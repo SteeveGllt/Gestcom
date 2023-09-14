@@ -1,0 +1,41 @@
+﻿<Window x:Class="Gestcom.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Gestcom"
+        mc:Ignorable="d"
+        Title="Gestcom" Height="450" Width="800">
+    <Grid>
+        <!-- Menu principal -->
+        <Menu>
+            <!-- Élément de menu "Fichiers" -->
+            <MenuItem x:Name="Fichiers" Header="Fichiers">
+                <!-- Sous-menu de "Fichiers" -->
+                <MenuItem x:Name="Lots" Header="Lots">
+                    <MenuItem x:Name="Entree" Header="Entrée" Click="Entree_Click"/>
+                </MenuItem>
+                <MenuItem Header="Ouvrir" />
+                <Separator />
+                <MenuItem Header="Enregistrer" />
+                <MenuItem Header="Enregistrer sous" />
+                <Separator />
+                <MenuItem Header="Quitter" />
+            </MenuItem>
+
+            <!-- Élément de menu "Édition" -->
+            <MenuItem Header="Édition">
+                <!-- Sous-menu de "Édition" -->
+                <MenuItem Header="Copier" />
+                <MenuItem Header="Couper" />
+                <MenuItem Header="Coller" />
+            </MenuItem>
+
+            <!-- Autres éléments de menu (Affichage, etc.) -->
+            <!-- ... -->
+        </Menu>
+
+    </Grid>
+    
+    
+</Window>
