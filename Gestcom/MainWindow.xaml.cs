@@ -1,4 +1,5 @@
 ﻿using Gestcom.ModelAdo;
+using Gestcom.Models;
 using Gestcom.Views;
 using System;
 using System.Collections.Generic;
@@ -23,9 +24,11 @@ namespace Gestcom
     /// </summary>
     public partial class MainWindow : Window
     {
+      
         public MainWindow()
         {
             InitializeComponent();
+         
 
         }
 

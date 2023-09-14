@@ -55,7 +55,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ModelAdo\LotAdo.cs" />
     <Compile Include="Models\Fromagerie.cs" />
+    <Compile Include="Models\Lot.cs" />
     <Compile Include="Views\entree_lot.xaml.cs">
       <DependentUpon>entree_lot.xaml</DependentUpon>
     </Compile>
@@ -79,7 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ModelAdo\ArticleAdo.cs" />
-    <Compile Include="ModelAdo\fromagerieAdo.cs" />
+    <Compile Include="ModelAdo\FromagerieAdo.cs" />
     <Compile Include="Models\Article.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
