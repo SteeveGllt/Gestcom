@@ -7,26 +7,27 @@
         mc:Ignorable="d"
         Title="Entrée Lot" Height="500" Width="400" Background="LightGray">
     <Grid>
-        <Label x:Name="lblFromagerie" Content="Fromagerie :" HorizontalAlignment="Left" Margin="20,38,0,0" VerticalAlignment="Top" FontFamily="Arial"/>
-        <ComboBox x:Name="cbxFromagerie" HorizontalAlignment="Left" Margin="120,42,0,0" VerticalAlignment="Top" Width="60" FontFamily="Arial"/>
-        <Label x:Name="lblMois" Content="Mois :" HorizontalAlignment="Left" Margin="20,78,0,0" VerticalAlignment="Top" FontFamily="Arial"/>
-        <ComboBox x:Name="cbxMois" HorizontalAlignment="Left" Margin="120,82,0,0" VerticalAlignment="Top" Width="60" FontFamily="Arial"/>
-        <Label x:Name="lblAnnee" Content="Année :" HorizontalAlignment="Left" Margin="20,118,0,0" VerticalAlignment="Top" FontFamily="Arial"/>
-        <TextBox x:Name="tbxAnnee" HorizontalAlignment="Left" Margin="120,126,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="40" MaxLength="2" FontFamily="Arial"/>
-        <Label x:Name="lblDateEntree" Content="Date Entrée :" HorizontalAlignment="Left" Margin="20,158,0,0" VerticalAlignment="Top" FontFamily="Arial"/>
-        <DatePicker x:Name="dtpDateEntree" HorizontalAlignment="Left" Margin="120,159,0,0" VerticalAlignment="Top" SelectedDateChanged="dtpDateEntree_SelectedDateChanged" FontFamily="Arial" />
-        <Label x:Name="lblDateDebut" Content="Date Début :" HorizontalAlignment="Left" Margin="20,198,0,0" VerticalAlignment="Top" FontFamily="Arial"/>
-        <DatePicker x:Name="dtpDateDebut" HorizontalAlignment="Left" Margin="120,200,0,0" VerticalAlignment="Top" SelectedDateChanged="dtpDateDebut_SelectedDateChanged" FontFamily="Arial"/>
-        <Label x:Name="lblDateFin" Content="Date Fin :" HorizontalAlignment="Left" Margin="20,238,0,0" VerticalAlignment="Top" FontFamily="Arial"/>
-        <DatePicker x:Name="dtpDateFin" HorizontalAlignment="Left" Margin="120,240,0,0" VerticalAlignment="Top" SelectedDateChanged="dtpDateFin_SelectedDateChanged" FontFamily="Arial"/>
-        <Label x:Name="lblNbPains" Content="Nb Pains :" HorizontalAlignment="Left" Margin="20,278,0,0" VerticalAlignment="Top" FontFamily="Arial"/>
-        <TextBox x:Name="tbxPains" HorizontalAlignment="Left" Margin="120,286,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="40" MaxLength="3" FontFamily="Arial"/>
-        <Label x:Name="lblPoidsBrut" Content="Poids Brut :" HorizontalAlignment="Left" Margin="20,318,0,0" VerticalAlignment="Top" FontFamily="Arial"/>
-        <TextBox x:Name="tbxPoidsBrut" HorizontalAlignment="Left" Margin="120,326,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="60" MaxLength="5" FontFamily="Arial"/>
-        <Label x:Name="lblFreinte" Content="Freinte :" HorizontalAlignment="Left" Margin="20,358,0,0" VerticalAlignment="Top" FontFamily="Arial"/>
-        <TextBox x:Name="tbxFreinte" HorizontalAlignment="Left" Margin="120,366,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False" FontFamily="Arial" />
-        <Label x:Name="lblPoidsNet" Content="Poids Net :" HorizontalAlignment="Left" Margin="20,398,0,0" VerticalAlignment="Top" FontFamily="Arial"/>
-        <TextBox x:Name="tbxPoidsNet" HorizontalAlignment="Left" Margin="120,406,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False" FontFamily="Arial"/>
-        <Label x:Name="lblAfficheNbJours" HorizontalAlignment="Left" Margin="232,279,0,0" VerticalAlignment="Top" Height="25"/>
+        <Label x:Name="lblFromagerie" Content="Fromagerie :" HorizontalAlignment="Left" Margin="20,16,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="16"/>
+        <ComboBox x:Name="cbxFromagerie" HorizontalAlignment="Left" Margin="140,19,0,0" VerticalAlignment="Top" Width="60" FontFamily="Arial" FontSize="16"/>
+        <Label x:Name="lblMois" Content="Mois :" HorizontalAlignment="Left" Margin="20,56,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="16"/>
+        <ComboBox x:Name="cbxMois" HorizontalAlignment="Left" Margin="140,59,0,0" VerticalAlignment="Top" Width="60" FontFamily="Arial" FontSize="16"/>
+        <Label x:Name="lblAnnee" Content="Année :" HorizontalAlignment="Left" Margin="20,96,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="16"/>
+        <TextBox x:Name="tbxAnnee" HorizontalAlignment="Left" Margin="140,104,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="40" MaxLength="2" FontFamily="Arial" FontSize="16"/>
+        <Label x:Name="lblDateEntree" Content="Date Entrée :" HorizontalAlignment="Left" Margin="20,136,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="16"/>
+        <DatePicker x:Name="dtpDateEntree" HorizontalAlignment="Left" Margin="140,138,0,0" VerticalAlignment="Top" SelectedDateChanged="dtpDateEntree_SelectedDateChanged" FontFamily="Arial" FontSize="16" />
+        <Label x:Name="lblDateDebut" Content="Date Début :" HorizontalAlignment="Left" Margin="20,176,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="16"/>
+        <DatePicker x:Name="dtpDateDebut" HorizontalAlignment="Left" Margin="140,178,0,0" VerticalAlignment="Top" SelectedDateChanged="dtpDateDebut_SelectedDateChanged" FontFamily="Arial" FontSize="16"/>
+        <Label x:Name="lblDateFin" Content="Date Fin :" HorizontalAlignment="Left" Margin="20,216,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="16"/>
+        <DatePicker x:Name="dtpDateFin" HorizontalAlignment="Left" Margin="140,218,0,0" VerticalAlignment="Top" SelectedDateChanged="dtpDateFin_SelectedDateChanged" FontFamily="Arial" FontSize="16"/>
+        <Label x:Name="lblNbPains" Content="Nb Pains :" HorizontalAlignment="Left" Margin="20,256,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="16"/>
+        <TextBox x:Name="tbxPains" HorizontalAlignment="Left" Margin="140,264,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="40" MaxLength="3" FontFamily="Arial" FontSize="16"/>
+        <Label x:Name="lblPoidsBrut" Content="Poids Brut :" HorizontalAlignment="Left" Margin="20,296,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="16"/>
+        <TextBox x:Name="tbxPoidsBrut" HorizontalAlignment="Left" Margin="140,304,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="60" MaxLength="5" FontFamily="Arial" KeyUp="tbxPoidsBrut_KeyUp" FontSize="16"/>
+        <Label x:Name="lblFreinte" Content="Freinte :" HorizontalAlignment="Left" Margin="20,336,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="16"/>
+        <TextBox x:Name="tbxFreinte" HorizontalAlignment="Left" Margin="140,344,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False" FontFamily="Arial" FontSize="16" />
+        <Label x:Name="lblPoidsNet" Content="Poids Net :" HorizontalAlignment="Left" Margin="20,376,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="16"/>
+        <TextBox x:Name="tbxPoidsNet" HorizontalAlignment="Left" Margin="141,384,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False" FontFamily="Arial" FontSize="16"/>
+        <Label x:Name="lblAfficheNbJours" HorizontalAlignment="Left" Margin="295,274,0,0" VerticalAlignment="Top" Height="40" FontSize="16" Width="50"/>
+        <Button Content="Validation" HorizontalAlignment="Left" Margin="140,419,0,0" VerticalAlignment="Top" Click="Button_Click" FontFamily="Arial" Width="120" FontSize="16"/>
     </Grid>
 </Window>

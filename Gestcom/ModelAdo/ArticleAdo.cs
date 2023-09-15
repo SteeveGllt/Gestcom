@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.OleDb;
 using Gestcom.DataAccess;
 using System;
+using System.Windows;
 
 namespace Gestcom.ModelAdo
 {
@@ -31,6 +32,7 @@ namespace Gestcom.ModelAdo
             } catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                MessageBox.Show("Erreur de communication avec la base de données!");
                 return null;
             }
             finally

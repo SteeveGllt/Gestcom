@@ -44,7 +44,8 @@ namespace Gestcom.Views
             if (dtpDateEntree.SelectedDate.Value.Month < 2 && dtpDateEntree.SelectedDate.Value.Day < 10)
             {
                 tbxAnnee.Text = (dtpDateEntree.SelectedDate.Value.Year - 2001).ToString();
-            } else
+            }
+            else
             {
                 tbxAnnee.Text = (dtpDateEntree.SelectedDate.Value.Year - 2000).ToString();
             }
@@ -76,27 +77,27 @@ namespace Gestcom.Views
         {
             // Date de début
             DateTime? dateDebut = dtpDateDebut.SelectedDate;
-           
+
 
             // Date d'entrée
             DateTime? dateEntree = dtpDateEntree.SelectedDate;
-           
-           
+
+
 
             // Date de fin
             DateTime? dateFin = dtpDateFin.SelectedDate;
-            
+
 
             if (dateDebut.HasValue && dateEntree.HasValue && dateFin.HasValue)
             {
-               
+
                 // Calcul de la différence entre les dates en jours
                 TimeSpan diffDebutEntree = dateEntree.Value - dateFin.Value;
-                
+
                 TimeSpan diffEntreeFin = dateFin.Value - dateDebut.Value;
-             
+
                 long nbjours = diffDebutEntree.Days + (long)Math.Floor((double)diffEntreeFin.Days / 2);
-         
+
                 lblAfficheNbJours.Content = nbjours.ToString();
 
                 if (nbjours <= 0)
@@ -105,7 +106,7 @@ namespace Gestcom.Views
                 }
                 else if (nbjours <= 2)
                 {
-                   
+
                     return 6 - (nbjours - 1) * 1.5m;
                 }
                 else if (nbjours <= 5)
@@ -130,9 +131,9 @@ namespace Gestcom.Views
                 }
             }
             return Math.Round(1m);
-           
+
         }
-        
+
         private int Calcul_Pds_Net()
         {
             try
@@ -150,6 +151,58 @@ namespace Gestcom.Views
 
         }
 
-       
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (tbxPains.Text != "" && tbxPoidsBrut.Text != "")
+            {
+                Lot lot = LotAdo.ExisteLot(Convert.ToDecimal(cbxFromagerie.Text), Convert.ToDecimal(tbxAnnee.Text), Convert.ToDecimal(cbxMois.Text));
+                if (lot != null)
+                {
+                    Console.WriteLine(lot.LOFROM + " " + lot.LOANNE + " " + lot.LOMOIS);
+                    lot.LOCEM1 = Convert.ToDecimal(tbxPains.Text);
+                    lot.LOCEB1 = Convert.ToDecimal(tbxPoidsBrut.Text);
+                    lot.LOCEN1 = Convert.ToDecimal(tbxPoidsNet.Text);
+                    Console.WriteLine(lot.LOCEM1 + " " + lot.LOCEB1 + " " + lot.LOCEN1);
+                    LotAdo.updateLot(lot.LOFROM, lot.LOANNE, lot.LOMOIS, lot.LOCEM1, lot.LOCEB1, lot.LOCEN1);
+                }
+                else
+                {
+                    Lot newLot = new Lot();
+                    newLot.LOFROM = Convert.ToDecimal(cbxFromagerie.Text);
+                    newLot.LOANNE = Convert.ToDecimal(tbxAnnee.Text);
+                    newLot.LOMOIS = Convert.ToDecimal(cbxMois.Text);
+                    newLot.LOCEM1 = Convert.ToDecimal(tbxPains.Text);
+                    newLot.LOCEB1 = Convert.ToDecimal(tbxPoidsBrut.Text);
+                    newLot.LOCEN1 = Convert.ToDecimal(tbxPoidsNet.Text);
+                    LotAdo.createLot(newLot);
+                }
+                EntreeLot entreeLot = new EntreeLot();
+                entreeLot.LOFROM = Convert.ToDecimal(cbxFromagerie.Text);
+                entreeLot.LOANNE = Convert.ToDecimal(tbxAnnee.Text);
+                entreeLot.LOMOIS = Convert.ToDecimal(cbxMois.Text);
+                entreeLot.Date_Entrée = dtpDateEntree.SelectedDate.Value;
+                entreeLot.Date_Début = dtpDateDebut.SelectedDate.Value;
+                entreeLot.DAte_Fin = dtpDateFin.SelectedDate.Value;
+                entreeLot.LOCENM = Convert.ToDecimal(tbxPains.Text);
+                entreeLot.LOCENB = Convert.ToDecimal(tbxPoidsBrut.Text);
+                entreeLot.LOCENN = Convert.ToDecimal(tbxPoidsNet.Text);
+                entreeLot.LOTAUX = Convert.ToDecimal(tbxFreinte.Text);
+
+                LotAdo.createEntreeLot(entreeLot);
+
+            }
+            else
+            {
+                MessageBox.Show("Veuillez entrer des valeurs dans les champs Nb Pains et Poids Brut");
+            }
+
+
+        }
+
+        private void tbxPoidsBrut_KeyUp(object sender, KeyEventArgs e)
+        {
+
+            if (e.IsUp) tbxPoidsNet.Text = Calcul_Pds_Net().ToString();
+        }
     }
 }

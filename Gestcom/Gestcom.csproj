@@ -56,6 +56,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ModelAdo\LotAdo.cs" />
+    <Compile Include="Models\EntreeLot.cs" />
     <Compile Include="Models\Fromagerie.cs" />
     <Compile Include="Models\Lot.cs" />
     <Compile Include="Views\entree_lot.xaml.cs">
