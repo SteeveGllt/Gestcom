@@ -8,6 +8,9 @@
         Title="Gestcom" Height="450" Width="800">
     <Grid>
         <!-- Menu principal -->
+        <Frame x:Name="frame" Content="Frame" Margin="120,66,105,74"/>
+
+        <!-- Menu principal -->
         <Menu>
             <!-- Élément de menu "Fichiers" -->
             <MenuItem x:Name="Fichiers" Header="Fichiers">
@@ -24,9 +27,9 @@
             </MenuItem>
 
             <!-- Élément de menu "Édition" -->
-            <MenuItem Header="Édition">
+            <MenuItem x:Name="Edition" Header="Édition">
                 <!-- Sous-menu de "Édition" -->
-                <MenuItem Header="Copier" />
+                <MenuItem x:Name="Pesée" Header="Pesée" Click="Pesée_Click" />
                 <MenuItem Header="Couper" />
                 <MenuItem Header="Coller" />
             </MenuItem>

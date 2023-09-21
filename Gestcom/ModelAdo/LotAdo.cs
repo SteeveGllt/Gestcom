@@ -1,4 +1,5 @@
-﻿using Gestcom.DataAccess;
+﻿using Gestcom.Classes;
+using Gestcom.DataAccess;
 using Gestcom.Models;
 using System;
 using System.Collections.Generic;
@@ -146,6 +147,48 @@ namespace Gestcom.ModelAdo
                 MessageBox.Show("Erreur de communication avec la base de données!");
             }
             finally { close(); }
+        }
+      public static List<EntreeLotFrom> allEntreeEnFonctionDuMoisEtDeLannee(decimal mois, decimal annee)
+        {
+            try
+            {
+
+                List<EntreeLotFrom> entreeLotFroms = new List<EntreeLotFrom>();
+                OleDbDataReader reader;
+                open();
+                //OleDbCommand oleDbCommand = new OleDbCommand("SELECT * FROM TB_Entrée_Lots WHERE LOMOIS = @LOMOIS AND LOANNE = @LOANNE");
+                OleDbCommand oleDbCommand = new OleDbCommand("SELECT TB_Entrée_Lots.LOFROM, TB_Entrée_Lots.LOANNE, TB_Entrée_Lots.LOMOIS, TB_Entrée_Lots.Date_Entrée, " +
+                    "TB_Entrée_Lots.LOCENM, TB_Entrée_Lots.LOCENB, TB_Entrée_Lots.LOCENN, TB_Entrée_Lots.LOTAUX, TB_Fromageries.FRNUM, TB_Fromageries.FRNOM, " +
+                    "TB_Fromageries.FRADR, TB_Fromageries.FRCPOS, TB_Fromageries.FRVILL, TB_Fromageries.FRNDIR FROM TB_Entrée_Lots INNER JOIN TB_Fromageries ON " +
+                    "TB_Entrée_Lots.LOFROM = TB_Fromageries.FRNUM WHERE LOMOIS = @LOMOIS AND LOANNE = @LOANNE");
+                oleDbCommand.Connection = connection;
+                oleDbCommand.Prepare();
+                oleDbCommand.Parameters.AddWithValue("@LOMOIS", mois);
+                oleDbCommand.Parameters.AddWithValue("@LOANNE", annee);
+                reader = oleDbCommand.ExecuteReader();
+                while (reader.Read())
+                {
+                    EntreeLotFrom entreeLotFrom = new EntreeLotFrom((Decimal)reader["LOFROM"], (Decimal)reader["LOANNE"],
+                        (Decimal)reader["LOMOIS"], (DateTime)reader["Date_Entrée"], 
+                        (Decimal)reader["LOCENM"], (Decimal)reader["LOCENB"], (Decimal)reader["LOCENN"], (Decimal)reader["LOTAUX"], (Decimal)reader["FRNUM"], 
+                        (String)reader["FRNOM"], (String)reader["FRADR"], (Decimal)reader["FRCPOS"],
+                        (String)reader["FRVILL"], (String)reader["FRNDIR"]);
+                    entreeLotFroms.Add(entreeLotFrom);
+                }
+                Console.WriteLine(reader);
+                reader.Close();
+                return entreeLotFroms;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                MessageBox.Show("Erreur de communication avec la base de données!");
+                return null;
+            }
+            finally
+            {
+                close();
+            }
         }
 
     }

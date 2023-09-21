@@ -24,5 +24,21 @@ namespace Gestcom.Models
 
         public EntreeLot() { }
 
+        public EntreeLot(decimal lOFACO, decimal lOFROM, decimal lOANNE, decimal lOMOIS, decimal lODEP, DateTime date_Entrée, DateTime date_Début, DateTime dAte_Fin, decimal lOCENM, decimal lOCENB, decimal lOCPES, decimal lOCENN, decimal lOTAUX)
+        {
+            LOFACO = lOFACO;
+            LOFROM = lOFROM;
+            LOANNE = lOANNE;
+            LOMOIS = lOMOIS;
+            LODEP = lODEP;
+            Date_Entrée = date_Entrée;
+            Date_Début = date_Début;
+            DAte_Fin = dAte_Fin;
+            LOCENM = lOCENM;
+            LOCENB = lOCENB;
+            LOCPES = lOCPES;
+            LOCENN = lOCENN;
+            LOTAUX = lOTAUX;
+        }
     }
 }
