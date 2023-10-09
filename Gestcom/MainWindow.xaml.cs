@@ -36,9 +36,10 @@ namespace Gestcom
         {
             entree_lot entree = new entree_lot();
             entree.Show();
+
         }
 
-        private void Pesée_Click(object sender, RoutedEventArgs e)
+         private void Pesée_Click(object sender, RoutedEventArgs e)
         {
             edit_pesee edit = new edit_pesee();
             edit.Show();

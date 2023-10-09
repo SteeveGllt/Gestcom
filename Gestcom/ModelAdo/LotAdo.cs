@@ -16,7 +16,6 @@ namespace Gestcom.ModelAdo
         {
             try
             {
-
                 Lot lot = new Lot();
                 OleDbDataReader reader;
                 open();
@@ -129,9 +128,9 @@ namespace Gestcom.ModelAdo
                 oleDbCommand.Parameters.AddWithValue("@LOFROM", entreeLot.LOFROM);
                 oleDbCommand.Parameters.AddWithValue("@LOANNE", entreeLot.LOANNE);
                 oleDbCommand.Parameters.AddWithValue("@LOMOIS", entreeLot.LOMOIS);
-                oleDbCommand.Parameters.AddWithValue("@Date_Entrée", entreeLot.Date_Entrée.ToString("MM/dd/yyyy"));
-                oleDbCommand.Parameters.AddWithValue("@Date_Début", entreeLot.Date_Début.ToString("MM/dd/yyyy"));
-                oleDbCommand.Parameters.AddWithValue("@DAte_Fin", entreeLot.DAte_Fin.ToString("MM/dd/yyyy"));
+                oleDbCommand.Parameters.AddWithValue("@Date_Entrée", entreeLot.Date_Entrée.ToString("dd/MM/yyyy"));
+                oleDbCommand.Parameters.AddWithValue("@Date_Début", entreeLot.Date_Début.ToString("dd/MM/yyyy"));
+                oleDbCommand.Parameters.AddWithValue("@DAte_Fin", entreeLot.DAte_Fin.ToString("dd/MM/yyyy"));
          
                 oleDbCommand.Parameters.AddWithValue("@LOCENM", entreeLot.LOCENM); // Pains
                 oleDbCommand.Parameters.AddWithValue("@LOCENB", entreeLot.LOCENB); // Brut

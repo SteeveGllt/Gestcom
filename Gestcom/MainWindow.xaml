@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Gestcom"
         mc:Ignorable="d"
         Title="Gestcom" Height="450" Width="800">
-    <Grid>
+    <Grid x:Name="mainGrid">
         <!-- Menu principal -->
         <Frame x:Name="frame" Content="Frame" Margin="120,66,105,74"/>
 
@@ -39,6 +39,6 @@
         </Menu>
 
     </Grid>
-    
-    
+
+
 </Window>
