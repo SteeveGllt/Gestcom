@@ -10,7 +10,7 @@
         <Label x:Name="lblMois" Content="Mois :" HorizontalAlignment="Left" Margin="42,38,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="cbxMois" HorizontalAlignment="Left" Margin="95,42,0,0" VerticalAlignment="Top" Width="120"/>
         <Label x:Name="lblAnnee" Content="Annee :" HorizontalAlignment="Left" Margin="240,39,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tbxAnnee" HorizontalAlignment="Left" Margin="300,46,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="55"/>
+        <TextBox x:Name="tbxAnnee" MaxLength="2" HorizontalAlignment="Left" Margin="300,46,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="55"/>
         <Button Content="Button" HorizontalAlignment="Left" Margin="215,99,0,0" VerticalAlignment="Top" Click="Button_Click"/>
 
     </Grid>
