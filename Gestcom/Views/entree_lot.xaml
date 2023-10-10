@@ -8,7 +8,7 @@
         Title="Entrée Lot" Height="500" Width="400" Background="LightGray">
     <Grid>
         <Label x:Name="lblFromagerie" Content="Fromagerie :" HorizontalAlignment="Left" Margin="20,16,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="16"/>
-        <ComboBox x:Name="cbxFromagerie" HorizontalAlignment="Left" Margin="140,19,0,0" VerticalAlignment="Top" Width="60" FontFamily="Arial" FontSize="16"/>
+        <ComboBox x:Name="cbxFromagerie" HorizontalAlignment="Left" Margin="140,19,0,0" VerticalAlignment="Top" Width="60" FontFamily="Arial" FontSize="16" SelectionChanged="cbxFromagerie_SelectionChanged"/>
         <Label x:Name="lblMois" Content="Mois :" HorizontalAlignment="Left" Margin="20,56,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="16"/>
         <ComboBox x:Name="cbxMois" HorizontalAlignment="Left" Margin="140,59,0,0" VerticalAlignment="Top" Width="60" FontFamily="Arial" FontSize="16"/>
         <Label x:Name="lblAnnee" Content="Année :" HorizontalAlignment="Left" Margin="20,96,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="16"/>

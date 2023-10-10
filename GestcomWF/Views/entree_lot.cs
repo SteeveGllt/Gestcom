@@ -1,90 +1,73 @@
 ﻿using Gestcom.ModelAdo;
 using Gestcom.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
-namespace Gestcom.Views
+namespace GestcomWF.Views
 {
-    /// <summary>
-    /// Logique d'interaction pour entree_lot.xaml
-    /// </summary>
-    public partial class entree_lot : Window
+    public partial class entree_lot : Form
     {
         List<Fromagerie> fromageries;
         public entree_lot()
         {
             InitializeComponent();
-            //Récupération des numéros de Fromagerie
             this.fromageries = FromagerieAdo.all();
-            cbxFromagerie.ItemsSource = null;
-            cbxFromagerie.ItemsSource = this.fromageries;
-            cbxFromagerie.DisplayMemberPath = "FRNUM";
+            cbxFromagerie.DataSource = null;
+            cbxFromagerie.DataSource = this.fromageries;
+            cbxFromagerie.DisplayMember = "FRNUM";
             cbxFromagerie.SelectedIndex = 0;
 
-            // Combobox Mois initialisé avec les numéros des mois
-            this.cbxMois.ItemsSource = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
+            this.cbxMois.DataSource = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
             this.cbxMois.SelectedItem = DateTime.Now.Month;
 
             // DataPickers configurés avec la date du jour
-            dtpDateEntree.SelectedDate = DateTime.Now;
-            dtpDateDebut.SelectedDate = DateTime.Now;
-            dtpDateFin.SelectedDate = DateTime.Now;
-            Console.WriteLine((dtpDateEntree.SelectedDate.Value.Month < 2 && dtpDateEntree.SelectedDate.Value.Day < 10));
-            if (dtpDateEntree.SelectedDate.Value.Month < 2 && dtpDateEntree.SelectedDate.Value.Day < 10)
+            dtpDateEntree.Value = DateTime.Now;
+            dtpDateDebut.Value = DateTime.Now;
+            dtpDateFin.Value = DateTime.Now;
+            if (dtpDateEntree.Value.Month < 2 && dtpDateEntree.Value.Day < 10)
             {
-                tbxAnnee.Text = (dtpDateEntree.SelectedDate.Value.Year - 2001).ToString();
+                tbxAnnee.Text = (dtpDateEntree.Value.Year - 2001).ToString();
             }
             else
             {
-                tbxAnnee.Text = (dtpDateEntree.SelectedDate.Value.Year - 2000).ToString();
+                tbxAnnee.Text = (dtpDateEntree.Value.Year - 2000).ToString();
             }
 
 
-            tbxPoidsNet.IsReadOnly = true;
+            tbxPoidsNet.ReadOnly = true;
 
             cbxFromagerie.Focus();
         }
 
-        private void dtpDateDebut_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        private void dtpDateEntree_ValueChanged(object sender, EventArgs e)
         {
             tbxFreinte.Text = Calcul_Freinte().ToString();
             tbxPoidsNet.Text = Calcul_Pds_Net().ToString();
         }
 
-        private void dtpDateEntree_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        private void dtpDateDebut_ValueChanged(object sender, EventArgs e)
         {
             tbxFreinte.Text = Calcul_Freinte().ToString();
             tbxPoidsNet.Text = Calcul_Pds_Net().ToString();
         }
-        private void dtpDateFin_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+
+        private void dtpDateFin_ValueChanged(object sender, EventArgs e)
         {
             tbxFreinte.Text = Calcul_Freinte().ToString();
             tbxPoidsNet.Text = Calcul_Pds_Net().ToString();
         }
+
         private decimal Calcul_Freinte()
         {
             // Date de début
-            DateTime? dateDebut = dtpDateDebut.SelectedDate;
+            DateTime? dateDebut = dtpDateDebut.Value;
 
 
             // Date d'entrée
-            DateTime? dateEntree = dtpDateEntree.SelectedDate;
+            DateTime? dateEntree = dtpDateEntree.Value;
 
 
 
             // Date de fin
-            DateTime? dateFin = dtpDateFin.SelectedDate;
+            DateTime? dateFin = dtpDateFin.Value;
 
 
             if (dateDebut.HasValue && dateEntree.HasValue && dateFin.HasValue)
@@ -97,7 +80,7 @@ namespace Gestcom.Views
 
                 long nbjours = diffDebutEntree.Days + (long)Math.Floor((double)diffEntreeFin.Days / 2);
 
-                lblAfficheNbJours.Content = nbjours.ToString();
+                label1.Text = nbjours.ToString();
 
                 if (nbjours <= 0)
                 {
@@ -130,9 +113,7 @@ namespace Gestcom.Views
                 }
             }
             return Math.Round(1m);
-
         }
-
         private int Calcul_Pds_Net()
         {
             try
@@ -147,10 +128,9 @@ namespace Gestcom.Views
                 // Gérer l'exception de format si la conversion échoue
                 return 0; // Ou une autre valeur par défaut appropriée
             }
-
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
             if (tbxPains.Text != "" && tbxPoidsBrut.Text != "")
             {
@@ -179,9 +159,9 @@ namespace Gestcom.Views
                 entreeLot.LOFROM = Convert.ToDecimal(cbxFromagerie.Text);
                 entreeLot.LOANNE = Convert.ToDecimal(tbxAnnee.Text);
                 entreeLot.LOMOIS = Convert.ToDecimal(cbxMois.Text);
-                entreeLot.Date_Entrée = dtpDateEntree.SelectedDate.Value;
-                entreeLot.Date_Début = dtpDateDebut.SelectedDate.Value;
-                entreeLot.DAte_Fin = dtpDateFin.SelectedDate.Value;
+                entreeLot.Date_Entrée = dtpDateEntree.Value;
+                entreeLot.Date_Début = dtpDateDebut.Value;
+                entreeLot.DAte_Fin = dtpDateFin.Value;
                 entreeLot.LOCENM = Convert.ToDecimal(tbxPains.Text);
                 entreeLot.LOCENB = Convert.ToDecimal(tbxPoidsBrut.Text);
                 entreeLot.LOCENN = Convert.ToDecimal(tbxPoidsNet.Text);
@@ -194,24 +174,16 @@ namespace Gestcom.Views
             {
                 MessageBox.Show("Veuillez entrer des valeurs dans les champs Nb Pains et Poids Brut");
             }
-
-
         }
 
         private void tbxPoidsBrut_KeyUp(object sender, KeyEventArgs e)
         {
-
-            if (e.IsUp) tbxPoidsNet.Text = Calcul_Pds_Net().ToString();
+            tbxPoidsNet.Text = Calcul_Pds_Net().ToString();
         }
 
         private void tbxFreinte_KeyUp(object sender, KeyEventArgs e)
         {
-            if(e.IsUp) tbxPoidsNet.Text = Calcul_Pds_Net().ToString();
-        }
-
-        private void cbxFromagerie_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
+            tbxPoidsNet.Text = Calcul_Pds_Net().ToString();
         }
     }
 }
