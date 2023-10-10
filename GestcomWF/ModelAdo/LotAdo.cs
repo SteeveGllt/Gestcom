@@ -142,7 +142,36 @@ namespace Gestcom.ModelAdo
             }
             finally { close(); }
         }
-      public static List<EntreeLotFrom> allEntreeEnFonctionDuMoisEtDeLannee(decimal mois, decimal annee)
+        public static void createEntreeLotAffine(EntreeLot entreeLot)
+        {
+            try
+            {
+                open();
+                OleDbCommand oleDbCommand = new OleDbCommand();
+                oleDbCommand.Connection = connection;
+                oleDbCommand.CommandText = "INSERT INTO TB_Entrée_Lots(LOFACO, LOFROM, LOANNE, LOMOIS, LODEP, Date_Entrée, LOCENM, LOCENB, LOCPES, LOCENN, LOTAUX) VALUES(1, @LOFROM, @LOANNE, @LOMOIS, 0, @Date_Entrée, @LOCENM, @LOCENB, 0, LOCENN, LOTAUX)";
+                oleDbCommand.Prepare();
+                oleDbCommand.Parameters.AddWithValue("@LOFROM", entreeLot.LOFROM);
+                oleDbCommand.Parameters.AddWithValue("@LOANNE", entreeLot.LOANNE);
+                oleDbCommand.Parameters.AddWithValue("@LOMOIS", entreeLot.LOMOIS);
+                oleDbCommand.Parameters.AddWithValue("@Date_Entrée", entreeLot.Date_Entrée.ToString("dd/MM/yyyy"));
+
+                oleDbCommand.Parameters.AddWithValue("@LOCENM", entreeLot.LOCENM); // Pains
+                oleDbCommand.Parameters.AddWithValue("@LOCENB", entreeLot.LOCENB); // Brut
+                oleDbCommand.Parameters.AddWithValue("@LOCENN", entreeLot.LOCENN); // Net
+                oleDbCommand.Parameters.AddWithValue("@LOTAUX", entreeLot.LOTAUX); // Freinte
+                oleDbCommand.ExecuteNonQuery();
+                Console.WriteLine("Lot créé dans entrée lot");
+                MessageBox.Show("Lot créé dans entrée lot");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                MessageBox.Show("Erreur de communication avec la base de données!");
+            }
+            finally { close(); }
+        }
+        public static List<EntreeLotFrom> allEntreeEnFonctionDuMoisEtDeLannee(decimal mois, decimal annee)
         {
             try
             {

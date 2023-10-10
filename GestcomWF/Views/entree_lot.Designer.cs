@@ -55,6 +55,7 @@ namespace GestcomWF.Views
             dtpDateDebut = new DateTimePicker();
             dtpDateFin = new DateTimePicker();
             button1 = new Button();
+            cbAffiner = new CheckBox();
             SuspendLayout();
             // 
             // lblFromagerie
@@ -254,12 +255,24 @@ namespace GestcomWF.Views
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
+            // cbAffiner
+            // 
+            cbAffiner.AutoSize = true;
+            cbAffiner.Location = new Point(377, 26);
+            cbAffiner.Name = "cbAffiner";
+            cbAffiner.Size = new Size(58, 19);
+            cbAffiner.TabIndex = 27;
+            cbAffiner.Text = "Affiné";
+            cbAffiner.UseVisualStyleBackColor = true;
+            cbAffiner.CheckedChanged += cbAffiner_CheckedChanged;
+            // 
             // entree_lot
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = System.Drawing.Color.LightGray;
             ClientSize = new Size(571, 547);
+            Controls.Add(cbAffiner);
             Controls.Add(button1);
             Controls.Add(dtpDateFin);
             Controls.Add(dtpDateDebut);
@@ -314,5 +327,6 @@ namespace GestcomWF.Views
         private DateTimePicker dtpDateDebut;
         private DateTimePicker dtpDateFin;
         private Button button1;
+        private CheckBox cbAffiner;
     }
 }

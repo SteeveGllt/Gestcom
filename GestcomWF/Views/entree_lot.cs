@@ -35,6 +35,7 @@ namespace GestcomWF.Views
             tbxPoidsNet.ReadOnly = true;
 
             cbxFromagerie.Focus();
+
         }
 
         private void dtpDateEntree_ValueChanged(object sender, EventArgs e)
@@ -155,19 +156,36 @@ namespace GestcomWF.Views
                     newLot.LOCEN1 = Convert.ToDecimal(tbxPoidsNet.Text);
                     LotAdo.createLot(newLot);
                 }
-                EntreeLot entreeLot = new EntreeLot();
-                entreeLot.LOFROM = Convert.ToDecimal(cbxFromagerie.Text);
-                entreeLot.LOANNE = Convert.ToDecimal(tbxAnnee.Text);
-                entreeLot.LOMOIS = Convert.ToDecimal(cbxMois.Text);
-                entreeLot.Date_Entrée = dtpDateEntree.Value;
-                entreeLot.Date_Début = dtpDateDebut.Value;
-                entreeLot.DAte_Fin = dtpDateFin.Value;
-                entreeLot.LOCENM = Convert.ToDecimal(tbxPains.Text);
-                entreeLot.LOCENB = Convert.ToDecimal(tbxPoidsBrut.Text);
-                entreeLot.LOCENN = Convert.ToDecimal(tbxPoidsNet.Text);
-                entreeLot.LOTAUX = Convert.ToDecimal(tbxFreinte.Text);
+                if (cbAffiner.Checked)
+                {
+                    EntreeLot entreeLotAffiner = new EntreeLot();
+                    entreeLotAffiner.LOFROM = Convert.ToDecimal(cbxFromagerie.Text);
+                    entreeLotAffiner.LOANNE = Convert.ToDecimal(tbxAnnee.Text);
+                    entreeLotAffiner.LOMOIS = Convert.ToDecimal(cbxMois.Text);
+                    entreeLotAffiner.Date_Entrée = dtpDateEntree.Value;
+                    entreeLotAffiner.LOCENM = Convert.ToDecimal(tbxPains.Text);
+                    entreeLotAffiner.LOCENB = Convert.ToDecimal(tbxPoidsBrut.Text);
+                    entreeLotAffiner.LOCENN = Convert.ToDecimal(tbxPoidsNet.Text);
+                    entreeLotAffiner.LOTAUX = Convert.ToDecimal(tbxFreinte.Text);
+                    LotAdo.createEntreeLotAffine(entreeLotAffiner);
+                }
+                else
+                {
+                    EntreeLot entreeLot = new EntreeLot();
+                    entreeLot.LOFROM = Convert.ToDecimal(cbxFromagerie.Text);
+                    entreeLot.LOANNE = Convert.ToDecimal(tbxAnnee.Text);
+                    entreeLot.LOMOIS = Convert.ToDecimal(cbxMois.Text);
+                    entreeLot.Date_Entrée = dtpDateEntree.Value;
+                    entreeLot.Date_Début = dtpDateDebut.Value;
+                    entreeLot.DAte_Fin = dtpDateFin.Value;
+                    entreeLot.LOCENM = Convert.ToDecimal(tbxPains.Text);
+                    entreeLot.LOCENB = Convert.ToDecimal(tbxPoidsBrut.Text);
+                    entreeLot.LOCENN = Convert.ToDecimal(tbxPoidsNet.Text);
+                    entreeLot.LOTAUX = Convert.ToDecimal(tbxFreinte.Text);
 
-                LotAdo.createEntreeLot(entreeLot);
+                    LotAdo.createEntreeLot(entreeLot);
+                }
+
 
             }
             else
@@ -184,6 +202,12 @@ namespace GestcomWF.Views
         private void tbxFreinte_KeyUp(object sender, KeyEventArgs e)
         {
             tbxPoidsNet.Text = Calcul_Pds_Net().ToString();
+        }
+
+        private void cbAffiner_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbAffiner.Checked) tbxFreinte.Text = "0";
+            else tbxFreinte.Text = Calcul_Freinte().ToString();
         }
     }
 }
