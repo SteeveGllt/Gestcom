@@ -1,6 +1,9 @@
 ﻿using Gestcom.Classes;
 using Gestcom.ModelAdo;
 using IronXL;
+using Microsoft.Office.Interop.Excel;
+using Microsoft.Win32;
+using System.Drawing.Printing;
 
 namespace GestcomWF.Views
 {
@@ -8,6 +11,7 @@ namespace GestcomWF.Views
     {
         WorkSheet workSheet;
         WorkBook workbook = new WorkBook(ExcelFileFormat.XLSX);
+        private string selectedFilePath = string.Empty;
 
         List<MoisNum> listeObjets = new List<MoisNum> {
             new MoisNum { Mois = "Janvier", Numero = 1 },
@@ -288,5 +292,35 @@ namespace GestcomWF.Views
 
 
         }
+        private void PrintDocument_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            if (selectedFilePath.EndsWith(".txt"))
+            {
+                string textToPrint = File.ReadAllText(selectedFilePath);
+                System.Drawing.Font font = new System.Drawing.Font("Arial", 12);
+                e.Graphics.DrawString(textToPrint, font, Brushes.Black, new System.Drawing.PointF(10, 10));
+            }
+            else // Pour les images
+            {
+                System.Drawing.Image image = System.Drawing.Image.FromFile(selectedFilePath);
+                e.Graphics.DrawImage(image, new System.Drawing.PointF(10, 10));
+            }
+        }
+
+        private void printExcel_Click(object sender, EventArgs e)
+        {
+            PrintDocument printDocument = new PrintDocument();
+            printDocument.PrintPage += PrintDocument_PrintPage;
+            using (PrintDialog printDialog = new PrintDialog())
+            {
+                printDialog.Document = printDocument;
+
+                if (printDialog.ShowDialog() == DialogResult.OK)
+                {
+                    printDocument.Print();
+                }
+            }
+        }
     }
 }
+

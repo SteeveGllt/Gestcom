@@ -37,6 +37,7 @@ namespace GestcomWF.Views
             lblAnnee = new Label();
             cbxMois = new ComboBox();
             tbxAnnee = new TextBox();
+            printExcel = new Button();
             SuspendLayout();
             // 
             // button1
@@ -84,12 +85,23 @@ namespace GestcomWF.Views
             tbxAnnee.Size = new Size(50, 23);
             tbxAnnee.TabIndex = 4;
             // 
+            // printExcel
+            // 
+            printExcel.Location = new Point(221, 147);
+            printExcel.Name = "printExcel";
+            printExcel.Size = new Size(75, 23);
+            printExcel.TabIndex = 5;
+            printExcel.Text = "Imprimer";
+            printExcel.UseVisualStyleBackColor = true;
+            printExcel.Click += printExcel_Click;
+            // 
             // edit_pesee
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = System.Drawing.Color.LightGray;
             ClientSize = new Size(444, 243);
+            Controls.Add(printExcel);
             Controls.Add(tbxAnnee);
             Controls.Add(cbxMois);
             Controls.Add(lblAnnee);
@@ -108,5 +120,6 @@ namespace GestcomWF.Views
         private Label lblAnnee;
         private ComboBox cbxMois;
         private TextBox tbxAnnee;
+        private Button printExcel;
     }
 }
