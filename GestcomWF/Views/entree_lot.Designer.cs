@@ -171,6 +171,7 @@ namespace GestcomWF.Views
             // tbxAnnee
             // 
             tbxAnnee.Location = new Point(163, 94);
+            tbxAnnee.MaxLength = 2;
             tbxAnnee.Name = "tbxAnnee";
             tbxAnnee.Size = new Size(50, 23);
             tbxAnnee.TabIndex = 13;
@@ -178,6 +179,7 @@ namespace GestcomWF.Views
             // tbxPains
             // 
             tbxPains.Location = new Point(163, 233);
+            tbxPains.MaxLength = 3;
             tbxPains.Name = "tbxPains";
             tbxPains.Size = new Size(87, 23);
             tbxPains.TabIndex = 17;
@@ -185,6 +187,7 @@ namespace GestcomWF.Views
             // tbxPoidsBrut
             // 
             tbxPoidsBrut.Location = new Point(163, 269);
+            tbxPoidsBrut.MaxLength = 5;
             tbxPoidsBrut.Name = "tbxPoidsBrut";
             tbxPoidsBrut.Size = new Size(100, 23);
             tbxPoidsBrut.TabIndex = 18;

@@ -5,55 +5,77 @@ namespace GestcomWF.Views
 {
     public partial class entree_lot : Form
     {
+        private const int MAGIC_YEAR_START = 2000;
+        private const int MAGIC_YEAR_DIFFERENCE = 2001;
         List<Fromagerie> fromageries;
         public entree_lot()
         {
             InitializeComponent();
+            InitializeFromagerie();
+            InitializeComboboxMois();
+            InitializeDatePickers();
+            InitializeTextBoxes();
+            cbxFromagerie.Focus();
+
+        }
+        private void InitializeFromagerie()
+        {
             this.fromageries = FromagerieAdo.all();
             cbxFromagerie.DataSource = null;
             cbxFromagerie.DataSource = this.fromageries;
             cbxFromagerie.DisplayMember = "FRNUM";
             cbxFromagerie.SelectedIndex = 0;
-
+        }
+        private void InitializeComboboxMois()
+        {
             this.cbxMois.DataSource = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
             this.cbxMois.SelectedItem = DateTime.Now.Month;
+        }
+        private void InitializeDatePickers()
+        {
+            DateTime currentDateTime = DateTime.Now;
+            dtpDateEntree.Value = currentDateTime;
+            dtpDateDebut.Value = currentDateTime;
+            dtpDateFin.Value = currentDateTime;
+        }
 
-            // DataPickers configurés avec la date du jour
-            dtpDateEntree.Value = DateTime.Now;
-            dtpDateDebut.Value = DateTime.Now;
-            dtpDateFin.Value = DateTime.Now;
-            if (dtpDateEntree.Value.Month < 2 && dtpDateEntree.Value.Day < 10)
+        private void InitializeTextBoxes()
+        {
+            tbxPoidsNet.ReadOnly = true;
+            tbxAnnee.Text = ComputeAnnee(dtpDateEntree.Value).ToString();
+        }
+
+        private int ComputeAnnee(DateTime date)
+        {
+            if (date.Month < 2 && date.Day < 10)
             {
-                tbxAnnee.Text = (dtpDateEntree.Value.Year - 2001).ToString();
+                return date.Year - MAGIC_YEAR_DIFFERENCE;
             }
             else
             {
-                tbxAnnee.Text = (dtpDateEntree.Value.Year - 2000).ToString();
+                return date.Year - MAGIC_YEAR_START;
             }
+        }
 
-
-            tbxPoidsNet.ReadOnly = true;
-
-            cbxFromagerie.Focus();
-
+        private void UpdateFreinteAndPoidsNet()
+        {
+            tbxFreinte.Text = Calcul_Freinte().ToString();
+            tbxPoidsNet.Text = Calcul_Pds_Net().ToString();
         }
 
         private void dtpDateEntree_ValueChanged(object sender, EventArgs e)
         {
-            tbxFreinte.Text = Calcul_Freinte().ToString();
-            tbxPoidsNet.Text = Calcul_Pds_Net().ToString();
+            UpdateFreinteAndPoidsNet();
         }
 
         private void dtpDateDebut_ValueChanged(object sender, EventArgs e)
         {
-            tbxFreinte.Text = Calcul_Freinte().ToString();
-            tbxPoidsNet.Text = Calcul_Pds_Net().ToString();
+            UpdateFreinteAndPoidsNet();
         }
 
         private void dtpDateFin_ValueChanged(object sender, EventArgs e)
         {
-            tbxFreinte.Text = Calcul_Freinte().ToString();
-            tbxPoidsNet.Text = Calcul_Pds_Net().ToString();
+            UpdateFreinteAndPoidsNet();
         }
 
         private decimal Calcul_Freinte()
@@ -182,11 +204,9 @@ namespace GestcomWF.Views
                     entreeLot.LOCENB = Convert.ToDecimal(tbxPoidsBrut.Text);
                     entreeLot.LOCENN = Convert.ToDecimal(tbxPoidsNet.Text);
                     entreeLot.LOTAUX = Convert.ToDecimal(tbxFreinte.Text);
-
                     LotAdo.createEntreeLot(entreeLot);
                 }
-
-
+                ResetForm();
             }
             else
             {
@@ -206,8 +226,29 @@ namespace GestcomWF.Views
 
         private void cbAffiner_CheckedChanged(object sender, EventArgs e)
         {
-            if (cbAffiner.Checked) tbxFreinte.Text = "0";
-            else tbxFreinte.Text = Calcul_Freinte().ToString();
+            if (cbAffiner.Checked) { tbxFreinte.Text = "0"; tbxPoidsNet.Text = Calcul_Pds_Net().ToString(); }
+            else { tbxFreinte.Text = Calcul_Freinte().ToString(); tbxPoidsNet.Text = Calcul_Pds_Net().ToString(); }
+        }
+
+        private void ResetForm()
+        {
+            // Remettre à zéro les ComboBox
+            cbxFromagerie.SelectedIndex = 0;
+            cbxMois.SelectedItem = DateTime.Now.Month;
+
+            // Remettre à zéro les DateTimePickers
+            dtpDateEntree.Value = DateTime.Now;
+            dtpDateDebut.Value = DateTime.Now;
+            dtpDateFin.Value = DateTime.Now;
+
+            // Remettre à zéro les TextBox
+            tbxPoidsNet.Text = "";
+            tbxPains.Text = "";
+            tbxPoidsBrut.Text = "";
+            tbxFreinte.Text = Calcul_Freinte().ToString();
+            tbxAnnee.Text = (dtpDateEntree.Value.Year - 2000).ToString();
+
+            cbAffiner.Checked = false;
         }
     }
 }
