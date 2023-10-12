@@ -117,6 +117,7 @@ namespace GestcomWF
             imprimantesToolStripMenuItem.Name = "imprimantesToolStripMenuItem";
             imprimantesToolStripMenuItem.Size = new Size(180, 22);
             imprimantesToolStripMenuItem.Text = "Imprimantes";
+            imprimantesToolStripMenuItem.Click += imprimantesToolStripMenuItem_Click;
             // 
             // editPeséeToolStripMenuItem
             // 

@@ -38,6 +38,8 @@ namespace GestcomWF.Views
             cbxMois = new ComboBox();
             tbxAnnee = new TextBox();
             printExcel = new Button();
+            btnRechercher = new Button();
+            textBox1 = new TextBox();
             SuspendLayout();
             // 
             // button1
@@ -87,7 +89,7 @@ namespace GestcomWF.Views
             // 
             // printExcel
             // 
-            printExcel.Location = new Point(221, 147);
+            printExcel.Location = new Point(292, 147);
             printExcel.Name = "printExcel";
             printExcel.Size = new Size(75, 23);
             printExcel.TabIndex = 5;
@@ -95,12 +97,31 @@ namespace GestcomWF.Views
             printExcel.UseVisualStyleBackColor = true;
             printExcel.Click += printExcel_Click;
             // 
+            // btnRechercher
+            // 
+            btnRechercher.Location = new Point(76, 147);
+            btnRechercher.Name = "btnRechercher";
+            btnRechercher.Size = new Size(75, 23);
+            btnRechercher.TabIndex = 6;
+            btnRechercher.Text = "Rechercher";
+            btnRechercher.UseVisualStyleBackColor = true;
+            btnRechercher.Click += btnRechercher_Click;
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(162, 147);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(100, 23);
+            textBox1.TabIndex = 7;
+            // 
             // edit_pesee
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = System.Drawing.Color.LightGray;
             ClientSize = new Size(444, 243);
+            Controls.Add(textBox1);
+            Controls.Add(btnRechercher);
             Controls.Add(printExcel);
             Controls.Add(tbxAnnee);
             Controls.Add(cbxMois);
@@ -121,5 +142,7 @@ namespace GestcomWF.Views
         private ComboBox cbxMois;
         private TextBox tbxAnnee;
         private Button printExcel;
+        private Button btnRechercher;
+        private TextBox textBox1;
     }
 }

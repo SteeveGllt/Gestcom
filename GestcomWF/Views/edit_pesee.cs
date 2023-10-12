@@ -1,9 +1,7 @@
 ﻿using Gestcom.Classes;
 using Gestcom.ModelAdo;
 using IronXL;
-using Microsoft.Office.Interop.Excel;
-using Microsoft.Win32;
-using System.Drawing.Printing;
+using System.Runtime.InteropServices;
 
 namespace GestcomWF.Views
 {
@@ -11,6 +9,7 @@ namespace GestcomWF.Views
     {
         WorkSheet workSheet;
         WorkBook workbook = new WorkBook(ExcelFileFormat.XLSX);
+
         private string selectedFilePath = string.Empty;
 
         List<MoisNum> listeObjets = new List<MoisNum> {
@@ -292,33 +291,65 @@ namespace GestcomWF.Views
 
 
         }
-        private void PrintDocument_PrintPage(object sender, PrintPageEventArgs e)
-        {
-            if (selectedFilePath.EndsWith(".txt"))
-            {
-                string textToPrint = File.ReadAllText(selectedFilePath);
-                System.Drawing.Font font = new System.Drawing.Font("Arial", 12);
-                e.Graphics.DrawString(textToPrint, font, Brushes.Black, new System.Drawing.PointF(10, 10));
-            }
-            else // Pour les images
-            {
-                System.Drawing.Image image = System.Drawing.Image.FromFile(selectedFilePath);
-                e.Graphics.DrawImage(image, new System.Drawing.PointF(10, 10));
-            }
-        }
 
         private void printExcel_Click(object sender, EventArgs e)
         {
-            PrintDocument printDocument = new PrintDocument();
-            printDocument.PrintPage += PrintDocument_PrintPage;
-            using (PrintDialog printDialog = new PrintDialog())
+            OuvrirImprimerFermerXLS();
+        }
+        private void OuvrirImprimerFermerXLS()
+        {
+            if (string.IsNullOrEmpty(selectedFilePath))
             {
-                printDialog.Document = printDocument;
+                MessageBox.Show("Veuillez d'abord sélectionner un fichier.");
+                return;
+            }
 
-                if (printDialog.ShowDialog() == DialogResult.OK)
+            PrintAllSheets(selectedFilePath);
+
+        }
+    
+
+
+
+        private void RechercherXLS()
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "Excel files (*.xls; *.xlsx)|*.xls;*.xlsx";
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    printDocument.Print();
+                    selectedFilePath = openFileDialog.FileName;
                 }
+            }
+        }
+
+        private void btnRechercher_Click(object sender, EventArgs e)
+        {
+            RechercherXLS();
+        }
+
+        private void PrintAllSheets(string filePath)
+        {
+            Microsoft.Office.Interop.Excel.Application excelApp = new Microsoft.Office.Interop.Excel.Application();
+            Microsoft.Office.Interop.Excel.Workbook workbook = excelApp.Workbooks.Open(filePath);
+
+            try
+            {
+                foreach (Microsoft.Office.Interop.Excel.Worksheet worksheet in workbook.Sheets)
+                {
+                    worksheet.PrintOutEx();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Une erreur est survenue lors de la tentative d'impression: {ex.Message}");
+            }
+            finally
+            {
+                workbook.Close(false);
+                excelApp.Quit();
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(workbook);
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(excelApp);
             }
         }
     }
