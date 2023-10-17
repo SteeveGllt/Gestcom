@@ -226,7 +226,13 @@ namespace GestcomWF.Views
 
         private void cbAffiner_CheckedChanged(object sender, EventArgs e)
         {
-            if (cbAffiner.Checked) { 
+            if (cbAffiner.Checked) {
+                this.fromageries = FromagerieAdo.allNonActif();
+                cbxFromagerie.DataSource = null;
+                cbxFromagerie.DataSource = this.fromageries;
+                cbxFromagerie.DisplayMember = "FRNUM";
+                cbxFromagerie.SelectedIndex = 0;
+
                 tbxFreinte.Text = "0"; 
                 tbxPoidsNet.Text = Calcul_Pds_Net().ToString(); 
 
@@ -235,7 +241,9 @@ namespace GestcomWF.Views
                 dtpDateDebut.Visible = false;
                 dtpDateFin.Visible = false;
             }
-            else { 
+            else {
+                InitializeFromagerie();
+
                 tbxFreinte.Text = Calcul_Freinte().ToString(); 
                 tbxPoidsNet.Text = Calcul_Pds_Net().ToString();
 

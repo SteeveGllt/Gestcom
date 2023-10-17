@@ -42,6 +42,8 @@ namespace GestcomWF.Views
 
         private void button1_Click(object sender, EventArgs e)
         {
+
+
             if (tbxAnnee.Text == "" || tbxAnnee.Text.Length < 2)
             {
                 MessageBox.Show("Veuillez entrer une année en deux chiffres");
@@ -49,6 +51,7 @@ namespace GestcomWF.Views
             }
             else
             {
+
                 Decimal valeurPrecedente = 0;
 
 
@@ -281,10 +284,18 @@ namespace GestcomWF.Views
                         this.workSheet.Style.Font.Name = "Arial";
 
                     }
+                    SaveFileDialog saveFileDialog = new SaveFileDialog();
+                    saveFileDialog.Filter = "Excel files(*.xls; *.xlsx)| *.xls; *.xlsx";
+                    saveFileDialog.Title = "Enregistrez le fichier sous...";
+                    saveFileDialog.FileName = "saisie_pesee " + moisNum.Mois + ".xls";
+                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        string path = saveFileDialog.FileName;
 
-                    workbook.SaveAs(@"D:\saisie_pesee " + moisNum.Mois + ".xls");
-                    workbook.Close();
+                        workbook.SaveAs(@"D:\saisie_pesee " + moisNum.Mois + ".xls");
+                        workbook.Close();
 
+                    }
                 }
             }
 

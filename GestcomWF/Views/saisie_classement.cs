@@ -15,6 +15,10 @@ namespace GestcomWF.Views
         public saisie_classement()
         {
             InitializeComponent();
+            InitializeDataGridView();
+
         }
+
+       
     }
 }
