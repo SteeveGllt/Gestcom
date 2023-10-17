@@ -213,6 +213,53 @@ namespace Gestcom.ModelAdo
                 close();
             }
         }
+        public static List<Lot> allLot(decimal loanne, decimal lomois)
+        {
+            try
+            {
+                Lot lot = new Lot();
+                List<Lot> lots = new List<Lot>();
+                OleDbDataReader reader;
+                open();
+                OleDbCommand oleDbCommand = new OleDbCommand();
+                oleDbCommand.Connection = connection;
+                oleDbCommand.CommandText = "SELECT LOFROM, LOCEM1, LOC11, LOC12, LOC13 FROM TB_Lots WHERE LOANNE = @LOANNE AND LOMOIS = @LOMOIS";
+                oleDbCommand.Prepare();
+                oleDbCommand.Parameters.AddWithValue("@LOANNE", loanne);
+                oleDbCommand.Parameters.AddWithValue("@LOMOIS", lomois);
+                oleDbCommand.ExecuteNonQuery();
+                reader = oleDbCommand.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    // Si la requête a retourné des résultats, créez un objet Lot
+                    lot = new Lot
+                    {
+                        // Assurez-vous de récupérer les valeurs appropriées depuis le reader
+                        LOFROM = reader.GetDecimal(0),
+                        LOCEM1 = reader.GetDecimal(1),
+                        LOC11 = reader.GetDecimal(2),
+                        LOC12 = reader.GetDecimal(3),
+                        LOC13 = reader.GetDecimal(4)
+                    };
+                    lots.Add(lot);
+                    
+                }
+                return lots;
+
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                MessageBox.Show("Erreur de communication avec la base de données!");
+                return null;
+            }
+            finally
+            {
+                close();
+            }
+        }
 
     }
 }

@@ -32,8 +32,8 @@
             labelAnnee = new Label();
             buttonGenerer = new Button();
             dataGridView = new DataGridView();
-            textBox1 = new TextBox();
-            comboBox1 = new ComboBox();
+            tbxAnnee = new TextBox();
+            cbxMois = new ComboBox();
             lbl_total = new Label();
             lbl_a = new Label();
             lbl_b = new Label();
@@ -75,6 +75,7 @@
             buttonGenerer.TabIndex = 2;
             buttonGenerer.Text = "Générer";
             buttonGenerer.UseVisualStyleBackColor = true;
+            buttonGenerer.Click += buttonGenerer_Click;
             // 
             // dataGridView
             // 
@@ -83,21 +84,24 @@
             dataGridView.Name = "dataGridView";
             dataGridView.Size = new System.Drawing.Size(467, 173);
             dataGridView.TabIndex = 3;
+            dataGridView.CellDoubleClick += new DataGridViewCellEventHandler(dataGridView_CellDoubleClick);
+
             // 
-            // textBox1
+            // tbxAnnee
             // 
-            textBox1.Location = new System.Drawing.Point(236, 7);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new System.Drawing.Size(47, 23);
-            textBox1.TabIndex = 4;
+            tbxAnnee.Location = new System.Drawing.Point(236, 7);
+            tbxAnnee.MaxLength = 2;
+            tbxAnnee.Name = "tbxAnnee";
+            tbxAnnee.Size = new System.Drawing.Size(47, 23);
+            tbxAnnee.TabIndex = 4;
             // 
-            // comboBox1
+            // cbxMois
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new System.Drawing.Point(57, 7);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new System.Drawing.Size(121, 23);
-            comboBox1.TabIndex = 5;
+            cbxMois.FormattingEnabled = true;
+            cbxMois.Location = new System.Drawing.Point(57, 7);
+            cbxMois.Name = "cbxMois";
+            cbxMois.Size = new System.Drawing.Size(121, 23);
+            cbxMois.TabIndex = 5;
             // 
             // lbl_total
             // 
@@ -187,8 +191,8 @@
             Controls.Add(lbl_b);
             Controls.Add(lbl_a);
             Controls.Add(lbl_total);
-            Controls.Add(comboBox1);
-            Controls.Add(textBox1);
+            Controls.Add(cbxMois);
+            Controls.Add(tbxAnnee);
             Controls.Add(labelMois);
             Controls.Add(labelAnnee);
             Controls.Add(buttonGenerer);
@@ -203,12 +207,32 @@
 
         private void InitializeDataGridView()
         {
-            dataGridView.ColumnCount = 5;
-            dataGridView.Columns[0].Name = "Num Fromagerie";
-            dataGridView.Columns[1].Name = "Total";
-            dataGridView.Columns[2].Name = "A";
-            dataGridView.Columns[3].Name = "B";
-            dataGridView.Columns[4].Name = "C";
+            dataGridView.AutoGenerateColumns = false;
+            dataGridView.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "LOFROM",
+                HeaderText = "Numéro"
+            });
+            dataGridView.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "LOCEM1",
+                HeaderText = "Total"
+            });
+            dataGridView.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "LOC11",
+                HeaderText = "A"
+            });
+            dataGridView.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "LOC12",
+                HeaderText = "B"
+            });
+            dataGridView.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "LOC13",
+                HeaderText = "C"
+            });
             foreach (DataGridViewColumn col in dataGridView.Columns)
             {
                 col.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -221,8 +245,8 @@
         private Label labelAnnee;
         private Button buttonGenerer;
         private DataGridView dataGridView;
-        private TextBox textBox1;
-        private ComboBox comboBox1;
+        private TextBox tbxAnnee;
+        private ComboBox cbxMois;
         private Label lbl_total;
         private Label lbl_a;
         private Label lbl_b;
