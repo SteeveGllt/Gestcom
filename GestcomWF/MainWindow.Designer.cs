@@ -43,15 +43,19 @@ namespace GestcomWF
             classementToolStripMenuItem = new ToolStripMenuItem();
             imprimantesToolStripMenuItem = new ToolStripMenuItem();
             editPeséeToolStripMenuItem = new ToolStripMenuItem();
+            éditionToolStripMenuItem = new ToolStripMenuItem();
+            saisiePeséesToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
             // 
-            menuStrip1.Items.AddRange(new ToolStripItem[] { fichiersToolStripMenuItem });
+            menuStrip1.ImageScalingSize = new Size(20, 20);
+            menuStrip1.Items.AddRange(new ToolStripItem[] { fichiersToolStripMenuItem, éditionToolStripMenuItem });
             menuStrip1.Location = new System.Drawing.Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1671, 24);
+            menuStrip1.Padding = new Padding(7, 3, 0, 3);
+            menuStrip1.Size = new Size(1910, 30);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -59,81 +63,96 @@ namespace GestcomWF
             // 
             fichiersToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { clientsToolStripMenuItem, articlesToolStripMenuItem, tarifsToolStripMenuItem, lieuxDeLivraisonToolStripMenuItem, fromageriesToolStripMenuItem, lotsToolStripMenuItem, imprimantesToolStripMenuItem, editPeséeToolStripMenuItem });
             fichiersToolStripMenuItem.Name = "fichiersToolStripMenuItem";
-            fichiersToolStripMenuItem.Size = new Size(59, 20);
+            fichiersToolStripMenuItem.Size = new Size(72, 24);
             fichiersToolStripMenuItem.Text = "Fichiers";
             // 
             // clientsToolStripMenuItem
             // 
             clientsToolStripMenuItem.Name = "clientsToolStripMenuItem";
-            clientsToolStripMenuItem.Size = new Size(180, 22);
+            clientsToolStripMenuItem.Size = new Size(224, 26);
             clientsToolStripMenuItem.Text = "Clients";
             // 
             // articlesToolStripMenuItem
             // 
             articlesToolStripMenuItem.Name = "articlesToolStripMenuItem";
-            articlesToolStripMenuItem.Size = new Size(180, 22);
+            articlesToolStripMenuItem.Size = new Size(224, 26);
             articlesToolStripMenuItem.Text = "Articles";
             // 
             // tarifsToolStripMenuItem
             // 
             tarifsToolStripMenuItem.Name = "tarifsToolStripMenuItem";
-            tarifsToolStripMenuItem.Size = new Size(180, 22);
+            tarifsToolStripMenuItem.Size = new Size(224, 26);
             tarifsToolStripMenuItem.Text = "Tarifs";
             // 
             // lieuxDeLivraisonToolStripMenuItem
             // 
             lieuxDeLivraisonToolStripMenuItem.Name = "lieuxDeLivraisonToolStripMenuItem";
-            lieuxDeLivraisonToolStripMenuItem.Size = new Size(180, 22);
+            lieuxDeLivraisonToolStripMenuItem.Size = new Size(224, 26);
             lieuxDeLivraisonToolStripMenuItem.Text = "Lieux de Livraison";
             // 
             // fromageriesToolStripMenuItem
             // 
             fromageriesToolStripMenuItem.Name = "fromageriesToolStripMenuItem";
-            fromageriesToolStripMenuItem.Size = new Size(180, 22);
+            fromageriesToolStripMenuItem.Size = new Size(224, 26);
             fromageriesToolStripMenuItem.Text = "Fromageries";
             // 
             // lotsToolStripMenuItem
             // 
             lotsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { entréeToolStripMenuItem, classementToolStripMenuItem });
             lotsToolStripMenuItem.Name = "lotsToolStripMenuItem";
-            lotsToolStripMenuItem.Size = new Size(180, 22);
+            lotsToolStripMenuItem.Size = new Size(224, 26);
             lotsToolStripMenuItem.Text = "Lots";
             // 
             // entréeToolStripMenuItem
             // 
             entréeToolStripMenuItem.Name = "entréeToolStripMenuItem";
-            entréeToolStripMenuItem.Size = new Size(135, 22);
+            entréeToolStripMenuItem.Size = new Size(224, 26);
             entréeToolStripMenuItem.Text = "Entrée";
             entréeToolStripMenuItem.Click += entréeToolStripMenuItem_Click;
             // 
             // classementToolStripMenuItem
             // 
             classementToolStripMenuItem.Name = "classementToolStripMenuItem";
-            classementToolStripMenuItem.Size = new Size(135, 22);
+            classementToolStripMenuItem.Size = new Size(224, 26);
             classementToolStripMenuItem.Text = "Classement";
+            classementToolStripMenuItem.Click += classementToolStripMenuItem_Click;
             // 
             // imprimantesToolStripMenuItem
             // 
             imprimantesToolStripMenuItem.Name = "imprimantesToolStripMenuItem";
-            imprimantesToolStripMenuItem.Size = new Size(180, 22);
+            imprimantesToolStripMenuItem.Size = new Size(224, 26);
             imprimantesToolStripMenuItem.Text = "Imprimantes";
             imprimantesToolStripMenuItem.Click += imprimantesToolStripMenuItem_Click;
             // 
             // editPeséeToolStripMenuItem
             // 
             editPeséeToolStripMenuItem.Name = "editPeséeToolStripMenuItem";
-            editPeséeToolStripMenuItem.Size = new Size(180, 22);
+            editPeséeToolStripMenuItem.Size = new Size(224, 26);
             editPeséeToolStripMenuItem.Text = "Edit Pesée";
-            editPeséeToolStripMenuItem.Click += editPeséeToolStripMenuItem_Click;
+            // 
+            // éditionToolStripMenuItem
+            // 
+            éditionToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { saisiePeséesToolStripMenuItem });
+            éditionToolStripMenuItem.Name = "éditionToolStripMenuItem";
+            éditionToolStripMenuItem.Size = new Size(70, 24);
+            éditionToolStripMenuItem.Text = "Édition";
+            // 
+            // saisiePeséesToolStripMenuItem
+            // 
+            saisiePeséesToolStripMenuItem.Name = "saisiePeséesToolStripMenuItem";
+            saisiePeséesToolStripMenuItem.Size = new Size(224, 26);
+            saisiePeséesToolStripMenuItem.Text = "Saisie pesées";
+            saisiePeséesToolStripMenuItem.Click += saisiePeséesToolStripMenuItem_Click;
             // 
             // MainWindow
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1671, 687);
+            ClientSize = new Size(1910, 916);
             Controls.Add(menuStrip1);
             IsMdiContainer = true;
             MainMenuStrip = menuStrip1;
+            Margin = new Padding(3, 4, 3, 4);
             Name = "MainWindow";
             Text = "Gestcom";
             menuStrip1.ResumeLayout(false);
@@ -156,5 +175,7 @@ namespace GestcomWF
         private ToolStripMenuItem classementToolStripMenuItem;
         private ToolStripMenuItem imprimantesToolStripMenuItem;
         private ToolStripMenuItem editPeséeToolStripMenuItem;
+        private ToolStripMenuItem éditionToolStripMenuItem;
+        private ToolStripMenuItem saisiePeséesToolStripMenuItem;
     }
 }

@@ -226,8 +226,25 @@ namespace GestcomWF.Views
 
         private void cbAffiner_CheckedChanged(object sender, EventArgs e)
         {
-            if (cbAffiner.Checked) { tbxFreinte.Text = "0"; tbxPoidsNet.Text = Calcul_Pds_Net().ToString(); }
-            else { tbxFreinte.Text = Calcul_Freinte().ToString(); tbxPoidsNet.Text = Calcul_Pds_Net().ToString(); }
+            if (cbAffiner.Checked) { 
+                tbxFreinte.Text = "0"; 
+                tbxPoidsNet.Text = Calcul_Pds_Net().ToString(); 
+
+                lblDate_debut.Visible = false;
+                lblDate_fin.Visible = false;
+                dtpDateDebut.Visible = false;
+                dtpDateFin.Visible = false;
+            }
+            else { 
+                tbxFreinte.Text = Calcul_Freinte().ToString(); 
+                tbxPoidsNet.Text = Calcul_Pds_Net().ToString();
+
+
+                lblDate_debut.Visible = true;
+                lblDate_fin.Visible = true;
+                dtpDateDebut.Visible = true;
+                dtpDateFin.Visible = true;
+            }
         }
 
         private void ResetForm()

@@ -282,8 +282,7 @@ namespace GestcomWF.Views
 
                     }
 
-
-                    workbook.SaveAs(@"D:\example_workbook.xls");
+                    workbook.SaveAs(@"D:\saisie_pesee " + moisNum.Mois + ".xls");
                     workbook.Close();
 
                 }
@@ -307,7 +306,7 @@ namespace GestcomWF.Views
             PrintAllSheets(selectedFilePath);
 
         }
-    
+
 
 
 
@@ -319,6 +318,7 @@ namespace GestcomWF.Views
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     selectedFilePath = openFileDialog.FileName;
+                    tbxRecherche.Text = selectedFilePath.ToString();
                 }
             }
         }

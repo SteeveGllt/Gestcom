@@ -18,7 +18,7 @@ namespace GestcomWF
             entree_Lot.Show();
         }
 
-        private void editPeséeToolStripMenuItem_Click(object sender, EventArgs e)
+        private void saisiePeséesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             edit_pesee edit_Pesee = new edit_pesee();
             edit_Pesee.MdiParent = this;
@@ -42,6 +42,13 @@ namespace GestcomWF
                     MessageBox.Show($"Vous avez choisi l'imprimante: {printerName}");
                 }
             }
+        }
+
+        private void classementToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            saisie_classement saisie_classement = new saisie_classement();
+            saisie_classement.MdiParent = this;
+            saisie_classement.Show();
         }
     }
 }
