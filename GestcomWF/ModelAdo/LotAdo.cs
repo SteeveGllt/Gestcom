@@ -1,6 +1,7 @@
 ﻿using Gestcom.Classes;
 using Gestcom.Models;
 using GestcomWF.DataAccess;
+using Microsoft.VisualBasic;
 using System.Data.OleDb;
 
 namespace Gestcom.ModelAdo
@@ -65,7 +66,7 @@ namespace Gestcom.ModelAdo
                 open();
                 OleDbCommand oleDbCommand = new OleDbCommand();
                 oleDbCommand.Connection = connection;
-                oleDbCommand.CommandText = "UPDATE TB_Lots SET LOCEM1 = @LOCEM1, LOCEB1 = @LOCEB1, LOCEN1 = @LOCEN1 WHERE LOFACO=1 AND LOFROM = @LOFROM AND LOANNE = @LOANNE AND LOMOIS = @LOMOIS AND LODEP=0";
+                oleDbCommand.CommandText = "UPDATE TB_Lots SET LOCEM1 = LOCEM1 + @LOCEM1, LOCEB1 = LOCEB1 + @LOCEB1, LOCEN1 = LOCEN1 + @LOCEN1 WHERE LOFACO = 1 AND LOFROM = @LOFROM AND LOANNE = @LOANNE AND LOMOIS = @LOMOIS AND LODEP = 0";
                 oleDbCommand.Prepare();
                 oleDbCommand.Parameters.AddWithValue("@LOCEM1", nbPains);
                 oleDbCommand.Parameters.AddWithValue("@LOCEB1", poidsBrut);
