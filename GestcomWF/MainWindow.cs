@@ -50,5 +50,12 @@ namespace GestcomWF
             saisie_classement.MdiParent = this;
             saisie_classement.Show();
         }
+
+        private void calculatriceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            calculatrice calculatrice = new calculatrice();
+            calculatrice.MdiParent = this;
+            calculatrice.Show();
+        }
     }
 }

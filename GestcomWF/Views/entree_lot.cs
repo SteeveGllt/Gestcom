@@ -1,5 +1,6 @@
 ﻿using Gestcom.ModelAdo;
 using Gestcom.Models;
+using System.Globalization;
 
 namespace GestcomWF.Views
 {
@@ -188,7 +189,7 @@ namespace GestcomWF.Views
                     entreeLotAffiner.LOCENM = Convert.ToDecimal(tbxPains.Text);
                     entreeLotAffiner.LOCENB = Convert.ToDecimal(tbxPoidsBrut.Text);
                     entreeLotAffiner.LOCENN = Convert.ToDecimal(tbxPoidsNet.Text);
-                    entreeLotAffiner.LOTAUX = Convert.ToDecimal(tbxFreinte.Text);
+                    entreeLotAffiner.LOTAUX = Convert.ToDouble(tbxFreinte.Text);
                     LotAdo.createEntreeLotAffine(entreeLotAffiner);
                 }
                 else
@@ -203,7 +204,8 @@ namespace GestcomWF.Views
                     entreeLot.LOCENM = Convert.ToDecimal(tbxPains.Text);
                     entreeLot.LOCENB = Convert.ToDecimal(tbxPoidsBrut.Text);
                     entreeLot.LOCENN = Convert.ToDecimal(tbxPoidsNet.Text);
-                    entreeLot.LOTAUX = Convert.ToDecimal(tbxFreinte.Text);
+                    entreeLot.LOTAUX = Convert.ToDouble(tbxFreinte.Text);
+
                     LotAdo.createEntreeLot(entreeLot);
                 }
                 ResetForm();

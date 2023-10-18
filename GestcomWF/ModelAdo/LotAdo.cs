@@ -91,7 +91,7 @@ namespace Gestcom.ModelAdo
                 open();
                 OleDbCommand oleDbCommand = new OleDbCommand();
                 oleDbCommand.Connection = connection;
-                oleDbCommand.CommandText = "INSERT INTO TB_Lots(LOFACO, LOFROM, LOANNE, LOMOIS, LODEP, LOCEM1, LOCEB1, LOCEN1, LOCPES, LOCC1) VALUES(1, @LOFROM, @LOANNE, @LOMOIS, 0, @LOCEM1, @LOCEB1, @LOCEN1, 0, 0)";
+                oleDbCommand.CommandText = "INSERT INTO TB_Lots(LOFACO, LOFROM, LOANNE, LOMOIS, LODEP, LOCEM1, LOCEB1, LOCEN1, LOCPES, LOCC1, LOC11, LOC12, LOC13) VALUES(1, @LOFROM, @LOANNE, @LOMOIS, 0, @LOCEM1, @LOCEB1, @LOCEN1, 0, 0, 0, 0, 0)";
                 oleDbCommand.Prepare();
                 oleDbCommand.Parameters.AddWithValue("@LOFROM", lot.LOFROM);
                 oleDbCommand.Parameters.AddWithValue("@LOANNE", lot.LOANNE);
@@ -118,7 +118,7 @@ namespace Gestcom.ModelAdo
                 open();
                 OleDbCommand oleDbCommand = new OleDbCommand();
                 oleDbCommand.Connection = connection;
-                oleDbCommand.CommandText = "INSERT INTO TB_Entrée_Lots(LOFACO, LOFROM, LOANNE, LOMOIS, LODEP, Date_Entrée, Date_Début, DAte_Fin, LOCENM, LOCENB, LOCPES, LOCENN, LOTAUX) VALUES(1, @LOFROM, @LOANNE, @LOMOIS, 0, @Date_Entrée, @Date_Début, @DAte_Fin, @LOCENM, @LOCENB, 0, LOCENN, LOTAUX)";
+                oleDbCommand.CommandText = "INSERT INTO TB_Entrée_Lots(LOFACO, LOFROM, LOANNE, LOMOIS, LODEP, Date_Entrée, Date_Début, DAte_Fin, LOCENM, LOCENB, LOCPES, LOCENN, LOTAUX) VALUES(1, @LOFROM, @LOANNE, @LOMOIS, 0, @Date_Entrée, @Date_Début, @DAte_Fin, @LOCENM, @LOCENB, 0, @LOCENN, @LOTAUX)";
                 oleDbCommand.Prepare();
                 oleDbCommand.Parameters.AddWithValue("@LOFROM", entreeLot.LOFROM);
                 oleDbCommand.Parameters.AddWithValue("@LOANNE", entreeLot.LOANNE);
@@ -138,7 +138,7 @@ namespace Gestcom.ModelAdo
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                MessageBox.Show("Erreur de communication avec la base de données!");
+                MessageBox.Show("Erreur de communication avec la base de données!" + ex);
             }
             finally { close(); }
         }
@@ -259,6 +259,32 @@ namespace Gestcom.ModelAdo
             {
                 close();
             }
+        }
+
+        public static void updateLotClassement(decimal lofrom, decimal loanne, decimal lomois, decimal a, decimal b, decimal c)
+        {
+            try
+            {
+                open();
+                OleDbCommand oleDbCommand = new OleDbCommand();
+                oleDbCommand.Connection = connection;
+                oleDbCommand.CommandText = "UPDATE TB_Lots SET LOC11 = @LOC11, LOC12 = @LOC12, LOC13 = @LOC13 WHERE LOFACO=1 AND LOFROM = @LOFROM AND LOANNE = @LOANNE AND LOMOIS = @LOMOIS AND LODEP=0";
+                oleDbCommand.Prepare();
+                oleDbCommand.Parameters.AddWithValue("@LOC11", a);
+                oleDbCommand.Parameters.AddWithValue("@LOC12", b);
+                oleDbCommand.Parameters.AddWithValue("@LOC13", c);
+                oleDbCommand.Parameters.AddWithValue("@LOFROM", lofrom);
+                oleDbCommand.Parameters.AddWithValue("@LOANNE", loanne);
+                oleDbCommand.Parameters.AddWithValue("@LOMOIS", lomois);
+                oleDbCommand.ExecuteNonQuery();
+                MessageBox.Show("Lot Modifié");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                MessageBox.Show("Erreur de communication avec la base de données!");
+            }
+            finally { close(); }
         }
 
     }

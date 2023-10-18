@@ -10,11 +10,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace GestcomWF.Views
 {
+
     public partial class saisie_classement : Form
     {
+        private Lot _currentLot = null;
+
         List<MoisNum> listeObjets = new List<MoisNum> {
             new MoisNum { Mois = "Janvier", Numero = 1 },
             new MoisNum { Mois = "Février", Numero = 2 },
@@ -35,16 +39,37 @@ namespace GestcomWF.Views
             InitializeDataGridView();
             cbxMois.DataSource = listeObjets;
             cbxMois.DisplayMember = "Mois";
-            cbxMois.SelectedIndex = 1;
+            cbxMois.SelectedIndex = 0;
             dataGridView.DataSource = null;
 
         }
 
         private void buttonGenerer_Click(object sender, EventArgs e)
         {
-            MoisNum moisNum = (MoisNum)cbxMois.SelectedItem;
-        
-            dataGridView.DataSource = LotAdo.allLot(Convert.ToDecimal(tbxAnnee.Text), moisNum.Numero);
+
+
+            if (tbxAnnee.Text == "" || tbxAnnee.Text.Length < 2)
+            {
+                MessageBox.Show("Veuillez entrer une année en deux chiffres");
+
+            }
+            else
+            {
+                MoisNum moisNum = (MoisNum)cbxMois.SelectedItem;
+                List<Lot> lots = LotAdo.allLot(Convert.ToDecimal(tbxAnnee.Text), moisNum.Numero);
+                if (lots.Count <= 0)
+                {
+                    MessageBox.Show("Aucune valeur");
+                }
+                else
+                {
+                    dataGridView.DataSource = lots;
+
+                }
+
+
+            }
+
         }
         private void dataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -59,8 +84,110 @@ namespace GestcomWF.Views
                 tbx_a.Text = lot.LOC11.ToString();
                 tbx_b.Text = lot.LOC12.ToString();
                 tbx_c.Text = lot.LOC13.ToString();
+                this._currentLot = lot;
                 // Assignez d'autres propriétés de l'objet `lot` à d'autres TextBox si nécessaire
             }
+        }
+
+
+
+        private void CalculateRemaining()
+        {
+            int total = Convert.ToInt32(tbx_total.Text);  // Vous pouvez récupérer cette valeur depuis un autre champ si nécessaire
+            int valueA = 0;
+            int valueB = 0;
+            int valueC = 0;
+
+            int.TryParse(tbx_a.Text, out valueA);
+            int.TryParse(tbx_b.Text, out valueB);
+            int.TryParse(tbx_c.Text, out valueC);
+
+            int remaining = total - valueA - valueB;
+
+            tbx_c.Text = remaining.ToString();
+           
+            if (remaining < 0)
+            {
+                MessageBox.Show("La somme des valeurs dépasse le total!");
+                // Réinitialiser la valeur du champ qui a causé le dépassement, ou ajuster selon votre logique
+            }
+
+
+
+        }
+
+        private void tbx_a_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                CalculateRemaining();
+                tbx_b.Focus();
+            }
+
+        }
+
+        private void tbx_b_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                CalculateRemaining();
+                tbx_c.Focus();
+            }
+
+        }
+
+        private void tbx_c_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                CalculateRemaining();
+            }
+
+        }
+
+        private void btn_valider_Click(object sender, EventArgs e)
+        {
+            MoisNum moisNum = (MoisNum)cbxMois.SelectedItem;
+            if (_currentLot == null)
+            {
+                MessageBox.Show("Veuillez sélectionner un lot");
+            }
+            else if (!IsNumber(tbx_a.Text) || !IsNumber(tbx_b.Text) || !IsNumber(tbx_c.Text))
+            {
+                MessageBox.Show("Veuillez entrer des nombres valides dans chaque champ.");
+                return;
+            }
+            else if (!IsNonNegativeNumber(tbx_a.Text) || !IsNonNegativeNumber(tbx_b.Text) || !IsNonNegativeNumber(tbx_c.Text))
+            {
+                MessageBox.Show("Veuillez entrer des nombres valides dans chaque champ.");
+                return;
+            }
+            else
+            {
+
+                LotAdo.updateLotClassement(_currentLot.LOFROM, Convert.ToDecimal(tbxAnnee.Text), moisNum.Numero, Convert.ToDecimal(tbx_a.Text), Convert.ToDecimal(tbx_b.Text), Convert.ToDecimal(tbx_c.Text));
+                _currentLot = null;
+                tbx_a.Text = "";
+                tbx_b.Text = "";
+                tbx_c.Text = "";
+                tbx_total.Text = "";
+            }
+
+        }
+
+        private bool IsNumber(string text)
+        {
+            int parsedValue;
+            return int.TryParse(text, out parsedValue);
+        }
+        private bool IsNonNegativeNumber(string text)
+        {
+            int parsedValue;
+            if (int.TryParse(text, out parsedValue))
+            {
+                return parsedValue >= 0;  // Retourne vrai si le nombre est non négatif
+            }
+            return false;
         }
     }
 }

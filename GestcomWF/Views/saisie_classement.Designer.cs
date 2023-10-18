@@ -84,8 +84,7 @@
             dataGridView.Name = "dataGridView";
             dataGridView.Size = new System.Drawing.Size(467, 173);
             dataGridView.TabIndex = 3;
-            dataGridView.CellDoubleClick += new DataGridViewCellEventHandler(dataGridView_CellDoubleClick);
-
+            dataGridView.CellDoubleClick += dataGridView_CellDoubleClick;
             // 
             // tbxAnnee
             // 
@@ -148,6 +147,7 @@
             btn_valider.TabIndex = 10;
             btn_valider.Text = "Valider";
             btn_valider.UseVisualStyleBackColor = true;
+            btn_valider.Click += btn_valider_Click;
             // 
             // tbx_total
             // 
@@ -162,6 +162,7 @@
             tbx_a.Name = "tbx_a";
             tbx_a.Size = new System.Drawing.Size(62, 23);
             tbx_a.TabIndex = 12;
+            tbx_a.KeyUp += tbx_a_KeyUp;
             // 
             // tbx_b
             // 
@@ -169,6 +170,7 @@
             tbx_b.Name = "tbx_b";
             tbx_b.Size = new System.Drawing.Size(62, 23);
             tbx_b.TabIndex = 13;
+            tbx_b.KeyUp += tbx_b_KeyUp;
             // 
             // tbx_c
             // 
@@ -176,6 +178,7 @@
             tbx_c.Name = "tbx_c";
             tbx_c.Size = new System.Drawing.Size(62, 23);
             tbx_c.TabIndex = 14;
+            tbx_c.KeyUp += tbx_c_KeyUp;
             // 
             // saisie_classement
             // 
@@ -207,6 +210,7 @@
 
         private void InitializeDataGridView()
         {
+            dataGridView.ReadOnly = true;
             dataGridView.AutoGenerateColumns = false;
             dataGridView.Columns.Add(new DataGridViewTextBoxColumn()
             {
