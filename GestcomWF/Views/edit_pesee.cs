@@ -40,10 +40,11 @@ namespace GestcomWF.Views
 
         }
 
+        // Gestionnaire de l'événement clic sur le bouton1
         private void button1_Click(object sender, EventArgs e)
         {
 
-
+            // Vérification que le champ 'année' est correctement rempli
             if (tbxAnnee.Text == "" || tbxAnnee.Text.Length < 2)
             {
                 MessageBox.Show("Veuillez entrer une année en deux chiffres");
@@ -55,9 +56,10 @@ namespace GestcomWF.Views
                 Decimal valeurPrecedente = 0;
 
 
-
+                // Récupération du mois sélectionné depuis la comboBox
                 MoisNum moisNum = (MoisNum)cbxMois.SelectedItem;
 
+                // Récupération de toutes les entrées pour le mois et l'année donnés
                 List<EntreeLotFrom> entreeLotFroms = LotAdo.allEntreeEnFonctionDuMoisEtDeLannee(moisNum.Numero, Convert.ToDecimal(tbxAnnee.Text));
                 if (entreeLotFroms.Count <= 0)
                 {
@@ -65,18 +67,17 @@ namespace GestcomWF.Views
                 }
                 else
                 {
-                    /*this.workSheet = workbook.CreateWorkSheet("date");
-               this.workSheet["B1"].Value = moisNum.Mois.ToUpper() + " " + tbxAnnee.Text;
-               this.workSheet["B1"].FormatString = "MMMM yyyy";*/
+
                     string annee = (DateTime.Now.Year / 100).ToString();
+                    // Traitement pour chaque entré
                     foreach (EntreeLotFrom entreeLotFrom in entreeLotFroms)
                     {
                         string nomFeuille = entreeLotFrom.FRNOM.Replace("/", "-");
 
-
-
+                        // Si l'entrée a une nouvelle valeur FRNUM
                         if (entreeLotFrom.FRNUM != valeurPrecedente)
                         {
+                            // Initialisation de la feuille Excel avec le nom adapté
                             this.workSheet = workbook.CreateWorkSheet(nomFeuille);
                             this.workSheet["D7"].Value = entreeLotFrom.FRNDIR;
                             this.workSheet["D8"].Value = "Président " + entreeLotFrom.FRNOM;
@@ -280,10 +281,11 @@ namespace GestcomWF.Views
                         RangeColumn col5 = workSheet.GetColumn(5);
                         col5.Width = 3300; // Set width
 
-
+                        // Configuration du style de la feuille (police, ...)
                         this.workSheet.Style.Font.Name = "Arial";
 
                     }
+                    // Propose à l'utilisateur d'enregistrer le fichier Excel
                     SaveFileDialog saveFileDialog = new SaveFileDialog();
                     saveFileDialog.Filter = "Excel files(*.xls; *.xlsx)| *.xls; *.xlsx";
                     saveFileDialog.Title = "Enregistrez le fichier sous...";
@@ -301,51 +303,66 @@ namespace GestcomWF.Views
 
 
         }
-
+        // Gestionnaire d'événement pour le clic sur le bouton d'impression Excel.
         private void printExcel_Click(object sender, EventArgs e)
         {
+            // Appelle la méthode pour ouvrir, imprimer et fermer le fichier Excel.
             OuvrirImprimerFermerXLS();
         }
         private void OuvrirImprimerFermerXLS()
         {
+            // Vérifie si un fichier a été sélectionné.
             if (string.IsNullOrEmpty(selectedFilePath))
             {
+                // Affiche un message si aucun fichier n'a été sélectionné.
                 MessageBox.Show("Veuillez d'abord sélectionner un fichier.");
                 return;
             }
 
+            // Appelle la méthode pour imprimer toutes les feuilles du fichier Excel.
             PrintAllSheets(selectedFilePath);
 
         }
 
 
 
-
+        // Permet à l'utilisateur de rechercher et de sélectionner un fichier Excel.
         private void RechercherXLS()
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
+                // Filtre les fichiers pour n'afficher que les fichiers Excel
                 openFileDialog.Filter = "Excel files (*.xls; *.xlsx)|*.xls;*.xlsx";
+
+                // Affiche la boîte de dialogue de sélection de fichier.
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
+                    // Stocke le chemin du fichier sélectionné.
                     selectedFilePath = openFileDialog.FileName;
+
+                    // Affiche le chemin du fichier dans le TextBox.
                     tbxRecherche.Text = selectedFilePath.ToString();
                 }
             }
         }
 
+        // Gestionnaire d'événement pour le clic sur le bouton de recherche de fichier Excel.
         private void btnRechercher_Click(object sender, EventArgs e)
         {
+            // Appelle la méthode pour permettre à l'utilisateur de rechercher un fichier Excel.
             RechercherXLS();
         }
 
+        // Imprime toutes les feuilles de calcul du fichier Excel spécifié.
         private void PrintAllSheets(string filePath)
         {
+            // Initialise les objets pour l'application Excel et le classeur.
             Microsoft.Office.Interop.Excel.Application excelApp = new Microsoft.Office.Interop.Excel.Application();
             Microsoft.Office.Interop.Excel.Workbook workbook = excelApp.Workbooks.Open(filePath);
 
             try
             {
+                // Parcourt et imprime chaque feuille du classeur.
                 foreach (Microsoft.Office.Interop.Excel.Worksheet worksheet in workbook.Sheets)
                 {
                     worksheet.PrintOutEx();
@@ -353,12 +370,16 @@ namespace GestcomWF.Views
             }
             catch (Exception ex)
             {
+                // Affiche un message d'erreur en cas de problème lors de l'impression.
                 MessageBox.Show($"Une erreur est survenue lors de la tentative d'impression: {ex.Message}");
             }
             finally
             {
+                // Ferme le classeur et l'application Excel.
                 workbook.Close(false);
                 excelApp.Quit();
+
+                // Libère les ressources pour éviter les fuites de mémoire.
                 System.Runtime.InteropServices.Marshal.ReleaseComObject(workbook);
                 System.Runtime.InteropServices.Marshal.ReleaseComObject(excelApp);
             }

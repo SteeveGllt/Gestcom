@@ -6,9 +6,12 @@ namespace GestcomWF.Views
 {
     public partial class entree_lot : Form
     {
+        // Constantes pour calculer l'année
         private const int MAGIC_YEAR_START = 2000;
         private const int MAGIC_YEAR_DIFFERENCE = 2001;
-        List<Fromagerie> fromageries;
+        List<Fromagerie> fromageries; // Liste des fromageries
+
+        // Constructeur
         public entree_lot()
         {
             InitializeComponent();
@@ -19,6 +22,8 @@ namespace GestcomWF.Views
             cbxFromagerie.Focus();
 
         }
+
+        // Initialisation de la liste des fromageries à partir de la base de données
         private void InitializeFromagerie()
         {
             this.fromageries = FromagerieAdo.all();
@@ -27,11 +32,15 @@ namespace GestcomWF.Views
             cbxFromagerie.DisplayMember = "FRNUM";
             cbxFromagerie.SelectedIndex = 0;
         }
+
+        // Initialisation de la combobox des mois
         private void InitializeComboboxMois()
         {
             this.cbxMois.DataSource = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
             this.cbxMois.SelectedItem = DateTime.Now.Month;
         }
+
+        // Initialisation des DateTimePickers avec la date courante
         private void InitializeDatePickers()
         {
             DateTime currentDateTime = DateTime.Now;
@@ -40,12 +49,14 @@ namespace GestcomWF.Views
             dtpDateFin.Value = currentDateTime;
         }
 
+        // Initialisation des TextBoxes
         private void InitializeTextBoxes()
         {
             tbxPoidsNet.ReadOnly = true;
             tbxAnnee.Text = ComputeAnnee(dtpDateEntree.Value).ToString();
         }
 
+        // Calcul de l'année basé sur la date
         private int ComputeAnnee(DateTime date)
         {
             if (date.Month < 2 && date.Day < 10)
@@ -58,12 +69,14 @@ namespace GestcomWF.Views
             }
         }
 
+        // Mettre à jour les champs de Freinte et PoidsNet
         private void UpdateFreinteAndPoidsNet()
         {
             tbxFreinte.Text = Calcul_Freinte().ToString();
             tbxPoidsNet.Text = Calcul_Pds_Net().ToString();
         }
 
+        // Événements lors du changement des dates
         private void dtpDateEntree_ValueChanged(object sender, EventArgs e)
         {
             UpdateFreinteAndPoidsNet();
@@ -79,8 +92,10 @@ namespace GestcomWF.Views
             UpdateFreinteAndPoidsNet();
         }
 
+        // Calcul de la freinte basé sur les dates
         private decimal Calcul_Freinte()
         {
+            // Récupération des dates
             // Date de début
             DateTime? dateDebut = dtpDateDebut.Value;
 
@@ -138,6 +153,8 @@ namespace GestcomWF.Views
             }
             return Math.Round(1m);
         }
+
+        // Calcul du poids net
         private int Calcul_Pds_Net()
         {
             try
@@ -154,6 +171,7 @@ namespace GestcomWF.Views
             }
         }
 
+        // Événement lors du clic sur le bouton1
         private void button1_Click(object sender, EventArgs e)
         {
             if (tbxPains.Text != "" && tbxPoidsBrut.Text != "")
@@ -216,6 +234,7 @@ namespace GestcomWF.Views
             }
         }
 
+        // Événements lors de la saisie dans les champs PoidsBrut et Freinte
         private void tbxPoidsBrut_KeyUp(object sender, KeyEventArgs e)
         {
             tbxPoidsNet.Text = Calcul_Pds_Net().ToString();
@@ -226,6 +245,7 @@ namespace GestcomWF.Views
             tbxPoidsNet.Text = Calcul_Pds_Net().ToString();
         }
 
+        // Événement lors du changement de l'état de la checkbox Affiner
         private void cbAffiner_CheckedChanged(object sender, EventArgs e)
         {
             if (cbAffiner.Checked) {
@@ -257,6 +277,7 @@ namespace GestcomWF.Views
             }
         }
 
+        // Méthode pour réinitialiser le formulaire
         private void ResetForm()
         {
             // Remettre à zéro les ComboBox

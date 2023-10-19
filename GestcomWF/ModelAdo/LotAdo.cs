@@ -8,16 +8,30 @@ namespace Gestcom.ModelAdo
 {
     public class LotAdo : DataAdo
     {
+        /// <summary>
+        /// Vérifie si un lot existe déjà dans la base de données.
+        /// </summary>
+        /// <param name="lofrom">Paramètre LOFROM.</param>
+        /// <param name="loanne">Paramètre LOANNE.</param>
+        /// <param name="lomois">Paramètre LOMOIS.</param>
+        /// <returns>Retourne un objet Lot si le lot existe, sinon null.</returns>
         public static Lot ExisteLot(decimal lofrom, decimal loanne, decimal lomois)
         {
             try
             {
+                // Initialisation de l'objet Lot
                 Lot lot = new Lot();
                 OleDbDataReader reader;
+
+                // Ouverture de la connexion
                 open();
                 OleDbCommand oleDbCommand = new OleDbCommand();
                 oleDbCommand.Connection = connection;
+
+                // Requête SQL pour vérifier l'existence d'un lot
                 oleDbCommand.CommandText = "SELECT LOFACO, LOFROM, LOANNE, LOMOIS, LODEP FROM TB_Lots WHERE LOFACO=1 AND LOFROM = @LOFROM AND LOANNE = @LOANNE AND LOMOIS = @LOMOIS AND LODEP=0";
+
+                // Préparation et exécution de la requête
                 oleDbCommand.Prepare();
                 oleDbCommand.Parameters.AddWithValue("@LOFROM", lofrom);
                 oleDbCommand.Parameters.AddWithValue("@LOANNE", loanne);

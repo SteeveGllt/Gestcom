@@ -17,8 +17,10 @@ namespace GestcomWF.Views
 
     public partial class saisie_classement : Form
     {
+        // Membre pour garder une trace du lot actuel
         private Lot _currentLot = null;
 
+        // Liste des mois pour la combobox
         List<MoisNum> listeObjets = new List<MoisNum> {
             new MoisNum { Mois = "Janvier", Numero = 1 },
             new MoisNum { Mois = "Février", Numero = 2 },
@@ -33,17 +35,22 @@ namespace GestcomWF.Views
             new MoisNum { Mois = "Novembre", Numero = 11 },
             new MoisNum { Mois = "Décembre", Numero = 12 }
             };
+
+        // Constructeur de la classe
         public saisie_classement()
         {
             InitializeComponent();
             InitializeDataGridView();
+            // Initialiser la combobox avec les mois
             cbxMois.DataSource = listeObjets;
             cbxMois.DisplayMember = "Mois";
             cbxMois.SelectedIndex = 0;
+            // Initialiser le DataGridView sans source de données
             dataGridView.DataSource = null;
 
         }
 
+        // Génère des lots basés sur le mois et l'année entrés
         private void buttonGenerer_Click(object sender, EventArgs e)
         {
 
@@ -71,6 +78,8 @@ namespace GestcomWF.Views
             }
 
         }
+
+        // Événement lors du double clic sur une ligne du DataGridView
         private void dataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) // Assurez-vous que le double-clic n'est pas sur l'en-tête
@@ -89,8 +98,7 @@ namespace GestcomWF.Views
             }
         }
 
-
-
+        // Calcule et affiche le montant restant
         private void CalculateRemaining()
         {
             int total = Convert.ToInt32(tbx_total.Text);  // Vous pouvez récupérer cette valeur depuis un autre champ si nécessaire
@@ -105,7 +113,7 @@ namespace GestcomWF.Views
             int remaining = total - valueA - valueB;
 
             tbx_c.Text = remaining.ToString();
-           
+
             if (remaining < 0)
             {
                 MessageBox.Show("La somme des valeurs dépasse le total!");
@@ -116,6 +124,7 @@ namespace GestcomWF.Views
 
         }
 
+        // Si l'utilisateur appuie sur Enter après avoir entré une valeur dans tbx_a
         private void tbx_a_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -126,6 +135,7 @@ namespace GestcomWF.Views
 
         }
 
+        // Si l'utilisateur appuie sur Enter après avoir entré une valeur dans tbx_b
         private void tbx_b_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -136,6 +146,7 @@ namespace GestcomWF.Views
 
         }
 
+        // Si l'utilisateur appuie sur Enter après avoir entré une valeur dans tbx_c
         private void tbx_c_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -145,6 +156,7 @@ namespace GestcomWF.Views
 
         }
 
+        // Valide et met à jour le lot sélectionné
         private void btn_valider_Click(object sender, EventArgs e)
         {
             MoisNum moisNum = (MoisNum)cbxMois.SelectedItem;
@@ -175,11 +187,14 @@ namespace GestcomWF.Views
 
         }
 
+        // Fonction pour vérifier si une chaîne est un nombre
         private bool IsNumber(string text)
         {
             int parsedValue;
             return int.TryParse(text, out parsedValue);
         }
+
+        // Fonction pour vérifier si une chaîne est un nombre non négatif
         private bool IsNonNegativeNumber(string text)
         {
             int parsedValue;
