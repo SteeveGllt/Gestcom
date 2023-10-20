@@ -43,35 +43,36 @@
             tbx_a = new TextBox();
             tbx_b = new TextBox();
             tbx_c = new TextBox();
+            generate_excel = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
             SuspendLayout();
             // 
             // labelMois
             // 
             labelMois.AutoSize = true;
-            labelMois.Location = new System.Drawing.Point(14, 10);
-            labelMois.Margin = new Padding(4, 0, 4, 0);
+            labelMois.Location = new System.Drawing.Point(16, 19);
+            labelMois.Margin = new Padding(5, 0, 5, 0);
             labelMois.Name = "labelMois";
-            labelMois.Size = new System.Drawing.Size(36, 15);
+            labelMois.Size = new System.Drawing.Size(44, 20);
             labelMois.TabIndex = 0;
             labelMois.Text = "Mois:";
             // 
             // labelAnnee
             // 
             labelAnnee.AutoSize = true;
-            labelAnnee.Location = new System.Drawing.Point(185, 10);
-            labelAnnee.Margin = new Padding(4, 0, 4, 0);
+            labelAnnee.Location = new System.Drawing.Point(211, 19);
+            labelAnnee.Margin = new Padding(5, 0, 5, 0);
             labelAnnee.Name = "labelAnnee";
-            labelAnnee.Size = new System.Drawing.Size(44, 15);
+            labelAnnee.Size = new System.Drawing.Size(54, 20);
             labelAnnee.TabIndex = 1;
             labelAnnee.Text = "Année:";
             // 
             // buttonGenerer
             // 
-            buttonGenerer.Location = new System.Drawing.Point(308, 7);
-            buttonGenerer.Margin = new Padding(4, 3, 4, 3);
+            buttonGenerer.Location = new System.Drawing.Point(352, 15);
+            buttonGenerer.Margin = new Padding(5, 4, 5, 4);
             buttonGenerer.Name = "buttonGenerer";
-            buttonGenerer.Size = new System.Drawing.Size(88, 27);
+            buttonGenerer.Size = new System.Drawing.Size(101, 36);
             buttonGenerer.TabIndex = 2;
             buttonGenerer.Text = "Générer";
             buttonGenerer.UseVisualStyleBackColor = true;
@@ -79,71 +80,75 @@
             // 
             // dataGridView
             // 
-            dataGridView.Location = new System.Drawing.Point(185, 61);
-            dataGridView.Margin = new Padding(4, 3, 4, 3);
+            dataGridView.ColumnHeadersHeight = 29;
+            dataGridView.Location = new System.Drawing.Point(174, 69);
+            dataGridView.Margin = new Padding(5, 4, 5, 4);
             dataGridView.Name = "dataGridView";
-            dataGridView.Size = new System.Drawing.Size(467, 173);
+            dataGridView.RowHeadersWidth = 51;
+            dataGridView.Size = new System.Drawing.Size(534, 231);
             dataGridView.TabIndex = 3;
             dataGridView.CellDoubleClick += dataGridView_CellDoubleClick;
             // 
             // tbxAnnee
             // 
-            tbxAnnee.Location = new System.Drawing.Point(236, 7);
+            tbxAnnee.Location = new System.Drawing.Point(270, 15);
+            tbxAnnee.Margin = new Padding(3, 4, 3, 4);
             tbxAnnee.MaxLength = 2;
             tbxAnnee.Name = "tbxAnnee";
-            tbxAnnee.Size = new System.Drawing.Size(47, 23);
+            tbxAnnee.Size = new System.Drawing.Size(53, 27);
             tbxAnnee.TabIndex = 4;
             // 
             // cbxMois
             // 
             cbxMois.FormattingEnabled = true;
-            cbxMois.Location = new System.Drawing.Point(57, 7);
+            cbxMois.Location = new System.Drawing.Point(65, 15);
+            cbxMois.Margin = new Padding(3, 4, 3, 4);
             cbxMois.Name = "cbxMois";
-            cbxMois.Size = new System.Drawing.Size(121, 23);
+            cbxMois.Size = new System.Drawing.Size(138, 28);
             cbxMois.TabIndex = 5;
             // 
             // lbl_total
             // 
             lbl_total.AutoSize = true;
-            lbl_total.Location = new System.Drawing.Point(24, 61);
+            lbl_total.Location = new System.Drawing.Point(13, 73);
             lbl_total.Name = "lbl_total";
-            lbl_total.Size = new System.Drawing.Size(35, 15);
+            lbl_total.Size = new System.Drawing.Size(45, 20);
             lbl_total.TabIndex = 6;
             lbl_total.Text = "Total:";
             // 
             // lbl_a
             // 
             lbl_a.AutoSize = true;
-            lbl_a.Location = new System.Drawing.Point(24, 91);
+            lbl_a.Location = new System.Drawing.Point(13, 113);
             lbl_a.Name = "lbl_a";
-            lbl_a.Size = new System.Drawing.Size(18, 15);
+            lbl_a.Size = new System.Drawing.Size(22, 20);
             lbl_a.TabIndex = 7;
             lbl_a.Text = "A:";
             // 
             // lbl_b
             // 
             lbl_b.AutoSize = true;
-            lbl_b.Location = new System.Drawing.Point(24, 124);
+            lbl_b.Location = new System.Drawing.Point(13, 157);
             lbl_b.Name = "lbl_b";
-            lbl_b.Size = new System.Drawing.Size(17, 15);
+            lbl_b.Size = new System.Drawing.Size(21, 20);
             lbl_b.TabIndex = 8;
             lbl_b.Text = "B:";
             // 
             // lbl_c
             // 
             lbl_c.AutoSize = true;
-            lbl_c.Location = new System.Drawing.Point(24, 157);
+            lbl_c.Location = new System.Drawing.Point(13, 201);
             lbl_c.Name = "lbl_c";
-            lbl_c.Size = new System.Drawing.Size(18, 15);
+            lbl_c.Size = new System.Drawing.Size(21, 20);
             lbl_c.TabIndex = 9;
             lbl_c.Text = "C:";
             // 
             // btn_valider
             // 
-            btn_valider.Location = new System.Drawing.Point(39, 198);
-            btn_valider.Margin = new Padding(4, 3, 4, 3);
+            btn_valider.Location = new System.Drawing.Point(45, 264);
+            btn_valider.Margin = new Padding(5, 4, 5, 4);
             btn_valider.Name = "btn_valider";
-            btn_valider.Size = new System.Drawing.Size(88, 27);
+            btn_valider.Size = new System.Drawing.Size(101, 36);
             btn_valider.TabIndex = 10;
             btn_valider.Text = "Valider";
             btn_valider.UseVisualStyleBackColor = true;
@@ -151,40 +156,55 @@
             // 
             // tbx_total
             // 
-            tbx_total.Location = new System.Drawing.Point(79, 58);
+            tbx_total.Location = new System.Drawing.Point(76, 69);
+            tbx_total.Margin = new Padding(3, 4, 3, 4);
             tbx_total.Name = "tbx_total";
-            tbx_total.Size = new System.Drawing.Size(62, 23);
+            tbx_total.Size = new System.Drawing.Size(70, 27);
             tbx_total.TabIndex = 11;
             // 
             // tbx_a
             // 
-            tbx_a.Location = new System.Drawing.Point(79, 88);
+            tbx_a.Location = new System.Drawing.Point(76, 109);
+            tbx_a.Margin = new Padding(3, 4, 3, 4);
             tbx_a.Name = "tbx_a";
-            tbx_a.Size = new System.Drawing.Size(62, 23);
+            tbx_a.Size = new System.Drawing.Size(70, 27);
             tbx_a.TabIndex = 12;
             tbx_a.KeyUp += tbx_a_KeyUp;
             // 
             // tbx_b
             // 
-            tbx_b.Location = new System.Drawing.Point(79, 121);
+            tbx_b.Location = new System.Drawing.Point(76, 153);
+            tbx_b.Margin = new Padding(3, 4, 3, 4);
             tbx_b.Name = "tbx_b";
-            tbx_b.Size = new System.Drawing.Size(62, 23);
+            tbx_b.Size = new System.Drawing.Size(70, 27);
             tbx_b.TabIndex = 13;
             tbx_b.KeyUp += tbx_b_KeyUp;
             // 
             // tbx_c
             // 
-            tbx_c.Location = new System.Drawing.Point(79, 154);
+            tbx_c.Location = new System.Drawing.Point(76, 197);
+            tbx_c.Margin = new Padding(3, 4, 3, 4);
             tbx_c.Name = "tbx_c";
-            tbx_c.Size = new System.Drawing.Size(62, 23);
+            tbx_c.Size = new System.Drawing.Size(70, 27);
             tbx_c.TabIndex = 14;
             tbx_c.KeyUp += tbx_c_KeyUp;
             // 
+            // generate_excel
+            // 
+            generate_excel.Location = new System.Drawing.Point(570, 15);
+            generate_excel.Name = "generate_excel";
+            generate_excel.Size = new System.Drawing.Size(177, 29);
+            generate_excel.TabIndex = 15;
+            generate_excel.Text = "Générer le fichier Excel";
+            generate_excel.UseVisualStyleBackColor = true;
+            generate_excel.Click += generate_excel_Click;
+            // 
             // saisie_classement
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(664, 250);
+            ClientSize = new System.Drawing.Size(759, 333);
+            Controls.Add(generate_excel);
             Controls.Add(tbx_c);
             Controls.Add(tbx_b);
             Controls.Add(tbx_a);
@@ -200,7 +220,7 @@
             Controls.Add(labelAnnee);
             Controls.Add(buttonGenerer);
             Controls.Add(dataGridView);
-            Margin = new Padding(4, 3, 4, 3);
+            Margin = new Padding(5, 4, 5, 4);
             Name = "saisie_classement";
             Text = "Saisie classement";
             ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
@@ -260,5 +280,6 @@
         private TextBox tbx_a;
         private TextBox tbx_b;
         private TextBox tbx_c;
+        private Button generate_excel;
     }
 }

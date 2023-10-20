@@ -1,8 +1,10 @@
 ﻿using Gestcom.Classes;
 using Gestcom.Models;
+using GestcomWF.Classes;
 using GestcomWF.DataAccess;
 using Microsoft.VisualBasic;
 using System.Data.OleDb;
+using System.Windows.Forms;
 
 namespace Gestcom.ModelAdo
 {
@@ -141,7 +143,7 @@ namespace Gestcom.ModelAdo
                 oleDbCommand.Parameters.AddWithValue("@Date_Entrée", entreeLot.Date_Entrée.ToString("dd/MM/yyyy"));
                 oleDbCommand.Parameters.AddWithValue("@Date_Début", entreeLot.Date_Début.ToString("dd/MM/yyyy"));
                 oleDbCommand.Parameters.AddWithValue("@DAte_Fin", entreeLot.DAte_Fin.ToString("dd/MM/yyyy"));
-         
+
                 oleDbCommand.Parameters.AddWithValue("@LOCENM", entreeLot.LOCENM); // Pains
                 oleDbCommand.Parameters.AddWithValue("@LOCENB", entreeLot.LOCENB); // Brut
                 oleDbCommand.Parameters.AddWithValue("@LOCENN", entreeLot.LOCENN); // Net
@@ -207,8 +209,8 @@ namespace Gestcom.ModelAdo
                 while (reader.Read())
                 {
                     EntreeLotFrom entreeLotFrom = new EntreeLotFrom((Decimal)reader["LOFROM"], (Decimal)reader["LOANNE"],
-                        (Decimal)reader["LOMOIS"], (DateTime)reader["Date_Entrée"], 
-                        (Decimal)reader["LOCENM"], (Decimal)reader["LOCENB"], (Decimal)reader["LOCENN"], (Decimal)reader["LOTAUX"], (Decimal)reader["FRNUM"], 
+                        (Decimal)reader["LOMOIS"], (DateTime)reader["Date_Entrée"],
+                        (Decimal)reader["LOCENM"], (Decimal)reader["LOCENB"], (Decimal)reader["LOCENN"], (Decimal)reader["LOTAUX"], (Decimal)reader["FRNUM"],
                         (String)reader["FRNOM"], (String)reader["FRADR"], (Decimal)reader["FRCPOS"],
                         (String)reader["FRVILL"], (String)reader["FRNDIR"]);
                     entreeLotFroms.Add(entreeLotFrom);
@@ -247,19 +249,22 @@ namespace Gestcom.ModelAdo
 
                 while (reader.Read())
                 {
-                    // Si la requête a retourné des résultats, créez un objet Lot
-                    lot = new Lot
+                    // Vérifiez si l'une des colonnes est null
+                    if (reader.IsDBNull(reader.GetOrdinal("LOFROM")) ||
+                        reader.IsDBNull(reader.GetOrdinal("LOCEM1")) ||
+                        reader.IsDBNull(reader.GetOrdinal("LOC11")) ||
+                        reader.IsDBNull(reader.GetOrdinal("LOC12")) ||
+                        reader.IsDBNull(reader.GetOrdinal("LOC13")))
                     {
-                        // Assurez-vous de récupérer les valeurs appropriées depuis le reader
-                        LOFROM = reader.GetDecimal(0),
-                        LOCEM1 = reader.GetDecimal(1),
-                        LOC11 = reader.GetDecimal(2),
-                        LOC12 = reader.GetDecimal(3),
-                        LOC13 = reader.GetDecimal(4)
-                    };
+                        return null;
+                    }
+
+                    // Si toutes les colonnes contiennent des données, créez un objet Lot
+                    lot = new Lot((Decimal)reader["LOFROM"], (Decimal)reader["LOCEM1"], (Decimal)reader["LOC11"], (Decimal)reader["LOC12"], (Decimal)reader["LOC13"]);
                     lots.Add(lot);
-                    
                 }
+
+
                 return lots;
 
 
@@ -267,7 +272,7 @@ namespace Gestcom.ModelAdo
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                MessageBox.Show("Erreur de communication avec la base de données!");
+                MessageBox.Show("Erreur de communication avec la base de données!" + ex);
                 return null;
             }
             finally
@@ -301,6 +306,47 @@ namespace Gestcom.ModelAdo
             }
             finally { close(); }
         }
+        public static List<LotFrom> generationFichierExcelClassement(decimal mois, decimal annee)
+        {
+            try
+            {
 
+                List<LotFrom> lots = new List<LotFrom>();
+                OleDbDataReader reader;
+                open();
+                //OleDbCommand oleDbCommand = new OleDbCommand("SELECT * FROM TB_Entrée_Lots WHERE LOMOIS = @LOMOIS AND LOANNE = @LOANNE");
+                OleDbCommand oleDbCommand = new OleDbCommand("SELECT TB_Lots.LOFROM, TB_Fromageries.FRNOM, TB_Fromageries.FRNDIR, TB_Fromageries.FRADR, TB_Fromageries.FRCPOS, TB_Lots.LOCEM1, TB_Lots.LOC11, TB_Lots.LOC12, TB_Lots.LOC13, " +
+                    " TB_Lots.LOANNE, TB_Lots.LOMOIS, TB_Fromageries.FRVILL, TB_Fromageries.FRNUM FROM TB_Fromageries INNER JOIN TB_Lots ON TB_Fromageries.FRNUM = TB_Lots.LOFROM" +
+                    " WHERE LOMOIS = @LOMOIS AND LOANNE = @LOANNE AND TB_Lots.LODEP = 0 ORDER BY TB_Lots.LOFROM; ");
+                oleDbCommand.Connection = connection;
+                oleDbCommand.Prepare();
+                oleDbCommand.Parameters.AddWithValue("@LOMOIS", mois);
+                oleDbCommand.Parameters.AddWithValue("@LOANNE", annee);
+                reader = oleDbCommand.ExecuteReader();
+                while (reader.Read())
+                {
+                    LotFrom lot = new LotFrom((Decimal)reader["LOFROM"], (String)reader["FRNOM"], (String)reader["FRNDIR"], (String)reader["FRADR"], (Decimal)reader["FRCPOS"], (Decimal)reader["LOCEM1"], (Decimal)reader["LOC11"], (Decimal)reader["LOC12"], (Decimal)reader["LOC13"],
+                        (Decimal)reader["LOANNE"],
+                        (Decimal)reader["LOMOIS"],
+                        (String)reader["FRVILL"],
+                        (Decimal)reader["FRNUM"]);
+                    lots.Add(lot);
+                }
+                Console.WriteLine(reader);
+                reader.Close();
+                return lots;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                MessageBox.Show("Erreur de communication avec la base de données!");
+                return null;
+            }
+            finally
+            {
+                close();
+            }
+        }
     }
+    
 }
