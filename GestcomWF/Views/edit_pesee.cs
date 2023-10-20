@@ -294,14 +294,12 @@ namespace GestcomWF.Views
                     {
                         string path = saveFileDialog.FileName;
 
-                        workbook.SaveAs(@"D:\saisie_pesee " + moisNum.Mois + ".xls");
+                        workbook.SaveAs(path);
                         workbook.Close();
 
                     }
                 }
             }
-
-
         }
         // Gestionnaire d'événement pour le clic sur le bouton d'impression Excel.
         private void printExcel_Click(object sender, EventArgs e)
