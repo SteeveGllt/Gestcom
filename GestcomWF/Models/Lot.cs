@@ -81,14 +81,7 @@ namespace Gestcom.Models
             LOC12 = loc12;
             LOC13 = loc13;
         }
-        public Lot(decimal lofrom, decimal locem1, decimal loc11, decimal loc12, decimal loc13)
-        {
-            LOFROM = lofrom;
-            LOCEM1 = locem1;
-            LOC11 = loc11;
-            LOC12 = loc12;
-            LOC13 = loc13;
-        }
+       
 
 
     }

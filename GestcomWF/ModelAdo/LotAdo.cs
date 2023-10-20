@@ -316,7 +316,7 @@ namespace Gestcom.ModelAdo
                 open();
                 //OleDbCommand oleDbCommand = new OleDbCommand("SELECT * FROM TB_Entrée_Lots WHERE LOMOIS = @LOMOIS AND LOANNE = @LOANNE");
                 OleDbCommand oleDbCommand = new OleDbCommand("SELECT TB_Lots.LOFROM, TB_Fromageries.FRNOM, TB_Fromageries.FRNDIR, TB_Fromageries.FRADR, TB_Fromageries.FRCPOS, TB_Lots.LOCEM1, TB_Lots.LOC11, TB_Lots.LOC12, TB_Lots.LOC13, " +
-                    " TB_Lots.LOANNE, TB_Lots.LOMOIS, TB_Lots.LODEP FROM TB_Fromageries INNER JOIN TB_Lots ON TB_Fromageries.FRNUM = TB_Lots.LOFROM" +
+                    " TB_Lots.LOANNE, TB_Lots.LOMOIS, TB_Fromageries.FRVILL, TB_Fromageries.FRNUM FROM TB_Fromageries INNER JOIN TB_Lots ON TB_Fromageries.FRNUM = TB_Lots.LOFROM" +
                     " WHERE LOMOIS = @LOMOIS AND LOANNE = @LOANNE AND TB_Lots.LODEP = 0 ORDER BY TB_Lots.LOFROM; ");
                 oleDbCommand.Connection = connection;
                 oleDbCommand.Prepare();
@@ -325,10 +325,11 @@ namespace Gestcom.ModelAdo
                 reader = oleDbCommand.ExecuteReader();
                 while (reader.Read())
                 {
-                    LotFrom lot = new LotFrom((Decimal)reader["LOFROM"], (Decimal)reader["LOANNE"],
-                        (Decimal)reader["LOMOIS"], (Decimal)reader["LOCENM1"], (Decimal)reader["LOC11"], (Decimal)reader["LOC12"], (Decimal)reader["LOC13"], (Decimal)reader["FRNUM"],
-                        (String)reader["FRNOM"], (String)reader["FRADR"], (Decimal)reader["FRCPOS"],
-                        (String)reader["FRVILL"], (String)reader["FRNDIR"]);
+                    LotFrom lot = new LotFrom((Decimal)reader["LOFROM"], (String)reader["FRNOM"], (String)reader["FRNDIR"], (String)reader["FRADR"], (Decimal)reader["FRCPOS"], (Decimal)reader["LOCEM1"], (Decimal)reader["LOC11"], (Decimal)reader["LOC12"], (Decimal)reader["LOC13"],
+                        (Decimal)reader["LOANNE"],
+                        (Decimal)reader["LOMOIS"],
+                        (String)reader["FRVILL"],
+                        (Decimal)reader["FRNUM"]);
                     lots.Add(lot);
                 }
                 Console.WriteLine(reader);

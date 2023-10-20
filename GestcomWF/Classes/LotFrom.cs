@@ -11,7 +11,7 @@ namespace GestcomWF.Classes
         public Decimal LOFROM { get; set; } // Lot From = Num Fromagerie
         public Decimal LOANNE { get; set; }
         public Decimal LOMOIS { get; set; }
-        public Decimal LOCENM1 { get; set; } // Pains
+        public Decimal LOCEM1 { get; set; } // Pains
         public Decimal LOC11 { get; set; } // Pains
         public Decimal LOC12 { get; set; } // Pains
         public Decimal LOC13 { get; set; } // Pains
@@ -22,21 +22,21 @@ namespace GestcomWF.Classes
         public String FRVILL { get; set; }
         public String FRNDIR { get; set; }
 
-        public LotFrom(decimal lOFROM, decimal lOANNE, decimal lOMOIS, decimal lOCENM1, decimal lOC11, decimal lOC12, decimal lOC13, decimal fRNUM, string fRNOM, string fRADR, decimal fRCPOS, string fRVILL, string fRNDIR)
+        public LotFrom(decimal lOFROM, string fRNOM, string fRNDIR, string fRADR, decimal fRCPOS, decimal lOCEM1, decimal lOC11, decimal lOC12, decimal lOC13, decimal lOANNE, decimal lOMOIS, string fRVILL, decimal fRNUM)
         {
             LOFROM = lOFROM;
-            LOANNE = lOANNE;
-            LOMOIS = lOMOIS;
-            LOCENM1 = lOCENM1;
+            FRNOM = fRNOM;
+            FRNDIR = fRNDIR;
+            FRADR = fRADR;
+            FRCPOS = fRCPOS;
+            LOCEM1 = lOCEM1;
             LOC11 = lOC11;
             LOC12 = lOC12;
             LOC13 = lOC13;
-            FRNUM = fRNUM;
-            FRNOM = fRNOM;
-            FRADR = fRADR;
-            FRCPOS = fRCPOS;
+            LOANNE = lOANNE;
+            LOMOIS = lOMOIS;
             FRVILL = fRVILL;
-            FRNDIR = fRNDIR;
+            FRNUM = fRNUM;
         }
     }
 }
