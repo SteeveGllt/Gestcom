@@ -51,7 +51,6 @@ namespace Gestcom.Views
             }
 
 
-            tbxFreinte.IsReadOnly = true;
             tbxPoidsNet.IsReadOnly = true;
 
             cbxFromagerie.Focus();
@@ -203,6 +202,16 @@ namespace Gestcom.Views
         {
 
             if (e.IsUp) tbxPoidsNet.Text = Calcul_Pds_Net().ToString();
+        }
+
+        private void tbxFreinte_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(e.IsUp) tbxPoidsNet.Text = Calcul_Pds_Net().ToString();
+        }
+
+        private void cbxFromagerie_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

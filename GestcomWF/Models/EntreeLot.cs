@@ -20,11 +20,11 @@ namespace Gestcom.Models
         public Decimal LOCENB { get; set; }
         public Decimal LOCPES { get; set; }
         public Decimal LOCENN { get; set; }
-        public Decimal LOTAUX { get; set; }
+        public Double LOTAUX { get; set; }
 
         public EntreeLot() { }
 
-        public EntreeLot(decimal lOFACO, decimal lOFROM, decimal lOANNE, decimal lOMOIS, decimal lODEP, DateTime date_Entrée, DateTime date_Début, DateTime dAte_Fin, decimal lOCENM, decimal lOCENB, decimal lOCPES, decimal lOCENN, decimal lOTAUX)
+        public EntreeLot(decimal lOFACO, decimal lOFROM, decimal lOANNE, decimal lOMOIS, decimal lODEP, DateTime date_Entrée, DateTime date_Début, DateTime dAte_Fin, decimal lOCENM, decimal lOCENB, decimal lOCPES, decimal lOCENN, double lOTAUX)
         {
             LOFACO = lOFACO;
             LOFROM = lOFROM;

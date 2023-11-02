@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Data.OleDb;
 using System.Windows;
+using System.Data.OleDb;
 
-namespace Gestcom.DataAccess
+namespace GestcomWF.DataAccess
 {
     public abstract class DataAdo
     {
-
         public static OleDbConnection connection;
         protected static void open()
         {

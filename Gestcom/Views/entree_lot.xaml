@@ -8,7 +8,7 @@
         Title="Entrée Lot" Height="500" Width="400" Background="LightGray">
     <Grid>
         <Label x:Name="lblFromagerie" Content="Fromagerie :" HorizontalAlignment="Left" Margin="20,16,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="16"/>
-        <ComboBox x:Name="cbxFromagerie" HorizontalAlignment="Left" Margin="140,19,0,0" VerticalAlignment="Top" Width="60" FontFamily="Arial" FontSize="16"/>
+        <ComboBox x:Name="cbxFromagerie" HorizontalAlignment="Left" Margin="140,19,0,0" VerticalAlignment="Top" Width="60" FontFamily="Arial" FontSize="16" SelectionChanged="cbxFromagerie_SelectionChanged"/>
         <Label x:Name="lblMois" Content="Mois :" HorizontalAlignment="Left" Margin="20,56,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="16"/>
         <ComboBox x:Name="cbxMois" HorizontalAlignment="Left" Margin="140,59,0,0" VerticalAlignment="Top" Width="60" FontFamily="Arial" FontSize="16"/>
         <Label x:Name="lblAnnee" Content="Année :" HorizontalAlignment="Left" Margin="20,96,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="16"/>
@@ -24,7 +24,7 @@
         <Label x:Name="lblPoidsBrut" Content="Poids Brut :" HorizontalAlignment="Left" Margin="20,296,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="16"/>
         <TextBox x:Name="tbxPoidsBrut" HorizontalAlignment="Left" Margin="140,304,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="60" MaxLength="5" FontFamily="Arial" KeyUp="tbxPoidsBrut_KeyUp" FontSize="16"/>
         <Label x:Name="lblFreinte" Content="Freinte :" HorizontalAlignment="Left" Margin="20,336,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="16"/>
-        <TextBox x:Name="tbxFreinte" HorizontalAlignment="Left" Margin="140,344,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False" FontFamily="Arial" FontSize="16" />
+        <TextBox x:Name="tbxFreinte" HorizontalAlignment="Left" Margin="140,344,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontFamily="Arial" FontSize="16" KeyUp="tbxFreinte_KeyUp" />
         <Label x:Name="lblPoidsNet" Content="Poids Net :" HorizontalAlignment="Left" Margin="20,376,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="16"/>
         <TextBox x:Name="tbxPoidsNet" HorizontalAlignment="Left" Margin="141,384,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False" FontFamily="Arial" FontSize="16"/>
         <Label x:Name="lblAfficheNbJours" HorizontalAlignment="Left" Margin="295,274,0,0" VerticalAlignment="Top" Height="40" FontSize="16" Width="50"/>
