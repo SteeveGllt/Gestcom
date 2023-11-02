@@ -261,93 +261,40 @@ namespace GestcomWF.Views
                             this.workSheet["F27"].StringValue = moisNum.Mois.ToUpper() + " " + (annee + tbxAnnee.Text);
                             this.workSheet["F27"].Style.Font.Bold = true;
 
-                          
+
                             // Initialisez la ligne actuelle
 
                             //int currentRow = 30;
-                            if(lotFrom.LOC11 != 0)
+                            if (lotFrom.LOC11 != 0)
                             {
                                 this.workSheet["B30"].Value = "- Catégorie A";
                                 this.workSheet["B30"].Style.Font.Bold = true;
-
-                            int currentRow = 30;
-
-
-
-
-                            /* foreach (var dateEntry in entreeLotFroms.Where(item => item.FRNUM == entreeLotFrom.FRNUM))
-                             {
-                                 // Remplissez les données pour chaque entrée de fromagerie
-                                 workSheet[$"B{currentRow}"].Value = dateEntry.Date_Entrée;
-
-                                 this.workSheet[$"B{currentRow}"].FormatString = "dd/MM/yyyy";
-                                 this.workSheet[$"B{currentRow}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
-
-                                 workSheet[$"C{currentRow}"].Value = dateEntry.LOCENM;
-                                 this.workSheet[$"C{currentRow}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
-
-
 
                                 this.workSheet["C30"].Value = "………..";
                                 this.workSheet["C30"].Style.Font.Bold = true;
                                 this.workSheet["C30"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Center;
 
 
-                                 workSheet[$"D{currentRow}"].Value = dateEntry.LOCENB;
-                                 this.workSheet[$"D{currentRow}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
-                                 workSheet[$"E{currentRow}"].Value = dateEntry.LOTAUX;
-                                 this.workSheet[$"E{currentRow}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
-                                 workSheet[$"F{currentRow}"].Value = dateEntry.LOCENN;
-                                 this.workSheet[$"F{currentRow}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
-
-
                                 this.workSheet["F30"].Value = "pains";
                                 this.workSheet["F30"].Style.Font.Bold = true;
 
-
-                                workSheet["E30"].Value = lotFrom.LOC11;
+                                workSheet["E30"].Value = lotFrom.LOC12;
                                 this.workSheet["E30"].Style.Font.Bold = true;
                                 this.workSheet["E30"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
+
                             }
+
+
+
                             if (lotFrom.LOC12 != 0)
                             {
                                 this.workSheet["B31"].Value = "- Catégorie B";
                                 this.workSheet["B31"].Style.Font.Bold = true;
 
 
-                                 currentRow++;
-                             }*/
-                            // Placez le total à 4 cellules en dessous de la dernière ligne remplie
 
+                                // Placez le total à 4 cellules en dessous de la dernière ligne remplie
 
-                            int totalRow = currentRow + 4;
-
-                            workSheet.Merge($"B{totalRow}:B{totalRow - 1}");
-                            workSheet[$"B{totalRow - 1}"].Value = "Totaux";
-
-                            // Appliquer l'alignement horizontal et vertical au contenu
-                            this.workSheet[$"B{totalRow - 1}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
-                            this.workSheet[$"B{totalRow - 1}"].Style.VerticalAlignment = IronXL.Styles.VerticalAlignment.Center;
-
-                            // Ligne en bas du tableau
-                            this.workSheet[$"B{totalRow}:F{totalRow}"].Style.BottomBorder.SetColor("#000000");
-                            this.workSheet[$"B{totalRow}:F{totalRow}"].Style.BottomBorder.Type = IronXL.Styles.BorderType.Thin;
-
-
-
-
-
-                            workSheet.Merge($"C{totalRow}:C{totalRow - 1}");
-                            workSheet.Merge($"F{totalRow}:F{totalRow - 1}");
-
-                            var sumRange = workSheet[$"C30:C{currentRow - 1}"];
-                            workSheet[$"C{totalRow - 1}"].Value = sumRange.Sum();
-
-                            this.workSheet[$"C{totalRow - 1}"].Style.Font.Bold = true;
-
-                            // Appliquer l'alignement horizontal et vertical au contenu
-                            this.workSheet[$"C{totalRow - 1}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
-                            this.workSheet[$"C{totalRow - 1}"].Style.VerticalAlignment = IronXL.Styles.VerticalAlignment.Center;
 
 
                                 this.workSheet["C31"].Value = "………..";
@@ -381,7 +328,7 @@ namespace GestcomWF.Views
                             }
 
 
-                            foreach (var dateEntry in lotFroms.Where(item => item.FRNUM == lotFrom.FRNUM))
+                            /*foreach (var dateEntry in lotFroms.Where(item => item.FRNUM == lotFrom.FRNUM))
                              {
                                  // Remplissez les données pour chaque entrée de fromagerie
                                  workSheet[$"E{currentRow}"].Value = dateEntry.LOC11;
@@ -389,7 +336,7 @@ namespace GestcomWF.Views
                                  this.workSheet[$"E{currentRow}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
 
                                  currentRow++;
-                             }
+                             }*/
 
                             // Placez le total à 4 cellules en dessous de la dernière ligne remplie
 
@@ -425,7 +372,7 @@ namespace GestcomWF.Views
                         RangeColumn col5 = workSheet.GetColumn(5);
                         col5.Width = 1647; // Set width
 
-                       
+
 
                         // Configuration du style de la feuille (police, ...)
                         this.workSheet.Style.Font.Name = "Arial";
@@ -450,6 +397,6 @@ namespace GestcomWF.Views
             }
         }
 
-    
+
     }
 }

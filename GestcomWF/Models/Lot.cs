@@ -89,7 +89,18 @@ namespace Gestcom.Models
             LOPUAC = lopuac;
         }
 
+        public Lot(decimal lofrom, decimal locem1, decimal loc11, decimal loc12, decimal loc13, decimal lopu1, decimal lopu2, decimal lopu3)
+        {
+            LOFROM = lofrom;
+            LOCEM1 = locem1;
+            LOC11 = loc11;
+            LOC12 = loc12;
+            LOC13 = loc13;
+            LOPU1 = lopu1;
+            LOPU2 = lopu2;
+            LOPU3 = lopu3;
 
+        }
 
     }
 }

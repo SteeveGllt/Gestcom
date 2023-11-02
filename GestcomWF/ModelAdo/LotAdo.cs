@@ -396,6 +396,7 @@ namespace Gestcom.ModelAdo
             }
         }
 
+
         public static void updateLotPrix(decimal lofrom, decimal loanne, decimal lomois, decimal newPrix)
         {
             try
@@ -437,6 +438,60 @@ namespace Gestcom.ModelAdo
                 MessageBox.Show("Erreur de communication avec la base de données!");
             }
             finally { close(); }
+        }
+
+        public static List<Lot> allLotRappel(decimal loanne, decimal lomois)
+        {
+            try
+            {
+                Lot lot = new Lot();
+                List<Lot> lots = new List<Lot>();
+                OleDbDataReader reader;
+                open();
+                OleDbCommand oleDbCommand = new OleDbCommand();
+                oleDbCommand.Connection = connection;
+                oleDbCommand.CommandText = "SELECT LOFROM, LOCEM1, LOC11, LOC12, LOC13, LOPU1, LOPU2, LOPU3 FROM TB_Lots WHERE LOANNE = @LOANNE AND LOMOIS = @LOMOIS";
+                oleDbCommand.Prepare();
+                oleDbCommand.Parameters.AddWithValue("@LOANNE", loanne);
+                oleDbCommand.Parameters.AddWithValue("@LOMOIS", lomois);
+                oleDbCommand.ExecuteNonQuery();
+                reader = oleDbCommand.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    // Vérifiez si l'une des colonnes est null
+                    if (reader.IsDBNull(reader.GetOrdinal("LOFROM")) ||
+                        reader.IsDBNull(reader.GetOrdinal("LOCEM1")) ||
+                        reader.IsDBNull(reader.GetOrdinal("LOC11")) ||
+                        reader.IsDBNull(reader.GetOrdinal("LOC12")) ||
+                        reader.IsDBNull(reader.GetOrdinal("LOC13")) ||
+                        reader.IsDBNull(reader.GetOrdinal("LOPU1")) ||
+                        reader.IsDBNull(reader.GetOrdinal("LOPU2")) ||
+                        reader.IsDBNull(reader.GetOrdinal("LOPU3")))
+                    {
+                        return null;
+                    }
+
+                    // Si toutes les colonnes contiennent des données, créez un objet Lot
+                    lot = new Lot((Decimal)reader["LOFROM"], (Decimal)reader["LOCEM1"], (Decimal)reader["LOC11"], (Decimal)reader["LOC12"], (Decimal)reader["LOC13"], (Decimal)reader["LOPU1"], (Decimal)reader["LOPU2"], (Decimal)reader["LOPU3"]);
+                    lots.Add(lot);
+                }
+
+
+                return lots;
+
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                MessageBox.Show("Erreur de communication avec la base de données!" + ex);
+                return null;
+            }
+            finally
+            {
+                close();
+            }
         }
 
     }
