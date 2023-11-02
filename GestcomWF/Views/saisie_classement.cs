@@ -230,7 +230,7 @@ namespace GestcomWF.Views
 
                 // Récupération de toutes les entrées pour le mois et l'année donnés
                 List<LotFrom> lotFroms = LotAdo.generationFichierExcelClassement(moisNum.Numero, Convert.ToDecimal(tbxAnnee.Text));
-                if (lotFroms.Count <= 0)
+                if (lotFroms == null || lotFroms.Count <= 0)
                 {
                     MessageBox.Show("Aucune valeur");
                 }
@@ -248,71 +248,28 @@ namespace GestcomWF.Views
                         {
                             // Initialisation de la feuille Excel avec le nom adapté
                             this.workSheet = workbook.CreateWorkSheet(nomFeuille);
-                            this.workSheet["D7"].Value = lotFrom.FRNDIR;
-                            this.workSheet["D8"].Value = "Président " + lotFrom.FRNOM;
-                            this.workSheet["D9"].Value = lotFrom.FRADR;
-                            this.workSheet["D10"].Value = lotFrom.FRCPOS + " " + lotFrom.FRVILL; // JE ME SUIS ARRETE LA
-                            this.workSheet["A15"].Value = "      TB/PB";
-                            this.workSheet["D16"].Value = "Le" + " " + DateTime.Now.ToString("D");
-                            this.workSheet["B21"].Value = "Monsieur le Président";
-                            this.workSheet["B23"].Value = "Nous vous prions de bien vouloir trouver ci-dessous, le détail des";
-                            this.workSheet["B24"].Value = "pesées concernant vos fabrications de ";
+                            this.workSheet["D10"].Value = lotFrom.FRNOM;
+                            this.workSheet["D11"].Value = lotFrom.FRNDIR;
+                            this.workSheet["D12"].Value = lotFrom.FRADR;
+                            this.workSheet["D13"].Value = lotFrom.FRCPOS + " " + lotFrom.FRVILL;
+                            this.workSheet["A18"].Value = "      TB/PB";
+                            this.workSheet["D19"].Value = "Le" + " " + DateTime.Now.ToString("D");
+                            this.workSheet["B24"].Value = "Monsieur le Président";
+                            this.workSheet["B26"].Value = "          Nous vous prions de bien vouloir trouver ci-dessous, pour information,";
+                            this.workSheet["B27"].Value = "le classement de votre lot de fabrication ";
 
-                            this.workSheet["E24"].StringValue = moisNum.Mois.ToUpper() + " " + (annee + tbxAnnee.Text);
-                            this.workSheet["E24"].Style.Font.Bold = true;
+                            this.workSheet["F27"].StringValue = moisNum.Mois.ToUpper() + " " + (annee + tbxAnnee.Text);
+                            this.workSheet["F27"].Style.Font.Bold = true;
 
-
-                            this.workSheet["B27:F27"].Style.TopBorder.SetColor("#000000");
-                            this.workSheet["B27:F27"].Style.TopBorder.Type = IronXL.Styles.BorderType.Thin;
-
-                            this.workSheet["B27"].Value = "Date";
-                            this.workSheet["B27"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
-
-                            //this.workSheet["B27:B35"].Style.RightBorder.SetColor("#000000");
-                            //this.workSheet["B27:B35"].Style.RightBorder.Type = IronXL.Styles.BorderType.Medium;
-
-                            this.workSheet["B28"].Value = "Entrée";
-                            this.workSheet["B28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
-
-
-                            this.workSheet["C27"].Value = "Nombres";
-                            this.workSheet["C27"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
-
-
-
-                            this.workSheet["C28"].Value = "Meules";
-                            this.workSheet["C28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
-
-                            this.workSheet["D27"].Value = "Poids";
-                            this.workSheet["D27"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
-
-
-
-                            this.workSheet["D28"].Value = "brut";
-                            this.workSheet["D28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
-
-                            this.workSheet["E27"].Value = "%";
-                            this.workSheet["E27"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
-
-
-
-                            this.workSheet["E28"].Value = "Réfaction";
-                            this.workSheet["E28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
-
-                            this.workSheet["F27"].Value = "Poids";
-                            this.workSheet["F27"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
-
-                            this.workSheet["F28"].Value = "Net";
-                            this.workSheet["F28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
-
-
-
-
-                            this.workSheet["B28:F28"].Style.BottomBorder.SetColor("#000000");
-                            this.workSheet["B28:F28"].Style.BottomBorder.Type = IronXL.Styles.BorderType.Thin;
-
-
+                          
                             // Initialisez la ligne actuelle
+
+                            //int currentRow = 30;
+                            if(lotFrom.LOC11 != 0)
+                            {
+                                this.workSheet["B30"].Value = "- Catégorie A";
+                                this.workSheet["B30"].Style.Font.Bold = true;
+
                             int currentRow = 30;
 
 
@@ -331,6 +288,11 @@ namespace GestcomWF.Views
 
 
 
+                                this.workSheet["C30"].Value = "………..";
+                                this.workSheet["C30"].Style.Font.Bold = true;
+                                this.workSheet["C30"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Center;
+
+
                                  workSheet[$"D{currentRow}"].Value = dateEntry.LOCENB;
                                  this.workSheet[$"D{currentRow}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
                                  workSheet[$"E{currentRow}"].Value = dateEntry.LOTAUX;
@@ -338,6 +300,19 @@ namespace GestcomWF.Views
                                  workSheet[$"F{currentRow}"].Value = dateEntry.LOCENN;
                                  this.workSheet[$"F{currentRow}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
 
+
+                                this.workSheet["F30"].Value = "pains";
+                                this.workSheet["F30"].Style.Font.Bold = true;
+
+
+                                workSheet["E30"].Value = lotFrom.LOC11;
+                                this.workSheet["E30"].Style.Font.Bold = true;
+                                this.workSheet["E30"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
+                            }
+                            if (lotFrom.LOC12 != 0)
+                            {
+                                this.workSheet["B31"].Value = "- Catégorie B";
+                                this.workSheet["B31"].Style.Font.Bold = true;
 
 
                                  currentRow++;
@@ -374,91 +349,95 @@ namespace GestcomWF.Views
                             this.workSheet[$"C{totalRow - 1}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
                             this.workSheet[$"C{totalRow - 1}"].Style.VerticalAlignment = IronXL.Styles.VerticalAlignment.Center;
 
-                            this.workSheet[$"C{totalRow - 1}:C{currentRow + 4}"].Style.TopBorder.SetColor("#000000");
-                            this.workSheet[$"C{totalRow - 1}:C{currentRow + 4}"].Style.TopBorder.Type = IronXL.Styles.BorderType.Thin;
 
-                            var sumRangePoidsNet = workSheet[$"F30:F{currentRow - 1}"];
-                            workSheet[$"F{totalRow - 1}"].Value = sumRangePoidsNet.Sum();
-
-                            this.workSheet[$"F{totalRow - 1}"].Style.Font.Bold = true;
-
-                            // Appliquer l'alignement horizontal et vertical au contenu
-                            this.workSheet[$"F{totalRow - 1}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
-                            this.workSheet[$"F{totalRow - 1}"].Style.VerticalAlignment = IronXL.Styles.VerticalAlignment.Center;
-
-                            this.workSheet[$"F{totalRow - 1}:F{currentRow + 4}"].Style.TopBorder.SetColor("#000000");
-                            this.workSheet[$"F{totalRow - 1}:F{currentRow + 4}"].Style.TopBorder.Type = IronXL.Styles.BorderType.Thin;
-
-                            this.workSheet[$"C27:C{currentRow + 4}"].Style.RightBorder.SetColor("#000000");
-                            this.workSheet[$"C27:C{currentRow + 4}"].Style.RightBorder.Type = IronXL.Styles.BorderType.Thin;
+                                this.workSheet["C31"].Value = "………..";
+                                this.workSheet["C31"].Style.Font.Bold = true;
+                                this.workSheet["C31"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Center;
 
 
+                                this.workSheet["F31"].Value = "pains";
+                                this.workSheet["F31"].Style.Font.Bold = true;
 
-                            //this.workSheet[$"B27:B{totalRow}"].Style.RightBorder.SetColor("#000000");
-                            //this.workSheet[$"B27:B{totalRow}"].Style.RightBorder.Type = IronXL.Styles.BorderType.Medium;
-                            // Bordure à droite de la colonne C
-                            this.workSheet[$"C27:C{currentRow + 4}"].Style.RightBorder.SetColor("#000000");
-                            this.workSheet[$"C27:C{currentRow + 4}"].Style.RightBorder.Type = IronXL.Styles.BorderType.Thin;
+                                workSheet["E31"].Value = lotFrom.LOC12;
+                                this.workSheet["E31"].Style.Font.Bold = true;
+                                this.workSheet["E31"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
+                            }
+                            if (lotFrom.LOC13 != 0)
+                            {
+                                this.workSheet["B32"].Value = "- Catégorie C";
+                                this.workSheet["B32"].Style.Font.Bold = true;
 
-                            // Ligne à droite de la cellule D
-                            this.workSheet[$"D27:D{currentRow + 4}"].Style.RightBorder.SetColor("#000000");
-                            this.workSheet[$"D27:D{currentRow + 4}"].Style.RightBorder.Type = IronXL.Styles.BorderType.Thin;
-
-                            // Ligne à droite de la colonne E
-                            this.workSheet[$"E27:E{currentRow + 4}"].Style.RightBorder.SetColor("#000000");
-                            this.workSheet[$"E27:E{currentRow + 4}"].Style.RightBorder.Type = IronXL.Styles.BorderType.Thin;
-
-                            // Ligne à droite du tableau
-                            this.workSheet[$"F27:F{totalRow}"].Style.RightBorder.SetColor("#000000");
-                            this.workSheet[$"F27:F{totalRow}"].Style.RightBorder.Type = IronXL.Styles.BorderType.Thin;
-
-                            // Bordure à gauche du tableau
-                            this.workSheet[$"B27:B{totalRow}"].Style.LeftBorder.SetColor("#000000");
-                            this.workSheet[$"B27:B{totalRow}"].Style.LeftBorder.Type = IronXL.Styles.BorderType.Thin;
-
-                            // Bordure à droite de la colonne B
-                            this.workSheet[$"B27:B{currentRow + 4}"].Style.RightBorder.SetColor("#000000");
-                            this.workSheet[$"B27:B{currentRow + 4}"].Style.RightBorder.Type = IronXL.Styles.BorderType.Thin;
+                                this.workSheet["C32"].Value = "………..";
+                                this.workSheet["C32"].Style.Font.Bold = true;
+                                this.workSheet["C32"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Center;
 
 
-                            this.workSheet["B39"].Value = "          Vous en souhaitant bonne réception";
-                            this.workSheet["B41"].Value = "          Nous vous prions d'agréer, Monsieur le Président, nos";
-                            this.workSheet["B42"].Value = "salutations distinguées";
-                            this.workSheet["E45"].Value = "Service Technique";
-                            this.workSheet[$"E45"].Style.Font.Bold = true;
+                                this.workSheet["F32"].Value = "pains";
+                                this.workSheet["F32"].Style.Font.Bold = true;
 
-                            // valeurPrecedente = entreeLotFrom.FRNUM;
+                                workSheet["E32"].Value = lotFrom.LOC13;
+                                this.workSheet["E32"].Style.Font.Bold = true;
+                                this.workSheet["E32"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
+                            }
+
+
+                            foreach (var dateEntry in lotFroms.Where(item => item.FRNUM == lotFrom.FRNUM))
+                             {
+                                 // Remplissez les données pour chaque entrée de fromagerie
+                                 workSheet[$"E{currentRow}"].Value = dateEntry.LOC11;
+                                 this.workSheet[$"E{currentRow}"].Style.Font.Bold = true;
+                                 this.workSheet[$"E{currentRow}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
+
+                                 currentRow++;
+                             }
+
+                            // Placez le total à 4 cellules en dessous de la dernière ligne remplie
+
+
+                            // int totalRow = currentRow + 4;
+
+
+                            this.workSheet["B34"].Value = "          Nous vous prions d'agréer, Monsieur le Président, nos";
+                            this.workSheet["B35"].Value = "salutations distinguées";
+                            this.workSheet["E38"].Value = "Service Technique";
+                            this.workSheet[$"E38"].Style.Font.Bold = true;
+
+
+                            valeurPrecedente = lotFrom.FRNUM;
+
                         }
 
-
-
                         RangeColumn col0 = workSheet.GetColumn(0);
-                        col0.Width = 7210; // Set width
+                        col0.Width = 3513; // Set width
 
                         RangeColumn col1 = workSheet.GetColumn(1);
-                        col1.Width = 3300; // Set width
+                        col1.Width = 3513; // Set width
 
                         RangeColumn col2 = workSheet.GetColumn(2);
-                        col2.Width = 3300; // Set width
+                        col2.Width = 3257; // Set width
 
                         RangeColumn col3 = workSheet.GetColumn(3);
-                        col3.Width = 3300; // Set width
+                        col3.Width = 1134; // Set width
 
                         RangeColumn col4 = workSheet.GetColumn(4);
-                        col4.Width = 3300; // Set width
+                        col4.Width = 2123; // Set width
 
                         RangeColumn col5 = workSheet.GetColumn(5);
-                        col5.Width = 3300; // Set width
+                        col5.Width = 1647; // Set width
+
+                       
 
                         // Configuration du style de la feuille (police, ...)
                         this.workSheet.Style.Font.Name = "Arial";
+
+
 
                     }
                     // Propose à l'utilisateur d'enregistrer le fichier Excel
                     SaveFileDialog saveFileDialog = new SaveFileDialog();
                     saveFileDialog.Filter = "Excel files(*.xls; *.xlsx)| *.xls; *.xlsx";
                     saveFileDialog.Title = "Enregistrez le fichier sous...";
-                    saveFileDialog.FileName = "saisie_pesee " + moisNum.Mois + ".xls";
+                    saveFileDialog.FileName = "classement " + moisNum.Mois + ".xls";
                     if (saveFileDialog.ShowDialog() == DialogResult.OK)
                     {
                         string path = saveFileDialog.FileName;
