@@ -42,10 +42,12 @@ namespace GestcomWF
             entréeToolStripMenuItem = new ToolStripMenuItem();
             classementToolStripMenuItem = new ToolStripMenuItem();
             imprimantesToolStripMenuItem = new ToolStripMenuItem();
+            saisieAcompteToolStripMenuItem = new ToolStripMenuItem();
             éditionToolStripMenuItem = new ToolStripMenuItem();
             saisiePeséesToolStripMenuItem = new ToolStripMenuItem();
             outilsToolStripMenuItem = new ToolStripMenuItem();
             calculatriceToolStripMenuItem = new ToolStripMenuItem();
+            saisieRappelToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -62,7 +64,7 @@ namespace GestcomWF
             // 
             // fichiersToolStripMenuItem
             // 
-            fichiersToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { clientsToolStripMenuItem, articlesToolStripMenuItem, tarifsToolStripMenuItem, lieuxDeLivraisonToolStripMenuItem, fromageriesToolStripMenuItem, lotsToolStripMenuItem, imprimantesToolStripMenuItem });
+            fichiersToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { clientsToolStripMenuItem, articlesToolStripMenuItem, tarifsToolStripMenuItem, lieuxDeLivraisonToolStripMenuItem, fromageriesToolStripMenuItem, lotsToolStripMenuItem, imprimantesToolStripMenuItem, saisieAcompteToolStripMenuItem, saisieRappelToolStripMenuItem });
             fichiersToolStripMenuItem.Name = "fichiersToolStripMenuItem";
             fichiersToolStripMenuItem.Size = new Size(72, 24);
             fichiersToolStripMenuItem.Text = "Fichiers";
@@ -125,6 +127,13 @@ namespace GestcomWF
             imprimantesToolStripMenuItem.Text = "Imprimantes";
             imprimantesToolStripMenuItem.Click += imprimantesToolStripMenuItem_Click;
             // 
+            // saisieAcompteToolStripMenuItem
+            // 
+            saisieAcompteToolStripMenuItem.Name = "saisieAcompteToolStripMenuItem";
+            saisieAcompteToolStripMenuItem.Size = new Size(224, 26);
+            saisieAcompteToolStripMenuItem.Text = "Saisie Acompte";
+            saisieAcompteToolStripMenuItem.Click += saisieAcompteToolStripMenuItem_Click;
+            // 
             // éditionToolStripMenuItem
             // 
             éditionToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { saisiePeséesToolStripMenuItem });
@@ -152,6 +161,13 @@ namespace GestcomWF
             calculatriceToolStripMenuItem.Size = new Size(169, 26);
             calculatriceToolStripMenuItem.Text = "Calculatrice";
             calculatriceToolStripMenuItem.Click += calculatriceToolStripMenuItem_Click;
+            // 
+            // saisieRappelToolStripMenuItem
+            // 
+            saisieRappelToolStripMenuItem.Name = "saisieRappelToolStripMenuItem";
+            saisieRappelToolStripMenuItem.Size = new Size(224, 26);
+            saisieRappelToolStripMenuItem.Text = "Saisie Rappel";
+            saisieRappelToolStripMenuItem.Click += saisieRappelToolStripMenuItem_Click;
             // 
             // MainWindow
             // 
@@ -187,5 +203,7 @@ namespace GestcomWF
         private ToolStripMenuItem saisiePeséesToolStripMenuItem;
         private ToolStripMenuItem outilsToolStripMenuItem;
         private ToolStripMenuItem calculatriceToolStripMenuItem;
+        private ToolStripMenuItem saisieAcompteToolStripMenuItem;
+        private ToolStripMenuItem saisieRappelToolStripMenuItem;
     }
 }

@@ -57,5 +57,19 @@ namespace GestcomWF
             calculatrice.MdiParent = this;
             calculatrice.Show();
         }
+
+        private void saisieAcompteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            saisie_acompte saisie_Acompte = new saisie_acompte();
+            saisie_Acompte.MdiParent = this;
+            saisie_Acompte.Show();
+        }
+
+        private void saisieRappelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            saisie_rappel saisie_Rappel = new saisie_rappel();
+            saisie_Rappel.MdiParent = this;
+            saisie_Rappel.Show();
+        }
     }
 }

@@ -347,6 +347,97 @@ namespace Gestcom.ModelAdo
                 close();
             }
         }
+        public static List<Lot> allLotAcompte(decimal loanne, decimal lomois)
+        {
+            try
+            {
+                Lot lot = new Lot();
+                List<Lot> lots = new List<Lot>();
+                OleDbDataReader reader;
+                open();
+                OleDbCommand oleDbCommand = new OleDbCommand();
+                oleDbCommand.Connection = connection;
+                oleDbCommand.CommandText = "SELECT LOFROM, LOCEM1, LOPUAC FROM TB_Lots WHERE LOANNE = @LOANNE AND LOMOIS = @LOMOIS";
+                oleDbCommand.Prepare();
+                oleDbCommand.Parameters.AddWithValue("@LOANNE", loanne);
+                oleDbCommand.Parameters.AddWithValue("@LOMOIS", lomois);
+                oleDbCommand.ExecuteNonQuery();
+                reader = oleDbCommand.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    // Vérifiez si l'une des colonnes est null
+                    if (reader.IsDBNull(reader.GetOrdinal("LOFROM")) ||
+                        reader.IsDBNull(reader.GetOrdinal("LOCEM1")) ||
+                        reader.IsDBNull(reader.GetOrdinal("LOPUAC")))
+                    {
+                        return null;
+                    }
+
+                    // Si toutes les colonnes contiennent des données, créez un objet Lot
+                    lot = new Lot((Decimal)reader["LOFROM"], (Decimal)reader["LOCEM1"], (Decimal)reader["LOPUAC"]);
+                    lots.Add(lot);
+                }
+
+
+                return lots;
+
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                MessageBox.Show("Erreur de communication avec la base de données!" + ex);
+                return null;
+            }
+            finally
+            {
+                close();
+            }
+        }
+
+        public static void updateLotPrix(decimal lofrom, decimal loanne, decimal lomois, decimal newPrix)
+        {
+            try
+            {
+                open();
+                OleDbCommand oleDbCommand = new OleDbCommand();
+                oleDbCommand.Connection = connection;
+                oleDbCommand.CommandText = "UPDATE TB_Lots SET LOPUAC = @LOPUAC WHERE LOFACO=1 AND LOFROM = @LOFROM AND LOANNE = @LOANNE AND LOMOIS = @LOMOIS AND LODEP=0";
+                oleDbCommand.Prepare();
+                oleDbCommand.Parameters.AddWithValue("@LOPUAC", newPrix);
+                oleDbCommand.Parameters.AddWithValue("@LOFROM", lofrom);
+                oleDbCommand.Parameters.AddWithValue("@LOANNE", loanne);
+                oleDbCommand.Parameters.AddWithValue("@LOMOIS", lomois);
+                oleDbCommand.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                MessageBox.Show("Erreur de communication avec la base de données!");
+            }
+            finally { close(); }
+        }
+        public static void updateLotPrixAll(decimal newPrix)
+        {
+            try
+            {
+                open();
+                OleDbCommand oleDbCommand = new OleDbCommand();
+                oleDbCommand.Connection = connection;
+                oleDbCommand.CommandText = "UPDATE TB_Lots SET LOPUAC = @LOPUAC WHERE LOFACO=1 AND LODEP=0";
+                oleDbCommand.Prepare();
+                oleDbCommand.Parameters.AddWithValue("@LOPUAC", newPrix);
+                oleDbCommand.ExecuteNonQuery();
+                MessageBox.Show("Prix de tous les lots modifiés");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                MessageBox.Show("Erreur de communication avec la base de données!");
+            }
+            finally { close(); }
+        }
+
     }
-    
 }
