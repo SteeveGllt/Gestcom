@@ -209,7 +209,7 @@ namespace GestcomWF.Views
             return false;
         }
 
-       
+
 
         private void generate_excel_Click(object sender, EventArgs e)
         {
@@ -318,30 +318,30 @@ namespace GestcomWF.Views
 
 
 
-                            foreach (var dateEntry in entreeLotFroms.Where(item => item.FRNUM == entreeLotFrom.FRNUM))
-                            {
-                                // Remplissez les données pour chaque entrée de fromagerie
-                                workSheet[$"B{currentRow}"].Value = dateEntry.Date_Entrée;
+                            /* foreach (var dateEntry in entreeLotFroms.Where(item => item.FRNUM == entreeLotFrom.FRNUM))
+                             {
+                                 // Remplissez les données pour chaque entrée de fromagerie
+                                 workSheet[$"B{currentRow}"].Value = dateEntry.Date_Entrée;
 
-                                this.workSheet[$"B{currentRow}"].FormatString = "dd/MM/yyyy";
-                                this.workSheet[$"B{currentRow}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
+                                 this.workSheet[$"B{currentRow}"].FormatString = "dd/MM/yyyy";
+                                 this.workSheet[$"B{currentRow}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
 
-                                workSheet[$"C{currentRow}"].Value = dateEntry.LOCENM;
-                                this.workSheet[$"C{currentRow}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
-
-
-
-                                workSheet[$"D{currentRow}"].Value = dateEntry.LOCENB;
-                                this.workSheet[$"D{currentRow}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
-                                workSheet[$"E{currentRow}"].Value = dateEntry.LOTAUX;
-                                this.workSheet[$"E{currentRow}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
-                                workSheet[$"F{currentRow}"].Value = dateEntry.LOCENN;
-                                this.workSheet[$"F{currentRow}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
+                                 workSheet[$"C{currentRow}"].Value = dateEntry.LOCENM;
+                                 this.workSheet[$"C{currentRow}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
 
 
 
-                                currentRow++;
-                            }
+                                 workSheet[$"D{currentRow}"].Value = dateEntry.LOCENB;
+                                 this.workSheet[$"D{currentRow}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
+                                 workSheet[$"E{currentRow}"].Value = dateEntry.LOTAUX;
+                                 this.workSheet[$"E{currentRow}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
+                                 workSheet[$"F{currentRow}"].Value = dateEntry.LOCENN;
+                                 this.workSheet[$"F{currentRow}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
+
+
+
+                                 currentRow++;
+                             }*/
                             // Placez le total à 4 cellules en dessous de la dernière ligne remplie
 
 
@@ -427,7 +427,7 @@ namespace GestcomWF.Views
                             this.workSheet["E45"].Value = "Service Technique";
                             this.workSheet[$"E45"].Style.Font.Bold = true;
 
-                            valeurPrecedente = entreeLotFrom.FRNUM;
+                            // valeurPrecedente = entreeLotFrom.FRNUM;
                         }
 
 
@@ -470,5 +470,7 @@ namespace GestcomWF.Views
                 }
             }
         }
+
+    
     }
 }
