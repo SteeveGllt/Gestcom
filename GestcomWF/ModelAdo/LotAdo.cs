@@ -4,6 +4,7 @@ using GestcomWF.Classes;
 using GestcomWF.DataAccess;
 using Microsoft.VisualBasic;
 using System.Data.OleDb;
+using System.Data.SqlTypes;
 using System.Windows.Forms;
 
 namespace Gestcom.ModelAdo
@@ -85,7 +86,7 @@ namespace Gestcom.ModelAdo
                 oleDbCommand.CommandText = "UPDATE TB_Lots SET LOCEM1 = LOCEM1 + @LOCEM1, LOCEB1 = LOCEB1 + @LOCEB1, LOCEN1 = LOCEN1 + @LOCEN1 WHERE LOFACO = 1 AND LOFROM = @LOFROM AND LOANNE = @LOANNE AND LOMOIS = @LOMOIS AND LODEP = 0";
                 oleDbCommand.Prepare();
                 oleDbCommand.Parameters.AddWithValue("@LOCEM1", nbPains);
-                oleDbCommand.Parameters.AddWithValue("@LOCEB1", poidsBrut);
+                oleDbCommand.Parameters.AddWithValue("@LOCEB1", ((double)poidsBrut));
                 oleDbCommand.Parameters.AddWithValue("@LOCEN1", poidsNet);
                 oleDbCommand.Parameters.AddWithValue("@LOFROM", lofrom);
                 oleDbCommand.Parameters.AddWithValue("@LOANNE", loanne);
@@ -114,7 +115,7 @@ namespace Gestcom.ModelAdo
                 oleDbCommand.Parameters.AddWithValue("@LOANNE", lot.LOANNE);
                 oleDbCommand.Parameters.AddWithValue("@LOMOIS", lot.LOMOIS);
                 oleDbCommand.Parameters.AddWithValue("@LOCEM1", lot.LOCEM1);
-                oleDbCommand.Parameters.AddWithValue("@LOCEB1", lot.LOCEB1);
+                oleDbCommand.Parameters.AddWithValue("@LOCEB1", ((double)lot.LOCEB1));
                 oleDbCommand.Parameters.AddWithValue("@LOCEN1", lot.LOCEN1);
                 oleDbCommand.ExecuteNonQuery();
                 Console.WriteLine("Lot créé");
@@ -145,7 +146,7 @@ namespace Gestcom.ModelAdo
                 oleDbCommand.Parameters.AddWithValue("@DAte_Fin", entreeLot.DAte_Fin.ToString("dd/MM/yyyy"));
 
                 oleDbCommand.Parameters.AddWithValue("@LOCENM", entreeLot.LOCENM); // Pains
-                oleDbCommand.Parameters.AddWithValue("@LOCENB", entreeLot.LOCENB); // Brut
+                oleDbCommand.Parameters.AddWithValue("@LOCENB", ((double)entreeLot.LOCENB)); // Brut
                 oleDbCommand.Parameters.AddWithValue("@LOCENN", entreeLot.LOCENN); // Net
                 oleDbCommand.Parameters.AddWithValue("@LOTAUX", entreeLot.LOTAUX); // Freinte
                 oleDbCommand.ExecuteNonQuery();
@@ -486,6 +487,77 @@ namespace Gestcom.ModelAdo
             {
                 Console.WriteLine(ex.Message);
                 MessageBox.Show("Erreur de communication avec la base de données!" + ex);
+                return null;
+            }
+            finally
+            {
+                close();
+            }
+        }
+
+        public static void updateLotRappel(decimal lofrom, decimal loanne, decimal lomois, decimal a, decimal b, decimal c)
+        {
+            try
+            {
+                open();
+                OleDbCommand oleDbCommand = new OleDbCommand();
+                oleDbCommand.Connection = connection;
+                oleDbCommand.CommandText = "UPDATE TB_Lots SET LOPU1 = @LOPU1, LOPU2 = @LOPU2, LOPU3 = @LOPU3 WHERE LOFACO=1 AND LOFROM = @LOFROM AND LOANNE = @LOANNE AND LOMOIS = @LOMOIS AND LODEP=0";
+                oleDbCommand.Prepare();
+                oleDbCommand.Parameters.AddWithValue("@LOPU1", (double)a);
+                oleDbCommand.Parameters.AddWithValue("@LOPU2", (double)b);
+                oleDbCommand.Parameters.AddWithValue("@LOPU3", (double)c);
+                oleDbCommand.Parameters.AddWithValue("@LOFROM", lofrom);
+                oleDbCommand.Parameters.AddWithValue("@LOANNE", loanne);
+                oleDbCommand.Parameters.AddWithValue("@LOMOIS", lomois);
+                oleDbCommand.ExecuteNonQuery();
+                MessageBox.Show("Lot Modifié");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                MessageBox.Show("Erreur de communication avec la base de données!");
+            }
+            finally { close(); }
+        }
+
+        public static List<LotFrom> generationFichierExcelRappel(decimal mois, decimal annee)
+        {
+            try
+            {
+
+                List<LotFrom> lots = new List<LotFrom>();
+                OleDbDataReader reader;
+                open();
+                //OleDbCommand oleDbCommand = new OleDbCommand("SELECT * FROM TB_Entrée_Lots WHERE LOMOIS = @LOMOIS AND LOANNE = @LOANNE");
+                OleDbCommand oleDbCommand = new OleDbCommand("SELECT TB_Lots.LOFROM, TB_Fromageries.FRNOM, TB_Fromageries.FRNDIR, TB_Fromageries.FRADR, TB_Fromageries.FRCPOS, TB_Lots.LOCEN1, TB_Lots.LOCEM1, TB_Lots.LOC11, TB_Lots.LOC12, TB_Lots.LOC13, " +
+                    " TB_Lots.LOPU1, TB_Lots.LOPU2, TB_Lots.LOPU3, TB_Lots.LOANNE, TB_Lots.LOMOIS, TB_Fromageries.FRVILL, TB_Fromageries.FRNUM FROM TB_Fromageries INNER JOIN TB_Lots ON TB_Fromageries.FRNUM = TB_Lots.LOFROM" +
+                    " WHERE LOMOIS = @LOMOIS AND LOANNE = @LOANNE AND TB_Lots.LODEP = 0 ORDER BY TB_Lots.LOFROM; ");
+                oleDbCommand.Connection = connection;
+                oleDbCommand.Prepare();
+                oleDbCommand.Parameters.AddWithValue("@LOMOIS", mois);
+                oleDbCommand.Parameters.AddWithValue("@LOANNE", annee);
+                reader = oleDbCommand.ExecuteReader();
+                while (reader.Read())
+                {
+                    LotFrom lot = new LotFrom((Decimal)reader["LOFROM"], (String)reader["FRNOM"], (String)reader["FRNDIR"], (String)reader["FRADR"], (Decimal)reader["FRCPOS"], (Decimal)reader["LOCEN1"], (Decimal)reader["LOCEM1"], (Decimal)reader["LOC11"], (Decimal)reader["LOC12"], (Decimal)reader["LOC13"],
+                        (Decimal)reader["LOPU1"],
+                        (Decimal)reader["LOPU2"],
+                        (Decimal)reader["LOPU3"],
+                        (Decimal)reader["LOANNE"],
+                        (Decimal)reader["LOMOIS"],
+                        (String)reader["FRVILL"],
+                        (Decimal)reader["FRNUM"]) ;
+                    lots.Add(lot);
+                }
+                Console.WriteLine(reader);
+                reader.Close();
+                return lots;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                MessageBox.Show("Erreur de communication avec la base de données!");
                 return null;
             }
             finally

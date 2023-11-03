@@ -1,6 +1,7 @@
 ﻿using Gestcom.ModelAdo;
 using Gestcom.Models;
 using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace GestcomWF.Views
 {
@@ -179,9 +180,11 @@ namespace GestcomWF.Views
                 Lot lot = LotAdo.ExisteLot(Convert.ToDecimal(cbxFromagerie.Text), Convert.ToDecimal(tbxAnnee.Text), Convert.ToDecimal(cbxMois.Text));
                 if (lot != null)
                 {
+                    CultureInfo culture = new CultureInfo("fr-FR");
                     Console.WriteLine(lot.LOFROM + " " + lot.LOANNE + " " + lot.LOMOIS);
                     lot.LOCEM1 = Convert.ToDecimal(tbxPains.Text);
                     lot.LOCEB1 = Convert.ToDecimal(tbxPoidsBrut.Text);
+                  
                     lot.LOCEN1 = Convert.ToDecimal(tbxPoidsNet.Text);
                     Console.WriteLine(lot.LOCEM1 + " " + lot.LOCEB1 + " " + lot.LOCEN1);
                     LotAdo.updateLot(lot.LOFROM, lot.LOANNE, lot.LOMOIS, lot.LOCEM1, lot.LOCEB1, lot.LOCEN1);

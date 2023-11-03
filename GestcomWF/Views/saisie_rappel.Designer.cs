@@ -56,6 +56,7 @@
             generate_excel.TabIndex = 31;
             generate_excel.Text = "Générer le fichier Excel";
             generate_excel.UseVisualStyleBackColor = true;
+            generate_excel.Click += generate_excel_Click;
             // 
             // tbx_c
             // 

@@ -11,10 +11,14 @@ namespace GestcomWF.Classes
         public Decimal LOFROM { get; set; } // Lot From = Num Fromagerie
         public Decimal LOANNE { get; set; }
         public Decimal LOMOIS { get; set; }
+        public Decimal LOCEN1 { get; set; } // Pains
         public Decimal LOCEM1 { get; set; } // Pains
         public Decimal LOC11 { get; set; } // Pains
         public Decimal LOC12 { get; set; } // Pains
         public Decimal LOC13 { get; set; } // Pains
+        public Decimal LOPU1 { get; set; } 
+        public Decimal LOPU2 { get; set; } 
+        public Decimal LOPU3 { get; set; } 
         public Decimal FRNUM { get; set; } // Num Fromagerie
         public String FRNOM { get; set; }
         public String FRADR { get; set; }
@@ -33,6 +37,26 @@ namespace GestcomWF.Classes
             LOC11 = lOC11;
             LOC12 = lOC12;
             LOC13 = lOC13;
+            LOANNE = lOANNE;
+            LOMOIS = lOMOIS;
+            FRVILL = fRVILL;
+            FRNUM = fRNUM;
+        }
+        public LotFrom(decimal lOFROM, string fRNOM, string fRNDIR, string fRADR, decimal fRCPOS, decimal lOCEN1, decimal lOCEM1, decimal lOC11, decimal lOC12, decimal lOC13, decimal lOPU1, decimal lOPU2, decimal lOPU3, decimal lOANNE, decimal lOMOIS, string fRVILL, decimal fRNUM)
+        {
+            LOFROM = lOFROM;
+            FRNOM = fRNOM;
+            FRNDIR = fRNDIR;
+            FRADR = fRADR;
+            FRCPOS = fRCPOS;
+            LOCEN1 = lOCEN1;
+            LOCEM1 = lOCEM1;
+            LOC11 = lOC11;
+            LOC12 = lOC12;
+            LOC13 = lOC13;
+            LOPU1 = lOPU1;
+            LOPU2 = lOPU2;
+            LOPU3 = lOPU3;
             LOANNE = lOANNE;
             LOMOIS = lOMOIS;
             FRVILL = fRVILL;
