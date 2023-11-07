@@ -64,5 +64,21 @@ namespace GestcomWF.Classes
             FRVILL = fRVILL;
             FRNUM = fRNUM;
         }
+
+        public LotFrom(decimal lOFROM, string fRNOM, string fRNDIR, string fRADR, decimal fRCPOS, decimal lOCEN1, decimal lOCEM1, decimal lOPUAC, decimal lOANNE, decimal lOMOIS, string fRVILL, decimal fRNUM)
+        {
+            LOFROM = lOFROM;
+            FRNOM = fRNOM;
+            FRNDIR = fRNDIR;
+            FRADR = fRADR;
+            FRCPOS = fRCPOS;
+            LOCEN1 = lOCEN1;
+            LOCEM1 = lOCEM1;         
+            LOPUAC = lOPUAC;         
+            LOANNE = lOANNE;
+            LOMOIS = lOMOIS;
+            FRVILL = fRVILL;
+            FRNUM = fRNUM;
+        }
     }
 }

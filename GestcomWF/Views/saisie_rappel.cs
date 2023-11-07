@@ -473,7 +473,7 @@ namespace GestcomWF.Views
                                 this.workSheet["D33"].Value = "A déduire N/Acompte du ";
                                 this.workSheet["G35"].Value = "Total Hors Taxes";
                                 this.workSheet["G36"].Value = "T.V.A";
-                                this.workSheet["I36"].Value = "5.5";
+                                this.workSheet["I36"].Value = "5,5";
                                 this.workSheet["J36"].Value = "%";
                                 this.workSheet["G38"].Value = "Total Réglé";
                                 this.workSheet["G38"].Style.Font.Bold = true;

@@ -572,5 +572,48 @@ namespace Gestcom.ModelAdo
             }
         }
 
+        public static List<LotFrom> generationFichierExcelAcompte(decimal mois, decimal annee)
+        {
+            try
+            {
+
+                List<LotFrom> lots = new List<LotFrom>();
+                OleDbDataReader reader;
+                open();
+                //OleDbCommand oleDbCommand = new OleDbCommand("SELECT * FROM TB_Entrée_Lots WHERE LOMOIS = @LOMOIS AND LOANNE = @LOANNE");
+                OleDbCommand oleDbCommand = new OleDbCommand("SELECT TB_Lots.LOFROM, TB_Fromageries.FRNOM, TB_Fromageries.FRNDIR, TB_Fromageries.FRADR, TB_Fromageries.FRCPOS, TB_Lots.LOCEN1, TB_Lots.LOCEM1," +
+                    " TB_Lots.LOPUAC, TB_Lots.LOANNE, TB_Lots.LOMOIS, TB_Fromageries.FRVILL, TB_Fromageries.FRNUM FROM TB_Fromageries INNER JOIN TB_Lots ON TB_Fromageries.FRNUM = TB_Lots.LOFROM" +
+                    " WHERE LOMOIS = @LOMOIS AND LOANNE = @LOANNE AND TB_Lots.LODEP = 0 ORDER BY TB_Lots.LOFROM; ");
+                oleDbCommand.Connection = connection;
+                oleDbCommand.Prepare();
+                oleDbCommand.Parameters.AddWithValue("@LOMOIS", mois);
+                oleDbCommand.Parameters.AddWithValue("@LOANNE", annee);
+                reader = oleDbCommand.ExecuteReader();
+                while (reader.Read())
+                {
+                    LotFrom lot = new LotFrom((Decimal)reader["LOFROM"], (String)reader["FRNOM"], (String)reader["FRNDIR"], (String)reader["FRADR"], (Decimal)reader["FRCPOS"], (Decimal)reader["LOCEN1"], (Decimal)reader["LOCEM1"],
+                        (Decimal)reader["LOPUAC"],
+                        (Decimal)reader["LOANNE"],
+                        (Decimal)reader["LOMOIS"],
+                        (String)reader["FRVILL"],
+                        (Decimal)reader["FRNUM"]);
+                    lots.Add(lot);
+                }
+                Console.WriteLine(reader);
+                reader.Close();
+                return lots;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                MessageBox.Show("Erreur de communication avec la base de données!");
+                return null;
+            }
+            finally
+            {
+                close();
+            }
+        }
+
     }
 }
