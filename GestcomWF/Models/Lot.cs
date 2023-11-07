@@ -11,6 +11,7 @@ namespace Gestcom.Models
 {
     public class Lot
     {
+
         public Decimal LOFACO { get; set; }
         public Decimal LOFROM { get; set; }
         public Decimal LOANNE { get; set; }
@@ -72,6 +73,7 @@ namespace Gestcom.Models
         public String LOVID { get; set; }
         public Decimal LOPSTK { get; set; }
         public String VIDE { get; set; }
+        public Decimal MONTANT { get; set; }
 
         public Lot () { }
         public Lot(decimal lofrom, decimal locem1, decimal loc11, decimal loc12, decimal loc13) {
@@ -89,18 +91,21 @@ namespace Gestcom.Models
             LOPUAC = lopuac;
         }
 
-        public Lot(decimal lofrom, decimal locem1, decimal loc11, decimal loc12, decimal loc13, decimal lopu1, decimal lopu2, decimal lopu3)
+        public Lot(decimal lofrom, decimal locem1, decimal locen1, decimal loc11, decimal loc12, decimal loc13, decimal lopu1, decimal lopu2, decimal lopu3, decimal montant)
         {
             LOFROM = lofrom;
             LOCEM1 = locem1;
+            LOCEN1 = locen1;
             LOC11 = loc11;
             LOC12 = loc12;
             LOC13 = loc13;
             LOPU1 = lopu1;
             LOPU2 = lopu2;
             LOPU3 = lopu3;
+            MONTANT = montant;
 
         }
+
 
     }
 }

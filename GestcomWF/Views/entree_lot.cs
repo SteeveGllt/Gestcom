@@ -184,7 +184,7 @@ namespace GestcomWF.Views
                     Console.WriteLine(lot.LOFROM + " " + lot.LOANNE + " " + lot.LOMOIS);
                     lot.LOCEM1 = Convert.ToDecimal(tbxPains.Text);
                     lot.LOCEB1 = Convert.ToDecimal(tbxPoidsBrut.Text);
-                  
+
                     lot.LOCEN1 = Convert.ToDecimal(tbxPoidsNet.Text);
                     Console.WriteLine(lot.LOCEM1 + " " + lot.LOCEB1 + " " + lot.LOCEN1);
                     LotAdo.updateLot(lot.LOFROM, lot.LOANNE, lot.LOMOIS, lot.LOCEM1, lot.LOCEB1, lot.LOCEN1);
@@ -251,25 +251,27 @@ namespace GestcomWF.Views
         // Événement lors du changement de l'état de la checkbox Affiner
         private void cbAffiner_CheckedChanged(object sender, EventArgs e)
         {
-            if (cbAffiner.Checked) {
+            if (cbAffiner.Checked)
+            {
                 this.fromageries = FromagerieAdo.allNonActif();
                 cbxFromagerie.DataSource = null;
                 cbxFromagerie.DataSource = this.fromageries;
                 cbxFromagerie.DisplayMember = "FRNUM";
                 cbxFromagerie.SelectedIndex = 0;
 
-                tbxFreinte.Text = "0"; 
-                tbxPoidsNet.Text = Calcul_Pds_Net().ToString(); 
+                tbxFreinte.Text = "0";
+                tbxPoidsNet.Text = Calcul_Pds_Net().ToString();
 
                 lblDate_debut.Visible = false;
                 lblDate_fin.Visible = false;
                 dtpDateDebut.Visible = false;
                 dtpDateFin.Visible = false;
             }
-            else {
+            else
+            {
                 InitializeFromagerie();
 
-                tbxFreinte.Text = Calcul_Freinte().ToString(); 
+                tbxFreinte.Text = Calcul_Freinte().ToString();
                 tbxPoidsNet.Text = Calcul_Pds_Net().ToString();
 
 

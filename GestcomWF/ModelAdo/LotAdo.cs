@@ -5,6 +5,7 @@ using GestcomWF.DataAccess;
 using Microsoft.VisualBasic;
 using System.Data.OleDb;
 using System.Data.SqlTypes;
+using System.Globalization;
 using System.Windows.Forms;
 
 namespace Gestcom.ModelAdo
@@ -146,7 +147,7 @@ namespace Gestcom.ModelAdo
                 oleDbCommand.Parameters.AddWithValue("@DAte_Fin", entreeLot.DAte_Fin.ToString("dd/MM/yyyy"));
 
                 oleDbCommand.Parameters.AddWithValue("@LOCENM", entreeLot.LOCENM); // Pains
-                oleDbCommand.Parameters.AddWithValue("@LOCENB", ((double)entreeLot.LOCENB)); // Brut
+                oleDbCommand.Parameters.AddWithValue("@LOCENB", entreeLot.LOCENB); // Brut
                 oleDbCommand.Parameters.AddWithValue("@LOCENN", entreeLot.LOCENN); // Net
                 oleDbCommand.Parameters.AddWithValue("@LOTAUX", entreeLot.LOTAUX); // Freinte
                 oleDbCommand.ExecuteNonQuery();
@@ -445,13 +446,12 @@ namespace Gestcom.ModelAdo
         {
             try
             {
-                Lot lot = new Lot();
                 List<Lot> lots = new List<Lot>();
                 OleDbDataReader reader;
                 open();
                 OleDbCommand oleDbCommand = new OleDbCommand();
                 oleDbCommand.Connection = connection;
-                oleDbCommand.CommandText = "SELECT LOFROM, LOCEM1, LOC11, LOC12, LOC13, LOPU1, LOPU2, LOPU3 FROM TB_Lots WHERE LOANNE = @LOANNE AND LOMOIS = @LOMOIS";
+                oleDbCommand.CommandText = "SELECT LOFROM, LOCEM1, LOCEN1, LOC11, LOC12, LOC13, LOPU1, LOPU2, LOPU3, MONTANT FROM TB_Lots WHERE LOANNE = @LOANNE AND LOMOIS = @LOMOIS";
                 oleDbCommand.Prepare();
                 oleDbCommand.Parameters.AddWithValue("@LOANNE", loanne);
                 oleDbCommand.Parameters.AddWithValue("@LOMOIS", lomois);
@@ -460,21 +460,25 @@ namespace Gestcom.ModelAdo
 
                 while (reader.Read())
                 {
-                    // Vérifiez si l'une des colonnes est null
-                    if (reader.IsDBNull(reader.GetOrdinal("LOFROM")) ||
-                        reader.IsDBNull(reader.GetOrdinal("LOCEM1")) ||
-                        reader.IsDBNull(reader.GetOrdinal("LOC11")) ||
-                        reader.IsDBNull(reader.GetOrdinal("LOC12")) ||
-                        reader.IsDBNull(reader.GetOrdinal("LOC13")) ||
-                        reader.IsDBNull(reader.GetOrdinal("LOPU1")) ||
-                        reader.IsDBNull(reader.GetOrdinal("LOPU2")) ||
-                        reader.IsDBNull(reader.GetOrdinal("LOPU3")))
-                    {
-                        return null;
-                    }
+                    // Définissez les valeurs par défaut pour chaque champ qui pourrait être null.
+                    decimal defaultDecimal = 0m; // Vous pouvez définir une autre valeur par défaut si nécessaire.
 
-                    // Si toutes les colonnes contiennent des données, créez un objet Lot
-                    lot = new Lot((Decimal)reader["LOFROM"], (Decimal)reader["LOCEM1"], (Decimal)reader["LOC11"], (Decimal)reader["LOC12"], (Decimal)reader["LOC13"], (Decimal)reader["LOPU1"], (Decimal)reader["LOPU2"], (Decimal)reader["LOPU3"]);
+                    // Créez un objet Lot, en utilisant les valeurs par défaut si les champs de la base de données sont DBNull.
+                    Lot lot = new Lot(
+                        reader.IsDBNull(reader.GetOrdinal("LOFROM")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOFROM")),
+                        reader.IsDBNull(reader.GetOrdinal("LOCEM1")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOCEM1")),
+                        // Répétez pour les autres champs en vérifiant pour chacun s'ils sont null
+                        reader.IsDBNull(reader.GetOrdinal("LOCEN1")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOCEN1")),
+                        reader.IsDBNull(reader.GetOrdinal("LOC11")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOC11")),
+                        reader.IsDBNull(reader.GetOrdinal("LOC12")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOC12")),
+                        reader.IsDBNull(reader.GetOrdinal("LOC13")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOC13")),
+                        reader.IsDBNull(reader.GetOrdinal("LOPU1")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOPU1")),
+                        reader.IsDBNull(reader.GetOrdinal("LOPU2")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOPU2")),
+                        reader.IsDBNull(reader.GetOrdinal("LOPU3")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOPU3")),
+                        reader.IsDBNull(reader.GetOrdinal("MONTANT")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("MONTANT"))
+                    // Ajoutez tous les champs nécessaires pour le constructeur de Lot ici.
+                    );
+
                     lots.Add(lot);
                 }
 
@@ -495,18 +499,19 @@ namespace Gestcom.ModelAdo
             }
         }
 
-        public static void updateLotRappel(decimal lofrom, decimal loanne, decimal lomois, decimal a, decimal b, decimal c)
+        public static void updateLotRappel(decimal lofrom, decimal loanne, decimal lomois, decimal a, decimal b, decimal c, decimal montant)
         {
             try
             {
                 open();
                 OleDbCommand oleDbCommand = new OleDbCommand();
                 oleDbCommand.Connection = connection;
-                oleDbCommand.CommandText = "UPDATE TB_Lots SET LOPU1 = @LOPU1, LOPU2 = @LOPU2, LOPU3 = @LOPU3 WHERE LOFACO=1 AND LOFROM = @LOFROM AND LOANNE = @LOANNE AND LOMOIS = @LOMOIS AND LODEP=0";
+                oleDbCommand.CommandText = "UPDATE TB_Lots SET LOPU1 = @LOPU1, LOPU2 = @LOPU2, LOPU3 = @LOPU3, MONTANT = @MONTANT WHERE LOFACO=1 AND LOFROM = @LOFROM AND LOANNE = @LOANNE AND LOMOIS = @LOMOIS AND LODEP=0";
                 oleDbCommand.Prepare();
-                oleDbCommand.Parameters.AddWithValue("@LOPU1", (double)a);
-                oleDbCommand.Parameters.AddWithValue("@LOPU2", (double)b);
-                oleDbCommand.Parameters.AddWithValue("@LOPU3", (double)c);
+                oleDbCommand.Parameters.AddWithValue("@LOPU1", a);
+                oleDbCommand.Parameters.AddWithValue("@LOPU2", b);
+                oleDbCommand.Parameters.AddWithValue("@LOPU3", c);
+                oleDbCommand.Parameters.AddWithValue("@MONTANT", montant);
                 oleDbCommand.Parameters.AddWithValue("@LOFROM", lofrom);
                 oleDbCommand.Parameters.AddWithValue("@LOANNE", loanne);
                 oleDbCommand.Parameters.AddWithValue("@LOMOIS", lomois);
@@ -531,7 +536,7 @@ namespace Gestcom.ModelAdo
                 open();
                 //OleDbCommand oleDbCommand = new OleDbCommand("SELECT * FROM TB_Entrée_Lots WHERE LOMOIS = @LOMOIS AND LOANNE = @LOANNE");
                 OleDbCommand oleDbCommand = new OleDbCommand("SELECT TB_Lots.LOFROM, TB_Fromageries.FRNOM, TB_Fromageries.FRNDIR, TB_Fromageries.FRADR, TB_Fromageries.FRCPOS, TB_Lots.LOCEN1, TB_Lots.LOCEM1, TB_Lots.LOC11, TB_Lots.LOC12, TB_Lots.LOC13, " +
-                    " TB_Lots.LOPU1, TB_Lots.LOPU2, TB_Lots.LOPU3, TB_Lots.LOANNE, TB_Lots.LOMOIS, TB_Fromageries.FRVILL, TB_Fromageries.FRNUM FROM TB_Fromageries INNER JOIN TB_Lots ON TB_Fromageries.FRNUM = TB_Lots.LOFROM" +
+                    " TB_Lots.LOPUAC, TB_Lots.LOPU1, TB_Lots.LOPU2, TB_Lots.LOPU3, TB_Lots.LOANNE, TB_Lots.LOMOIS, TB_Fromageries.FRVILL, TB_Fromageries.FRNUM FROM TB_Fromageries INNER JOIN TB_Lots ON TB_Fromageries.FRNUM = TB_Lots.LOFROM" +
                     " WHERE LOMOIS = @LOMOIS AND LOANNE = @LOANNE AND TB_Lots.LODEP = 0 ORDER BY TB_Lots.LOFROM; ");
                 oleDbCommand.Connection = connection;
                 oleDbCommand.Prepare();
@@ -541,13 +546,14 @@ namespace Gestcom.ModelAdo
                 while (reader.Read())
                 {
                     LotFrom lot = new LotFrom((Decimal)reader["LOFROM"], (String)reader["FRNOM"], (String)reader["FRNDIR"], (String)reader["FRADR"], (Decimal)reader["FRCPOS"], (Decimal)reader["LOCEN1"], (Decimal)reader["LOCEM1"], (Decimal)reader["LOC11"], (Decimal)reader["LOC12"], (Decimal)reader["LOC13"],
+                        (Decimal)reader["LOPUAC"],
                         (Decimal)reader["LOPU1"],
                         (Decimal)reader["LOPU2"],
                         (Decimal)reader["LOPU3"],
                         (Decimal)reader["LOANNE"],
                         (Decimal)reader["LOMOIS"],
                         (String)reader["FRVILL"],
-                        (Decimal)reader["FRNUM"]) ;
+                        (Decimal)reader["FRNUM"]);
                     lots.Add(lot);
                 }
                 Console.WriteLine(reader);

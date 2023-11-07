@@ -1,3 +1,5 @@
+using System.Globalization;
+
 namespace GestcomWF
 {
     internal static class Program
@@ -10,6 +12,9 @@ namespace GestcomWF
         {
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
+            CultureInfo ci = new CultureInfo("fr-FR");
+            Thread.CurrentThread.CurrentCulture = ci;
+            Thread.CurrentThread.CurrentUICulture = ci;
             ApplicationConfiguration.Initialize();
             Application.Run(new MainWindow());
         }
