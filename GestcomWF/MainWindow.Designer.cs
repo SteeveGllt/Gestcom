@@ -43,11 +43,11 @@ namespace GestcomWF
             classementToolStripMenuItem = new ToolStripMenuItem();
             imprimantesToolStripMenuItem = new ToolStripMenuItem();
             saisieAcompteToolStripMenuItem = new ToolStripMenuItem();
+            saisieRappelToolStripMenuItem = new ToolStripMenuItem();
             éditionToolStripMenuItem = new ToolStripMenuItem();
             saisiePeséesToolStripMenuItem = new ToolStripMenuItem();
             outilsToolStripMenuItem = new ToolStripMenuItem();
             calculatriceToolStripMenuItem = new ToolStripMenuItem();
-            saisieRappelToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -57,8 +57,7 @@ namespace GestcomWF
             menuStrip1.Items.AddRange(new ToolStripItem[] { fichiersToolStripMenuItem, éditionToolStripMenuItem, outilsToolStripMenuItem });
             menuStrip1.Location = new System.Drawing.Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Padding = new Padding(7, 3, 0, 3);
-            menuStrip1.Size = new Size(1910, 30);
+            menuStrip1.Size = new Size(1671, 24);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -66,85 +65,93 @@ namespace GestcomWF
             // 
             fichiersToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { clientsToolStripMenuItem, articlesToolStripMenuItem, tarifsToolStripMenuItem, lieuxDeLivraisonToolStripMenuItem, fromageriesToolStripMenuItem, lotsToolStripMenuItem, imprimantesToolStripMenuItem, saisieAcompteToolStripMenuItem, saisieRappelToolStripMenuItem });
             fichiersToolStripMenuItem.Name = "fichiersToolStripMenuItem";
-            fichiersToolStripMenuItem.Size = new Size(72, 24);
+            fichiersToolStripMenuItem.Size = new Size(59, 20);
             fichiersToolStripMenuItem.Text = "Fichiers";
             // 
             // clientsToolStripMenuItem
             // 
             clientsToolStripMenuItem.Name = "clientsToolStripMenuItem";
-            clientsToolStripMenuItem.Size = new Size(224, 26);
+            clientsToolStripMenuItem.Size = new Size(180, 22);
             clientsToolStripMenuItem.Text = "Clients";
             // 
             // articlesToolStripMenuItem
             // 
             articlesToolStripMenuItem.Name = "articlesToolStripMenuItem";
-            articlesToolStripMenuItem.Size = new Size(224, 26);
+            articlesToolStripMenuItem.Size = new Size(180, 22);
             articlesToolStripMenuItem.Text = "Articles";
             // 
             // tarifsToolStripMenuItem
             // 
             tarifsToolStripMenuItem.Name = "tarifsToolStripMenuItem";
-            tarifsToolStripMenuItem.Size = new Size(224, 26);
+            tarifsToolStripMenuItem.Size = new Size(180, 22);
             tarifsToolStripMenuItem.Text = "Tarifs";
             // 
             // lieuxDeLivraisonToolStripMenuItem
             // 
             lieuxDeLivraisonToolStripMenuItem.Name = "lieuxDeLivraisonToolStripMenuItem";
-            lieuxDeLivraisonToolStripMenuItem.Size = new Size(224, 26);
+            lieuxDeLivraisonToolStripMenuItem.Size = new Size(180, 22);
             lieuxDeLivraisonToolStripMenuItem.Text = "Lieux de Livraison";
             // 
             // fromageriesToolStripMenuItem
             // 
             fromageriesToolStripMenuItem.Name = "fromageriesToolStripMenuItem";
-            fromageriesToolStripMenuItem.Size = new Size(224, 26);
+            fromageriesToolStripMenuItem.Size = new Size(180, 22);
             fromageriesToolStripMenuItem.Text = "Fromageries";
+            fromageriesToolStripMenuItem.Click += fromageriesToolStripMenuItem_Click;
             // 
             // lotsToolStripMenuItem
             // 
             lotsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { entréeToolStripMenuItem, classementToolStripMenuItem });
             lotsToolStripMenuItem.Name = "lotsToolStripMenuItem";
-            lotsToolStripMenuItem.Size = new Size(224, 26);
+            lotsToolStripMenuItem.Size = new Size(180, 22);
             lotsToolStripMenuItem.Text = "Lots";
             // 
             // entréeToolStripMenuItem
             // 
             entréeToolStripMenuItem.Name = "entréeToolStripMenuItem";
-            entréeToolStripMenuItem.Size = new Size(167, 26);
+            entréeToolStripMenuItem.Size = new Size(135, 22);
             entréeToolStripMenuItem.Text = "Entrée";
             entréeToolStripMenuItem.Click += entréeToolStripMenuItem_Click;
             // 
             // classementToolStripMenuItem
             // 
             classementToolStripMenuItem.Name = "classementToolStripMenuItem";
-            classementToolStripMenuItem.Size = new Size(167, 26);
+            classementToolStripMenuItem.Size = new Size(135, 22);
             classementToolStripMenuItem.Text = "Classement";
             classementToolStripMenuItem.Click += classementToolStripMenuItem_Click;
             // 
             // imprimantesToolStripMenuItem
             // 
             imprimantesToolStripMenuItem.Name = "imprimantesToolStripMenuItem";
-            imprimantesToolStripMenuItem.Size = new Size(224, 26);
+            imprimantesToolStripMenuItem.Size = new Size(180, 22);
             imprimantesToolStripMenuItem.Text = "Imprimantes";
             imprimantesToolStripMenuItem.Click += imprimantesToolStripMenuItem_Click;
             // 
             // saisieAcompteToolStripMenuItem
             // 
             saisieAcompteToolStripMenuItem.Name = "saisieAcompteToolStripMenuItem";
-            saisieAcompteToolStripMenuItem.Size = new Size(224, 26);
+            saisieAcompteToolStripMenuItem.Size = new Size(180, 22);
             saisieAcompteToolStripMenuItem.Text = "Saisie Acompte";
             saisieAcompteToolStripMenuItem.Click += saisieAcompteToolStripMenuItem_Click;
+            // 
+            // saisieRappelToolStripMenuItem
+            // 
+            saisieRappelToolStripMenuItem.Name = "saisieRappelToolStripMenuItem";
+            saisieRappelToolStripMenuItem.Size = new Size(180, 22);
+            saisieRappelToolStripMenuItem.Text = "Saisie Rappel";
+            saisieRappelToolStripMenuItem.Click += saisieRappelToolStripMenuItem_Click;
             // 
             // éditionToolStripMenuItem
             // 
             éditionToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { saisiePeséesToolStripMenuItem });
             éditionToolStripMenuItem.Name = "éditionToolStripMenuItem";
-            éditionToolStripMenuItem.Size = new Size(70, 24);
+            éditionToolStripMenuItem.Size = new Size(56, 20);
             éditionToolStripMenuItem.Text = "Édition";
             // 
             // saisiePeséesToolStripMenuItem
             // 
             saisiePeséesToolStripMenuItem.Name = "saisiePeséesToolStripMenuItem";
-            saisiePeséesToolStripMenuItem.Size = new Size(179, 26);
+            saisiePeséesToolStripMenuItem.Size = new Size(141, 22);
             saisiePeséesToolStripMenuItem.Text = "Saisie pesées";
             saisiePeséesToolStripMenuItem.Click += saisiePeséesToolStripMenuItem_Click;
             // 
@@ -152,32 +159,24 @@ namespace GestcomWF
             // 
             outilsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { calculatriceToolStripMenuItem });
             outilsToolStripMenuItem.Name = "outilsToolStripMenuItem";
-            outilsToolStripMenuItem.Size = new Size(61, 24);
+            outilsToolStripMenuItem.Size = new Size(50, 20);
             outilsToolStripMenuItem.Text = "Outils";
             // 
             // calculatriceToolStripMenuItem
             // 
             calculatriceToolStripMenuItem.Name = "calculatriceToolStripMenuItem";
-            calculatriceToolStripMenuItem.Size = new Size(169, 26);
+            calculatriceToolStripMenuItem.Size = new Size(136, 22);
             calculatriceToolStripMenuItem.Text = "Calculatrice";
             calculatriceToolStripMenuItem.Click += calculatriceToolStripMenuItem_Click;
             // 
-            // saisieRappelToolStripMenuItem
-            // 
-            saisieRappelToolStripMenuItem.Name = "saisieRappelToolStripMenuItem";
-            saisieRappelToolStripMenuItem.Size = new Size(224, 26);
-            saisieRappelToolStripMenuItem.Text = "Saisie Rappel";
-            saisieRappelToolStripMenuItem.Click += saisieRappelToolStripMenuItem_Click;
-            // 
             // MainWindow
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1910, 916);
+            ClientSize = new Size(1671, 687);
             Controls.Add(menuStrip1);
             IsMdiContainer = true;
             MainMenuStrip = menuStrip1;
-            Margin = new Padding(3, 4, 3, 4);
             Name = "MainWindow";
             Text = "Gestcom";
             menuStrip1.ResumeLayout(false);

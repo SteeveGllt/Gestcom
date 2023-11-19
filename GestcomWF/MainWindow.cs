@@ -71,5 +71,12 @@ namespace GestcomWF
             saisie_Rappel.MdiParent = this;
             saisie_Rappel.Show();
         }
+
+        private void fromageriesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            fromageries fromageries = new fromageries();
+            fromageries.MdiParent = this;
+            fromageries.Show();
+        }
     }
 }

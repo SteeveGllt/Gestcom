@@ -103,5 +103,52 @@ namespace Gestcom.ModelAdo
                 close();
             }
         }
+
+        public static List<Fromagerie> allData()
+        {
+            try
+            {
+                // Initialisation de la liste pour stocker les fromageries récupérées.
+                List<Fromagerie> fromageries = new List<Fromagerie>();
+
+                OleDbDataReader reader;
+
+                // Ouverture de la connexion à la base de données.
+                open();
+
+                // Création de la commande SQL pour sélectionner les fromageries actives.
+                OleDbCommand oleDbCommand = new OleDbCommand("SELECT FRNUM FROM TB_Fromageries WHERE ((FRACTIF)=True) ORDER BY FRNUM");
+                oleDbCommand.Connection = connection;
+
+                reader = oleDbCommand.ExecuteReader();
+
+                // Parcours du résultat ligne par ligne.
+                while (reader.Read())
+                {
+                    // Création d'un objet Fromagerie à partir du numéro récupéré.
+                    Fromagerie fromagerie = new Fromagerie((Decimal)reader["FRNUM"]);
+
+                    fromageries.Add(fromagerie);
+                }
+
+                // Affichage inutile du reader. À supprimer si non nécessaire.
+                Console.WriteLine(reader);
+
+                reader.Close();
+
+                return fromageries;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                MessageBox.Show("Erreur de communication avec la base de données!");
+                return null;
+            }
+            finally
+            {
+                // Assure que la connexion est fermée après l'exécution.
+                close();
+            }
+        }
     }
 }

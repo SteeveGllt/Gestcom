@@ -303,5 +303,10 @@ namespace GestcomWF.Views
 
             cbAffiner.Checked = false;
         }
+
+        private void cbxFromagerie_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

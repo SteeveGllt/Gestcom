@@ -12,6 +12,10 @@ namespace Gestcom.Models
         {
             FRNUM = fRNUM;
         }
+        public Fromagerie(decimal fRNUM, string fRNOM)
+        {
+            FRNOM = fRNOM;
+        }
 
         public Fromagerie(decimal fRNUM, string fRNOM, string fRADR, decimal fRCPOS, string fRVILL, string fRNDIR, decimal fRTYPE, decimal fRTCON, decimal fRCMEU, decimal fRCPOI, string fRMODR, string fRDOMI, decimal fRBANQ, decimal fRGUIC, string fRCOM1, string fRCOM2, decimal cOE1, decimal cOE2, decimal cOE3, decimal cOE4, decimal fRREFA, decimal fRPUAC, decimal fRETRE, string fRHIVE, string fRCVER, decimal fRVVER, string fREVER, bool fRACTIF)
          {
@@ -74,6 +78,6 @@ namespace Gestcom.Models
         public String FREVER { get; set;}
         public Boolean FRACTIF { get; set;}
 
-        
+      
     }
 }

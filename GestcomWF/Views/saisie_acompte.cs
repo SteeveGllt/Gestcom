@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +26,8 @@ namespace GestcomWF.Views
 
         WorkSheet workSheet;
         WorkBook workbook = new WorkBook(ExcelFileFormat.XLSX);
+
+        NumberFormatInfo nfi = new CultureInfo("fr-Fr", false).NumberFormat;
 
         // Liste des mois pour la combobox
         List<MoisNum> listeObjets = new List<MoisNum> {
@@ -51,6 +54,8 @@ namespace GestcomWF.Views
             cbxMois.SelectedIndex = 0;
             // Initialiser le DataGridView sans source de données
             dataGridView.DataSource = null;
+
+           
         }
 
         private void btn_valider_dg_Click(object sender, EventArgs e)
@@ -96,6 +101,7 @@ namespace GestcomWF.Views
         private void btn_valider_Click(object sender, EventArgs e)
         {
             MoisNum moisNum = (MoisNum)cbxMois.SelectedItem;
+            
             if (this._currentLot != null)
             {
                 decimal newPrice;
@@ -116,6 +122,7 @@ namespace GestcomWF.Views
                         }
                         else
                         {
+                            
                             // Mettre à jour un seul lot
                             LotAdo.updateLotPrix(this._currentLot.LOFROM, Convert.ToDecimal(tbx_annee.Text), moisNum.Numero, newPrice);
                             this._currentLot.LOPUAC = newPrice;
@@ -142,7 +149,6 @@ namespace GestcomWF.Views
             try
             {
 
-
                 // Vérification que le champ 'année' est correctement rempli
                 if (tbx_annee.Text == "" || tbx_annee.Text.Length < 2)
                 {
@@ -155,11 +161,23 @@ namespace GestcomWF.Views
                     Decimal valeurPrecedente = 0;
 
 
+
                     // Récupération du mois sélectionné depuis la comboBox
                     MoisNum moisNum = (MoisNum)cbxMois.SelectedItem;
 
+                    decimal moisNumValue = moisNum.Numero;
+
+                    decimal moisDecale = moisNumValue - 5;
+                    if (moisDecale <= 0)
+                    {
+                        moisDecale += 12;
+                    }
+
+
+                    Console.WriteLine(moisDecale);
+
                     // Récupération de toutes les entrées pour le mois et l'année donnés
-                    List<LotFrom> lotFroms = LotAdo.generationFichierExcelAcompte(moisNum.Numero, Convert.ToDecimal(tbx_annee.Text));
+                    List<LotFrom> lotFroms = LotAdo.generationFichierExcelAcompte(moisDecale, Convert.ToDecimal(tbx_annee.Text));
                     if (lotFroms == null || lotFroms.Count <= 0)
                     {
                         MessageBox.Show("Aucune valeur");

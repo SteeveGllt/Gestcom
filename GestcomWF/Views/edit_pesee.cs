@@ -59,6 +59,7 @@ namespace GestcomWF.Views
                 // Récupération du mois sélectionné depuis la comboBox
                 MoisNum moisNum = (MoisNum)cbxMois.SelectedItem;
 
+
                 // Récupération de toutes les entrées pour le mois et l'année donnés
                 List<EntreeLotFrom> entreeLotFroms = LotAdo.allEntreeEnFonctionDuMoisEtDeLannee(moisNum.Numero, Convert.ToDecimal(tbxAnnee.Text));
                 if (entreeLotFroms.Count <= 0)

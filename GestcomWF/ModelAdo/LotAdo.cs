@@ -251,18 +251,17 @@ namespace Gestcom.ModelAdo
 
                 while (reader.Read())
                 {
-                    // Vérifiez si l'une des colonnes est null
-                    if (reader.IsDBNull(reader.GetOrdinal("LOFROM")) ||
-                        reader.IsDBNull(reader.GetOrdinal("LOCEM1")) ||
-                        reader.IsDBNull(reader.GetOrdinal("LOC11")) ||
-                        reader.IsDBNull(reader.GetOrdinal("LOC12")) ||
-                        reader.IsDBNull(reader.GetOrdinal("LOC13")))
-                    {
-                        return null;
-                    }
+                    decimal defaultDecimal = 0m;
+
 
                     // Si toutes les colonnes contiennent des données, créez un objet Lot
-                    lot = new Lot((Decimal)reader["LOFROM"], (Decimal)reader["LOCEM1"], (Decimal)reader["LOC11"], (Decimal)reader["LOC12"], (Decimal)reader["LOC13"]);
+                    //lot = new Lot((Decimal)reader["LOFROM"], (Decimal)reader["LOCEM1"], (Decimal)reader["LOC11"], (Decimal)reader["LOC12"], (Decimal)reader["LOC13"]);
+                    lot = new Lot(
+                         reader.IsDBNull(reader.GetOrdinal("LOFROM")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOFROM")),
+                        reader.IsDBNull(reader.GetOrdinal("LOCEM1")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOCEM1")),
+                        reader.IsDBNull(reader.GetOrdinal("LOC11")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOC11")),
+                        reader.IsDBNull(reader.GetOrdinal("LOC12")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOC12")),
+                        reader.IsDBNull(reader.GetOrdinal("LOC13")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOC13")));
                     lots.Add(lot);
                 }
 
@@ -327,11 +326,28 @@ namespace Gestcom.ModelAdo
                 reader = oleDbCommand.ExecuteReader();
                 while (reader.Read())
                 {
-                    LotFrom lot = new LotFrom((Decimal)reader["LOFROM"], (String)reader["FRNOM"], (String)reader["FRNDIR"], (String)reader["FRADR"], (Decimal)reader["FRCPOS"], (Decimal)reader["LOCEM1"], (Decimal)reader["LOC11"], (Decimal)reader["LOC12"], (Decimal)reader["LOC13"],
-                        (Decimal)reader["LOANNE"],
-                        (Decimal)reader["LOMOIS"],
-                        (String)reader["FRVILL"],
-                        (Decimal)reader["FRNUM"]);
+                    decimal defaultDecimal = 0m;
+                    string defaultString = "";
+                    /* LotFrom lot = new LotFrom((Decimal)reader["LOFROM"], (String)reader["FRNOM"], (String)reader["FRNDIR"], (String)reader["FRADR"], (Decimal)reader["FRCPOS"], (Decimal)reader["LOCEM1"], (Decimal)reader["LOC11"], (Decimal)reader["LOC12"], (Decimal)reader["LOC13"],
+                         (Decimal)reader["LOANNE"],
+                         (Decimal)reader["LOMOIS"],
+                         (String)reader["FRVILL"],
+                         (Decimal)reader["FRNUM"]);*/
+                    LotFrom lot = new LotFrom(
+                         reader.IsDBNull(reader.GetOrdinal("LOFROM")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOFROM")),
+                         reader.IsDBNull(reader.GetOrdinal("FRNOM")) ? defaultString : reader.GetString(reader.GetOrdinal("FRNOM")),
+                         reader.IsDBNull(reader.GetOrdinal("FRNDIR")) ? defaultString : reader.GetString(reader.GetOrdinal("FRNDIR")),
+                         reader.IsDBNull(reader.GetOrdinal("FRADR")) ? defaultString : reader.GetString(reader.GetOrdinal("FRADR")),
+                         reader.IsDBNull(reader.GetOrdinal("FRCPOS")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("FRCPOS")),
+                        reader.IsDBNull(reader.GetOrdinal("LOCEM1")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOCEM1")),
+                        reader.IsDBNull(reader.GetOrdinal("LOC11")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOC11")),
+                        reader.IsDBNull(reader.GetOrdinal("LOC12")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOC12")),
+                        reader.IsDBNull(reader.GetOrdinal("LOC13")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOC13")),
+                        reader.IsDBNull(reader.GetOrdinal("LOANNE")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOANNE")),
+                        reader.IsDBNull(reader.GetOrdinal("LOMOIS")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOMOIS")),
+                         reader.IsDBNull(reader.GetOrdinal("FRVILL")) ? defaultString : reader.GetString(reader.GetOrdinal("FRVILL")),
+                         reader.IsDBNull(reader.GetOrdinal("FRNUM")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("FRNUM"))
+                        );
                     lots.Add(lot);
                 }
                 Console.WriteLine(reader);
@@ -368,16 +384,14 @@ namespace Gestcom.ModelAdo
 
                 while (reader.Read())
                 {
-                    // Vérifiez si l'une des colonnes est null
-                    if (reader.IsDBNull(reader.GetOrdinal("LOFROM")) ||
-                        reader.IsDBNull(reader.GetOrdinal("LOCEM1")) ||
-                        reader.IsDBNull(reader.GetOrdinal("LOPUAC")))
-                    {
-                        return null;
-                    }
-
+                    decimal defaultDecimal = 0m;
                     // Si toutes les colonnes contiennent des données, créez un objet Lot
-                    lot = new Lot((Decimal)reader["LOFROM"], (Decimal)reader["LOCEM1"], (Decimal)reader["LOPUAC"]);
+                    //lot = new Lot((Decimal)reader["LOFROM"], (Decimal)reader["LOCEM1"], (Decimal)reader["LOPUAC"]);
+                    lot = new Lot(
+                        reader.IsDBNull(reader.GetOrdinal("LOFROM")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOFROM")),
+                        reader.IsDBNull(reader.GetOrdinal("LOCEM1")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOCEM1")),
+                        reader.IsDBNull(reader.GetOrdinal("LOPUAC")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOPUAC"))
+                        );
                     lots.Add(lot);
                 }
 
@@ -545,7 +559,7 @@ namespace Gestcom.ModelAdo
                 reader = oleDbCommand.ExecuteReader();
                 while (reader.Read())
                 {
-                    LotFrom lot = new LotFrom((Decimal)reader["LOFROM"], (String)reader["FRNOM"], (String)reader["FRNDIR"], (String)reader["FRADR"], (Decimal)reader["FRCPOS"], (Decimal)reader["LOCEN1"], (Decimal)reader["LOCEM1"], (Decimal)reader["LOC11"], (Decimal)reader["LOC12"], (Decimal)reader["LOC13"],
+                    /*LotFrom lot = new LotFrom((Decimal)reader["LOFROM"], (String)reader["FRNOM"], (String)reader["FRNDIR"], (String)reader["FRADR"], (Decimal)reader["FRCPOS"], (Decimal)reader["LOCEN1"], (Decimal)reader["LOCEM1"], (Decimal)reader["LOC11"], (Decimal)reader["LOC12"], (Decimal)reader["LOC13"],
                         (Decimal)reader["LOPUAC"],
                         (Decimal)reader["LOPU1"],
                         (Decimal)reader["LOPU2"],
@@ -553,7 +567,29 @@ namespace Gestcom.ModelAdo
                         (Decimal)reader["LOANNE"],
                         (Decimal)reader["LOMOIS"],
                         (String)reader["FRVILL"],
-                        (Decimal)reader["FRNUM"]);
+                        (Decimal)reader["FRNUM"]);*/
+                    decimal defaultDecimal = 0m;
+                    string defaultString = "";
+                    LotFrom lot = new LotFrom(
+                        reader.IsDBNull(reader.GetOrdinal("LOFROM")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOFROM")),
+                        reader.IsDBNull(reader.GetOrdinal("FRNOM")) ? defaultString : reader.GetString(reader.GetOrdinal("FRNOM")),
+                        reader.IsDBNull(reader.GetOrdinal("FRNDIR")) ? defaultString : reader.GetString(reader.GetOrdinal("FRNDIR")),
+                        reader.IsDBNull(reader.GetOrdinal("FRADR")) ? defaultString : reader.GetString(reader.GetOrdinal("FRADR")),
+                        reader.IsDBNull(reader.GetOrdinal("FRCPOS")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("FRCPOS")),
+                       reader.IsDBNull(reader.GetOrdinal("LOCEN1")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOCEN1")),
+                       reader.IsDBNull(reader.GetOrdinal("LOCEM1")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOCEM1")),
+                       reader.IsDBNull(reader.GetOrdinal("LOC11")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOC11")),
+                       reader.IsDBNull(reader.GetOrdinal("LOC12")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOC12")),
+                       reader.IsDBNull(reader.GetOrdinal("LOC13")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOC13")),
+                       reader.IsDBNull(reader.GetOrdinal("LOPUAC")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOPUAC")),
+                        reader.IsDBNull(reader.GetOrdinal("LOPU1")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOPU1")),
+                       reader.IsDBNull(reader.GetOrdinal("LOPU2")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOPU2")),
+                       reader.IsDBNull(reader.GetOrdinal("LOPU3")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOPU3")),
+                       reader.IsDBNull(reader.GetOrdinal("LOANNE")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOANNE")),
+                       reader.IsDBNull(reader.GetOrdinal("LOMOIS")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOMOIS")),
+                        reader.IsDBNull(reader.GetOrdinal("FRVILL")) ? defaultString : reader.GetString(reader.GetOrdinal("FRVILL")),
+                        reader.IsDBNull(reader.GetOrdinal("FRNUM")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("FRNUM"))
+                       );
                     lots.Add(lot);
                 }
                 Console.WriteLine(reader);
@@ -591,12 +627,29 @@ namespace Gestcom.ModelAdo
                 reader = oleDbCommand.ExecuteReader();
                 while (reader.Read())
                 {
-                    LotFrom lot = new LotFrom((Decimal)reader["LOFROM"], (String)reader["FRNOM"], (String)reader["FRNDIR"], (String)reader["FRADR"], (Decimal)reader["FRCPOS"], (Decimal)reader["LOCEN1"], (Decimal)reader["LOCEM1"],
+                    /*LotFrom lot = new LotFrom((Decimal)reader["LOFROM"], (String)reader["FRNOM"], (String)reader["FRNDIR"], (String)reader["FRADR"], (Decimal)reader["FRCPOS"], (Decimal)reader["LOCEN1"], (Decimal)reader["LOCEM1"],
                         (Decimal)reader["LOPUAC"],
                         (Decimal)reader["LOANNE"],
                         (Decimal)reader["LOMOIS"],
                         (String)reader["FRVILL"],
-                        (Decimal)reader["FRNUM"]);
+                        (Decimal)reader["FRNUM"]);*/
+                    decimal defaultDecimal = 0m;
+                    string defaultString = "";
+
+                    LotFrom lot = new LotFrom(
+                        reader.IsDBNull(reader.GetOrdinal("LOFROM")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOFROM")),
+                        reader.IsDBNull(reader.GetOrdinal("FRNOM")) ? defaultString : reader.GetString(reader.GetOrdinal("FRNOM")),
+                        reader.IsDBNull(reader.GetOrdinal("FRNDIR")) ? defaultString : reader.GetString(reader.GetOrdinal("FRNDIR")),
+                        reader.IsDBNull(reader.GetOrdinal("FRADR")) ? defaultString : reader.GetString(reader.GetOrdinal("FRADR")),
+                        reader.IsDBNull(reader.GetOrdinal("FRCPOS")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("FRCPOS")),
+                       reader.IsDBNull(reader.GetOrdinal("LOCEN1")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOCEN1")),
+                       reader.IsDBNull(reader.GetOrdinal("LOCEM1")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOCEM1")),
+                       reader.IsDBNull(reader.GetOrdinal("LOPUAC")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOPUAC")),
+                       reader.IsDBNull(reader.GetOrdinal("LOANNE")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOANNE")),
+                       reader.IsDBNull(reader.GetOrdinal("LOMOIS")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOMOIS")),
+                        reader.IsDBNull(reader.GetOrdinal("FRVILL")) ? defaultString : reader.GetString(reader.GetOrdinal("FRVILL")),
+                        reader.IsDBNull(reader.GetOrdinal("FRNUM")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("FRNUM"))
+                       );
                     lots.Add(lot);
                 }
                 Console.WriteLine(reader);

@@ -62,9 +62,9 @@ namespace GestcomWF.Views
             // 
             lblFromagerie.AutoSize = true;
             lblFromagerie.Font = new Font("Arial", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            lblFromagerie.Location = new Point(30, 36);
+            lblFromagerie.Location = new Point(26, 27);
             lblFromagerie.Name = "lblFromagerie";
-            lblFromagerie.Size = new Size(123, 23);
+            lblFromagerie.Size = new Size(98, 18);
             lblFromagerie.TabIndex = 0;
             lblFromagerie.Text = "Fromagerie :";
             // 
@@ -72,9 +72,9 @@ namespace GestcomWF.Views
             // 
             lblMois.AutoSize = true;
             lblMois.Font = new Font("Arial", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            lblMois.Location = new Point(30, 80);
+            lblMois.Location = new Point(26, 60);
             lblMois.Name = "lblMois";
-            lblMois.Size = new Size(64, 23);
+            lblMois.Size = new Size(50, 18);
             lblMois.TabIndex = 1;
             lblMois.Text = "Mois :";
             // 
@@ -82,9 +82,9 @@ namespace GestcomWF.Views
             // 
             lblAnnee.AutoSize = true;
             lblAnnee.Font = new Font("Arial", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            lblAnnee.Location = new Point(30, 125);
+            lblAnnee.Location = new Point(26, 94);
             lblAnnee.Name = "lblAnnee";
-            lblAnnee.Size = new Size(77, 23);
+            lblAnnee.Size = new Size(61, 18);
             lblAnnee.TabIndex = 2;
             lblAnnee.Text = "Année :";
             // 
@@ -92,9 +92,9 @@ namespace GestcomWF.Views
             // 
             lblDate_entree.AutoSize = true;
             lblDate_entree.Font = new Font("Arial", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            lblDate_entree.Location = new Point(30, 171);
+            lblDate_entree.Location = new Point(26, 128);
             lblDate_entree.Name = "lblDate_entree";
-            lblDate_entree.Size = new Size(128, 23);
+            lblDate_entree.Size = new Size(100, 18);
             lblDate_entree.TabIndex = 3;
             lblDate_entree.Text = "Date Entrée :";
             // 
@@ -102,9 +102,9 @@ namespace GestcomWF.Views
             // 
             lblDate_fin.AutoSize = true;
             lblDate_fin.Font = new Font("Arial", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            lblDate_fin.Location = new Point(30, 265);
+            lblDate_fin.Location = new Point(26, 199);
             lblDate_fin.Name = "lblDate_fin";
-            lblDate_fin.Size = new Size(96, 23);
+            lblDate_fin.Size = new Size(76, 18);
             lblDate_fin.TabIndex = 4;
             lblDate_fin.Text = "Date Fin :";
             // 
@@ -112,9 +112,9 @@ namespace GestcomWF.Views
             // 
             lblDate_debut.AutoSize = true;
             lblDate_debut.Font = new Font("Arial", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            lblDate_debut.Location = new Point(30, 216);
+            lblDate_debut.Location = new Point(26, 162);
             lblDate_debut.Name = "lblDate_debut";
-            lblDate_debut.Size = new Size(122, 23);
+            lblDate_debut.Size = new Size(96, 18);
             lblDate_debut.TabIndex = 5;
             lblDate_debut.Text = "Date Début :";
             // 
@@ -122,9 +122,9 @@ namespace GestcomWF.Views
             // 
             lblNb_pains.AutoSize = true;
             lblNb_pains.Font = new Font("Arial", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            lblNb_pains.Location = new Point(30, 311);
+            lblNb_pains.Location = new Point(26, 233);
             lblNb_pains.Name = "lblNb_pains";
-            lblNb_pains.Size = new Size(100, 23);
+            lblNb_pains.Size = new Size(80, 18);
             lblNb_pains.TabIndex = 6;
             lblNb_pains.Text = "Nb Pains :";
             // 
@@ -132,9 +132,9 @@ namespace GestcomWF.Views
             // 
             lblPoids_brut.AutoSize = true;
             lblPoids_brut.Font = new Font("Arial", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            lblPoids_brut.Location = new Point(30, 359);
+            lblPoids_brut.Location = new Point(26, 269);
             lblPoids_brut.Name = "lblPoids_brut";
-            lblPoids_brut.Size = new Size(113, 23);
+            lblPoids_brut.Size = new Size(89, 18);
             lblPoids_brut.TabIndex = 7;
             lblPoids_brut.Text = "Poids Brut :";
             // 
@@ -142,9 +142,9 @@ namespace GestcomWF.Views
             // 
             lblFreinte.AutoSize = true;
             lblFreinte.Font = new Font("Arial", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            lblFreinte.Location = new Point(30, 404);
+            lblFreinte.Location = new Point(26, 303);
             lblFreinte.Name = "lblFreinte";
-            lblFreinte.Size = new Size(71, 23);
+            lblFreinte.Size = new Size(57, 18);
             lblFreinte.TabIndex = 8;
             lblFreinte.Text = "Freinte";
             // 
@@ -152,9 +152,9 @@ namespace GestcomWF.Views
             // 
             lblPoids_net.AutoSize = true;
             lblPoids_net.Font = new Font("Arial", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            lblPoids_net.Location = new Point(30, 455);
+            lblPoids_net.Location = new Point(26, 341);
             lblPoids_net.Name = "lblPoids_net";
-            lblPoids_net.Size = new Size(107, 23);
+            lblPoids_net.Size = new Size(85, 18);
             lblPoids_net.TabIndex = 9;
             lblPoids_net.Text = "Poids Net :";
             // 
@@ -162,108 +162,98 @@ namespace GestcomWF.Views
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Arial", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(394, 328);
+            label1.Location = new Point(345, 246);
             label1.Name = "label1";
-            label1.Size = new Size(62, 23);
+            label1.Size = new Size(50, 18);
             label1.TabIndex = 10;
             label1.Text = "label1";
             // 
             // tbxAnnee
             // 
-            tbxAnnee.Location = new Point(186, 125);
-            tbxAnnee.Margin = new Padding(3, 4, 3, 4);
+            tbxAnnee.Location = new Point(163, 94);
             tbxAnnee.MaxLength = 2;
             tbxAnnee.Name = "tbxAnnee";
-            tbxAnnee.Size = new Size(57, 27);
+            tbxAnnee.Size = new Size(50, 23);
             tbxAnnee.TabIndex = 13;
             // 
             // tbxPains
             // 
-            tbxPains.Location = new Point(186, 311);
-            tbxPains.Margin = new Padding(3, 4, 3, 4);
+            tbxPains.Location = new Point(163, 233);
             tbxPains.MaxLength = 3;
             tbxPains.Name = "tbxPains";
-            tbxPains.Size = new Size(99, 27);
+            tbxPains.Size = new Size(87, 23);
             tbxPains.TabIndex = 17;
             // 
             // tbxPoidsBrut
             // 
-            tbxPoidsBrut.Location = new Point(186, 359);
-            tbxPoidsBrut.Margin = new Padding(3, 4, 3, 4);
+            tbxPoidsBrut.Location = new Point(163, 269);
             tbxPoidsBrut.MaxLength = 10;
             tbxPoidsBrut.Name = "tbxPoidsBrut";
-            tbxPoidsBrut.Size = new Size(114, 27);
+            tbxPoidsBrut.Size = new Size(100, 23);
             tbxPoidsBrut.TabIndex = 18;
             tbxPoidsBrut.KeyUp += tbxPoidsBrut_KeyUp;
             // 
             // tbxFreinte
             // 
-            tbxFreinte.Location = new Point(186, 404);
-            tbxFreinte.Margin = new Padding(3, 4, 3, 4);
+            tbxFreinte.Location = new Point(163, 303);
             tbxFreinte.Name = "tbxFreinte";
-            tbxFreinte.Size = new Size(114, 27);
+            tbxFreinte.Size = new Size(100, 23);
             tbxFreinte.TabIndex = 19;
             tbxFreinte.KeyUp += tbxFreinte_KeyUp;
             // 
             // tbxPoidsNet
             // 
-            tbxPoidsNet.Location = new Point(186, 448);
-            tbxPoidsNet.Margin = new Padding(3, 4, 3, 4);
+            tbxPoidsNet.Location = new Point(163, 336);
             tbxPoidsNet.Name = "tbxPoidsNet";
-            tbxPoidsNet.Size = new Size(114, 27);
+            tbxPoidsNet.Size = new Size(100, 23);
             tbxPoidsNet.TabIndex = 20;
             // 
             // cbxFromagerie
             // 
             cbxFromagerie.FormattingEnabled = true;
-            cbxFromagerie.Location = new Point(186, 36);
-            cbxFromagerie.Margin = new Padding(3, 4, 3, 4);
+            cbxFromagerie.Location = new Point(163, 27);
             cbxFromagerie.Name = "cbxFromagerie";
-            cbxFromagerie.Size = new Size(76, 28);
+            cbxFromagerie.Size = new Size(67, 23);
             cbxFromagerie.TabIndex = 21;
+            cbxFromagerie.SelectedIndexChanged += cbxFromagerie_SelectedIndexChanged;
             // 
             // cbxMois
             // 
             cbxMois.FormattingEnabled = true;
-            cbxMois.Location = new Point(186, 80);
-            cbxMois.Margin = new Padding(3, 4, 3, 4);
+            cbxMois.Location = new Point(163, 60);
             cbxMois.Name = "cbxMois";
-            cbxMois.Size = new Size(76, 28);
+            cbxMois.Size = new Size(67, 23);
             cbxMois.TabIndex = 22;
             // 
             // dtpDateEntree
             // 
-            dtpDateEntree.Location = new Point(186, 171);
-            dtpDateEntree.Margin = new Padding(3, 4, 3, 4);
+            dtpDateEntree.Location = new Point(163, 128);
             dtpDateEntree.Name = "dtpDateEntree";
-            dtpDateEntree.Size = new Size(228, 27);
+            dtpDateEntree.Size = new Size(200, 23);
             dtpDateEntree.TabIndex = 23;
             dtpDateEntree.ValueChanged += dtpDateEntree_ValueChanged;
             // 
             // dtpDateDebut
             // 
-            dtpDateDebut.Location = new Point(186, 216);
-            dtpDateDebut.Margin = new Padding(3, 4, 3, 4);
+            dtpDateDebut.Location = new Point(163, 162);
             dtpDateDebut.Name = "dtpDateDebut";
-            dtpDateDebut.Size = new Size(228, 27);
+            dtpDateDebut.Size = new Size(200, 23);
             dtpDateDebut.TabIndex = 24;
             dtpDateDebut.ValueChanged += dtpDateDebut_ValueChanged;
             // 
             // dtpDateFin
             // 
-            dtpDateFin.Location = new Point(186, 265);
-            dtpDateFin.Margin = new Padding(3, 4, 3, 4);
+            dtpDateFin.Location = new Point(163, 199);
             dtpDateFin.Name = "dtpDateFin";
-            dtpDateFin.Size = new Size(228, 27);
+            dtpDateFin.Size = new Size(200, 23);
             dtpDateFin.TabIndex = 25;
             dtpDateFin.ValueChanged += dtpDateFin_ValueChanged;
             // 
             // button1
             // 
-            button1.Location = new Point(186, 520);
-            button1.Margin = new Padding(3, 4, 3, 4);
+            button1.Location = new Point(163, 390);
             button1.Name = "button1";
-            button1.Size = new Size(114, 31);
+            button1.Size = new Size(100, 23);
             button1.TabIndex = 26;
             button1.Text = "Validation";
             button1.UseVisualStyleBackColor = true;
@@ -272,10 +262,9 @@ namespace GestcomWF.Views
             // cbAffiner
             // 
             cbAffiner.AutoSize = true;
-            cbAffiner.Location = new Point(431, 35);
-            cbAffiner.Margin = new Padding(3, 4, 3, 4);
+            cbAffiner.Location = new Point(377, 26);
             cbAffiner.Name = "cbAffiner";
-            cbAffiner.Size = new Size(71, 24);
+            cbAffiner.Size = new Size(58, 19);
             cbAffiner.TabIndex = 27;
             cbAffiner.Text = "Affiné";
             cbAffiner.UseVisualStyleBackColor = true;
@@ -283,10 +272,10 @@ namespace GestcomWF.Views
             // 
             // entree_lot
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = System.Drawing.Color.LightGray;
-            ClientSize = new Size(650, 719);
+            ClientSize = new Size(570, 545);
             Controls.Add(cbAffiner);
             Controls.Add(button1);
             Controls.Add(dtpDateFin);
@@ -310,9 +299,8 @@ namespace GestcomWF.Views
             Controls.Add(lblAnnee);
             Controls.Add(lblMois);
             Controls.Add(lblFromagerie);
-            Margin = new Padding(3, 4, 3, 4);
-            MaximumSize = new Size(668, 766);
-            MinimumSize = new Size(668, 766);
+            MaximumSize = new Size(586, 584);
+            MinimumSize = new Size(586, 584);
             Name = "entree_lot";
             Text = "entree_lot";
             ResumeLayout(false);
