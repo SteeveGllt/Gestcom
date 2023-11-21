@@ -166,6 +166,7 @@ namespace GestcomWF.Views
                     MoisNum moisNum = (MoisNum)cbxMois.SelectedItem;
 
                     decimal moisNumValue = moisNum.Numero;
+                    string nomMoisDecale = "";
 
                     decimal moisDecale = moisNumValue - 5;
                     if (moisDecale <= 0)
@@ -173,6 +174,14 @@ namespace GestcomWF.Views
                         moisDecale += 12;
                     }
 
+                    MoisNum moisDecaleValue = listeObjets.FirstOrDefault(m => m.Numero == moisDecale);
+
+                    if (moisDecaleValue != null)
+                    {
+                        // Utilisez moisDecale.Mois pour obtenir le nom du mois décalé
+                        nomMoisDecale = moisDecaleValue.Mois;
+                        // Vous pouvez maintenant utiliser nomMoisDecale pour vos besoins
+                    }
 
                     Console.WriteLine(moisDecale);
 
@@ -184,6 +193,7 @@ namespace GestcomWF.Views
                     }
                     else
                     {
+                       
                         decimal prix = 0;
                         decimal acompte = 0;
                         string annee = (DateTime.Now.Year / 100).ToString();
@@ -209,7 +219,7 @@ namespace GestcomWF.Views
                                 this.workSheet["G28"].Value = "Le" + " " + DateTime.Now.ToString("D");
                                 this.workSheet["B23"].Value = "Monsieur le Président";
                                 this.workSheet["B25"].Value = "          Nous vous prions de bien vouloir trouver ci-dessous, le détail";
-                                this.workSheet["B26"].Value = "du premier acompte sur votre lot de fabrication";
+                                this.workSheet["B26"].Value = "du premier acompte sur votre lot de fabrication " + nomMoisDecale.ToUpper() + " " + annee + tbx_annee.Text;
 
                                 /* this.workSheet["F27"].StringValue = moisNum.Mois.ToUpper() + " " + (annee + tbxAnnee.Text);
                                  this.workSheet["F27"].Style.Font.Bold = true;*/

@@ -50,6 +50,13 @@ namespace GestcomWF.Views
             dataGridView.DataSource = null;
         }
 
+        public decimal CustomParse(string incomingValue)
+        {
+            decimal val;
+            if (!decimal.TryParse(incomingValue.Replace(".", "").Replace(",", ""), NumberStyles.Number, CultureInfo.InvariantCulture, out val))
+                return 0;
+            return val / 100;
+        }
         private void btn_valider_Click(object sender, EventArgs e)
         {
 
@@ -59,6 +66,7 @@ namespace GestcomWF.Views
             bool isCNum = Decimal.TryParse(tbx_c.Text, out c);
             bool isAnneeNum = Decimal.TryParse(tbxAnnee.Text, out annee);
 
+            
 
             MoisNum moisNum = (MoisNum)cbxMois.SelectedItem;
             if (_currentLot == null)
