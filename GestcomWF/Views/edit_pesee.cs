@@ -7,8 +7,7 @@ namespace GestcomWF.Views
 {
     public partial class edit_pesee : Form
     {
-        WorkSheet workSheet;
-        WorkBook workbook = new WorkBook(ExcelFileFormat.XLSX);
+       
 
         private string selectedFilePath = string.Empty;
 
@@ -68,6 +67,8 @@ namespace GestcomWF.Views
                 }
                 else
                 {
+                    WorkSheet workSheet = null;
+                    WorkBook workbook = new WorkBook(ExcelFileFormat.XLSX);
 
                     string annee = (DateTime.Now.Year / 100).ToString();
                     // Traitement pour chaque entré
@@ -79,69 +80,69 @@ namespace GestcomWF.Views
                         if (entreeLotFrom.FRNUM != valeurPrecedente)
                         {
                             // Initialisation de la feuille Excel avec le nom adapté
-                            this.workSheet = workbook.CreateWorkSheet(nomFeuille);
-                            this.workSheet["D7"].Value = entreeLotFrom.FRNDIR;
-                            this.workSheet["D8"].Value = "Président " + entreeLotFrom.FRNOM;
-                            this.workSheet["D9"].Value = entreeLotFrom.FRADR;
-                            this.workSheet["D10"].Value = entreeLotFrom.FRCPOS + " " + entreeLotFrom.FRVILL;
-                            this.workSheet["A15"].Value = "      TB/PB";
-                            this.workSheet["D16"].Value = "Le" + " " + DateTime.Now.ToString("D");
-                            this.workSheet["B21"].Value = "Monsieur le Président";
-                            this.workSheet["B23"].Value = "Nous vous prions de bien vouloir trouver ci-dessous, le détail des";
-                            this.workSheet["B24"].Value = "pesées concernant vos fabrications de ";
+                            workSheet = workbook.CreateWorkSheet(nomFeuille);
+                            workSheet["D7"].Value = entreeLotFrom.FRNDIR;
+                            workSheet["D8"].Value = "Président " + entreeLotFrom.FRNOM;
+                            workSheet["D9"].Value = entreeLotFrom.FRADR;
+                            workSheet["D10"].Value = entreeLotFrom.FRCPOS + " " + entreeLotFrom.FRVILL;
+                            workSheet["A15"].Value = "      TB/PB";
+                            workSheet["D16"].Value = "Le" + " " + DateTime.Now.ToString("D");
+                            workSheet["B21"].Value = "Monsieur le Président";
+                            workSheet["B23"].Value = "Nous vous prions de bien vouloir trouver ci-dessous, le détail des";
+                            workSheet["B24"].Value = "pesées concernant vos fabrications de ";
 
-                            this.workSheet["E24"].StringValue = moisNum.Mois.ToUpper() + " " + (annee + tbxAnnee.Text);
-                            this.workSheet["E24"].Style.Font.Bold = true;
+                            workSheet["E24"].StringValue = moisNum.Mois.ToUpper() + " " + (annee + tbxAnnee.Text);
+                            workSheet["E24"].Style.Font.Bold = true;
 
 
-                            this.workSheet["B27:F27"].Style.TopBorder.SetColor("#000000");
-                            this.workSheet["B27:F27"].Style.TopBorder.Type = IronXL.Styles.BorderType.Thin;
+                            workSheet["B27:F27"].Style.TopBorder.SetColor("#000000");
+                            workSheet["B27:F27"].Style.TopBorder.Type = IronXL.Styles.BorderType.Thin;
 
-                            this.workSheet["B27"].Value = "Date";
-                            this.workSheet["B27"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
+                            workSheet["B27"].Value = "Date";
+                            workSheet["B27"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
 
                             //this.workSheet["B27:B35"].Style.RightBorder.SetColor("#000000");
                             //this.workSheet["B27:B35"].Style.RightBorder.Type = IronXL.Styles.BorderType.Medium;
 
-                            this.workSheet["B28"].Value = "Entrée";
-                            this.workSheet["B28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
+                            workSheet["B28"].Value = "Entrée";
+                            workSheet["B28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
 
 
-                            this.workSheet["C27"].Value = "Nombres";
-                            this.workSheet["C27"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
-
-
-
-                            this.workSheet["C28"].Value = "Meules";
-                            this.workSheet["C28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
-
-                            this.workSheet["D27"].Value = "Poids";
-                            this.workSheet["D27"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
+                            workSheet["C27"].Value = "Nombres";
+                            workSheet["C27"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
 
 
 
-                            this.workSheet["D28"].Value = "brut";
-                            this.workSheet["D28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
+                            workSheet["C28"].Value = "Meules";
+                            workSheet["C28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
 
-                            this.workSheet["E27"].Value = "%";
-                            this.workSheet["E27"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
-
-
-
-                            this.workSheet["E28"].Value = "Réfaction";
-                            this.workSheet["E28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
-
-                            this.workSheet["F27"].Value = "Poids";
-                            this.workSheet["F27"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
-
-                            this.workSheet["F28"].Value = "Net";
-                            this.workSheet["F28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
+                            workSheet["D27"].Value = "Poids";
+                            workSheet["D27"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
 
 
 
+                            workSheet["D28"].Value = "brut";
+                            workSheet["D28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
 
-                            this.workSheet["B28:F28"].Style.BottomBorder.SetColor("#000000");
-                            this.workSheet["B28:F28"].Style.BottomBorder.Type = IronXL.Styles.BorderType.Thin;
+                            workSheet["E27"].Value = "%";
+                            workSheet["E27"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
+
+
+
+                            workSheet["E28"].Value = "Réfaction";
+                            workSheet["E28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
+
+                            workSheet["F27"].Value = "Poids";
+                            workSheet["F27"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
+
+                            workSheet["F28"].Value = "Net";
+                            workSheet["F28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
+
+
+
+
+                            workSheet["B28:F28"].Style.BottomBorder.SetColor("#000000");
+                            workSheet["B28:F28"].Style.BottomBorder.Type = IronXL.Styles.BorderType.Thin;
 
 
                             // Initialisez la ligne actuelle
@@ -155,20 +156,20 @@ namespace GestcomWF.Views
                                 // Remplissez les données pour chaque entrée de fromagerie
                                 workSheet[$"B{currentRow}"].Value = dateEntry.Date_Entrée;
 
-                                this.workSheet[$"B{currentRow}"].FormatString = "dd/MM/yyyy";
-                                this.workSheet[$"B{currentRow}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
+                                workSheet[$"B{currentRow}"].FormatString = "dd/MM/yyyy";
+                                workSheet[$"B{currentRow}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
 
                                 workSheet[$"C{currentRow}"].Value = dateEntry.LOCENM;
-                                this.workSheet[$"C{currentRow}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
+                                workSheet[$"C{currentRow}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
 
 
 
                                 workSheet[$"D{currentRow}"].Value = dateEntry.LOCENB;
-                                this.workSheet[$"D{currentRow}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
+                                workSheet[$"D{currentRow}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
                                 workSheet[$"E{currentRow}"].Value = dateEntry.LOTAUX;
-                                this.workSheet[$"E{currentRow}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
+                                workSheet[$"E{currentRow}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
                                 workSheet[$"F{currentRow}"].Value = dateEntry.LOCENN;
-                                this.workSheet[$"F{currentRow}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
+                                workSheet[$"F{currentRow}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
 
 
 
@@ -183,12 +184,12 @@ namespace GestcomWF.Views
                             workSheet[$"B{totalRow - 1}"].Value = "Totaux";
 
                             // Appliquer l'alignement horizontal et vertical au contenu
-                            this.workSheet[$"B{totalRow - 1}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
-                            this.workSheet[$"B{totalRow - 1}"].Style.VerticalAlignment = IronXL.Styles.VerticalAlignment.Center;
+                            workSheet[$"B{totalRow - 1}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
+                            workSheet[$"B{totalRow - 1}"].Style.VerticalAlignment = IronXL.Styles.VerticalAlignment.Center;
 
                             // Ligne en bas du tableau
-                            this.workSheet[$"B{totalRow}:F{totalRow}"].Style.BottomBorder.SetColor("#000000");
-                            this.workSheet[$"B{totalRow}:F{totalRow}"].Style.BottomBorder.Type = IronXL.Styles.BorderType.Thin;
+                            workSheet[$"B{totalRow}:F{totalRow}"].Style.BottomBorder.SetColor("#000000");
+                            workSheet[$"B{totalRow}:F{totalRow}"].Style.BottomBorder.Type = IronXL.Styles.BorderType.Thin;
 
 
 
@@ -200,64 +201,64 @@ namespace GestcomWF.Views
                             var sumRange = workSheet[$"C30:C{currentRow - 1}"];
                             workSheet[$"C{totalRow - 1}"].Value = sumRange.Sum();
 
-                            this.workSheet[$"C{totalRow - 1}"].Style.Font.Bold = true;
+                            workSheet[$"C{totalRow - 1}"].Style.Font.Bold = true;
 
                             // Appliquer l'alignement horizontal et vertical au contenu
-                            this.workSheet[$"C{totalRow - 1}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
-                            this.workSheet[$"C{totalRow - 1}"].Style.VerticalAlignment = IronXL.Styles.VerticalAlignment.Center;
+                            workSheet[$"C{totalRow - 1}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
+                            workSheet[$"C{totalRow - 1}"].Style.VerticalAlignment = IronXL.Styles.VerticalAlignment.Center;
 
-                            this.workSheet[$"C{totalRow - 1}:C{currentRow + 4}"].Style.TopBorder.SetColor("#000000");
-                            this.workSheet[$"C{totalRow - 1}:C{currentRow + 4}"].Style.TopBorder.Type = IronXL.Styles.BorderType.Thin;
+                            workSheet[$"C{totalRow - 1}:C{currentRow + 4}"].Style.TopBorder.SetColor("#000000");
+                            workSheet[$"C{totalRow - 1}:C{currentRow + 4}"].Style.TopBorder.Type = IronXL.Styles.BorderType.Thin;
 
                             var sumRangePoidsNet = workSheet[$"F30:F{currentRow - 1}"];
                             workSheet[$"F{totalRow - 1}"].Value = sumRangePoidsNet.Sum();
 
-                            this.workSheet[$"F{totalRow - 1}"].Style.Font.Bold = true;
+                            workSheet[$"F{totalRow - 1}"].Style.Font.Bold = true;
 
                             // Appliquer l'alignement horizontal et vertical au contenu
-                            this.workSheet[$"F{totalRow - 1}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
-                            this.workSheet[$"F{totalRow - 1}"].Style.VerticalAlignment = IronXL.Styles.VerticalAlignment.Center;
+                            workSheet[$"F{totalRow - 1}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
+                            workSheet[$"F{totalRow - 1}"].Style.VerticalAlignment = IronXL.Styles.VerticalAlignment.Center;
 
-                            this.workSheet[$"F{totalRow - 1}:F{currentRow + 4}"].Style.TopBorder.SetColor("#000000");
-                            this.workSheet[$"F{totalRow - 1}:F{currentRow + 4}"].Style.TopBorder.Type = IronXL.Styles.BorderType.Thin;
+                            workSheet[$"F{totalRow - 1}:F{currentRow + 4}"].Style.TopBorder.SetColor("#000000");
+                            workSheet[$"F{totalRow - 1}:F{currentRow + 4}"].Style.TopBorder.Type = IronXL.Styles.BorderType.Thin;
 
-                            this.workSheet[$"C27:C{currentRow + 4}"].Style.RightBorder.SetColor("#000000");
-                            this.workSheet[$"C27:C{currentRow + 4}"].Style.RightBorder.Type = IronXL.Styles.BorderType.Thin;
+                            workSheet[$"C27:C{currentRow + 4}"].Style.RightBorder.SetColor("#000000");
+                            workSheet[$"C27:C{currentRow + 4}"].Style.RightBorder.Type = IronXL.Styles.BorderType.Thin;
 
 
 
                             //this.workSheet[$"B27:B{totalRow}"].Style.RightBorder.SetColor("#000000");
                             //this.workSheet[$"B27:B{totalRow}"].Style.RightBorder.Type = IronXL.Styles.BorderType.Medium;
                             // Bordure à droite de la colonne C
-                            this.workSheet[$"C27:C{currentRow + 4}"].Style.RightBorder.SetColor("#000000");
-                            this.workSheet[$"C27:C{currentRow + 4}"].Style.RightBorder.Type = IronXL.Styles.BorderType.Thin;
+                            workSheet[$"C27:C{currentRow + 4}"].Style.RightBorder.SetColor("#000000");
+                            workSheet[$"C27:C{currentRow + 4}"].Style.RightBorder.Type = IronXL.Styles.BorderType.Thin;
 
                             // Ligne à droite de la cellule D
-                            this.workSheet[$"D27:D{currentRow + 4}"].Style.RightBorder.SetColor("#000000");
-                            this.workSheet[$"D27:D{currentRow + 4}"].Style.RightBorder.Type = IronXL.Styles.BorderType.Thin;
+                            workSheet[$"D27:D{currentRow + 4}"].Style.RightBorder.SetColor("#000000");
+                            workSheet[$"D27:D{currentRow + 4}"].Style.RightBorder.Type = IronXL.Styles.BorderType.Thin;
 
                             // Ligne à droite de la colonne E
-                            this.workSheet[$"E27:E{currentRow + 4}"].Style.RightBorder.SetColor("#000000");
-                            this.workSheet[$"E27:E{currentRow + 4}"].Style.RightBorder.Type = IronXL.Styles.BorderType.Thin;
+                            workSheet[$"E27:E{currentRow + 4}"].Style.RightBorder.SetColor("#000000");
+                            workSheet[$"E27:E{currentRow + 4}"].Style.RightBorder.Type = IronXL.Styles.BorderType.Thin;
 
                             // Ligne à droite du tableau
-                            this.workSheet[$"F27:F{totalRow}"].Style.RightBorder.SetColor("#000000");
-                            this.workSheet[$"F27:F{totalRow}"].Style.RightBorder.Type = IronXL.Styles.BorderType.Thin;
+                            workSheet[$"F27:F{totalRow}"].Style.RightBorder.SetColor("#000000");
+                            workSheet[$"F27:F{totalRow}"].Style.RightBorder.Type = IronXL.Styles.BorderType.Thin;
 
                             // Bordure à gauche du tableau
-                            this.workSheet[$"B27:B{totalRow}"].Style.LeftBorder.SetColor("#000000");
-                            this.workSheet[$"B27:B{totalRow}"].Style.LeftBorder.Type = IronXL.Styles.BorderType.Thin;
+                            workSheet[$"B27:B{totalRow}"].Style.LeftBorder.SetColor("#000000");
+                            workSheet[$"B27:B{totalRow}"].Style.LeftBorder.Type = IronXL.Styles.BorderType.Thin;
 
                             // Bordure à droite de la colonne B
-                            this.workSheet[$"B27:B{currentRow + 4}"].Style.RightBorder.SetColor("#000000");
-                            this.workSheet[$"B27:B{currentRow + 4}"].Style.RightBorder.Type = IronXL.Styles.BorderType.Thin;
+                            workSheet[$"B27:B{currentRow + 4}"].Style.RightBorder.SetColor("#000000");
+                            workSheet[$"B27:B{currentRow + 4}"].Style.RightBorder.Type = IronXL.Styles.BorderType.Thin;
 
 
-                            this.workSheet["B39"].Value = "          Vous en souhaitant bonne réception";
-                            this.workSheet["B41"].Value = "          Nous vous prions d'agréer, Monsieur le Président, nos";
-                            this.workSheet["B42"].Value = "salutations distinguées";
-                            this.workSheet["E45"].Value = "Service Technique";
-                            this.workSheet[$"E45"].Style.Font.Bold = true;
+                            workSheet["B39"].Value = "          Vous en souhaitant bonne réception";
+                            workSheet["B41"].Value = "          Nous vous prions d'agréer, Monsieur le Président, nos";
+                            workSheet["B42"].Value = "salutations distinguées";
+                            workSheet["E45"].Value = "Service Technique";
+                            workSheet[$"E45"].Style.Font.Bold = true;
 
                             valeurPrecedente = entreeLotFrom.FRNUM;
                         }
@@ -283,7 +284,7 @@ namespace GestcomWF.Views
                         col5.Width = 3300; // Set width
 
                         // Configuration du style de la feuille (police, ...)
-                        this.workSheet.Style.Font.Name = "Arial";
+                        workSheet.Style.Font.Name = "Arial";
 
                     }
                     // Propose à l'utilisateur d'enregistrer le fichier Excel

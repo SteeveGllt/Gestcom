@@ -24,8 +24,7 @@ namespace GestcomWF.Views
 
         private bool updateAllPrices = false;
 
-        WorkSheet workSheet;
-        WorkBook workbook = new WorkBook(ExcelFileFormat.XLSX);
+        
 
         NumberFormatInfo nfi = new CultureInfo("fr-Fr", false).NumberFormat;
 
@@ -157,6 +156,8 @@ namespace GestcomWF.Views
                 }
                 else
                 {
+                    WorkSheet workSheet = null;
+                    WorkBook workbook = new WorkBook(ExcelFileFormat.XLSX);
 
                     Decimal valeurPrecedente = 0;
 
@@ -209,17 +210,17 @@ namespace GestcomWF.Views
                             if (lotFrom.FRNUM != valeurPrecedente)
                             {
                                 // Initialisation de la feuille Excel avec le nom adapté
-                                this.workSheet = workbook.CreateWorkSheet(nomFeuille);
-                                this.workSheet["F10"].Value = lotFrom.FRNDIR;
-                                this.workSheet["F11"].Value = lotFrom.FRNOM;
-                                this.workSheet["F12"].Value = lotFrom.FRADR;
-                                this.workSheet["F13"].Value = lotFrom.FRCPOS + " " + lotFrom.FRVILL;
+                                workSheet = workbook.CreateWorkSheet(nomFeuille);
+                                workSheet["F10"].Value = lotFrom.FRNDIR;
+                                workSheet["F11"].Value = lotFrom.FRNOM;
+                                workSheet["F12"].Value = lotFrom.FRADR;
+                                workSheet["F13"].Value = lotFrom.FRCPOS + " " + lotFrom.FRVILL;
 
-                                this.workSheet["A18"].Value = "      TB/PB";
-                                this.workSheet["G28"].Value = "Le" + " " + DateTime.Now.ToString("D");
-                                this.workSheet["B23"].Value = "Monsieur le Président";
-                                this.workSheet["B25"].Value = "          Nous vous prions de bien vouloir trouver ci-dessous, le détail";
-                                this.workSheet["B26"].Value = "du premier acompte sur votre lot de fabrication " + nomMoisDecale.ToUpper() + " " + annee + tbx_annee.Text;
+                                workSheet["A18"].Value = "      TB/PB";
+                                workSheet["G28"].Value = "Le" + " " + DateTime.Now.ToString("D");
+                                workSheet["B23"].Value = "Monsieur le Président";
+                                workSheet["B25"].Value = "          Nous vous prions de bien vouloir trouver ci-dessous, le détail";
+                                workSheet["B26"].Value = "du premier acompte sur votre lot de fabrication " + nomMoisDecale.ToUpper() + " " + annee + tbx_annee.Text;
 
                                 /* this.workSheet["F27"].StringValue = moisNum.Mois.ToUpper() + " " + (annee + tbxAnnee.Text);
                                  this.workSheet["F27"].Style.Font.Bold = true;*/
@@ -228,40 +229,40 @@ namespace GestcomWF.Views
                                 // Initialisez la ligne actuelle
 
 
-                                this.workSheet["B28"].Value = "-";
-                                this.workSheet["B28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
+                                workSheet["B28"].Value = "-";
+                                workSheet["B28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
 
-                                this.workSheet["C28"].Value = lotFrom.LOCEM1;
-                                this.workSheet["C28"].Style.Font.Bold = true;
-                                this.workSheet["C28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
-
-
-                                this.workSheet["D28"].Value = "pains";
-
-                                this.workSheet["E28"].Value = lotFrom.LOCEN1;
-                                this.workSheet["E28"].Style.Font.Bold = true;
-                                this.workSheet["E28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
-
-                                this.workSheet["F28"].Value = "T";
-                                this.workSheet["F28"].Style.Font.Bold = true;
-                                this.workSheet["F28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Left;
-
-                                this.workSheet["G28"].Value = "x";
-                                this.workSheet["G28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Center;
-
-                                this.workSheet["H28"].Value = lotFrom.LOPUAC + " €";
-                                this.workSheet["H28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
+                                workSheet["C28"].Value = lotFrom.LOCEM1;
+                                workSheet["C28"].Style.Font.Bold = true;
+                                workSheet["C28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
 
 
+                                workSheet["D28"].Value = "pains";
 
-                                this.workSheet["I28"].Value = "'=";
-                                this.workSheet["I28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Left;
+                                workSheet["E28"].Value = lotFrom.LOCEN1;
+                                workSheet["E28"].Style.Font.Bold = true;
+                                workSheet["E28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
 
-                                this.workSheet["J28"].Value = prix + " €";
-                                this.workSheet["J28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
+                                workSheet["F28"].Value = "T";
+                                workSheet["F28"].Style.Font.Bold = true;
+                                workSheet["F28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Left;
 
-                                this.workSheet["J30"].Value = prix + " €";
-                                this.workSheet["J30"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
+                                workSheet["G28"].Value = "x";
+                                workSheet["G28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Center;
+
+                                workSheet["H28"].Value = lotFrom.LOPUAC + " €";
+                                workSheet["H28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
+
+
+
+                                workSheet["I28"].Value = "'=";
+                                workSheet["I28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Left;
+
+                                workSheet["J28"].Value = prix + " €";
+                                workSheet["J28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
+
+                                workSheet["J30"].Value = prix + " €";
+                                workSheet["J30"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
 
 
 
@@ -280,38 +281,38 @@ namespace GestcomWF.Views
 
                                 // int totalRow = currentRow + 4;
 
-                                this.workSheet["J28"].Style.BottomBorder.SetColor("#000000");
-                                this.workSheet["J28"].Style.BottomBorder.Type = IronXL.Styles.BorderType.Thin;
+                                workSheet["J28"].Style.BottomBorder.SetColor("#000000");
+                                workSheet["J28"].Style.BottomBorder.Type = IronXL.Styles.BorderType.Thin;
 
 
 
-                                this.workSheet["J31"].Style.BottomBorder.SetColor("#000000");
-                                this.workSheet["J31"].Style.BottomBorder.Type = IronXL.Styles.BorderType.Thin;
+                                workSheet["J31"].Style.BottomBorder.SetColor("#000000");
+                                workSheet["J31"].Style.BottomBorder.Type = IronXL.Styles.BorderType.Thin;
 
                               
                                 
                                 //this.workSheet["D33"].Value = "A déduire N/Acompte du ";
-                                this.workSheet["F30"].Value = "Total HT";
-                                this.workSheet["F31"].Value = "T.V.A";
-                                this.workSheet["H31"].Value = "5,5";
-                                this.workSheet["I31"].Value = "%";
-                                this.workSheet["J31"].Value = prix * 5.5m / 100;
+                                workSheet["F30"].Value = "Total HT";
+                                workSheet["F31"].Value = "T.V.A";
+                                workSheet["H31"].Value = "5,5";
+                                workSheet["I31"].Value = "%";
+                                workSheet["J31"].Value = prix * 5.5m / 100;
 
-                                this.workSheet["F33"].Value = "Total Réglé";
-                                this.workSheet["F33"].Style.Font.Bold = true;
+                                workSheet["F33"].Value = "Total Réglé";
+                                workSheet["F33"].Style.Font.Bold = true;
 
                                 var sumPrixTVA = workSheet["J30:J31"];
 
-                                this.workSheet["J33"].Value = sumPrixTVA.Sum() + "€";
-                                this.workSheet["J33"].Style.Font.Bold = true;
+                                workSheet["J33"].Value = sumPrixTVA.Sum() + "€";
+                                workSheet["J33"].Style.Font.Bold = true;
                                
 
 
-                                this.workSheet["B35"].Value = "          Vous en souhaitant bonne réception";
-                                this.workSheet["B37"].Value = "          Nous vous prions d'agréer, Monsieur le Président, nos";
-                                this.workSheet["B38"].Value = "salutations distinguées";
-                                this.workSheet["H40"].Value = "Service Comptabilité";
-                                this.workSheet["H40"].Style.Font.Bold = true;
+                                workSheet["B35"].Value = "          Vous en souhaitant bonne réception";
+                                workSheet["B37"].Value = "          Nous vous prions d'agréer, Monsieur le Président, nos";
+                                workSheet["B38"].Value = "salutations distinguées";
+                                workSheet["H40"].Value = "Service Comptabilité";
+                                workSheet["H40"].Style.Font.Bold = true;
 
 
                                 valeurPrecedente = lotFrom.FRNUM;
@@ -360,7 +361,7 @@ namespace GestcomWF.Views
 
 
                             // Configuration du style de la feuille (police, ...)
-                            this.workSheet.Style.Font.Name = "Arial";
+                            workSheet.Style.Font.Name = "Arial";
 
 
 

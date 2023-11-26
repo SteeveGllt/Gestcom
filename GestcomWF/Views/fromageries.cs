@@ -37,7 +37,7 @@ namespace GestcomWF.Views
 
         private void btnModifier_Click(object sender, EventArgs e)
         {
-            ListBox listBox = (ListBox)listBox1.SelectedItem;
+
 
 
         }
@@ -91,6 +91,7 @@ namespace GestcomWF.Views
                     tbxFrVver.Text = fromagerieComplete.FRVVER.ToString();
                     tbxFrEver.Text = fromagerieComplete.FREVER;
                     tbxFrActif.Text = fromagerieComplete.FRACTIF.ToString();
+                    tbxFacturation.Text = fromagerieComplete.FACTURATION.ToString();
                     this._currentFromagerie = fromagerieComplete;
                     // Assignez d'autres propriétés de l'objet `lot` à d'autres TextBox si nécessaire
                 }
@@ -165,7 +166,8 @@ namespace GestcomWF.Views
                    tbxFrCver.Text,
                     Convert.ToDecimal(tbxFrVver.Text),
                     tbxFrEver.Text,
-                    Convert.ToBoolean(tbxFrActif.Text)
+                    Convert.ToBoolean(tbxFrActif.Text),
+                    Convert.ToDecimal(tbxFacturation.Text)
                         );
 
                     // Appeler la méthode pour mettre à jour la base de données avec le fromagerie modifié

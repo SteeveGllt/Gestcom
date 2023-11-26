@@ -131,34 +131,35 @@ namespace Gestcom.ModelAdo
                     bool defaultBool = true;
                     // Création d'un objet Fromagerie à partir du numéro récupéré.
                     fromagerie = new Fromagerie(
-                         reader.IsDBNull(reader.GetOrdinal("FRNUM")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("FRNUM")),
- reader.IsDBNull(reader.GetOrdinal("FRNOM")) ? defaultString : reader.GetString(reader.GetOrdinal("FRNOM")),
- reader.IsDBNull(reader.GetOrdinal("FRADR")) ? defaultString : reader.GetString(reader.GetOrdinal("FRADR")),
- reader.IsDBNull(reader.GetOrdinal("FRCPOS")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("FRCPOS")),
- reader.IsDBNull(reader.GetOrdinal("FRVILL")) ? defaultString : reader.GetString(reader.GetOrdinal("FRVILL")),
-reader.IsDBNull(reader.GetOrdinal("FRNDIR")) ? defaultString : reader.GetString(reader.GetOrdinal("FRNDIR")),
-reader.IsDBNull(reader.GetOrdinal("FRTYPE")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("FRTYPE")),
-reader.IsDBNull(reader.GetOrdinal("FRTCON")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("FRTCON")),
-reader.IsDBNull(reader.GetOrdinal("FRCMEU")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("FRCMEU")),
-reader.IsDBNull(reader.GetOrdinal("FRCPOI")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("FRCPOI")),
-reader.IsDBNull(reader.GetOrdinal("FRMODR")) ? defaultString : reader.GetString(reader.GetOrdinal("FRMODR")),
- reader.IsDBNull(reader.GetOrdinal("FRDOMI")) ? defaultString : reader.GetString(reader.GetOrdinal("FRDOMI")),
-reader.IsDBNull(reader.GetOrdinal("FRBANQ")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("FRBANQ")),
-reader.IsDBNull(reader.GetOrdinal("FRGUIC")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("FRGUIC")),
-reader.IsDBNull(reader.GetOrdinal("FRCOM1")) ? defaultString : reader.GetString(reader.GetOrdinal("FRCOM1")),
-reader.IsDBNull(reader.GetOrdinal("FRCOM2")) ? defaultString : reader.GetString(reader.GetOrdinal("FRCOM2")),
- reader.IsDBNull(reader.GetOrdinal("COE1")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("COE1")),
- reader.IsDBNull(reader.GetOrdinal("COE2")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("COE2")),
- reader.IsDBNull(reader.GetOrdinal("COE3")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("COE3")),
- reader.IsDBNull(reader.GetOrdinal("COE4")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("COE4")),
- reader.IsDBNull(reader.GetOrdinal("FRREFA")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("FRREFA")),
- reader.IsDBNull(reader.GetOrdinal("FRPUAC")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("FRPUAC")),
- reader.IsDBNull(reader.GetOrdinal("FRETRE")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("FRETRE")),
- reader.IsDBNull(reader.GetOrdinal("FRHIVE")) ? defaultString : reader.GetString(reader.GetOrdinal("FRHIVE")),
- reader.IsDBNull(reader.GetOrdinal("FRCVER")) ? defaultString : reader.GetString(reader.GetOrdinal("FRCVER")),
- reader.IsDBNull(reader.GetOrdinal("FRVVER")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("FRVVER")),
- reader.IsDBNull(reader.GetOrdinal("FREVER")) ? defaultString : reader.GetString(reader.GetOrdinal("FREVER")),
- reader.IsDBNull(reader.GetOrdinal("FRACTIF")) ? defaultBool : reader.GetBoolean(reader.GetOrdinal("FRACTIF"))
+                        reader.IsDBNull(reader.GetOrdinal("FRNUM")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("FRNUM")),
+                        reader.IsDBNull(reader.GetOrdinal("FRNOM")) ? defaultString : reader.GetString(reader.GetOrdinal("FRNOM")),
+                        reader.IsDBNull(reader.GetOrdinal("FRADR")) ? defaultString : reader.GetString(reader.GetOrdinal("FRADR")),
+                        reader.IsDBNull(reader.GetOrdinal("FRCPOS")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("FRCPOS")),
+                        reader.IsDBNull(reader.GetOrdinal("FRVILL")) ? defaultString : reader.GetString(reader.GetOrdinal("FRVILL")),
+                        reader.IsDBNull(reader.GetOrdinal("FRNDIR")) ? defaultString : reader.GetString(reader.GetOrdinal("FRNDIR")),
+                        reader.IsDBNull(reader.GetOrdinal("FRTYPE")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("FRTYPE")),
+                        reader.IsDBNull(reader.GetOrdinal("FRTCON")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("FRTCON")),
+                        reader.IsDBNull(reader.GetOrdinal("FRCMEU")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("FRCMEU")),
+                        reader.IsDBNull(reader.GetOrdinal("FRCPOI")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("FRCPOI")),
+                        reader.IsDBNull(reader.GetOrdinal("FRMODR")) ? defaultString : reader.GetString(reader.GetOrdinal("FRMODR")),
+                        reader.IsDBNull(reader.GetOrdinal("FRDOMI")) ? defaultString : reader.GetString(reader.GetOrdinal("FRDOMI")),
+                        reader.IsDBNull(reader.GetOrdinal("FRBANQ")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("FRBANQ")),
+                        reader.IsDBNull(reader.GetOrdinal("FRGUIC")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("FRGUIC")),
+                        reader.IsDBNull(reader.GetOrdinal("FRCOM1")) ? defaultString : reader.GetString(reader.GetOrdinal("FRCOM1")),
+                        reader.IsDBNull(reader.GetOrdinal("FRCOM2")) ? defaultString : reader.GetString(reader.GetOrdinal("FRCOM2")),
+                        reader.IsDBNull(reader.GetOrdinal("COE1")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("COE1")),
+                        reader.IsDBNull(reader.GetOrdinal("COE2")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("COE2")),
+                        reader.IsDBNull(reader.GetOrdinal("COE3")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("COE3")),
+                        reader.IsDBNull(reader.GetOrdinal("COE4")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("COE4")),
+                        reader.IsDBNull(reader.GetOrdinal("FRREFA")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("FRREFA")),
+                        reader.IsDBNull(reader.GetOrdinal("FRPUAC")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("FRPUAC")),
+                        reader.IsDBNull(reader.GetOrdinal("FRETRE")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("FRETRE")),
+                        reader.IsDBNull(reader.GetOrdinal("FRHIVE")) ? defaultString : reader.GetString(reader.GetOrdinal("FRHIVE")),
+                        reader.IsDBNull(reader.GetOrdinal("FRCVER")) ? defaultString : reader.GetString(reader.GetOrdinal("FRCVER")),
+                        reader.IsDBNull(reader.GetOrdinal("FRVVER")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("FRVVER")),
+                        reader.IsDBNull(reader.GetOrdinal("FREVER")) ? defaultString : reader.GetString(reader.GetOrdinal("FREVER")),
+                        reader.IsDBNull(reader.GetOrdinal("FRACTIF")) ? defaultBool : reader.GetBoolean(reader.GetOrdinal("FRACTIF")),
+                        reader.IsDBNull(reader.GetOrdinal("FACTURATION")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("FACTURATION"))
                         );
 
                 }
@@ -190,7 +191,7 @@ reader.IsDBNull(reader.GetOrdinal("FRCOM2")) ? defaultString : reader.GetString(
                 open();
                 OleDbCommand oleDbCommand = new OleDbCommand();
                 oleDbCommand.Connection = connection;
-                oleDbCommand.CommandText = "UPDATE TB_Fromageries SET FRNUM = @FRNUM, FRNOM = @FRNOM, FRADR = @FRADR, FRCPOS = @FRCPOS, FRVILL = @FRVILL, FRNDIR = @FRNDIR, FRTYPE = @FRTYPE, FRTCON = @FRTCON, FRCMEU = @FRCMEU, FRCPOI = @FRCPOI, FRMODR = @FRMODR, FRDOMI = @FRDOMI, FRBANQ = @FRBANQ, FRGUIC = @FRGUIC, FRCOM1 = @FRCOM1, FRCOM2 = @FRCOM2, COE1 = @COE1, COE2 = @COE2, COE3 = @COE3, COE4 = @COE4, FRREFA = @FRREFA, FRPUAC = @FRPUAC, FRETRE = @FRETRE, FRHIVE = @FRHIVE, FRCVER = @FRCVER, FRVVER = @FRVVER, FREVER = @FREVER, FRACTIF = @FRACTIF WHERE FRNUM = @FRNUM";
+                oleDbCommand.CommandText = "UPDATE TB_Fromageries SET FRNUM = @FRNUM, FRNOM = @FRNOM, FRADR = @FRADR, FRCPOS = @FRCPOS, FRVILL = @FRVILL, FRNDIR = @FRNDIR, FRTYPE = @FRTYPE, FRTCON = @FRTCON, FRCMEU = @FRCMEU, FRCPOI = @FRCPOI, FRMODR = @FRMODR, FRDOMI = @FRDOMI, FRBANQ = @FRBANQ, FRGUIC = @FRGUIC, FRCOM1 = @FRCOM1, FRCOM2 = @FRCOM2, COE1 = @COE1, COE2 = @COE2, COE3 = @COE3, COE4 = @COE4, FRREFA = @FRREFA, FRPUAC = @FRPUAC, FRETRE = @FRETRE, FRHIVE = @FRHIVE, FRCVER = @FRCVER, FRVVER = @FRVVER, FREVER = @FREVER, FRACTIF = @FRACTIF, FACTURATION = @FACTURATION WHERE FRNUM = @FRNUM";
                 oleDbCommand.Prepare();
                 oleDbCommand.Parameters.AddWithValue("@FRNUM", fromagerie.FRNUM);
                 oleDbCommand.Parameters.AddWithValue("@FRNOM", fromagerie.FRNOM);
@@ -220,6 +221,7 @@ reader.IsDBNull(reader.GetOrdinal("FRCOM2")) ? defaultString : reader.GetString(
                 oleDbCommand.Parameters.AddWithValue("@FRVVER", fromagerie.FRVVER);
                 oleDbCommand.Parameters.AddWithValue("@FREVER", fromagerie.FREVER);
                 oleDbCommand.Parameters.AddWithValue("@FRACTIF", fromagerie.FRACTIF);
+                oleDbCommand.Parameters.AddWithValue("@FACTURATION", fromagerie.FACTURATION);
 
                 oleDbCommand.ExecuteNonQuery();
                 MessageBox.Show("Lot Modifié");
