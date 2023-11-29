@@ -64,6 +64,7 @@
             tbx_c.Name = "tbx_c";
             tbx_c.Size = new System.Drawing.Size(70, 27);
             tbx_c.TabIndex = 30;
+            tbx_c.KeyDown += tbx_c_KeyDown;
             // 
             // tbx_b
             // 
@@ -72,6 +73,7 @@
             tbx_b.Name = "tbx_b";
             tbx_b.Size = new System.Drawing.Size(70, 27);
             tbx_b.TabIndex = 29;
+            tbx_b.KeyDown += tbx_b_KeyDown;
             // 
             // tbx_a
             // 
@@ -80,6 +82,7 @@
             tbx_a.Name = "tbx_a";
             tbx_a.Size = new System.Drawing.Size(70, 27);
             tbx_a.TabIndex = 28;
+            tbx_a.KeyDown += tbx_a_KeyDown;
             // 
             // tbx_total
             // 
@@ -278,6 +281,7 @@
                 DataPropertyName = "MONTANT",
                 HeaderText = "Montant"
             });
+
             foreach (DataGridViewColumn col in dataGridView.Columns)
             {
                 col.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;

@@ -413,7 +413,7 @@ namespace Gestcom.ModelAdo
         }
 
 
-        public static void updateLotPrix(decimal lofrom, decimal loanne, decimal lomois, decimal newPrix)
+        public static void updateLotPrix(decimal lofrom, decimal loanne, decimal lomois, double newPrix)
         {
             try
             {
@@ -513,7 +513,7 @@ namespace Gestcom.ModelAdo
             }
         }
 
-        public static void updateLotRappel(decimal lofrom, decimal loanne, decimal lomois, decimal a, decimal b, decimal c, decimal montant)
+        public static void updateLotRappel(decimal lofrom, decimal loanne, decimal lomois, double a, double b, double c, double montant)
         {
             try
             {
@@ -550,7 +550,7 @@ namespace Gestcom.ModelAdo
                 open();
                 //OleDbCommand oleDbCommand = new OleDbCommand("SELECT * FROM TB_Entrée_Lots WHERE LOMOIS = @LOMOIS AND LOANNE = @LOANNE");
                 OleDbCommand oleDbCommand = new OleDbCommand("SELECT TB_Lots.LOFROM, TB_Fromageries.FRNOM, TB_Fromageries.FRNDIR, TB_Fromageries.FRADR, TB_Fromageries.FRCPOS, TB_Lots.LOCEN1, TB_Lots.LOCEM1, TB_Lots.LOC11, TB_Lots.LOC12, TB_Lots.LOC13, " +
-                    " TB_Lots.LOPUAC, TB_Lots.LOPU1, TB_Lots.LOPU2, TB_Lots.LOPU3, TB_Lots.LOANNE, TB_Lots.LOMOIS, TB_Fromageries.FRVILL, TB_Fromageries.FRNUM FROM TB_Fromageries INNER JOIN TB_Lots ON TB_Fromageries.FRNUM = TB_Lots.LOFROM" +
+                    " TB_Lots.LOPUAC, TB_Lots.LOPU1, TB_Lots.LOPU2, TB_Lots.LOPU3, TB_Lots.LOANNE, TB_Lots.LOMOIS, TB_Fromageries.FRVILL, TB_Fromageries.FRNUM, TB_Fromageries.FACTURATION FROM TB_Fromageries INNER JOIN TB_Lots ON TB_Fromageries.FRNUM = TB_Lots.LOFROM" +
                     " WHERE LOMOIS = @LOMOIS AND LOANNE = @LOANNE AND TB_Lots.LODEP = 0 ORDER BY TB_Lots.LOFROM; ");
                 oleDbCommand.Connection = connection;
                 oleDbCommand.Prepare();
@@ -588,7 +588,8 @@ namespace Gestcom.ModelAdo
                        reader.IsDBNull(reader.GetOrdinal("LOANNE")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOANNE")),
                        reader.IsDBNull(reader.GetOrdinal("LOMOIS")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOMOIS")),
                         reader.IsDBNull(reader.GetOrdinal("FRVILL")) ? defaultString : reader.GetString(reader.GetOrdinal("FRVILL")),
-                        reader.IsDBNull(reader.GetOrdinal("FRNUM")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("FRNUM"))
+                        reader.IsDBNull(reader.GetOrdinal("FRNUM")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("FRNUM")),
+                        reader.IsDBNull(reader.GetOrdinal("FACTURATION")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("FACTURATION"))
                        );
                     lots.Add(lot);
                 }

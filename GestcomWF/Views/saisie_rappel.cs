@@ -13,6 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace GestcomWF.Views
 {
@@ -20,7 +21,7 @@ namespace GestcomWF.Views
     {
         private Lot _currentLot = null;
 
-        
+
 
         // Liste des mois pour la combobox
         List<MoisNum> listeObjets = new List<MoisNum> {
@@ -59,39 +60,40 @@ namespace GestcomWF.Views
         private void btn_valider_Click(object sender, EventArgs e)
         {
 
-            decimal a, b, c, annee;
-            bool isANum = Decimal.TryParse(tbx_a.Text, out a);
-            bool isBNum = Decimal.TryParse(tbx_b.Text, out b);
-            bool isCNum = Decimal.TryParse(tbx_c.Text, out c);
-            bool isAnneeNum = Decimal.TryParse(tbxAnnee.Text, out annee);
+            decimal a, b, c;
 
-            
 
-            MoisNum moisNum = (MoisNum)cbxMois.SelectedItem;
-            if (_currentLot == null)
+            if (decimal.TryParse(tbx_a.Text, out a) && decimal.TryParse(tbx_b.Text, out b) && decimal.TryParse(tbx_c.Text, out c))
             {
-                MessageBox.Show("Veuillez sélectionner un lot");
-            }
 
-            else if (!IsNonNegativeNumber(tbx_a.Text) || !IsNonNegativeNumber(tbx_b.Text) || !IsNonNegativeNumber(tbx_c.Text))
-            {
-                MessageBox.Show("Veuillez entrer des nombres valides dans chaque champ.");
-                return;
-            }
-            else if (!isANum || !isBNum || !isCNum || !isAnneeNum)
-            {
-                MessageBox.Show("Veuillez entrer des nombres valides dans chaque champ.");
-                return;
+
+
+                MoisNum moisNum = (MoisNum)cbxMois.SelectedItem;
+                if (_currentLot == null)
+                {
+                    MessageBox.Show("Veuillez sélectionner un lot");
+                }
+
+                else if (!IsNonNegativeNumber(tbx_a.Text) || !IsNonNegativeNumber(tbx_b.Text) || !IsNonNegativeNumber(tbx_c.Text))
+                {
+                    MessageBox.Show("Veuillez entrer des nombres valides dans chaque champ.");
+                    return;
+                }
+
+                else
+                {
+                    var montant = ((_currentLot.LOC11 * Convert.ToDecimal(tbx_a.Text) + _currentLot.LOC12 * Convert.ToDecimal(tbx_b.Text) + _currentLot.LOC13 * Convert.ToDecimal(tbx_c.Text)) / _currentLot.LOCEM1) * _currentLot.LOCEN1;
+                    LotAdo.updateLotRappel(_currentLot.LOFROM, Convert.ToDecimal(tbxAnnee.Text), moisNum.Numero, Convert.ToDouble(a), Convert.ToDouble(b), Convert.ToDouble(c), Convert.ToDouble(Math.Round(montant, 2)));
+                    _currentLot = null;
+                    tbx_a.Text = "";
+                    tbx_b.Text = "";
+                    tbx_c.Text = "";
+                    tbx_total.Text = "";
+                }
             }
             else
             {
-                var montant = ((_currentLot.LOC11 * _currentLot.LOPU1 + _currentLot.LOC12 * _currentLot.LOPU2 + _currentLot.LOC13 * _currentLot.LOPU3) / _currentLot.LOCEM1) * _currentLot.LOCEN1;
-                LotAdo.updateLotRappel(_currentLot.LOFROM, annee, moisNum.Numero, a, b, c, Math.Round(montant, 2));
-                _currentLot = null;
-                tbx_a.Text = "";
-                tbx_b.Text = "";
-                tbx_c.Text = "";
-                tbx_total.Text = "";
+                MessageBox.Show("Ce n'est pas un decimal !");
             }
 
         }
@@ -116,14 +118,15 @@ namespace GestcomWF.Views
 
         private void buttonGenerer_Click(object sender, EventArgs e)
         {
+            decimal annee;
             if (tbxAnnee.Text == "" || tbxAnnee.Text.Length < 2)
             {
                 MessageBox.Show("Veuillez entrer une année en deux chiffres");
             }
-            else
+            if (decimal.TryParse(tbxAnnee.Text, out annee))
             {
                 MoisNum moisNum = (MoisNum)cbxMois.SelectedItem;
-                List<Lot> lots = LotAdo.allLotRappel(Convert.ToDecimal(tbxAnnee.Text), moisNum.Numero);
+                List<Lot> lots = LotAdo.allLotRappel(annee, moisNum.Numero);
                 if (lots == null || lots.Count == 0)
                 {
                     MessageBox.Show("Aucune valeur");
@@ -133,7 +136,11 @@ namespace GestcomWF.Views
                     dataGridView.DataSource = lots;
 
                 }
+            }
+            else
+            {
 
+                MessageBox.Show("Veuillez entrer un nombre");
 
             }
         }
@@ -179,6 +186,15 @@ namespace GestcomWF.Views
                     // Récupération du mois sélectionné depuis la comboBox
                     MoisNum moisNum = (MoisNum)cbxMois.SelectedItem;
 
+
+                    decimal moisNumValue = moisNum.Numero;
+                    decimal anneeValue = Convert.ToDecimal(tbxAnnee.Text);
+                    string nomMoisDecale = "";
+                    decimal moisDecale = 0;
+
+
+
+
                     // Récupération de toutes les entrées pour le mois et l'année donnés
                     List<LotFrom> lotFroms = LotAdo.generationFichierExcelRappel(moisNum.Numero, Convert.ToDecimal(tbxAnnee.Text));
                     if (lotFroms == null || lotFroms.Count <= 0)
@@ -190,9 +206,39 @@ namespace GestcomWF.Views
                         decimal poidsMoyen = 0;
                         decimal acompte = 0;
                         string annee = (DateTime.Now.Year / 100).ToString();
+                        bool anneeDejaReduite = false;
                         // Traitement pour chaque entré
                         foreach (LotFrom lotFrom in lotFroms)
                         {
+
+
+                            if (lotFrom.FACTURATION == -5)
+                            {
+                                moisDecale = moisNumValue - 5;
+                            }
+                            else if (lotFrom.FACTURATION == -6)
+                            {
+                                moisDecale = moisNumValue - 6;
+                            }
+
+                            if (moisDecale <= 0)
+                            {
+                                moisDecale += 12;
+                                if (!anneeDejaReduite)
+                                {
+                                    anneeValue -= 1;
+                                    anneeDejaReduite = true;
+                                }
+                            }
+
+                            MoisNum moisDecaleValue = listeObjets.FirstOrDefault(m => m.Numero == moisDecale);
+
+                            if (moisDecaleValue != null)
+                            {
+                                // Utilisez moisDecale.Mois pour obtenir le nom du mois décalé
+                                nomMoisDecale = moisDecaleValue.Mois;
+                                // Vous pouvez maintenant utiliser nomMoisDecale pour vos besoins
+                            }
 
                             poidsMoyen = lotFrom.LOCEN1 / lotFrom.LOCEM1;
                             acompte = lotFrom.LOPUAC * lotFrom.LOCEN1;
@@ -212,7 +258,7 @@ namespace GestcomWF.Views
                                 workSheet["G16"].Value = "Le" + " " + DateTime.Now.ToString("D");
                                 workSheet["B20"].Value = "Monsieur le Président";
                                 workSheet["B22"].Value = "          Conformément à nos conditions d'achat, le décompte de votre";
-                                workSheet["B23"].Value = "lot de fabrication SEPTEMBRE 2022 s'établit comme suit :";
+                                workSheet["B23"].Value = "lot de fabrication " + nomMoisDecale + " " + annee + anneeValue + " s'établit comme suit :";
 
                                 /* this.workSheet["F27"].StringValue = moisNum.Mois.ToUpper() + " " + (annee + tbxAnnee.Text);
                                  this.workSheet["F27"].Style.Font.Bold = true;*/
@@ -544,7 +590,7 @@ namespace GestcomWF.Views
                             RangeRow row3 = workSheet.GetRow(36);
                             row3.Height = 87; // Set height
 
-                            
+
 
                             // Configuration du style de la feuille (police, ...)
                             workSheet.Style.Font.Name = "Arial";
@@ -571,6 +617,63 @@ namespace GestcomWF.Views
             catch (Exception ex)
             {
                 MessageBox.Show("Une erreur est survenue ou le fichier est déjà généré");
+            }
+        }
+
+        private void tbx_a_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Decimal)
+            {
+                // Insérer une virgule à la position du curseur dans le TextBox
+                int selectionStart = tbx_a.SelectionStart;
+                tbx_a.Text = tbx_a.Text.Insert(selectionStart, ",");
+
+                // Mettre à jour la position du curseur
+                tbx_a.SelectionStart = selectionStart + 1;
+
+                // Empêcher la gestion ultérieure de cette touche
+                e.SuppressKeyPress = true;
+            }
+
+            if(e.KeyCode == Keys.Enter)
+            {
+                tbx_b.Focus();
+            }
+        }
+
+        private void tbx_b_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Decimal)
+            {
+                // Insérer une virgule à la position du curseur dans le TextBox
+                int selectionStart = tbx_b.SelectionStart;
+                tbx_b.Text = tbx_b.Text.Insert(selectionStart, ",");
+
+                // Mettre à jour la position du curseur
+                tbx_b.SelectionStart = selectionStart + 1;
+
+                // Empêcher la gestion ultérieure de cette touche
+                e.SuppressKeyPress = true;
+            }
+            if (e.KeyCode == Keys.Enter)
+            {
+                tbx_c.Focus();
+            }
+        }
+
+        private void tbx_c_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Decimal)
+            {
+                // Insérer une virgule à la position du curseur dans le TextBox
+                int selectionStart = tbx_c.SelectionStart;
+                tbx_c.Text = tbx_c.Text.Insert(selectionStart, ",");
+
+                // Mettre à jour la position du curseur
+                tbx_c.SelectionStart = selectionStart + 1;
+
+                // Empêcher la gestion ultérieure de cette touche
+                e.SuppressKeyPress = true;
             }
         }
     }

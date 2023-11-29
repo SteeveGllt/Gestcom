@@ -130,7 +130,7 @@ namespace Gestcom.ModelAdo
                     string defaultString = "";
                     bool defaultBool = true;
                     // Création d'un objet Fromagerie à partir du numéro récupéré.
-                    fromagerie = new Fromagerie(
+                   /* fromagerie = new Fromagerie(
                         reader.IsDBNull(reader.GetOrdinal("FRNUM")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("FRNUM")),
                         reader.IsDBNull(reader.GetOrdinal("FRNOM")) ? defaultString : reader.GetString(reader.GetOrdinal("FRNOM")),
                         reader.IsDBNull(reader.GetOrdinal("FRADR")) ? defaultString : reader.GetString(reader.GetOrdinal("FRADR")),
@@ -160,7 +160,7 @@ namespace Gestcom.ModelAdo
                         reader.IsDBNull(reader.GetOrdinal("FREVER")) ? defaultString : reader.GetString(reader.GetOrdinal("FREVER")),
                         reader.IsDBNull(reader.GetOrdinal("FRACTIF")) ? defaultBool : reader.GetBoolean(reader.GetOrdinal("FRACTIF")),
                         reader.IsDBNull(reader.GetOrdinal("FACTURATION")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("FACTURATION"))
-                        );
+                        );*/
 
                 }
 
@@ -221,7 +221,7 @@ namespace Gestcom.ModelAdo
                 oleDbCommand.Parameters.AddWithValue("@FRVVER", fromagerie.FRVVER);
                 oleDbCommand.Parameters.AddWithValue("@FREVER", fromagerie.FREVER);
                 oleDbCommand.Parameters.AddWithValue("@FRACTIF", fromagerie.FRACTIF);
-                oleDbCommand.Parameters.AddWithValue("@FACTURATION", fromagerie.FACTURATION);
+               // oleDbCommand.Parameters.AddWithValue("@FACTURATION", fromagerie.FACTURATION);
 
                 oleDbCommand.ExecuteNonQuery();
                 MessageBox.Show("Lot Modifié");

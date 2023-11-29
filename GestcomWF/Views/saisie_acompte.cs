@@ -3,17 +3,6 @@ using Gestcom.ModelAdo;
 using Gestcom.Models;
 using GestcomWF.Classes;
 using IronXL;
-using Microsoft.Office.Interop.Excel;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace GestcomWF.Views
 {
@@ -23,10 +12,6 @@ namespace GestcomWF.Views
         private Lot _currentLot = null;
 
         private bool updateAllPrices = false;
-
-        
-
-        NumberFormatInfo nfi = new CultureInfo("fr-Fr", false).NumberFormat;
 
         // Liste des mois pour la combobox
         List<MoisNum> listeObjets = new List<MoisNum> {
@@ -54,11 +39,13 @@ namespace GestcomWF.Views
             // Initialiser le DataGridView sans source de données
             dataGridView.DataSource = null;
 
-           
+
+
         }
 
         private void btn_valider_dg_Click(object sender, EventArgs e)
         {
+
             if (tbx_annee.Text == "" || tbx_annee.Text.Length < 2)
             {
                 MessageBox.Show("Veuillez entrer une année en deux chiffres");
@@ -76,8 +63,6 @@ namespace GestcomWF.Views
                     dataGridView.DataSource = lots;
 
                 }
-
-
             }
         }
 
@@ -100,7 +85,7 @@ namespace GestcomWF.Views
         private void btn_valider_Click(object sender, EventArgs e)
         {
             MoisNum moisNum = (MoisNum)cbxMois.SelectedItem;
-            
+
             if (this._currentLot != null)
             {
                 decimal newPrice;
@@ -115,15 +100,15 @@ namespace GestcomWF.Views
                             // Mettre à jour le prix pour chaque lot affiché dans le DataGridView
                             foreach (Lot lot in lots)
                             {
-                                LotAdo.updateLotPrix(lot.LOFROM, Convert.ToDecimal(tbx_annee.Text), moisNum.Numero, newPrice);
+                                LotAdo.updateLotPrix(lot.LOFROM, Convert.ToDecimal(tbx_annee.Text), moisNum.Numero, Convert.ToDouble(newPrice));
                                 lot.LOPUAC = newPrice;
                             }
                         }
                         else
                         {
-                            
+
                             // Mettre à jour un seul lot
-                            LotAdo.updateLotPrix(this._currentLot.LOFROM, Convert.ToDecimal(tbx_annee.Text), moisNum.Numero, newPrice);
+                            LotAdo.updateLotPrix(this._currentLot.LOFROM, Convert.ToDecimal(tbx_annee.Text), moisNum.Numero, Convert.ToDouble(newPrice));
                             this._currentLot.LOPUAC = newPrice;
                         }
 
@@ -159,7 +144,7 @@ namespace GestcomWF.Views
                     WorkSheet workSheet = null;
                     WorkBook workbook = new WorkBook(ExcelFileFormat.XLSX);
 
-                    Decimal valeurPrecedente = 0;
+                    decimal valeurPrecedente = 0;
 
 
 
@@ -167,12 +152,14 @@ namespace GestcomWF.Views
                     MoisNum moisNum = (MoisNum)cbxMois.SelectedItem;
 
                     decimal moisNumValue = moisNum.Numero;
+                    decimal anneeValue = Convert.ToDecimal(tbx_annee.Text);
                     string nomMoisDecale = "";
 
-                    decimal moisDecale = moisNumValue - 5;
+                    decimal moisDecale = moisNumValue - 2;
                     if (moisDecale <= 0)
                     {
                         moisDecale += 12;
+                        anneeValue -= 1;
                     }
 
                     MoisNum moisDecaleValue = listeObjets.FirstOrDefault(m => m.Numero == moisDecale);
@@ -181,7 +168,6 @@ namespace GestcomWF.Views
                     {
                         // Utilisez moisDecale.Mois pour obtenir le nom du mois décalé
                         nomMoisDecale = moisDecaleValue.Mois;
-                        // Vous pouvez maintenant utiliser nomMoisDecale pour vos besoins
                     }
 
                     Console.WriteLine(moisDecale);
@@ -194,7 +180,7 @@ namespace GestcomWF.Views
                     }
                     else
                     {
-                       
+
                         decimal prix = 0;
                         decimal acompte = 0;
                         string annee = (DateTime.Now.Year / 100).ToString();
@@ -220,7 +206,7 @@ namespace GestcomWF.Views
                                 workSheet["G28"].Value = "Le" + " " + DateTime.Now.ToString("D");
                                 workSheet["B23"].Value = "Monsieur le Président";
                                 workSheet["B25"].Value = "          Nous vous prions de bien vouloir trouver ci-dessous, le détail";
-                                workSheet["B26"].Value = "du premier acompte sur votre lot de fabrication " + nomMoisDecale.ToUpper() + " " + annee + tbx_annee.Text;
+                                workSheet["B26"].Value = "du premier acompte sur votre lot de fabrication " + nomMoisDecale.ToUpper() + " " + annee + anneeValue;
 
                                 /* this.workSheet["F27"].StringValue = moisNum.Mois.ToUpper() + " " + (annee + tbxAnnee.Text);
                                  this.workSheet["F27"].Style.Font.Bold = true;*/
@@ -289,8 +275,8 @@ namespace GestcomWF.Views
                                 workSheet["J31"].Style.BottomBorder.SetColor("#000000");
                                 workSheet["J31"].Style.BottomBorder.Type = IronXL.Styles.BorderType.Thin;
 
-                              
-                                
+
+
                                 //this.workSheet["D33"].Value = "A déduire N/Acompte du ";
                                 workSheet["F30"].Value = "Total HT";
                                 workSheet["F31"].Value = "T.V.A";
@@ -305,7 +291,7 @@ namespace GestcomWF.Views
 
                                 workSheet["J33"].Value = sumPrixTVA.Sum() + "€";
                                 workSheet["J33"].Style.Font.Bold = true;
-                               
+
 
 
                                 workSheet["B35"].Value = "          Vous en souhaitant bonne réception";
@@ -370,7 +356,7 @@ namespace GestcomWF.Views
                         SaveFileDialog saveFileDialog = new SaveFileDialog();
                         saveFileDialog.Filter = "Excel files(*.xls; *.xlsx)| *.xls; *.xlsx";
                         saveFileDialog.Title = "Enregistrez le fichier sous...";
-                        saveFileDialog.FileName = "rappel " + moisNum.Mois + ".xls";
+                        saveFileDialog.FileName = "acompte " + moisNum.Mois + ".xls";
                         if (saveFileDialog.ShowDialog() == DialogResult.OK)
                         {
                             string path = saveFileDialog.FileName;
@@ -385,6 +371,23 @@ namespace GestcomWF.Views
             catch (Exception ex)
             {
                 MessageBox.Show("Une erreur est survenue ou le fichier est déjà généré");
+
+            }
+        }
+
+        private void tbx_prix_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Decimal)
+            {
+                // Insérer une virgule à la position du curseur dans le TextBox
+                int selectionStart = tbx_prix.SelectionStart;
+                tbx_prix.Text = tbx_prix.Text.Insert(selectionStart, ",");
+
+                // Mettre à jour la position du curseur
+                tbx_prix.SelectionStart = selectionStart + 1;
+
+                // Empêcher la gestion ultérieure de cette touche
+                e.SuppressKeyPress = true;
             }
         }
     }

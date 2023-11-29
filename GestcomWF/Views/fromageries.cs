@@ -91,7 +91,7 @@ namespace GestcomWF.Views
                     tbxFrVver.Text = fromagerieComplete.FRVVER.ToString();
                     tbxFrEver.Text = fromagerieComplete.FREVER;
                     tbxFrActif.Text = fromagerieComplete.FRACTIF.ToString();
-                    tbxFacturation.Text = fromagerieComplete.FACTURATION.ToString();
+                    //tbxFacturation.Text = fromagerieComplete.FACTURATION.ToString();
                     this._currentFromagerie = fromagerieComplete;
                     // Assignez d'autres propriétés de l'objet `lot` à d'autres TextBox si nécessaire
                 }
@@ -136,7 +136,7 @@ namespace GestcomWF.Views
             {
                 if (this._currentFromagerie != null)
                 {
-                    Fromagerie fromagerie = new Fromagerie(
+                   /* Fromagerie fromagerie = new Fromagerie(
 
                     // Mettre à jour l'objet fromagerie avec les valeurs actuelles des TextBox
                     Convert.ToDecimal(tbxFrNum.Text),
@@ -168,10 +168,10 @@ namespace GestcomWF.Views
                     tbxFrEver.Text,
                     Convert.ToBoolean(tbxFrActif.Text),
                     Convert.ToDecimal(tbxFacturation.Text)
-                        );
+                        );*/
 
                     // Appeler la méthode pour mettre à jour la base de données avec le fromagerie modifié
-                    FromagerieAdo.updateFromagerie(fromagerie);
+                   // FromagerieAdo.updateFromagerie(fromagerie);
 
 
                 }

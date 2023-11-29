@@ -47,64 +47,61 @@ namespace GestcomWF.Views
             // lbl_annee
             // 
             lbl_annee.AutoSize = true;
-            lbl_annee.Location = new System.Drawing.Point(248, 38);
+            lbl_annee.Location = new System.Drawing.Point(283, 51);
             lbl_annee.Name = "lbl_annee";
-            lbl_annee.Size = new System.Drawing.Size(47, 15);
+            lbl_annee.Size = new System.Drawing.Size(58, 20);
             lbl_annee.TabIndex = 0;
             lbl_annee.Text = "Année :";
             // 
             // lbl_mois
             // 
             lbl_mois.AutoSize = true;
-            lbl_mois.Location = new System.Drawing.Point(37, 38);
+            lbl_mois.Location = new System.Drawing.Point(42, 51);
             lbl_mois.Name = "lbl_mois";
-            lbl_mois.Size = new System.Drawing.Size(39, 15);
+            lbl_mois.Size = new System.Drawing.Size(48, 20);
             lbl_mois.TabIndex = 1;
             lbl_mois.Text = "Mois :";
             // 
             // tbx_annee
             // 
-            tbx_annee.Location = new System.Drawing.Point(304, 34);
-            tbx_annee.Margin = new Padding(3, 2, 3, 2);
+            tbx_annee.Location = new System.Drawing.Point(347, 45);
             tbx_annee.Name = "tbx_annee";
-            tbx_annee.Size = new System.Drawing.Size(110, 23);
+            tbx_annee.Size = new System.Drawing.Size(125, 27);
             tbx_annee.TabIndex = 2;
             // 
             // dataGridView
             // 
             dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView.Location = new System.Drawing.Point(273, 98);
-            dataGridView.Margin = new Padding(3, 2, 3, 2);
+            dataGridView.Location = new System.Drawing.Point(312, 131);
             dataGridView.Name = "dataGridView";
             dataGridView.RowHeadersWidth = 51;
             dataGridView.RowTemplate.Height = 29;
-            dataGridView.Size = new System.Drawing.Size(384, 206);
+            dataGridView.Size = new System.Drawing.Size(439, 275);
             dataGridView.TabIndex = 4;
             dataGridView.CellDoubleClick += dataGridView_CellDoubleClick_1;
             // 
             // lbl_prix
             // 
             lbl_prix.AutoSize = true;
-            lbl_prix.Location = new System.Drawing.Point(44, 98);
+            lbl_prix.Location = new System.Drawing.Point(50, 131);
             lbl_prix.Name = "lbl_prix";
-            lbl_prix.Size = new System.Drawing.Size(33, 15);
+            lbl_prix.Size = new System.Drawing.Size(40, 20);
             lbl_prix.TabIndex = 5;
             lbl_prix.Text = "Prix :";
             // 
             // tbx_prix
             // 
-            tbx_prix.Location = new System.Drawing.Point(94, 98);
-            tbx_prix.Margin = new Padding(3, 2, 3, 2);
+            tbx_prix.Location = new System.Drawing.Point(107, 131);
             tbx_prix.Name = "tbx_prix";
-            tbx_prix.Size = new System.Drawing.Size(110, 23);
+            tbx_prix.Size = new System.Drawing.Size(125, 27);
             tbx_prix.TabIndex = 6;
+            tbx_prix.KeyDown += tbx_prix_KeyDown;
             // 
             // btn_valider
             // 
-            btn_valider.Location = new System.Drawing.Point(121, 138);
-            btn_valider.Margin = new Padding(3, 2, 3, 2);
+            btn_valider.Location = new System.Drawing.Point(138, 184);
             btn_valider.Name = "btn_valider";
-            btn_valider.Size = new System.Drawing.Size(82, 22);
+            btn_valider.Size = new System.Drawing.Size(94, 29);
             btn_valider.TabIndex = 7;
             btn_valider.Text = "Valider";
             btn_valider.UseVisualStyleBackColor = true;
@@ -112,10 +109,9 @@ namespace GestcomWF.Views
             // 
             // btn_valider_dg
             // 
-            btn_valider_dg.Location = new System.Drawing.Point(431, 34);
-            btn_valider_dg.Margin = new Padding(3, 2, 3, 2);
+            btn_valider_dg.Location = new System.Drawing.Point(493, 45);
             btn_valider_dg.Name = "btn_valider_dg";
-            btn_valider_dg.Size = new System.Drawing.Size(82, 22);
+            btn_valider_dg.Size = new System.Drawing.Size(94, 29);
             btn_valider_dg.TabIndex = 8;
             btn_valider_dg.Text = "Valider";
             btn_valider_dg.UseVisualStyleBackColor = true;
@@ -124,19 +120,17 @@ namespace GestcomWF.Views
             // cbxMois
             // 
             cbxMois.FormattingEnabled = true;
-            cbxMois.Location = new System.Drawing.Point(94, 34);
-            cbxMois.Margin = new Padding(3, 2, 3, 2);
+            cbxMois.Location = new System.Drawing.Point(107, 45);
             cbxMois.Name = "cbxMois";
-            cbxMois.Size = new System.Drawing.Size(133, 23);
+            cbxMois.Size = new System.Drawing.Size(151, 28);
             cbxMois.TabIndex = 9;
             // 
             // checkBoxUpdateAll
             // 
             checkBoxUpdateAll.AutoSize = true;
-            checkBoxUpdateAll.Location = new System.Drawing.Point(18, 201);
-            checkBoxUpdateAll.Margin = new Padding(3, 2, 3, 2);
+            checkBoxUpdateAll.Location = new System.Drawing.Point(21, 268);
             checkBoxUpdateAll.Name = "checkBoxUpdateAll";
-            checkBoxUpdateAll.Size = new System.Drawing.Size(89, 19);
+            checkBoxUpdateAll.Size = new System.Drawing.Size(111, 24);
             checkBoxUpdateAll.TabIndex = 10;
             checkBoxUpdateAll.Text = "Tous les lots";
             checkBoxUpdateAll.UseVisualStyleBackColor = true;
@@ -144,9 +138,10 @@ namespace GestcomWF.Views
             // 
             // generate_excel
             // 
-            generate_excel.Location = new System.Drawing.Point(549, 12);
+            generate_excel.Location = new System.Drawing.Point(627, 16);
+            generate_excel.Margin = new Padding(3, 4, 3, 4);
             generate_excel.Name = "generate_excel";
-            generate_excel.Size = new System.Drawing.Size(139, 23);
+            generate_excel.Size = new System.Drawing.Size(159, 31);
             generate_excel.TabIndex = 11;
             generate_excel.Text = "Générer le fichier Excel";
             generate_excel.UseVisualStyleBackColor = true;
@@ -154,9 +149,9 @@ namespace GestcomWF.Views
             // 
             // saisie_acompte
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(700, 338);
+            ClientSize = new System.Drawing.Size(800, 451);
             Controls.Add(generate_excel);
             Controls.Add(checkBoxUpdateAll);
             Controls.Add(cbxMois);
@@ -168,7 +163,6 @@ namespace GestcomWF.Views
             Controls.Add(tbx_annee);
             Controls.Add(lbl_mois);
             Controls.Add(lbl_annee);
-            Margin = new Padding(3, 2, 3, 2);
             Name = "saisie_acompte";
             Text = "saisie_acompte";
             ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();

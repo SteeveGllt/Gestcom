@@ -27,6 +27,8 @@ namespace GestcomWF.Classes
         public String FRVILL { get; set; }
         public String FRNDIR { get; set; }
 
+        public Decimal FACTURATION { get; set; }
+
         public LotFrom(decimal lOFROM, string fRNOM, string fRNDIR, string fRADR, decimal fRCPOS, decimal lOCEM1, decimal lOC11, decimal lOC12, decimal lOC13, decimal lOANNE, decimal lOMOIS, string fRVILL, decimal fRNUM)
         {
             LOFROM = lOFROM;
@@ -43,7 +45,7 @@ namespace GestcomWF.Classes
             FRVILL = fRVILL;
             FRNUM = fRNUM;
         }
-        public LotFrom(decimal lOFROM, string fRNOM, string fRNDIR, string fRADR, decimal fRCPOS, decimal lOCEN1, decimal lOCEM1, decimal lOC11, decimal lOC12, decimal lOC13, decimal lOPUAC, decimal lOPU1, decimal lOPU2, decimal lOPU3, decimal lOANNE, decimal lOMOIS, string fRVILL, decimal fRNUM)
+        public LotFrom(decimal lOFROM, string fRNOM, string fRNDIR, string fRADR, decimal fRCPOS, decimal lOCEN1, decimal lOCEM1, decimal lOC11, decimal lOC12, decimal lOC13, decimal lOPUAC, decimal lOPU1, decimal lOPU2, decimal lOPU3, decimal lOANNE, decimal lOMOIS, string fRVILL, decimal fRNUM, decimal facturation)
         {
             LOFROM = lOFROM;
             FRNOM = fRNOM;
@@ -63,6 +65,7 @@ namespace GestcomWF.Classes
             LOMOIS = lOMOIS;
             FRVILL = fRVILL;
             FRNUM = fRNUM;
+            FACTURATION = facturation;
         }
 
         public LotFrom(decimal lOFROM, string fRNOM, string fRNDIR, string fRADR, decimal fRCPOS, decimal lOCEN1, decimal lOCEM1, decimal lOPUAC, decimal lOANNE, decimal lOMOIS, string fRVILL, decimal fRNUM)

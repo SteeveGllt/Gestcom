@@ -1,5 +1,6 @@
 ﻿using Gestcom.ModelAdo;
 using Gestcom.Models;
+using System.Diagnostics;
 using System.Globalization;
 using System.Text.RegularExpressions;
 
@@ -22,6 +23,7 @@ namespace GestcomWF.Views
             InitializeTextBoxes();
             cbxFromagerie.Focus();
 
+          
         }
 
         // Initialisation de la liste des fromageries à partir de la base de données
@@ -32,6 +34,7 @@ namespace GestcomWF.Views
             cbxFromagerie.DataSource = this.fromageries;
             cbxFromagerie.DisplayMember = "FRNUM";
             cbxFromagerie.SelectedIndex = 0;
+        
         }
 
         // Initialisation de la combobox des mois
