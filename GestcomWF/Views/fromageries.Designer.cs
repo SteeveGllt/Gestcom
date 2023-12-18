@@ -140,6 +140,7 @@
             listBox1.Name = "listBox1";
             listBox1.Size = new System.Drawing.Size(614, 184);
             listBox1.TabIndex = 5;
+            listBox1.SelectedIndexChanged += listBox1_SelectedIndexChanged;
             listBox1.DoubleClick += listBox1_DoubleClick;
             // 
             // tbxFrNum

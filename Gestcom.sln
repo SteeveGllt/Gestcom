@@ -5,6 +5,8 @@ VisualStudioVersion = 17.7.34024.191
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GestcomWF", "GestcomWF\GestcomWF.csproj", "{707AF205-B7E5-4343-B228-4141330D0E0B}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "TestWFVb", "TestWFVb\TestWFVb.vbproj", "{63854E51-29CE-4788-8165-4D6470CACAA2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{707AF205-B7E5-4343-B228-4141330D0E0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{707AF205-B7E5-4343-B228-4141330D0E0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{707AF205-B7E5-4343-B228-4141330D0E0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63854E51-29CE-4788-8165-4D6470CACAA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63854E51-29CE-4788-8165-4D6470CACAA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63854E51-29CE-4788-8165-4D6470CACAA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63854E51-29CE-4788-8165-4D6470CACAA2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

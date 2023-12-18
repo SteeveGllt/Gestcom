@@ -1,7 +1,6 @@
 ﻿using Gestcom.Classes;
 using Gestcom.ModelAdo;
 using IronXL;
-using System.Runtime.InteropServices;
 
 namespace GestcomWF.Views
 {

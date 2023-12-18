@@ -48,13 +48,14 @@ namespace GestcomWF
             saisiePeséesToolStripMenuItem = new ToolStripMenuItem();
             outilsToolStripMenuItem = new ToolStripMenuItem();
             calculatriceToolStripMenuItem = new ToolStripMenuItem();
+            testVBNetToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { fichiersToolStripMenuItem, éditionToolStripMenuItem, outilsToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { fichiersToolStripMenuItem, éditionToolStripMenuItem, outilsToolStripMenuItem, testVBNetToolStripMenuItem });
             menuStrip1.Location = new System.Drawing.Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(1671, 24);
@@ -67,12 +68,14 @@ namespace GestcomWF
             fichiersToolStripMenuItem.Name = "fichiersToolStripMenuItem";
             fichiersToolStripMenuItem.Size = new Size(59, 20);
             fichiersToolStripMenuItem.Text = "Fichiers";
+            fichiersToolStripMenuItem.Click += fichiersToolStripMenuItem_Click;
             // 
             // clientsToolStripMenuItem
             // 
             clientsToolStripMenuItem.Name = "clientsToolStripMenuItem";
             clientsToolStripMenuItem.Size = new Size(180, 22);
             clientsToolStripMenuItem.Text = "Clients";
+            clientsToolStripMenuItem.Click += clientsToolStripMenuItem_Click;
             // 
             // articlesToolStripMenuItem
             // 
@@ -169,6 +172,13 @@ namespace GestcomWF
             calculatriceToolStripMenuItem.Text = "Calculatrice";
             calculatriceToolStripMenuItem.Click += calculatriceToolStripMenuItem_Click;
             // 
+            // testVBNetToolStripMenuItem
+            // 
+            testVBNetToolStripMenuItem.Name = "testVBNetToolStripMenuItem";
+            testVBNetToolStripMenuItem.Size = new Size(72, 20);
+            testVBNetToolStripMenuItem.Text = "TestVBNet";
+            testVBNetToolStripMenuItem.Click += testVBNetToolStripMenuItem_Click;
+            // 
             // MainWindow
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -204,5 +214,6 @@ namespace GestcomWF
         private ToolStripMenuItem calculatriceToolStripMenuItem;
         private ToolStripMenuItem saisieAcompteToolStripMenuItem;
         private ToolStripMenuItem saisieRappelToolStripMenuItem;
+        private ToolStripMenuItem testVBNetToolStripMenuItem;
     }
 }

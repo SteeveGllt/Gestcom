@@ -1,8 +1,6 @@
 ﻿using Gestcom.ModelAdo;
 using Gestcom.Models;
-using System.Diagnostics;
 using System.Globalization;
-using System.Text.RegularExpressions;
 
 namespace GestcomWF.Views
 {
