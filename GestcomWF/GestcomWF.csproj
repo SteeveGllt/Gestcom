@@ -30,8 +30,4 @@
     <Folder Include="Composants\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\TestWFVb\TestWFVb.vbproj" />
-  </ItemGroup>
-
 </Project>

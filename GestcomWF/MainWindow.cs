@@ -1,6 +1,5 @@
 using GestcomWF.Views;
 using System.Drawing.Printing;
-using TestWFVb;
 
 namespace GestcomWF
 {
@@ -85,13 +84,6 @@ namespace GestcomWF
             client client = new client();
             client.MdiParent = this;
             client.Show();
-        }
-
-        private void testVBNetToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Form1 form1 = new Form1();
-            form1.MdiParent = this;
-            form1.Show();
         }
 
         private void fichiersToolStripMenuItem_Click(object sender, EventArgs e)

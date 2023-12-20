@@ -60,7 +60,6 @@ namespace GestcomWF.Views
         private void btnCreate_Click(object sender, EventArgs e)
         {
             creation_client creation_Client = new creation_client();
-            creation_Client.MdiParent = this;
             creation_Client.Show();
         }
     }
