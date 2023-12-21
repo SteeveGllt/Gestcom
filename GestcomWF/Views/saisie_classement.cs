@@ -272,9 +272,12 @@ namespace GestcomWF.Views
                                     workSheet["F30"].Value = "pains";
                                     workSheet["F30"].Style.Font.Bold = true;
 
-                                    workSheet["E30"].Value = lotFrom.LOC12;
+                                    workSheet["E30"].Value = lotFrom.LOC11;
                                     workSheet["E30"].Style.Font.Bold = true;
                                     workSheet["E30"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
+
+                                    workSheet["G30"].Value = Math.Round((lotFrom.LOC11 / lotFrom.LOCEM1) * 100);
+                                    workSheet["G30"].Style.Font.Bold = true;
 
                                 }
 
@@ -302,6 +305,9 @@ namespace GestcomWF.Views
                                     workSheet["E31"].Value = lotFrom.LOC12;
                                     workSheet["E31"].Style.Font.Bold = true;
                                     workSheet["E31"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
+
+                                    workSheet["G31"].Value = Math.Round((lotFrom.LOC12 / lotFrom.LOCEM1) * 100);
+                                    workSheet["G31"].Style.Font.Bold = true;
                                 }
                                 if (lotFrom.LOC13 != 0)
                                 {
@@ -319,6 +325,9 @@ namespace GestcomWF.Views
                                     workSheet["E32"].Value = lotFrom.LOC13;
                                     workSheet["E32"].Style.Font.Bold = true;
                                     workSheet["E32"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
+
+                                    workSheet["G32"].Value = Math.Round((lotFrom.LOC13 / lotFrom.LOCEM1) * 100);
+                                    workSheet["G32"].Style.Font.Bold = true;
                                 }
 
 

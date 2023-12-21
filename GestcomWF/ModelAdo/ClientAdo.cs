@@ -6,6 +6,7 @@ using System.Data.OleDb;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolTip;
 using System.Security.Claims;
+using GestcomWF.Views;
 
 namespace GestcomWF.ModelAdo
 {
@@ -152,6 +153,120 @@ namespace GestcomWF.ModelAdo
                 close();
             }
         }
+        public static void CreateClient(Client cl)
+        {
+            try
+            {
+                // Initialisation de la liste pour stocker les fromageries récupérées.
+
+                Client client = null;
+                open();
+                OleDbCommand oleDbCommand = new OleDbCommand();
+                oleDbCommand.Connection = connection;
+
+                // Ouverture de la connexion à la base de données.
+
+
+                // Création de la commande SQL pour sélectionner les fromageries actives.
+                oleDbCommand.CommandText = "INSERT INTO TB_Clients(CLNUM, CLNOM, CLMTDI, CLADR1, CLADR2, CLCPOS, CLVILL, CLREGL, CLBASE, CLDEPA, CLECHE, CLARRI, CLBQUE, CLGUI, CLCPTE, CLRIB, CLDOM, CLREP, CLEDIT, CLFAMI, CLTRAN, CLLIVR, CLFACT, CLCOMP, CLRIST, CLREMI, CLCODE, CLTVA, CLENSE, CLDIV, CLINTRA, CLSUPP) VALUES (@CLNUM, @CLNOM, @CLMTDI, @CLADR1, @CLADR2, @CLCPOS, @CLVILL, @CLREGL, @CLBASE, @CLDEPA, @CLECHE, @CLARRI, @CLBQUE, @CLGUI, @CLCPTE, @CLRIB, @CLDOM, @CLREP, @CLEDIT, @CLFAMI, @CLTRAN, @CLLIVR, @CLFACT, @CLCOMP, @CLRIST, @CLREMI, @CLCODE, @CLTVA, @CLENSE, @CLDIV, @CLINTRA, @CLSUPP);";
+                oleDbCommand.Prepare();
+                oleDbCommand.Parameters.AddWithValue("@CLNUM", cl.CLNUM);
+                oleDbCommand.Parameters.AddWithValue("@CLNOM", cl.CLNOM);
+                oleDbCommand.Parameters.AddWithValue("@CLMTDI", cl.CLMTDI);
+                oleDbCommand.Parameters.AddWithValue("@CLADR1", cl.CLADR1);
+                oleDbCommand.Parameters.AddWithValue("@CLADR2", cl.CLADR2);
+                oleDbCommand.Parameters.AddWithValue("@CLCPOS", cl.CLCPOS);
+                oleDbCommand.Parameters.AddWithValue("@CLVILL", cl.CLVILL);
+                oleDbCommand.Parameters.AddWithValue("@CLREGL", cl.CLREGL);
+                oleDbCommand.Parameters.AddWithValue("@CLBASE", cl.CLBASE);
+                oleDbCommand.Parameters.AddWithValue("@CLDEPA", cl.CLDEPA);
+                oleDbCommand.Parameters.AddWithValue("@CLECHE", cl.CLECHE);
+                oleDbCommand.Parameters.AddWithValue("@CLARRI", cl.CLARRI);
+                oleDbCommand.Parameters.AddWithValue("@CLBQUE", cl.CLBQUE);
+                oleDbCommand.Parameters.AddWithValue("@CLGUI", cl.CLGUI);
+                oleDbCommand.Parameters.AddWithValue("@CLCPTE", cl.CLCPTE);
+                oleDbCommand.Parameters.AddWithValue("@CLRIB", cl.CLRIB);
+                oleDbCommand.Parameters.AddWithValue("@CLDOM", cl.CLDOM);
+                oleDbCommand.Parameters.AddWithValue("@CLREP", cl.CLREP);
+                oleDbCommand.Parameters.AddWithValue("@CLEDIT", cl.CLEDIT);
+                oleDbCommand.Parameters.AddWithValue("@CLFAMI", cl.CLFAMI);
+                oleDbCommand.Parameters.AddWithValue("@CLTRAN", cl.CLTRAN);
+                oleDbCommand.Parameters.AddWithValue("@CLLIVR", cl.CLLIVR);
+                oleDbCommand.Parameters.AddWithValue("@CLFACT", cl.CLFACT);
+                oleDbCommand.Parameters.AddWithValue("@CLCOMP", cl.CLCOMP);
+                oleDbCommand.Parameters.AddWithValue("@CLRIST", cl.CLRIST);
+                oleDbCommand.Parameters.AddWithValue("@CLREMI", cl.CLREMI);
+                oleDbCommand.Parameters.AddWithValue("@CLCODE", cl.CLCODE);
+                oleDbCommand.Parameters.AddWithValue("@CLTVA", cl.CLTVA);
+                oleDbCommand.Parameters.AddWithValue("@CLENSE", cl.CLENSE);
+                oleDbCommand.Parameters.AddWithValue("@CLDIV", cl.CLDIV);
+                oleDbCommand.Parameters.AddWithValue("@CLINTRA", cl.CLINTRA);
+                oleDbCommand.Parameters.AddWithValue("@CLSUPP", cl.CLSUPP);
+                oleDbCommand.ExecuteNonQuery();
+                Console.WriteLine("Client créé");
+                MessageBox.Show("Client crée");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                MessageBox.Show("Erreur de communication avec la base de données!" + ex);
+            }
+            finally { close(); }
+        }
+        public static void updateClient(Client client, decimal ancienneValeurId)
+        {
+            try
+            {
+                open();
+                OleDbCommand oleDbCommand = new OleDbCommand();
+                oleDbCommand.Connection = connection;
+                oleDbCommand.CommandText = "UPDATE TB_Clients SET CLNUM = @CLNUM, CLNOM = @CLNOM, CLMTDI = @CLMTDI, CLADR1 = @CLADR1, CLADR2 = @CLADR2, CLCPOS = @CLCPOS, CLVILL = @CLVILL, CLREGL = @CLREGL, CLBASE = @CLBASE, CLDEPA = @CLDEPA, CLECHE = @CLECHE, CLARRI = @CLARRI, CLBQUE = @CLBQUE, CLGUI = @CLGUI, CLCPTE = @CLCPTE, CLRIB = @CLRIB, CLDOM = @CLDOM, CLREP = @CLREP, CLEDIT = @CLEDIT, CLFAMI = @CLFAMI, CLTRAN = @CLTRAN, CLLIVR = @CLLIVR, CLFACT = @CLFACT, CLCOMP = @CLCOMP, CLRIST = @CLRIST, CLREMI = @CLREMI, CLCODE = @CLCODE, CLTVA = @CLTVA, CLENSE = @CLENSE, CLDIV = @CLDIV, CLINTRA = @CLINTRA WHERE CLNUM = " + ancienneValeurId;
+                oleDbCommand.Prepare();
+                oleDbCommand.Parameters.AddWithValue("@CLNUM", client.CLNUM);
+                oleDbCommand.Parameters.AddWithValue("@CLNOM", client.CLNOM);
+                oleDbCommand.Parameters.AddWithValue("@CLMTDI", client.CLMTDI);
+                oleDbCommand.Parameters.AddWithValue("@CLADR1", client.CLADR1);
+                oleDbCommand.Parameters.AddWithValue("@CLADR2", client.CLADR2);
+                oleDbCommand.Parameters.AddWithValue("@CLCPOS", client.CLCPOS);
+                oleDbCommand.Parameters.AddWithValue("@CLVILL", client.CLVILL);
+                oleDbCommand.Parameters.AddWithValue("@CLREGL", client.CLREGL);
+                oleDbCommand.Parameters.AddWithValue("@CLBASE", client.CLBASE);
+                oleDbCommand.Parameters.AddWithValue("@CLDEPA", client.CLDEPA);
+                oleDbCommand.Parameters.AddWithValue("@CLECHE", client.CLECHE);
+                oleDbCommand.Parameters.AddWithValue("@CLARRI", client.CLARRI);
+                oleDbCommand.Parameters.AddWithValue("@CLBQUE", client.CLBQUE);
+                oleDbCommand.Parameters.AddWithValue("@CLGUI", client.CLGUI);
+                oleDbCommand.Parameters.AddWithValue("@CLCPTE", client.CLCPTE);
+                oleDbCommand.Parameters.AddWithValue("@CLRIB", client.CLRIB);
+                oleDbCommand.Parameters.AddWithValue("@CLDOM", client.CLDOM);
+                oleDbCommand.Parameters.AddWithValue("@CLREP", client.CLREP);
+                oleDbCommand.Parameters.AddWithValue("@CLEDIT", client.CLEDIT);
+                oleDbCommand.Parameters.AddWithValue("@CLFAMI", client.CLFAMI);
+                oleDbCommand.Parameters.AddWithValue("@CLTRAN", client.CLTRAN);
+                oleDbCommand.Parameters.AddWithValue("@CLLIVR", client.CLLIVR);
+                oleDbCommand.Parameters.AddWithValue("@CLFACT", client.CLFACT);
+                oleDbCommand.Parameters.AddWithValue("@CLCOMP", client.CLCOMP);
+                oleDbCommand.Parameters.AddWithValue("@CLRIST", client.CLRIST);
+                oleDbCommand.Parameters.AddWithValue("@CLREMI", client.CLREMI);
+                oleDbCommand.Parameters.AddWithValue("@CLCODE", client.CLCODE);
+                oleDbCommand.Parameters.AddWithValue("@CLTVA", client.CLTVA);
+                oleDbCommand.Parameters.AddWithValue("@CLENSE", client.CLENSE);
+                oleDbCommand.Parameters.AddWithValue("@CLDIV", client.CLDIV);
+                oleDbCommand.Parameters.AddWithValue("@CLINTRA", client.CLINTRA);
+
+                // oleDbCommand.Parameters.AddWithValue("@FACTURATION", fromagerie.FACTURATION);
+
+                oleDbCommand.ExecuteNonQuery();
+                MessageBox.Show("Lot Modifié");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                MessageBox.Show("Erreur de communication avec la base de données!");
+            }
+            finally { close(); }
+        }
+
 
     }
 }
