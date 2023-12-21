@@ -50,6 +50,8 @@ namespace GestcomWF.Views
             }
             else
             {
+                WorkSheet workSheet = null;
+                WorkBook workbook = new WorkBook(ExcelFileFormat.XLSX);
 
                 Decimal valeurPrecedente = 0;
 
@@ -66,9 +68,6 @@ namespace GestcomWF.Views
                 }
                 else
                 {
-                    WorkSheet workSheet = null;
-                    WorkBook workbook = new WorkBook(ExcelFileFormat.XLSX);
-
                     string annee = (DateTime.Now.Year / 100).ToString();
                     // Traitement pour chaque entré
                     foreach (EntreeLotFrom entreeLotFrom in entreeLotFroms)

@@ -172,13 +172,6 @@ namespace GestcomWF
             calculatriceToolStripMenuItem.Text = "Calculatrice";
             calculatriceToolStripMenuItem.Click += calculatriceToolStripMenuItem_Click;
             // 
-            // testVBNetToolStripMenuItem
-            // 
-            testVBNetToolStripMenuItem.Name = "testVBNetToolStripMenuItem";
-            testVBNetToolStripMenuItem.Size = new Size(72, 20);
-            testVBNetToolStripMenuItem.Text = "TestVBNet";
-            testVBNetToolStripMenuItem.Click += testVBNetToolStripMenuItem_Click;
-            // 
             // MainWindow
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
