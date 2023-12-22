@@ -6,9 +6,10 @@ namespace GestcomWF.Views
 {
     public partial class edit_pesee : Form
     {
-       
+
 
         private string selectedFilePath = string.Empty;
+        private string moisExcel = string.Empty;
 
         List<MoisNum> listeObjets = new List<MoisNum> {
             new MoisNum { Mois = "Janvier", Numero = 1 },
@@ -84,7 +85,7 @@ namespace GestcomWF.Views
                             workSheet["D9"].Value = entreeLotFrom.FRADR;
                             workSheet["D10"].Value = entreeLotFrom.FRCPOS + " " + entreeLotFrom.FRVILL;
                             workSheet["A15"].Value = "      TB/PB";
-                            workSheet["D16"].Value = "Le" + " " + DateTime.Now.ToString("D");
+                            workSheet["D16"].Value = "Le" + " " + dtpDateExcel.Text;
                             workSheet["B21"].Value = "Monsieur le Président";
                             workSheet["B23"].Value = "Nous vous prions de bien vouloir trouver ci-dessous, le détail des";
                             workSheet["B24"].Value = "pesées concernant vos fabrications de ";
@@ -161,10 +162,9 @@ namespace GestcomWF.Views
                                 workSheet[$"C{currentRow}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
 
 
-
                                 workSheet[$"D{currentRow}"].Value = dateEntry.LOCENB;
                                 workSheet[$"D{currentRow}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
-                                workSheet[$"E{currentRow}"].Value = dateEntry.LOTAUX;
+                                workSheet[$"E{currentRow}"].Value = dateEntry.LOTAUX.ToString("F2") + "%";
                                 workSheet[$"E{currentRow}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
                                 workSheet[$"F{currentRow}"].Value = dateEntry.LOCENN;
                                 workSheet[$"F{currentRow}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
@@ -176,7 +176,7 @@ namespace GestcomWF.Views
                             // Placez le total à 4 cellules en dessous de la dernière ligne remplie
 
 
-                            int totalRow = currentRow + 4;
+                            int totalRow = currentRow + 2;
 
                             workSheet.Merge($"B{totalRow}:B{totalRow - 1}");
                             workSheet[$"B{totalRow - 1}"].Value = "Totaux";
@@ -205,8 +205,8 @@ namespace GestcomWF.Views
                             workSheet[$"C{totalRow - 1}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
                             workSheet[$"C{totalRow - 1}"].Style.VerticalAlignment = IronXL.Styles.VerticalAlignment.Center;
 
-                            workSheet[$"C{totalRow - 1}:C{currentRow + 4}"].Style.TopBorder.SetColor("#000000");
-                            workSheet[$"C{totalRow - 1}:C{currentRow + 4}"].Style.TopBorder.Type = IronXL.Styles.BorderType.Thin;
+                            workSheet[$"C{totalRow - 1}:C{currentRow + 2}"].Style.TopBorder.SetColor("#000000");
+                            workSheet[$"C{totalRow - 1}:C{currentRow + 2}"].Style.TopBorder.Type = IronXL.Styles.BorderType.Thin;
 
                             var sumRangePoidsNet = workSheet[$"F30:F{currentRow - 1}"];
                             workSheet[$"F{totalRow - 1}"].Value = sumRangePoidsNet.Sum();
@@ -217,27 +217,27 @@ namespace GestcomWF.Views
                             workSheet[$"F{totalRow - 1}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
                             workSheet[$"F{totalRow - 1}"].Style.VerticalAlignment = IronXL.Styles.VerticalAlignment.Center;
 
-                            workSheet[$"F{totalRow - 1}:F{currentRow + 4}"].Style.TopBorder.SetColor("#000000");
-                            workSheet[$"F{totalRow - 1}:F{currentRow + 4}"].Style.TopBorder.Type = IronXL.Styles.BorderType.Thin;
+                            workSheet[$"F{totalRow - 1}:F{currentRow + 2}"].Style.TopBorder.SetColor("#000000");
+                            workSheet[$"F{totalRow - 1}:F{currentRow + 2}"].Style.TopBorder.Type = IronXL.Styles.BorderType.Thin;
 
-                            workSheet[$"C27:C{currentRow + 4}"].Style.RightBorder.SetColor("#000000");
-                            workSheet[$"C27:C{currentRow + 4}"].Style.RightBorder.Type = IronXL.Styles.BorderType.Thin;
+                            workSheet[$"C27:C{currentRow + 2}"].Style.RightBorder.SetColor("#000000");
+                            workSheet[$"C27:C{currentRow + 2}"].Style.RightBorder.Type = IronXL.Styles.BorderType.Thin;
 
 
 
                             //this.workSheet[$"B27:B{totalRow}"].Style.RightBorder.SetColor("#000000");
                             //this.workSheet[$"B27:B{totalRow}"].Style.RightBorder.Type = IronXL.Styles.BorderType.Medium;
                             // Bordure à droite de la colonne C
-                            workSheet[$"C27:C{currentRow + 4}"].Style.RightBorder.SetColor("#000000");
-                            workSheet[$"C27:C{currentRow + 4}"].Style.RightBorder.Type = IronXL.Styles.BorderType.Thin;
+                            workSheet[$"C27:C{currentRow + 2}"].Style.RightBorder.SetColor("#000000");
+                            workSheet[$"C27:C{currentRow + 2}"].Style.RightBorder.Type = IronXL.Styles.BorderType.Thin;
 
                             // Ligne à droite de la cellule D
-                            workSheet[$"D27:D{currentRow + 4}"].Style.RightBorder.SetColor("#000000");
-                            workSheet[$"D27:D{currentRow + 4}"].Style.RightBorder.Type = IronXL.Styles.BorderType.Thin;
+                            workSheet[$"D27:D{currentRow + 2}"].Style.RightBorder.SetColor("#000000");
+                            workSheet[$"D27:D{currentRow + 2}"].Style.RightBorder.Type = IronXL.Styles.BorderType.Thin;
 
                             // Ligne à droite de la colonne E
-                            workSheet[$"E27:E{currentRow + 4}"].Style.RightBorder.SetColor("#000000");
-                            workSheet[$"E27:E{currentRow + 4}"].Style.RightBorder.Type = IronXL.Styles.BorderType.Thin;
+                            workSheet[$"E27:E{currentRow + 2}"].Style.RightBorder.SetColor("#000000");
+                            workSheet[$"E27:E{currentRow + 2}"].Style.RightBorder.Type = IronXL.Styles.BorderType.Thin;
 
                             // Ligne à droite du tableau
                             workSheet[$"F27:F{totalRow}"].Style.RightBorder.SetColor("#000000");
@@ -248,8 +248,8 @@ namespace GestcomWF.Views
                             workSheet[$"B27:B{totalRow}"].Style.LeftBorder.Type = IronXL.Styles.BorderType.Thin;
 
                             // Bordure à droite de la colonne B
-                            workSheet[$"B27:B{currentRow + 4}"].Style.RightBorder.SetColor("#000000");
-                            workSheet[$"B27:B{currentRow + 4}"].Style.RightBorder.Type = IronXL.Styles.BorderType.Thin;
+                            workSheet[$"B27:B{currentRow + 2}"].Style.RightBorder.SetColor("#000000");
+                            workSheet[$"B27:B{currentRow + 2}"].Style.RightBorder.Type = IronXL.Styles.BorderType.Thin;
 
 
                             workSheet["B39"].Value = "          Vous en souhaitant bonne réception";
@@ -289,7 +289,15 @@ namespace GestcomWF.Views
                     SaveFileDialog saveFileDialog = new SaveFileDialog();
                     saveFileDialog.Filter = "Excel files(*.xls; *.xlsx)| *.xls; *.xlsx";
                     saveFileDialog.Title = "Enregistrez le fichier sous...";
-                    saveFileDialog.FileName = "saisie_pesee " + moisNum.Mois + ".xls";
+                    if (moisNum.Numero < 10)
+                    {
+                        moisExcel = "0" + moisNum.Numero;
+                    }
+                    else
+                    {
+                        moisExcel = moisNum.Numero.ToString();
+                    }
+                    saveFileDialog.FileName = "Pesée_" + tbxAnnee.Text + moisExcel + ".xls";
                     if (saveFileDialog.ShowDialog() == DialogResult.OK)
                     {
                         string path = saveFileDialog.FileName;

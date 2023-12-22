@@ -22,7 +22,7 @@ namespace Gestcom.ModelAdo
                 open();
 
                 // Création de la commande SQL pour sélectionner les fromageries actives.
-                OleDbCommand oleDbCommand = new OleDbCommand("SELECT FRNUM FROM TB_Fromageries WHERE ((FRACTIF)=True) ORDER BY FRNUM");
+                OleDbCommand oleDbCommand = new OleDbCommand("SELECT FRNUM FROM TB_Fromageries WHERE ((FRAFFINE)=False) AND ((FRACTIF)=True) ORDER BY FRNUM");
                 oleDbCommand.Connection = connection;
 
                 reader = oleDbCommand.ExecuteReader();
@@ -57,7 +57,7 @@ namespace Gestcom.ModelAdo
         }
 
         // Récupère tous les éléments non actifs de la table TB_Fromageries.
-        public static List<Fromagerie> allNonActif()
+        public static List<Fromagerie> allNonAffine()
         {
             try
             {
@@ -70,7 +70,7 @@ namespace Gestcom.ModelAdo
                 open();
 
                 // Création de la commande SQL pour sélectionner les fromageries non actives.
-                OleDbCommand oleDbCommand = new OleDbCommand("SELECT FRNUM FROM TB_Fromageries WHERE ((FRACTIF)=False) ORDER BY FRNUM");
+                OleDbCommand oleDbCommand = new OleDbCommand("SELECT FRNUM FROM TB_Fromageries WHERE ((FRAFFINE)=True) AND ((FRACTIF)=True) ORDER BY FRNUM");
                 oleDbCommand.Connection = connection;
 
                 reader = oleDbCommand.ExecuteReader();

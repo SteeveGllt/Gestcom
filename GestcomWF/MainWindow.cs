@@ -18,12 +18,6 @@ namespace GestcomWF
             entree_Lot.Show();
         }
 
-        private void saisiePeséesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            edit_pesee edit_Pesee = new edit_pesee();
-            edit_Pesee.MdiParent = this;
-            edit_Pesee.Show();
-        }
 
         private void imprimantesToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -58,19 +52,6 @@ namespace GestcomWF
             calculatrice.Show();
         }
 
-        private void saisieAcompteToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            saisie_acompte saisie_Acompte = new saisie_acompte();
-            saisie_Acompte.MdiParent = this;
-            saisie_Acompte.Show();
-        }
-
-        private void saisieRappelToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            saisie_rappel saisie_Rappel = new saisie_rappel();
-            saisie_Rappel.MdiParent = this;
-            saisie_Rappel.Show();
-        }
 
         private void fromageriesToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -89,6 +70,27 @@ namespace GestcomWF
         private void fichiersToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void saisieÉditionDesAcomptesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            saisie_acompte saisie_Acompte = new saisie_acompte();
+            saisie_Acompte.MdiParent = this;
+            saisie_Acompte.Show();
+        }
+
+        private void saisieÉditionDesRappelsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            saisie_rappel saisie_Rappel = new saisie_rappel();
+            saisie_Rappel.MdiParent = this;
+            saisie_Rappel.Show();
+        }
+
+        private void editionDesPeséesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            edit_pesee edit_Pesee = new edit_pesee();
+            edit_Pesee.MdiParent = this;
+            edit_Pesee.Show();
         }
     }
 }

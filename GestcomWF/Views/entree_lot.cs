@@ -27,7 +27,7 @@ namespace GestcomWF.Views
         // Initialisation de la liste des fromageries à partir de la base de données
         private void InitializeFromagerie()
         {
-            this.fromageries = FromagerieAdo.all();
+            this.fromageries = FromagerieAdo.allNonAffine();
             cbxFromagerie.DataSource = null;
             cbxFromagerie.DataSource = this.fromageries;
             cbxFromagerie.DisplayMember = "FRNUM";
@@ -254,7 +254,7 @@ namespace GestcomWF.Views
         {
             if (cbAffiner.Checked)
             {
-                this.fromageries = FromagerieAdo.allNonActif();
+                this.fromageries = FromagerieAdo.all();
                 cbxFromagerie.DataSource = null;
                 cbxFromagerie.DataSource = this.fromageries;
                 cbxFromagerie.DisplayMember = "FRNUM";
