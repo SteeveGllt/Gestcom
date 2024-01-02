@@ -276,8 +276,9 @@ namespace GestcomWF.Views
                                     workSheet["E30"].Style.Font.Bold = true;
                                     workSheet["E30"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
 
-                                    workSheet["G30"].Value = Math.Round((lotFrom.LOC11 / lotFrom.LOCEM1) * 100);
+                                    workSheet["G30"].Value = Math.Round((lotFrom.LOC11 / lotFrom.LOCEM1) * 100) + "%";
                                     workSheet["G30"].Style.Font.Bold = true;
+                                    workSheet["G30"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
 
                                 }
 
@@ -306,8 +307,9 @@ namespace GestcomWF.Views
                                     workSheet["E31"].Style.Font.Bold = true;
                                     workSheet["E31"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
 
-                                    workSheet["G31"].Value = Math.Round((lotFrom.LOC12 / lotFrom.LOCEM1) * 100);
+                                    workSheet["G31"].Value = Math.Round((lotFrom.LOC12 / lotFrom.LOCEM1) * 100) + "%";
                                     workSheet["G31"].Style.Font.Bold = true;
+                                    workSheet["G31"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
                                 }
                                 if (lotFrom.LOC13 != 0)
                                 {
@@ -326,8 +328,9 @@ namespace GestcomWF.Views
                                     workSheet["E32"].Style.Font.Bold = true;
                                     workSheet["E32"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
 
-                                    workSheet["G32"].Value = Math.Round((lotFrom.LOC13 / lotFrom.LOCEM1) * 100);
+                                    workSheet["G32"].Value = Math.Round((lotFrom.LOC13 / lotFrom.LOCEM1) * 100) + "%";
                                     workSheet["G32"].Style.Font.Bold = true;
+                                    workSheet["G32"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
                                 }
 
 
@@ -373,7 +376,9 @@ namespace GestcomWF.Views
                             col4.Width = 2123; // Set width
 
                             RangeColumn col5 = workSheet.GetColumn(5);
-                            col5.Width = 1647; // Set width
+                            col5.Width = 1647; // Set
+
+                           
 
 
 

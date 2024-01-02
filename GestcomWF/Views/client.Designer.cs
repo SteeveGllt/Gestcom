@@ -106,7 +106,7 @@ namespace GestcomWF.Views
             // 
             listView1.Location = new System.Drawing.Point(12, 12);
             listView1.Name = "listView1";
-            listView1.Size = new System.Drawing.Size(218, 435);
+            listView1.Size = new System.Drawing.Size(315, 466);
             listView1.TabIndex = 0;
             listView1.UseCompatibleStateImageBehavior = false;
             listView1.DoubleClick += listView1_DoubleClick;
@@ -116,10 +116,10 @@ namespace GestcomWF.Views
             tabControl1.Controls.Add(tabPage1);
             tabControl1.Controls.Add(tabPage2);
             tabControl1.Controls.Add(tabPage3);
-            tabControl1.Location = new System.Drawing.Point(250, 12);
+            tabControl1.Location = new System.Drawing.Point(344, 12);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new System.Drawing.Size(388, 435);
+            tabControl1.Size = new System.Drawing.Size(495, 466);
             tabControl1.TabIndex = 1;
             // 
             // tabPage1
@@ -168,273 +168,273 @@ namespace GestcomWF.Views
             tabPage1.Location = new System.Drawing.Point(4, 29);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new System.Drawing.Size(380, 402);
+            tabPage1.Size = new System.Drawing.Size(487, 433);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Informations générales";
             tabPage1.UseVisualStyleBackColor = true;
             // 
             // tbxNumClient
             // 
-            tbxNumClient.Location = new System.Drawing.Point(97, 3);
+            tbxNumClient.Location = new System.Drawing.Point(122, 18);
             tbxNumClient.Name = "tbxNumClient";
-            tbxNumClient.Size = new System.Drawing.Size(100, 23);
+            tbxNumClient.Size = new System.Drawing.Size(157, 27);
             tbxNumClient.TabIndex = 40;
             // 
             // label32
             // 
             label32.AutoSize = true;
-            label32.Location = new System.Drawing.Point(8, 9);
+            label32.Location = new System.Drawing.Point(13, 24);
             label32.Name = "label32";
-            label32.Size = new System.Drawing.Size(83, 15);
+            label32.Size = new System.Drawing.Size(103, 20);
             label32.TabIndex = 39;
             label32.Text = "Numéro client";
             // 
             // tbxIntra
             // 
-            tbxIntra.Location = new System.Drawing.Point(326, 327);
+            tbxIntra.Location = new System.Drawing.Point(378, 365);
             tbxIntra.Name = "tbxIntra";
-            tbxIntra.Size = new System.Drawing.Size(46, 23);
+            tbxIntra.Size = new System.Drawing.Size(46, 27);
             tbxIntra.TabIndex = 38;
             // 
             // label31
             // 
             label31.AutoSize = true;
-            label31.Location = new System.Drawing.Point(218, 330);
+            label31.Location = new System.Drawing.Point(246, 368);
             label31.Name = "label31";
-            label31.Size = new System.Drawing.Size(102, 15);
+            label31.Size = new System.Drawing.Size(126, 20);
             label31.TabIndex = 37;
             label31.Text = "Numéro intracom";
             // 
             // tbxDiv
             // 
-            tbxDiv.Location = new System.Drawing.Point(107, 369);
+            tbxDiv.Location = new System.Drawing.Point(105, 401);
             tbxDiv.Name = "tbxDiv";
-            tbxDiv.Size = new System.Drawing.Size(265, 23);
+            tbxDiv.Size = new System.Drawing.Size(374, 27);
             tbxDiv.TabIndex = 36;
             // 
             // label30
             // 
             label30.AutoSize = true;
-            label30.Location = new System.Drawing.Point(8, 372);
+            label30.Location = new System.Drawing.Point(6, 404);
             label30.Name = "label30";
-            label30.Size = new System.Drawing.Size(80, 15);
+            label30.Size = new System.Drawing.Size(99, 20);
             label30.TabIndex = 35;
             label30.Text = "Commentaire";
             // 
             // tbxEnse
             // 
-            tbxEnse.Location = new System.Drawing.Point(264, 287);
+            tbxEnse.Location = new System.Drawing.Point(333, 325);
             tbxEnse.Name = "tbxEnse";
-            tbxEnse.Size = new System.Drawing.Size(46, 23);
+            tbxEnse.Size = new System.Drawing.Size(46, 27);
             tbxEnse.TabIndex = 34;
             // 
             // label29
             // 
             label29.AutoSize = true;
-            label29.Location = new System.Drawing.Point(177, 290);
+            label29.Location = new System.Drawing.Point(220, 328);
             label29.Name = "label29";
-            label29.Size = new System.Drawing.Size(85, 15);
+            label29.Size = new System.Drawing.Size(107, 20);
             label29.TabIndex = 33;
             label29.Text = "Code enseigne";
             // 
             // tbxTVA
             // 
-            tbxTVA.Location = new System.Drawing.Point(228, 246);
+            tbxTVA.Location = new System.Drawing.Point(281, 290);
             tbxTVA.Name = "tbxTVA";
-            tbxTVA.Size = new System.Drawing.Size(46, 23);
+            tbxTVA.Size = new System.Drawing.Size(46, 27);
             tbxTVA.TabIndex = 32;
             // 
             // tbxLivr
             // 
-            tbxLivr.Location = new System.Drawing.Point(133, 287);
+            tbxLivr.Location = new System.Drawing.Point(175, 325);
             tbxLivr.Name = "tbxLivr";
-            tbxLivr.Size = new System.Drawing.Size(39, 23);
+            tbxLivr.Size = new System.Drawing.Size(39, 27);
             tbxLivr.TabIndex = 31;
             // 
             // tbxTran
             // 
-            tbxTran.Location = new System.Drawing.Point(117, 252);
+            tbxTran.Location = new System.Drawing.Point(137, 290);
             tbxTran.Name = "tbxTran";
-            tbxTran.Size = new System.Drawing.Size(39, 23);
+            tbxTran.Size = new System.Drawing.Size(39, 27);
             tbxTran.TabIndex = 30;
             // 
             // label28
             // 
             label28.AutoSize = true;
-            label28.Location = new System.Drawing.Point(164, 249);
+            label28.Location = new System.Drawing.Point(194, 293);
             label28.Name = "label28";
-            label28.Size = new System.Drawing.Size(58, 15);
+            label28.Size = new System.Drawing.Size(74, 20);
             label28.TabIndex = 29;
             label28.Text = "Code TVA";
             // 
             // tbxCode
             // 
-            tbxCode.Location = new System.Drawing.Point(313, 213);
+            tbxCode.Location = new System.Drawing.Point(382, 254);
             tbxCode.Name = "tbxCode";
-            tbxCode.Size = new System.Drawing.Size(46, 23);
+            tbxCode.Size = new System.Drawing.Size(46, 27);
             tbxCode.TabIndex = 28;
             // 
             // label27
             // 
             label27.AutoSize = true;
-            label27.Location = new System.Drawing.Point(164, 216);
+            label27.Location = new System.Drawing.Point(197, 254);
             label27.Name = "label27";
-            label27.Size = new System.Drawing.Size(143, 15);
+            label27.Size = new System.Drawing.Size(179, 20);
             label27.TabIndex = 27;
             label27.Text = "Code remise (P ou V ou /)";
             // 
             // tbxRemi
             // 
-            tbxRemi.Location = new System.Drawing.Point(277, 172);
+            tbxRemi.Location = new System.Drawing.Point(341, 210);
             tbxRemi.Name = "tbxRemi";
-            tbxRemi.Size = new System.Drawing.Size(46, 23);
+            tbxRemi.Size = new System.Drawing.Size(46, 27);
             tbxRemi.TabIndex = 26;
             // 
             // label26
             // 
             label26.AutoSize = true;
-            label26.Location = new System.Drawing.Point(164, 175);
+            label26.Location = new System.Drawing.Point(201, 213);
             label26.Name = "label26";
-            label26.Size = new System.Drawing.Size(107, 15);
+            label26.Size = new System.Drawing.Size(134, 20);
             label26.TabIndex = 25;
             label26.Text = "% ou valeur remise";
             // 
             // tbxRist
             // 
-            tbxRist.Location = new System.Drawing.Point(313, 133);
+            tbxRist.Location = new System.Drawing.Point(376, 171);
             tbxRist.Name = "tbxRist";
-            tbxRist.Size = new System.Drawing.Size(46, 23);
+            tbxRist.Size = new System.Drawing.Size(46, 27);
             tbxRist.TabIndex = 24;
             // 
             // label25
             // 
             label25.AutoSize = true;
-            label25.Location = new System.Drawing.Point(164, 136);
+            label25.Location = new System.Drawing.Point(205, 174);
             label25.Name = "label25";
-            label25.Size = new System.Drawing.Size(133, 15);
+            label25.Size = new System.Drawing.Size(165, 20);
             label25.TabIndex = 23;
             label25.Text = "Numéro client ristourne";
             // 
             // tbxComp
             // 
-            tbxComp.Location = new System.Drawing.Point(157, 327);
+            tbxComp.Location = new System.Drawing.Point(194, 365);
             tbxComp.Name = "tbxComp";
-            tbxComp.Size = new System.Drawing.Size(46, 23);
+            tbxComp.Size = new System.Drawing.Size(46, 27);
             tbxComp.TabIndex = 22;
             // 
             // label24
             // 
             label24.AutoSize = true;
-            label24.Location = new System.Drawing.Point(8, 330);
+            label24.Location = new System.Drawing.Point(12, 368);
             label24.Name = "label24";
-            label24.Size = new System.Drawing.Size(143, 15);
+            label24.Size = new System.Drawing.Size(179, 20);
             label24.TabIndex = 21;
             label24.Text = "Numéro client comptable";
             // 
             // label23
             // 
             label23.AutoSize = true;
-            label23.Location = new System.Drawing.Point(8, 290);
+            label23.Location = new System.Drawing.Point(12, 328);
             label23.Name = "label23";
-            label23.Size = new System.Drawing.Size(128, 15);
+            label23.Size = new System.Drawing.Size(161, 20);
             label23.TabIndex = 20;
             label23.Text = "Code livraison habituel";
             // 
             // label22
             // 
             label22.AutoSize = true;
-            label22.Location = new System.Drawing.Point(7, 255);
+            label22.Location = new System.Drawing.Point(11, 293);
             label22.Name = "label22";
-            label22.Size = new System.Drawing.Size(103, 15);
+            label22.Size = new System.Drawing.Size(129, 20);
             label22.TabIndex = 19;
             label22.Text = "Code transporteur";
             // 
             // tbxEdit
             // 
-            tbxEdit.Location = new System.Drawing.Point(117, 211);
+            tbxEdit.Location = new System.Drawing.Point(152, 251);
             tbxEdit.Name = "tbxEdit";
-            tbxEdit.Size = new System.Drawing.Size(39, 23);
+            tbxEdit.Size = new System.Drawing.Size(39, 27);
             tbxEdit.TabIndex = 18;
             // 
             // label21
             // 
             label21.AutoSize = true;
-            label21.Location = new System.Drawing.Point(7, 214);
+            label21.Location = new System.Drawing.Point(11, 252);
             label21.Name = "label21";
-            label21.Size = new System.Drawing.Size(110, 15);
+            label21.Size = new System.Drawing.Size(138, 20);
             label21.TabIndex = 17;
             label21.Text = "Code édition sur BL";
             // 
             // tbxRep
             // 
-            tbxRep.Location = new System.Drawing.Point(117, 172);
+            tbxRep.Location = new System.Drawing.Point(148, 210);
             tbxRep.Name = "tbxRep";
-            tbxRep.Size = new System.Drawing.Size(39, 23);
+            tbxRep.Size = new System.Drawing.Size(39, 27);
             tbxRep.TabIndex = 16;
             // 
             // label20
             // 
             label20.AutoSize = true;
-            label20.Location = new System.Drawing.Point(7, 175);
+            label20.Location = new System.Drawing.Point(11, 213);
             label20.Name = "label20";
-            label20.Size = new System.Drawing.Size(104, 15);
+            label20.Size = new System.Drawing.Size(131, 20);
             label20.TabIndex = 15;
             label20.Text = "Code représentant";
             // 
             // tbxFamilleClient
             // 
-            tbxFamilleClient.Location = new System.Drawing.Point(107, 133);
+            tbxFamilleClient.Location = new System.Drawing.Point(134, 171);
             tbxFamilleClient.Name = "tbxFamilleClient";
-            tbxFamilleClient.Size = new System.Drawing.Size(36, 23);
+            tbxFamilleClient.Size = new System.Drawing.Size(36, 27);
             tbxFamilleClient.TabIndex = 14;
             // 
             // label19
             // 
             label19.AutoSize = true;
-            label19.Location = new System.Drawing.Point(7, 136);
+            label19.Location = new System.Drawing.Point(11, 174);
             label19.Name = "label19";
-            label19.Size = new System.Drawing.Size(94, 15);
+            label19.Size = new System.Drawing.Size(117, 20);
             label19.TabIndex = 13;
             label19.Text = "Famille du client";
             // 
             // tbxAdresse2
             // 
-            tbxAdresse2.Location = new System.Drawing.Point(236, 95);
+            tbxAdresse2.Location = new System.Drawing.Point(240, 133);
             tbxAdresse2.Name = "tbxAdresse2";
             tbxAdresse2.Size = new System.Drawing.Size(136, 27);
             tbxAdresse2.TabIndex = 12;
             // 
             // tbxVille
             // 
-            tbxVille.Location = new System.Drawing.Point(47, 95);
+            tbxVille.Location = new System.Drawing.Point(51, 133);
             tbxVille.Name = "tbxVille";
             tbxVille.Size = new System.Drawing.Size(124, 27);
             tbxVille.TabIndex = 11;
             // 
             // tbxCp
             // 
-            tbxCp.Location = new System.Drawing.Point(283, 64);
+            tbxCp.Location = new System.Drawing.Point(326, 97);
             tbxCp.Name = "tbxCp";
             tbxCp.Size = new System.Drawing.Size(89, 27);
             tbxCp.TabIndex = 10;
             // 
             // tbxAdresse1
             // 
-            tbxAdresse1.Location = new System.Drawing.Point(66, 64);
+            tbxAdresse1.Location = new System.Drawing.Point(92, 97);
             tbxAdresse1.Name = "tbxAdresse1";
             tbxAdresse1.Size = new System.Drawing.Size(136, 27);
             tbxAdresse1.TabIndex = 9;
             // 
             // tbxMtdi
             // 
-            tbxMtdi.Location = new System.Drawing.Point(197, 29);
+            tbxMtdi.Location = new System.Drawing.Point(203, 58);
             tbxMtdi.Name = "tbxMtdi";
             tbxMtdi.Size = new System.Drawing.Size(100, 27);
             tbxMtdi.TabIndex = 8;
             // 
             // tbxNom
             // 
-            tbxNom.Location = new System.Drawing.Point(46, 29);
+            tbxNom.Location = new System.Drawing.Point(52, 58);
             tbxNom.Name = "tbxNom";
             tbxNom.Size = new System.Drawing.Size(100, 27);
             tbxNom.TabIndex = 7;
@@ -442,7 +442,7 @@ namespace GestcomWF.Views
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new System.Drawing.Point(177, 98);
+            label7.Location = new System.Drawing.Point(181, 136);
             label7.Name = "label7";
             label7.Size = new System.Drawing.Size(73, 20);
             label7.TabIndex = 6;
@@ -451,7 +451,7 @@ namespace GestcomWF.Views
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new System.Drawing.Point(7, 98);
+            label6.Location = new System.Drawing.Point(11, 136);
             label6.Name = "label6";
             label6.Size = new System.Drawing.Size(38, 20);
             label6.TabIndex = 5;
@@ -460,7 +460,7 @@ namespace GestcomWF.Views
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new System.Drawing.Point(208, 67);
+            label5.Location = new System.Drawing.Point(240, 100);
             label5.Name = "label5";
             label5.Size = new System.Drawing.Size(89, 20);
             label5.TabIndex = 4;
@@ -469,7 +469,7 @@ namespace GestcomWF.Views
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new System.Drawing.Point(7, 67);
+            label4.Location = new System.Drawing.Point(13, 100);
             label4.Name = "label4";
             label4.Size = new System.Drawing.Size(73, 20);
             label4.TabIndex = 3;
@@ -478,7 +478,7 @@ namespace GestcomWF.Views
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new System.Drawing.Point(156, 32);
+            label3.Location = new System.Drawing.Point(162, 61);
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(45, 20);
             label3.TabIndex = 2;
@@ -488,7 +488,7 @@ namespace GestcomWF.Views
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(7, 32);
+            label2.Location = new System.Drawing.Point(13, 61);
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(42, 20);
             label2.TabIndex = 1;
@@ -516,14 +516,14 @@ namespace GestcomWF.Views
             tabPage2.Location = new System.Drawing.Point(4, 29);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new System.Drawing.Size(380, 402);
+            tabPage2.Size = new System.Drawing.Size(487, 433);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Banque";
             tabPage2.UseVisualStyleBackColor = true;
             // 
             // tbxDom
             // 
-            tbxDom.Location = new System.Drawing.Point(9, 145);
+            tbxDom.Location = new System.Drawing.Point(122, 109);
             tbxDom.Name = "tbxDom";
             tbxDom.Size = new System.Drawing.Size(213, 27);
             tbxDom.TabIndex = 10;
@@ -531,7 +531,7 @@ namespace GestcomWF.Views
             // label12
             // 
             label12.AutoSize = true;
-            label12.Location = new System.Drawing.Point(9, 127);
+            label12.Location = new System.Drawing.Point(9, 112);
             label12.Name = "label12";
             label12.Size = new System.Drawing.Size(99, 20);
             label12.TabIndex = 9;
@@ -539,7 +539,7 @@ namespace GestcomWF.Views
             // 
             // tbxRib
             // 
-            tbxRib.Location = new System.Drawing.Point(185, 78);
+            tbxRib.Location = new System.Drawing.Point(379, 55);
             tbxRib.MaxLength = 2;
             tbxRib.Name = "tbxRib";
             tbxRib.Size = new System.Drawing.Size(58, 27);
@@ -548,7 +548,7 @@ namespace GestcomWF.Views
             // label11
             // 
             label11.AutoSize = true;
-            label11.Location = new System.Drawing.Point(185, 60);
+            label11.Location = new System.Drawing.Point(342, 58);
             label11.Name = "label11";
             label11.Size = new System.Drawing.Size(31, 20);
             label11.TabIndex = 7;
@@ -556,10 +556,10 @@ namespace GestcomWF.Views
             // 
             // tbxCompte
             // 
-            tbxCompte.Location = new System.Drawing.Point(9, 78);
+            tbxCompte.Location = new System.Drawing.Point(156, 57);
             tbxCompte.MaxLength = 11;
             tbxCompte.Name = "tbxCompte";
-            tbxCompte.Size = new System.Drawing.Size(155, 27);
+            tbxCompte.Size = new System.Drawing.Size(180, 27);
             tbxCompte.TabIndex = 6;
             // 
             // label10
@@ -573,7 +573,7 @@ namespace GestcomWF.Views
             // 
             // tbxGui
             // 
-            tbxGui.Location = new System.Drawing.Point(126, 21);
+            tbxGui.Location = new System.Drawing.Point(342, 7);
             tbxGui.MaxLength = 5;
             tbxGui.Name = "tbxGui";
             tbxGui.Size = new System.Drawing.Size(82, 27);
@@ -582,7 +582,7 @@ namespace GestcomWF.Views
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new System.Drawing.Point(126, 3);
+            label9.Location = new System.Drawing.Point(238, 10);
             label9.Name = "label9";
             label9.Size = new System.Drawing.Size(98, 20);
             label9.TabIndex = 3;
@@ -590,7 +590,7 @@ namespace GestcomWF.Views
             // 
             // tbxBanque
             // 
-            tbxBanque.Location = new System.Drawing.Point(9, 21);
+            tbxBanque.Location = new System.Drawing.Point(114, 7);
             tbxBanque.MaxLength = 5;
             tbxBanque.Name = "tbxBanque";
             tbxBanque.Size = new System.Drawing.Size(100, 27);
@@ -599,7 +599,7 @@ namespace GestcomWF.Views
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new System.Drawing.Point(9, 3);
+            label8.Location = new System.Drawing.Point(10, 10);
             label8.Name = "label8";
             label8.Size = new System.Drawing.Size(98, 20);
             label8.TabIndex = 0;
@@ -619,20 +619,20 @@ namespace GestcomWF.Views
             tabPage3.Controls.Add(label14);
             tabPage3.Controls.Add(cbxReglement);
             tabPage3.Controls.Add(label13);
-            tabPage3.Location = new System.Drawing.Point(4, 24);
+            tabPage3.Location = new System.Drawing.Point(4, 29);
             tabPage3.Name = "tabPage3";
             tabPage3.Padding = new Padding(3);
-            tabPage3.Size = new System.Drawing.Size(380, 402);
+            tabPage3.Size = new System.Drawing.Size(487, 433);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "Règlement";
             tabPage3.UseVisualStyleBackColor = true;
             // 
             // tbxFacturation
             // 
-            tbxFacturation.Location = new System.Drawing.Point(133, 234);
+            tbxFacturation.Location = new System.Drawing.Point(142, 234);
             tbxFacturation.MaxLength = 1;
             tbxFacturation.Name = "tbxFacturation";
-            tbxFacturation.Size = new System.Drawing.Size(49, 23);
+            tbxFacturation.Size = new System.Drawing.Size(49, 27);
             tbxFacturation.TabIndex = 11;
             // 
             // label18
@@ -640,7 +640,7 @@ namespace GestcomWF.Views
             label18.AutoSize = true;
             label18.Location = new System.Drawing.Point(16, 237);
             label18.Name = "label18";
-            label18.Size = new System.Drawing.Size(96, 15);
+            label18.Size = new System.Drawing.Size(120, 20);
             label18.TabIndex = 10;
             label18.Text = "Code facturation";
             // 
@@ -649,7 +649,7 @@ namespace GestcomWF.Views
             tbxDecalageArrive.Location = new System.Drawing.Point(133, 188);
             tbxDecalageArrive.MaxLength = 1;
             tbxDecalageArrive.Name = "tbxDecalageArrive";
-            tbxDecalageArrive.Size = new System.Drawing.Size(49, 23);
+            tbxDecalageArrive.Size = new System.Drawing.Size(49, 27);
             tbxDecalageArrive.TabIndex = 9;
             // 
             // label17
@@ -657,16 +657,16 @@ namespace GestcomWF.Views
             label17.AutoSize = true;
             label17.Location = new System.Drawing.Point(16, 191);
             label17.Name = "label17";
-            label17.Size = new System.Drawing.Size(87, 15);
+            label17.Size = new System.Drawing.Size(113, 20);
             label17.TabIndex = 8;
             label17.Text = "Décalage arrivé";
             // 
             // tbxEche
             // 
-            tbxEche.Location = new System.Drawing.Point(181, 142);
+            tbxEche.Location = new System.Drawing.Point(221, 142);
             tbxEche.MaxLength = 2;
             tbxEche.Name = "tbxEche";
-            tbxEche.Size = new System.Drawing.Size(49, 23);
+            tbxEche.Size = new System.Drawing.Size(49, 27);
             tbxEche.TabIndex = 7;
             // 
             // label16
@@ -674,16 +674,16 @@ namespace GestcomWF.Views
             label16.AutoSize = true;
             label16.Location = new System.Drawing.Point(16, 145);
             label16.Name = "label16";
-            label16.Size = new System.Drawing.Size(159, 15);
+            label16.Size = new System.Drawing.Size(199, 20);
             label16.TabIndex = 6;
             label16.Text = "Nombre de jours d'échéance";
             // 
             // tbxDecalageDepart
             // 
-            tbxDecalageDepart.Location = new System.Drawing.Point(133, 95);
+            tbxDecalageDepart.Location = new System.Drawing.Point(142, 95);
             tbxDecalageDepart.MaxLength = 1;
             tbxDecalageDepart.Name = "tbxDecalageDepart";
-            tbxDecalageDepart.Size = new System.Drawing.Size(49, 23);
+            tbxDecalageDepart.Size = new System.Drawing.Size(49, 27);
             tbxDecalageDepart.TabIndex = 5;
             // 
             // label15
@@ -691,15 +691,15 @@ namespace GestcomWF.Views
             label15.AutoSize = true;
             label15.Location = new System.Drawing.Point(16, 98);
             label15.Name = "label15";
-            label15.Size = new System.Drawing.Size(92, 15);
+            label15.Size = new System.Drawing.Size(120, 20);
             label15.TabIndex = 4;
             label15.Text = "Décalage départ";
             // 
             // tbxBaseDepart
             // 
-            tbxBaseDepart.Location = new System.Drawing.Point(133, 53);
+            tbxBaseDepart.Location = new System.Drawing.Point(163, 53);
             tbxBaseDepart.Name = "tbxBaseDepart";
-            tbxBaseDepart.Size = new System.Drawing.Size(49, 23);
+            tbxBaseDepart.Size = new System.Drawing.Size(49, 27);
             tbxBaseDepart.TabIndex = 3;
             // 
             // label14
@@ -707,16 +707,16 @@ namespace GestcomWF.Views
             label14.AutoSize = true;
             label14.Location = new System.Drawing.Point(16, 56);
             label14.Name = "label14";
-            label14.Size = new System.Drawing.Size(111, 15);
+            label14.Size = new System.Drawing.Size(145, 20);
             label14.TabIndex = 2;
             label14.Text = "Date de base départ";
             // 
             // cbxReglement
             // 
             cbxReglement.FormattingEnabled = true;
-            cbxReglement.Location = new System.Drawing.Point(133, 11);
+            cbxReglement.Location = new System.Drawing.Point(163, 11);
             cbxReglement.Name = "cbxReglement";
-            cbxReglement.Size = new System.Drawing.Size(49, 23);
+            cbxReglement.Size = new System.Drawing.Size(49, 28);
             cbxReglement.TabIndex = 1;
             // 
             // label13
@@ -724,15 +724,15 @@ namespace GestcomWF.Views
             label13.AutoSize = true;
             label13.Location = new System.Drawing.Point(16, 14);
             label13.Name = "label13";
-            label13.Size = new System.Drawing.Size(111, 15);
+            label13.Size = new System.Drawing.Size(141, 20);
             label13.TabIndex = 0;
             label13.Text = "Mode de réglement";
             // 
             // btnCreate
             // 
-            btnCreate.Location = new System.Drawing.Point(559, 453);
+            btnCreate.Location = new System.Drawing.Point(741, 488);
             btnCreate.Name = "btnCreate";
-            btnCreate.Size = new System.Drawing.Size(75, 23);
+            btnCreate.Size = new System.Drawing.Size(89, 27);
             btnCreate.TabIndex = 2;
             btnCreate.Text = "Dupliquer";
             btnCreate.UseVisualStyleBackColor = true;
@@ -740,9 +740,9 @@ namespace GestcomWF.Views
             // 
             // button1
             // 
-            button1.Location = new System.Drawing.Point(478, 453);
+            button1.Location = new System.Drawing.Point(660, 488);
             button1.Name = "button1";
-            button1.Size = new System.Drawing.Size(75, 23);
+            button1.Size = new System.Drawing.Size(75, 27);
             button1.TabIndex = 3;
             button1.Text = "Modifier";
             button1.UseVisualStyleBackColor = true;
@@ -750,7 +750,7 @@ namespace GestcomWF.Views
             // 
             // client
             // 
-            ClientSize = new System.Drawing.Size(650, 486);
+            ClientSize = new System.Drawing.Size(855, 527);
             Controls.Add(button1);
             Controls.Add(btnCreate);
             Controls.Add(tabControl1);

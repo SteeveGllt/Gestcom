@@ -332,7 +332,7 @@ namespace GestcomWF.Views
                             col8.Width = 1317; // Set width
 
                             RangeColumn col9 = workSheet.GetColumn(9);
-                            col9.Width = 842; // Set width
+                            col9.Width = 4094; // Set width
 
 
                             workSheet["A29"].Value = " ";
