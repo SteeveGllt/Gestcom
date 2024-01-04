@@ -158,5 +158,10 @@ namespace GestcomWF.Views
                 //do something else
             }
         }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

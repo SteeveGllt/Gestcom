@@ -92,5 +92,12 @@ namespace GestcomWF
             edit_Pesee.MdiParent = this;
             edit_Pesee.Show();
         }
+
+        private void articlesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            article article = new article();
+            article.MdiParent = this;
+            article.Show();
+        }
     }
 }

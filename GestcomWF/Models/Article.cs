@@ -32,5 +32,7 @@ namespace Gestcom.Models
             this.ARDIV = ARDIV;
             this.ARSUPP = ARSUPP;
         }
+
+        public Article() { }
     }
 }

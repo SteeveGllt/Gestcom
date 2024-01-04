@@ -82,6 +82,7 @@ namespace GestcomWF
             articlesToolStripMenuItem.Name = "articlesToolStripMenuItem";
             articlesToolStripMenuItem.Size = new Size(180, 22);
             articlesToolStripMenuItem.Text = "Articles";
+            articlesToolStripMenuItem.Click += articlesToolStripMenuItem_Click;
             // 
             // tarifsToolStripMenuItem
             // 
