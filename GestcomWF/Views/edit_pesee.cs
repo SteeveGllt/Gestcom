@@ -196,10 +196,6 @@ namespace GestcomWF.Views
                             workSheet[$"B{totalRow}:F{totalRow}"].Style.BottomBorder.SetColor("#000000");
                             workSheet[$"B{totalRow}:F{totalRow}"].Style.BottomBorder.Type = IronXL.Styles.BorderType.Thin;
 
-
-
-
-
                             workSheet.Merge($"C{totalRow}:C{totalRow - 1}");
                             workSheet.Merge($"F{totalRow}:F{totalRow - 1}");
 
