@@ -159,22 +159,25 @@ namespace GestcomWF.Views
                                 workSheet[$"B{currentRow}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
 
                                 workSheet[$"C{currentRow}"].Value = dateEntry.LOCENM;
-                                workSheet[$"C{currentRow}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
-
+                                workSheet[$"C{currentRow}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
+                                workSheet[$"C{currentRow}"].FormatString = "# ##0    "; ;
 
                                 workSheet[$"D{currentRow}"].Value = dateEntry.LOCENB;
-                                workSheet[$"D{currentRow}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
+                                workSheet[$"D{currentRow}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
+                                workSheet[$"D{currentRow}"].FormatString = "# ##0    "; ;
+
+
                                 workSheet[$"E{currentRow}"].Value = dateEntry.LOTAUX.ToString("F2") + "%";
                                 workSheet[$"E{currentRow}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
+
                                 workSheet[$"F{currentRow}"].Value = dateEntry.LOCENN;
-                                workSheet[$"F{currentRow}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
+                                workSheet[$"F{currentRow}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
+                                workSheet[$"F{currentRow}"].FormatString = "# ##0    ";
 
 
 
                                 currentRow++;
                             }
-                            // Placez le total à 4 cellules en dessous de la dernière ligne remplie
-
 
                             int totalRow = currentRow + 2;
 
@@ -197,24 +200,25 @@ namespace GestcomWF.Views
                             workSheet.Merge($"F{totalRow}:F{totalRow - 1}");
 
                             var sumRange = workSheet[$"C30:C{currentRow - 1}"];
-                            workSheet[$"C{totalRow - 1}"].Value = sumRange.Sum();
+                            workSheet[$"C{totalRow - 1}"].Formula = "=SUM(C29:" + $"C{currentRow - 1})";
 
                             workSheet[$"C{totalRow - 1}"].Style.Font.Bold = true;
 
                             // Appliquer l'alignement horizontal et vertical au contenu
-                            workSheet[$"C{totalRow - 1}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
+                            workSheet[$"C{totalRow - 1}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
+                            workSheet[$"C{totalRow - 1}"].FormatString = "# ##0    ";
                             workSheet[$"C{totalRow - 1}"].Style.VerticalAlignment = IronXL.Styles.VerticalAlignment.Center;
 
                             workSheet[$"C{totalRow - 1}:C{currentRow + 2}"].Style.TopBorder.SetColor("#000000");
                             workSheet[$"C{totalRow - 1}:C{currentRow + 2}"].Style.TopBorder.Type = IronXL.Styles.BorderType.Thin;
 
                             var sumRangePoidsNet = workSheet[$"F30:F{currentRow - 1}"];
-                            workSheet[$"F{totalRow - 1}"].Value = sumRangePoidsNet.Sum();
-
+                            workSheet[$"F{totalRow - 1}"].Formula = "=SUM(F29:" + $"F{currentRow - 1})";
                             workSheet[$"F{totalRow - 1}"].Style.Font.Bold = true;
 
                             // Appliquer l'alignement horizontal et vertical au contenu
-                            workSheet[$"F{totalRow - 1}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
+                            workSheet[$"F{totalRow - 1}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
+                            workSheet[$"F{totalRow - 1}"].FormatString = "# ##0    ";
                             workSheet[$"F{totalRow - 1}"].Style.VerticalAlignment = IronXL.Styles.VerticalAlignment.Center;
 
                             workSheet[$"F{totalRow - 1}:F{currentRow + 2}"].Style.TopBorder.SetColor("#000000");

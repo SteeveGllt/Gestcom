@@ -56,6 +56,8 @@ namespace GestcomWF.Views
             dtpDateFin = new DateTimePicker();
             button1 = new Button();
             cbAffiner = new CheckBox();
+            lbPrixUnitaire = new Label();
+            tbxPrixUnitaire = new TextBox();
             SuspendLayout();
             // 
             // lblFromagerie
@@ -270,12 +272,33 @@ namespace GestcomWF.Views
             cbAffiner.UseVisualStyleBackColor = true;
             cbAffiner.CheckedChanged += cbAffiner_CheckedChanged;
             // 
+            // lbPrixUnitaire
+            // 
+            lbPrixUnitaire.AutoSize = true;
+            lbPrixUnitaire.Font = new Font("Arial", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lbPrixUnitaire.Location = new Point(26, 162);
+            lbPrixUnitaire.Name = "lbPrixUnitaire";
+            lbPrixUnitaire.Size = new Size(90, 18);
+            lbPrixUnitaire.TabIndex = 28;
+            lbPrixUnitaire.Text = "Prix unitaire";
+            lbPrixUnitaire.Visible = false;
+            // 
+            // tbxPrixUnitaire
+            // 
+            tbxPrixUnitaire.Location = new Point(163, 162);
+            tbxPrixUnitaire.Name = "tbxPrixUnitaire";
+            tbxPrixUnitaire.Size = new Size(76, 23);
+            tbxPrixUnitaire.TabIndex = 29;
+            tbxPrixUnitaire.Visible = false;
+            // 
             // entree_lot
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = System.Drawing.Color.LightGray;
             ClientSize = new Size(570, 545);
+            Controls.Add(lbPrixUnitaire);
+            Controls.Add(tbxPrixUnitaire);
             Controls.Add(cbAffiner);
             Controls.Add(button1);
             Controls.Add(dtpDateFin);
@@ -332,5 +355,7 @@ namespace GestcomWF.Views
         private DateTimePicker dtpDateFin;
         private Button button1;
         private CheckBox cbAffiner;
+        private Label lbPrixUnitaire;
+        private TextBox tbxPrixUnitaire;
     }
 }

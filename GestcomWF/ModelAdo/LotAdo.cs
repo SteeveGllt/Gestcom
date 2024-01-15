@@ -202,7 +202,7 @@ namespace Gestcom.ModelAdo
                 OleDbCommand oleDbCommand = new OleDbCommand("SELECT TB_Entrée_Lots.LOFROM, TB_Entrée_Lots.LOANNE, TB_Entrée_Lots.LOMOIS, TB_Entrée_Lots.Date_Entrée, " +
                     "TB_Entrée_Lots.LOCENM, TB_Entrée_Lots.LOCENB, TB_Entrée_Lots.LOCENN, TB_Entrée_Lots.LOTAUX, TB_Fromageries.FRNUM, TB_Fromageries.FRNOM, " +
                     "TB_Fromageries.FRADR, TB_Fromageries.FRCPOS, TB_Fromageries.FRVILL, TB_Fromageries.FRNDIR FROM TB_Entrée_Lots INNER JOIN TB_Fromageries ON " +
-                    "TB_Entrée_Lots.LOFROM = TB_Fromageries.FRNUM WHERE LOMOIS = @LOMOIS AND LOANNE = @LOANNE ORDER BY TB_Entrée_Lots.LOFROM;");
+                    "TB_Entrée_Lots.LOFROM = TB_Fromageries.FRNUM WHERE LOMOIS = @LOMOIS AND LOANNE = @LOANNE ORDER BY TB_Entrée_Lots.LOFROM,TB_Entrée_Lots.Date_Entrée;");
                 oleDbCommand.Connection = connection;
                 oleDbCommand.Prepare();
                 oleDbCommand.Parameters.AddWithValue("@LOMOIS", mois);
@@ -242,7 +242,7 @@ namespace Gestcom.ModelAdo
                 open();
                 OleDbCommand oleDbCommand = new OleDbCommand();
                 oleDbCommand.Connection = connection;
-                oleDbCommand.CommandText = "SELECT LOFROM, LOCEM1, LOC11, LOC12, LOC13 FROM TB_Lots WHERE LOANNE = @LOANNE AND LOMOIS = @LOMOIS";
+                oleDbCommand.CommandText = "SELECT LOFROM, LOCEM1, LOC11, LOC12, LOC13 FROM TB_Lots INNER JOIN TB_Fromageries ON TB_Lots.LOFROM = TB_Fromageries.FRNUM WHERE ((TB_Fromageries.FRAFFINE)=True) AND ((TB_Fromageries.FRACTIF)=True) AND LOANNE = @LOANNE AND LOMOIS = @LOMOIS ";
                 oleDbCommand.Prepare();
                 oleDbCommand.Parameters.AddWithValue("@LOANNE", loanne);
                 oleDbCommand.Parameters.AddWithValue("@LOMOIS", lomois);
@@ -375,7 +375,7 @@ namespace Gestcom.ModelAdo
                 open();
                 OleDbCommand oleDbCommand = new OleDbCommand();
                 oleDbCommand.Connection = connection;
-                oleDbCommand.CommandText = "SELECT LOFROM, LOCEM1, LOPUAC FROM TB_Lots WHERE LOANNE = @LOANNE AND LOMOIS = @LOMOIS";
+                oleDbCommand.CommandText = "SELECT LOFROM, LOCEM1, LOPUAC FROM TB_Lots INNER JOIN TB_Fromageries ON TB_Lots.LOFROM = TB_Fromageries.FRNUM WHERE ((TB_Fromageries.FRAFFINE)=False) AND ((TB_Fromageries.FRACTIF)=True) AND LOANNE = @LOANNE AND LOMOIS = @LOMOIS";
                 oleDbCommand.Prepare();
                 oleDbCommand.Parameters.AddWithValue("@LOANNE", loanne);
                 oleDbCommand.Parameters.AddWithValue("@LOMOIS", lomois);
@@ -465,7 +465,7 @@ namespace Gestcom.ModelAdo
                 open();
                 OleDbCommand oleDbCommand = new OleDbCommand();
                 oleDbCommand.Connection = connection;
-                oleDbCommand.CommandText = "SELECT LOFROM, LOCEM1, LOCEN1, LOC11, LOC12, LOC13, LOPU1, LOPU2, LOPU3, MONTANT FROM TB_Lots WHERE LOANNE = @LOANNE AND LOMOIS = @LOMOIS";
+                oleDbCommand.CommandText = "SELECT LOFROM, LOCEM1, LOCEN1, LOC11, LOC12, LOC13, LOPU1, LOPU2, LOPU3, MONTANT FROM TB_Lots INNER JOIN TB_Fromageries ON TB_Lots.LOFROM = TB_Fromageries.FRNUM WHERE ((TB_Fromageries.FRAFFINE)=False) AND ((TB_Fromageries.FRACTIF)=True) AND LOANNE = @LOANNE AND LOMOIS = @LOMOIS";
                 oleDbCommand.Prepare();
                 oleDbCommand.Parameters.AddWithValue("@LOANNE", loanne);
                 oleDbCommand.Parameters.AddWithValue("@LOMOIS", lomois);

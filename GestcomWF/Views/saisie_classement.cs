@@ -3,6 +3,7 @@ using Gestcom.ModelAdo;
 using Gestcom.Models;
 using GestcomWF.Classes;
 using IronXL;
+using System.Windows.Forms;
 
 namespace GestcomWF.Views
 {
@@ -12,7 +13,7 @@ namespace GestcomWF.Views
         // Membre pour garder une trace du lot actuel
         private Lot _currentLot = null;
 
-        
+        private string moisExcel = string.Empty;
 
         // Liste des mois pour la combobox
         List<MoisNum> listeObjets = new List<MoisNum> {
@@ -42,7 +43,10 @@ namespace GestcomWF.Views
             // Initialiser le DataGridView sans source de données
             dataGridView.DataSource = null;
 
+            RemplirComboBox(DateTime.Now);
+            AjusterAnneeAuDemarrage();
         }
+
 
         // Génère des lots basés sur le mois et l'année entrés
         private void buttonGenerer_Click(object sender, EventArgs e)
@@ -83,7 +87,15 @@ namespace GestcomWF.Views
             if (row != null && row.DataBoundItem is Lot lot)
             {
                 tbx_total.Text = lot.LOCEM1.ToString();
-                tbx_a.Text = lot.LOC11.ToString();
+                if (lot.LOC11 == 0)
+                {
+                    tbx_a.Text = lot.LOCEM1.ToString();
+                }
+                else
+                {
+                    tbx_a.Text = lot.LOC11.ToString();
+                }
+
                 tbx_b.Text = lot.LOC12.ToString();
                 tbx_c.Text = lot.LOC13.ToString();
                 this._currentLot = lot;
@@ -112,8 +124,6 @@ namespace GestcomWF.Views
                 MessageBox.Show("La somme des valeurs dépasse le total!");
                 // Réinitialiser la valeur du champ qui a causé le dépassement, ou ajuster selon votre logique
             }
-
-
 
         }
 
@@ -152,30 +162,36 @@ namespace GestcomWF.Views
         // Valide et met à jour le lot sélectionné
         private void btn_valider_Click(object sender, EventArgs e)
         {
-            MoisNum moisNum = (MoisNum)cbxMois.SelectedItem;
-            if (_currentLot == null)
+            List<Lot> lots = dataGridView.DataSource as List<Lot>;
+       
+            if (lots != null)
             {
-                MessageBox.Show("Veuillez sélectionner un lot");
-            }
-            else if (!IsNumber(tbx_a.Text) || !IsNumber(tbx_b.Text) || !IsNumber(tbx_c.Text))
-            {
-                MessageBox.Show("Veuillez entrer des nombres valides dans chaque champ.");
-                return;
-            }
-            else if (!IsNonNegativeNumber(tbx_a.Text) || !IsNonNegativeNumber(tbx_b.Text) || !IsNonNegativeNumber(tbx_c.Text))
-            {
-                MessageBox.Show("Veuillez entrer des nombres valides dans chaque champ.");
-                return;
-            }
-            else
-            {
+                MoisNum moisNum = (MoisNum)cbxMois.SelectedItem;
+                if (_currentLot == null)
+                {
+                    MessageBox.Show("Veuillez sélectionner un lot");
+                }
+                else if (!IsNumber(tbx_a.Text) || !IsNumber(tbx_b.Text) || !IsNumber(tbx_c.Text))
+                {
+                    MessageBox.Show("Veuillez entrer des nombres valides dans chaque champ.");
+                    return;
+                }
+                else if (!IsNonNegativeNumber(tbx_a.Text) || !IsNonNegativeNumber(tbx_b.Text) || !IsNonNegativeNumber(tbx_c.Text))
+                {
+                    MessageBox.Show("Veuillez entrer des nombres valides dans chaque champ.");
+                    return;
+                }
+                else
+                {
 
-                LotAdo.updateLotClassement(_currentLot.LOFROM, Convert.ToDecimal(tbxAnnee.Text), moisNum.Numero, Convert.ToDecimal(tbx_a.Text), Convert.ToDecimal(tbx_b.Text), Convert.ToDecimal(tbx_c.Text));
-                _currentLot = null;
-                tbx_a.Text = "";
-                tbx_b.Text = "";
-                tbx_c.Text = "";
-                tbx_total.Text = "";
+                    LotAdo.updateLotClassement(_currentLot.LOFROM, Convert.ToDecimal(tbxAnnee.Text), moisNum.Numero, Convert.ToDecimal(tbx_a.Text), Convert.ToDecimal(tbx_b.Text), Convert.ToDecimal(tbx_c.Text));
+                    _currentLot = null;
+                    tbx_a.Text = "";
+                    tbx_b.Text = "";
+                    tbx_c.Text = "";
+                    tbx_total.Text = "";
+
+                }
             }
 
         }
@@ -378,7 +394,7 @@ namespace GestcomWF.Views
                             RangeColumn col5 = workSheet.GetColumn(5);
                             col5.Width = 1647; // Set
 
-                           
+
 
 
 
@@ -392,7 +408,15 @@ namespace GestcomWF.Views
                         SaveFileDialog saveFileDialog = new SaveFileDialog();
                         saveFileDialog.Filter = "Excel files(*.xls; *.xlsx)| *.xls; *.xlsx";
                         saveFileDialog.Title = "Enregistrez le fichier sous...";
-                        saveFileDialog.FileName = "classement " + moisNum.Mois + ".xls";
+                        if (moisNum.Numero < 10)
+                        {
+                            moisExcel = "0" + moisNum.Numero;
+                        }
+                        else
+                        {
+                            moisExcel = moisNum.Numero.ToString();
+                        }
+                        saveFileDialog.FileName = "Classements_" + tbxAnnee.Text + moisExcel + ".xls";
                         if (saveFileDialog.ShowDialog() == DialogResult.OK)
                         {
                             string path = saveFileDialog.FileName;
@@ -410,6 +434,51 @@ namespace GestcomWF.Views
             }
         }
 
+        private void dtpDate_ValueChanged(object sender, EventArgs e)
+        {
+            RemplirComboBox(dtpDate.Value);
+            AjusterAnnee();
+        }
+        private void RemplirComboBox(DateTime dateSelectionnee)
+        {
+            // Calculer le mois précédent de 4 mois à partir de la date sélectionnée
+            DateTime moisPrecedent = dateSelectionnee.AddMonths(-4);
 
+            // Filtrer la liste des mois pour inclure uniquement ceux après le mois précédent
+            List<MoisNum> moisFiltres = listeObjets
+                .Where(mois => mois.Numero >= moisPrecedent.Month)
+                .ToList();
+
+            // Mettre à jour la ComboBox avec la liste filtrée
+            cbxMois.DataSource = moisFiltres;
+            cbxMois.DisplayMember = "Mois";
+            cbxMois.ValueMember = "Numero";
+
+            if (int.TryParse(tbxAnnee.Text, out int annee))
+            {
+                // Soustraire une année si le mois précédent est dans l'année actuelle
+                if (moisPrecedent.Year == dateSelectionnee.Year)
+                {
+                    tbxAnnee.Text = (annee - 1).ToString();
+                }
+            }
+        }
+        private void AjusterAnneeAuDemarrage()
+        {
+            // Ajuster l'année en fonction du mois précédent de 4 mois
+            DateTime dateDemarrage = DateTime.Now.AddMonths(-4);
+            int anneeAjustee = dateDemarrage.Month <= 2 ? dateDemarrage.Year - 1 : dateDemarrage.Year;
+
+            // Préremplir la TextBox avec l'année ajustée
+            tbxAnnee.Text = (anneeAjustee % 100).ToString("00");
+        }
+
+        private void AjusterAnnee()
+        {
+            // Ajuster l'année en fonction du mois précédent de 4 mois
+            DateTime moisPrecedent = dtpDate.Value.AddMonths(-4);
+            int anneeAjustee = moisPrecedent.Month <= 2 ? moisPrecedent.Year - 1 : moisPrecedent.Year;
+            tbxAnnee.Text = (anneeAjustee % 100).ToString("00");
+        }
     }
 }

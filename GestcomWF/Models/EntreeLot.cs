@@ -21,6 +21,7 @@ namespace Gestcom.Models
         public Decimal LOCPES { get; set; }
         public Decimal LOCENN { get; set; }
         public Double LOTAUX { get; set; }
+        public Decimal MONTANT { get; set; }
 
         public EntreeLot() { }
 
@@ -40,5 +41,6 @@ namespace Gestcom.Models
             LOCENN = lOCENN;
             LOTAUX = lOTAUX;
         }
+        
     }
 }

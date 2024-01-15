@@ -33,11 +33,20 @@ namespace GestcomWF.Views
             InitializeComponent();
             InitializeDataGridView();
 
+            int test = DateTime.Now.Month;
             cbxMois.DataSource = listeObjets;
             cbxMois.DisplayMember = "Mois";
-            cbxMois.SelectedIndex = 0;
+            int moisValue = test - 2;
+            if (moisValue <= 0)
+            {
+                moisValue += 12;
+            }
+            MessageBox.Show(moisValue.ToString());
+            cbxMois.SelectedIndex = moisValue;
             // Initialiser le DataGridView sans source de données
             dataGridView.DataSource = null;
+
+            checkBoxUpdateAll.Checked = true;
 
 
 
@@ -76,6 +85,7 @@ namespace GestcomWF.Views
             if (row != null && row.DataBoundItem is Lot lot)
             {
                 tbx_prix.Text = lot.LOPUAC.ToString();
+                tbxNumFromagerie.Text = lot.LOFROM.ToString();
 
                 this._currentLot = lot;
                 // Assignez d'autres propriétés de l'objet `lot` à d'autres TextBox si nécessaire
@@ -94,7 +104,6 @@ namespace GestcomWF.Views
                     List<Lot> lots = dataGridView.DataSource as List<Lot>;
                     if (lots != null)
                     {
-
                         if (updateAllPrices)
                         {
                             // Mettre à jour le prix pour chaque lot affiché dans le DataGridView
@@ -106,12 +115,10 @@ namespace GestcomWF.Views
                         }
                         else
                         {
-
                             // Mettre à jour un seul lot
                             LotAdo.updateLotPrix(this._currentLot.LOFROM, Convert.ToDecimal(tbx_annee.Text), moisNum.Numero, Convert.ToDouble(newPrice));
                             this._currentLot.LOPUAC = newPrice;
                         }
-
                         // Rafraîchissez le DataGridView
                         dataGridView.Refresh();
                     }

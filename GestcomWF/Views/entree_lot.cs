@@ -267,6 +267,12 @@ namespace GestcomWF.Views
                 lblDate_fin.Visible = false;
                 dtpDateDebut.Visible = false;
                 dtpDateFin.Visible = false;
+                lbPrixUnitaire.Visible = true;
+                tbxPrixUnitaire.Visible = true;
+                lblFreinte.Visible = false;
+                tbxFreinte.Visible = false;
+                lblPoids_net.Visible = false;
+                tbxPoidsNet.Visible = false;
             }
             else
             {
@@ -280,6 +286,8 @@ namespace GestcomWF.Views
                 lblDate_fin.Visible = true;
                 dtpDateDebut.Visible = true;
                 dtpDateFin.Visible = true;
+                lbPrixUnitaire.Visible = false;
+                tbxPrixUnitaire.Visible = false;
             }
         }
 
