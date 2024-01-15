@@ -60,7 +60,8 @@ namespace GestcomWF.Views
                 // Récupération du mois sélectionné depuis la comboBox
                 MoisNum moisNum = (MoisNum)cbxMois.SelectedItem;
 
-
+                DateTime selectedDate = dtpDateExcel.Value;
+                string formattedDate = selectedDate.ToString("dd MMMM yyyy");
                 // Récupération de toutes les entrées pour le mois et l'année donnés
                 List<EntreeLotFrom> entreeLotFroms = LotAdo.allEntreeEnFonctionDuMoisEtDeLannee(moisNum.Numero, Convert.ToDecimal(tbxAnnee.Text));
                 if (entreeLotFroms.Count <= 0)
@@ -78,6 +79,7 @@ namespace GestcomWF.Views
                         // Si l'entrée a une nouvelle valeur FRNUM
                         if (entreeLotFrom.FRNUM != valeurPrecedente)
                         {
+                         
                             // Initialisation de la feuille Excel avec le nom adapté
                             workSheet = workbook.CreateWorkSheet(nomFeuille);
                             workSheet["D7"].Value = entreeLotFrom.FRNDIR;
@@ -85,7 +87,7 @@ namespace GestcomWF.Views
                             workSheet["D9"].Value = entreeLotFrom.FRADR;
                             workSheet["D10"].Value = entreeLotFrom.FRCPOS + " " + entreeLotFrom.FRVILL;
                             workSheet["A15"].Value = "      TB/PB";
-                            workSheet["D16"].Value = "Le" + " " + dtpDateExcel.Text;
+                            workSheet["D16"].Value = "Le" + " " + formattedDate;
                             workSheet["B21"].Value = "Monsieur le Président";
                             workSheet["B23"].Value = "Nous vous prions de bien vouloir trouver ci-dessous, le détail des";
                             workSheet["B24"].Value = "pesées concernant vos fabrications de ";

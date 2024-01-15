@@ -21,7 +21,7 @@ namespace GestcomWF.Views
             InitializeTextBoxes();
             cbxFromagerie.Focus();
 
-          
+
         }
 
         // Initialisation de la liste des fromageries à partir de la base de données
@@ -32,7 +32,7 @@ namespace GestcomWF.Views
             cbxFromagerie.DataSource = this.fromageries;
             cbxFromagerie.DisplayMember = "FRNUM";
             cbxFromagerie.SelectedIndex = 0;
-        
+
         }
 
         // Initialisation de la combobox des mois
@@ -54,7 +54,7 @@ namespace GestcomWF.Views
         // Initialisation des TextBoxes
         private void InitializeTextBoxes()
         {
-            tbxPoidsNet.ReadOnly = true;
+            tbxPoidsNet.Enabled = false;
             tbxAnnee.Text = ComputeAnnee(dtpDateEntree.Value).ToString();
         }
 
@@ -176,19 +176,31 @@ namespace GestcomWF.Views
         // Événement lors du clic sur le bouton1
         private void button1_Click(object sender, EventArgs e)
         {
-            if (tbxPains.Text != "" && tbxPoidsBrut.Text != "")
+            if (tbxPains.Text != "")
             {
                 Lot lot = LotAdo.ExisteLot(Convert.ToDecimal(cbxFromagerie.Text), Convert.ToDecimal(tbxAnnee.Text), Convert.ToDecimal(cbxMois.Text));
                 if (lot != null)
                 {
-                    CultureInfo culture = new CultureInfo("fr-FR");
                     Console.WriteLine(lot.LOFROM + " " + lot.LOANNE + " " + lot.LOMOIS);
                     lot.LOCEM1 = Convert.ToDecimal(tbxPains.Text);
-                    lot.LOCEB1 = Convert.ToDecimal(tbxPoidsBrut.Text);
-
-                    lot.LOCEN1 = Convert.ToDecimal(tbxPoidsNet.Text);
+                   
                     Console.WriteLine(lot.LOCEM1 + " " + lot.LOCEB1 + " " + lot.LOCEN1);
-                    LotAdo.updateLot(lot.LOFROM, lot.LOANNE, lot.LOMOIS, lot.LOCEM1, lot.LOCEB1, lot.LOCEN1);
+                    if (cbAffiner.Checked)
+                    {
+                      
+                        lot.LOCEN1 = Convert.ToDecimal(tbxPoidsNet.Text);
+                        lot.LOCEB1 = lot.LOCEN1;
+                        lot.LOPUAC = Convert.ToDecimal(tbxPrixUnitaire.Text);
+                        var montant = lot.LOPUAC * lot.LOCEN1;
+                        LotAdo.updateLotAffine(lot.LOFROM, lot.LOANNE, lot.LOMOIS, lot.LOCEM1, lot.LOCEB1, lot.LOCEN1, montant);
+                    }
+                    else
+                    {
+                        lot.LOCEB1 = Convert.ToDecimal(tbxPoidsBrut.Text);
+                        lot.LOCEN1 = Convert.ToDecimal(tbxPoidsNet.Text);
+                        LotAdo.updateLot(lot.LOFROM, lot.LOANNE, lot.LOMOIS, lot.LOCEM1, lot.LOCEB1, lot.LOCEN1);
+                    }
+
                 }
                 else
                 {
@@ -197,9 +209,20 @@ namespace GestcomWF.Views
                     newLot.LOANNE = Convert.ToDecimal(tbxAnnee.Text);
                     newLot.LOMOIS = Convert.ToDecimal(cbxMois.Text);
                     newLot.LOCEM1 = Convert.ToDecimal(tbxPains.Text);
-                    newLot.LOCEB1 = Convert.ToDecimal(tbxPoidsBrut.Text);
-                    newLot.LOCEN1 = Convert.ToDecimal(tbxPoidsNet.Text);
-                    LotAdo.createLot(newLot);
+                    if (cbAffiner.Checked)
+                    {
+                        newLot.LOPUAC = Convert.ToDecimal(tbxPrixUnitaire.Text);
+                        newLot.LOCEN1 = Convert.ToDecimal(tbxPoidsNet.Text);
+                        newLot.LOCEB1 = newLot.LOCEN1;
+                        LotAdo.createLotAffine(newLot);
+                    }
+                    else
+                    {
+                        newLot.LOCEN1 = Convert.ToDecimal(tbxPoidsNet.Text);
+                        newLot.LOCEB1 = Convert.ToDecimal(tbxPoidsBrut.Text);
+                        LotAdo.createLot(newLot);
+                    }
+                  
                 }
                 if (cbAffiner.Checked)
                 {
@@ -209,8 +232,8 @@ namespace GestcomWF.Views
                     entreeLotAffiner.LOMOIS = Convert.ToDecimal(cbxMois.Text);
                     entreeLotAffiner.Date_Entrée = dtpDateEntree.Value;
                     entreeLotAffiner.LOCENM = Convert.ToDecimal(tbxPains.Text);
-                    entreeLotAffiner.LOCENB = Convert.ToDecimal(tbxPoidsBrut.Text);
                     entreeLotAffiner.LOCENN = Convert.ToDecimal(tbxPoidsNet.Text);
+                    entreeLotAffiner.LOCENB = entreeLotAffiner.LOCENN;
                     entreeLotAffiner.LOTAUX = Convert.ToDouble(tbxFreinte.Text);
                     LotAdo.createEntreeLotAffine(entreeLotAffiner);
                 }
@@ -271,8 +294,9 @@ namespace GestcomWF.Views
                 tbxPrixUnitaire.Visible = true;
                 lblFreinte.Visible = false;
                 tbxFreinte.Visible = false;
-                lblPoids_net.Visible = false;
-                tbxPoidsNet.Visible = false;
+                lblPoids_brut.Visible = false;
+                tbxPoidsBrut.Visible = false;
+                tbxPoidsNet.Enabled = true;
             }
             else
             {
@@ -288,6 +312,11 @@ namespace GestcomWF.Views
                 dtpDateFin.Visible = true;
                 lbPrixUnitaire.Visible = false;
                 tbxPrixUnitaire.Visible = false;
+                lblFreinte.Visible = true;
+                tbxFreinte.Visible = true;
+                lblPoids_brut.Visible = true;
+                tbxPoidsBrut.Visible = true;
+                tbxPoidsNet.Enabled = false;
             }
         }
 

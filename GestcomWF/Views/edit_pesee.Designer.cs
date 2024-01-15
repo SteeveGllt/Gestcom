@@ -57,7 +57,7 @@ namespace GestcomWF.Views
             // lblMois
             // 
             lblMois.AutoSize = true;
-            lblMois.Location = new Point(27, 30);
+            lblMois.Location = new Point(27, 63);
             lblMois.Name = "lblMois";
             lblMois.Size = new Size(39, 15);
             lblMois.TabIndex = 1;
@@ -66,7 +66,7 @@ namespace GestcomWF.Views
             // lblAnnee
             // 
             lblAnnee.AutoSize = true;
-            lblAnnee.Location = new Point(232, 30);
+            lblAnnee.Location = new Point(232, 63);
             lblAnnee.Name = "lblAnnee";
             lblAnnee.Size = new Size(47, 15);
             lblAnnee.TabIndex = 2;
@@ -75,7 +75,7 @@ namespace GestcomWF.Views
             // cbxMois
             // 
             cbxMois.FormattingEnabled = true;
-            cbxMois.Location = new Point(74, 28);
+            cbxMois.Location = new Point(74, 61);
             cbxMois.Name = "cbxMois";
             cbxMois.Size = new Size(121, 23);
             cbxMois.TabIndex = 3;
@@ -83,7 +83,7 @@ namespace GestcomWF.Views
             // 
             // tbxAnnee
             // 
-            tbxAnnee.Location = new Point(292, 28);
+            tbxAnnee.Location = new Point(292, 61);
             tbxAnnee.MaxLength = 2;
             tbxAnnee.Name = "tbxAnnee";
             tbxAnnee.Size = new Size(50, 23);
@@ -118,7 +118,7 @@ namespace GestcomWF.Views
             // 
             // dtpDateExcel
             // 
-            dtpDateExcel.Location = new Point(74, 66);
+            dtpDateExcel.Location = new Point(74, 22);
             dtpDateExcel.Name = "dtpDateExcel";
             dtpDateExcel.Size = new Size(200, 23);
             dtpDateExcel.TabIndex = 8;
@@ -126,7 +126,7 @@ namespace GestcomWF.Views
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(27, 72);
+            label1.Location = new Point(27, 28);
             label1.Name = "label1";
             label1.Size = new Size(31, 15);
             label1.TabIndex = 9;

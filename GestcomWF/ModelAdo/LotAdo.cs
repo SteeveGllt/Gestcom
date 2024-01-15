@@ -102,6 +102,32 @@ namespace Gestcom.ModelAdo
             }
             finally { close(); }
         }
+        public static void updateLotAffine(decimal lofrom, decimal loanne, decimal lomois, decimal nbPains, decimal poidsBrut, decimal poidsNet, decimal montant)
+        {
+            try
+            {
+                open();
+                OleDbCommand oleDbCommand = new OleDbCommand();
+                oleDbCommand.Connection = connection;
+                oleDbCommand.CommandText = "UPDATE TB_Lots SET LOCEM1 = LOCEM1 + @LOCEM1, LOCEB1 = LOCEB1 + @LOCEB1, LOCEN1 = LOCEN1 + @LOCEN1, MONTANT = MONTANT + @MONTANT WHERE LOFACO = 1 AND LOFROM = @LOFROM AND LOANNE = @LOANNE AND LOMOIS = @LOMOIS AND LODEP = 0";
+                oleDbCommand.Prepare();
+                oleDbCommand.Parameters.AddWithValue("@LOCEM1", nbPains);
+                oleDbCommand.Parameters.AddWithValue("@LOCEB1", ((double)poidsBrut));
+                oleDbCommand.Parameters.AddWithValue("@LOCEN1", poidsNet);
+                oleDbCommand.Parameters.AddWithValue("@MONTANT", montant);
+                oleDbCommand.Parameters.AddWithValue("@LOFROM", lofrom);
+                oleDbCommand.Parameters.AddWithValue("@LOANNE", loanne);
+                oleDbCommand.Parameters.AddWithValue("@LOMOIS", lomois);
+                oleDbCommand.ExecuteNonQuery();
+                MessageBox.Show("Lot Modifié");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                MessageBox.Show("Erreur de communication avec la base de données!");
+            }
+            finally { close(); }
+        }
 
         public static void createLot(Lot lot)
         {
@@ -118,6 +144,34 @@ namespace Gestcom.ModelAdo
                 oleDbCommand.Parameters.AddWithValue("@LOCEM1", lot.LOCEM1);
                 oleDbCommand.Parameters.AddWithValue("@LOCEB1", ((double)lot.LOCEB1));
                 oleDbCommand.Parameters.AddWithValue("@LOCEN1", lot.LOCEN1);
+                oleDbCommand.ExecuteNonQuery();
+                Console.WriteLine("Lot créé");
+                MessageBox.Show("Lot créé");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                MessageBox.Show("Erreur de communication avec la base de données!");
+            }
+            finally { close(); }
+        }
+        public static void createLotAffine(Lot lot)
+        {
+            try
+            {
+                open();
+                OleDbCommand oleDbCommand = new OleDbCommand();
+                oleDbCommand.Connection = connection;
+                oleDbCommand.CommandText = "INSERT INTO TB_Lots(LOFACO, LOFROM, LOANNE, LOMOIS, LODEP, LOCEM1, LOCEB1, LOCEN1, LOCPES, LOCC1, LOC11, LOC12, LOC13, LOPUAC, MONTANT) VALUES(1, @LOFROM, @LOANNE, @LOMOIS, 0, @LOCEM1, @LOCEB1, @LOCEN1, 0, 0, 0, 0, 0, @LOPUAC, @MONTANT)";
+                oleDbCommand.Prepare();
+                oleDbCommand.Parameters.AddWithValue("@LOFROM", lot.LOFROM);
+                oleDbCommand.Parameters.AddWithValue("@LOANNE", lot.LOANNE);
+                oleDbCommand.Parameters.AddWithValue("@LOMOIS", lot.LOMOIS);
+                oleDbCommand.Parameters.AddWithValue("@LOCEM1", lot.LOCEM1);
+                oleDbCommand.Parameters.AddWithValue("@LOCEB1", ((double)lot.LOCEB1));
+                oleDbCommand.Parameters.AddWithValue("@LOCEN1", lot.LOCEN1);
+                oleDbCommand.Parameters.AddWithValue("@LOPUAC", lot.LOPUAC);
+                oleDbCommand.Parameters.AddWithValue("@MONTANT", lot.LOPUAC * lot.LOCEN1);
                 oleDbCommand.ExecuteNonQuery();
                 Console.WriteLine("Lot créé");
                 MessageBox.Show("Lot créé");
