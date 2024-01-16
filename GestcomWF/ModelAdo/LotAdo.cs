@@ -119,7 +119,55 @@ namespace Gestcom.ModelAdo
                 oleDbCommand.Parameters.AddWithValue("@LOANNE", loanne);
                 oleDbCommand.Parameters.AddWithValue("@LOMOIS", lomois);
                 oleDbCommand.ExecuteNonQuery();
+
+                oleDbCommand.CommandText = "UPDATE TB_Lots SET TB_Lots.LOPUAC = ROUND(TB_Lots.MONTANT / TB_Lots.LOCEN1, 2) WHERE LOFACO = 1 AND LOFROM = " + lofrom + "AND LOANNE =" + loanne + "AND LOMOIS =" + lomois + "AND LODEP = 0";
+                oleDbCommand.ExecuteNonQuery();
                 MessageBox.Show("Lot Modifié");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                MessageBox.Show("Erreur de communication avec la base de données!");
+            }
+            finally { close(); }
+        }
+
+        public static void test(decimal lofrom, decimal loanne, decimal lomois)
+        {
+            try
+            {
+                open();
+                OleDbCommand oleDbCommand = new OleDbCommand();
+                oleDbCommand.Connection = connection;
+
+                // Étape 1: Récupérer le montant global et le poids net global
+                oleDbCommand.CommandText = "SELECT MONTANT, LOCEN1 FROM TB_Lots WHERE LOFACO = 1 AND LOFROM = @LOFROM AND LOANNE = @LOANNE AND LOMOIS = @LOMOIS AND LODEP = 0";
+                oleDbCommand.Parameters.AddWithValue("@LOFROM", lofrom);
+                oleDbCommand.Parameters.AddWithValue("@LOANNE", loanne);
+                oleDbCommand.Parameters.AddWithValue("@LOMOIS", lomois);
+
+                OleDbDataReader reader = oleDbCommand.ExecuteReader();
+                if (reader.Read())
+                {
+                    decimal montantGlobal = reader.GetDecimal(0);
+                    decimal locen1Global = reader.GetDecimal(1);
+                    reader.Close();
+
+                    // Étape 2: Mettre à jour les champs, y compris LOPUAC
+                    oleDbCommand.CommandText = "UPDATE TB_Lots SET LOPUAC = @LOPUAC WHERE LOFACO = 1 AND LOFROM = @LOFROM AND LOANNE = @LOANNE AND LOMOIS = @LOMOIS AND LODEP = 0";
+                    var test = Math.Round(montantGlobal / locen1Global, 2);
+                    oleDbCommand.Parameters.AddWithValue("@LOPUAC", (double)test);
+                    oleDbCommand.Parameters.AddWithValue("@LOFROM", lofrom);
+                    oleDbCommand.Parameters.AddWithValue("@LOANNE", loanne);
+                    oleDbCommand.Parameters.AddWithValue("@LOMOIS", lomois);
+
+                    oleDbCommand.ExecuteNonQuery();
+                    MessageBox.Show("Lot Modifié");
+                }
+                else
+                {
+                    MessageBox.Show("Aucune correspondance trouvée dans la base de données.");
+                }
             }
             catch (Exception ex)
             {

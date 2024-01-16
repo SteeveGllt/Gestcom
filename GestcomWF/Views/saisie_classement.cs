@@ -43,8 +43,7 @@ namespace GestcomWF.Views
             // Initialiser le DataGridView sans source de données
             dataGridView.DataSource = null;
 
-            RemplirComboBox(DateTime.Now);
-            AjusterAnneeAuDemarrage();
+            AjusterAnnee();
         }
 
 
@@ -163,7 +162,7 @@ namespace GestcomWF.Views
         private void btn_valider_Click(object sender, EventArgs e)
         {
             List<Lot> lots = dataGridView.DataSource as List<Lot>;
-       
+
             if (lots != null)
             {
                 MoisNum moisNum = (MoisNum)cbxMois.SelectedItem;
@@ -435,50 +434,17 @@ namespace GestcomWF.Views
         }
 
         private void dtpDate_ValueChanged(object sender, EventArgs e)
-        {
-            RemplirComboBox(dtpDate.Value);
+        { 
             AjusterAnnee();
         }
-        private void RemplirComboBox(DateTime dateSelectionnee)
-        {
-            // Calculer le mois précédent de 4 mois à partir de la date sélectionnée
-            DateTime moisPrecedent = dateSelectionnee.AddMonths(-4);
 
-            // Filtrer la liste des mois pour inclure uniquement ceux après le mois précédent
-            List<MoisNum> moisFiltres = listeObjets
-                .Where(mois => mois.Numero >= moisPrecedent.Month)
-                .ToList();
-
-            // Mettre à jour la ComboBox avec la liste filtrée
-            cbxMois.DataSource = moisFiltres;
-            cbxMois.DisplayMember = "Mois";
-            cbxMois.ValueMember = "Numero";
-
-            if (int.TryParse(tbxAnnee.Text, out int annee))
-            {
-                // Soustraire une année si le mois précédent est dans l'année actuelle
-                if (moisPrecedent.Year == dateSelectionnee.Year)
-                {
-                    tbxAnnee.Text = (annee - 1).ToString();
-                }
-            }
-        }
-        private void AjusterAnneeAuDemarrage()
-        {
-            // Ajuster l'année en fonction du mois précédent de 4 mois
-            DateTime dateDemarrage = DateTime.Now.AddMonths(-4);
-            int anneeAjustee = dateDemarrage.Month <= 2 ? dateDemarrage.Year - 1 : dateDemarrage.Year;
-
-            // Préremplir la TextBox avec l'année ajustée
-            tbxAnnee.Text = (anneeAjustee % 100).ToString("00");
-        }
 
         private void AjusterAnnee()
         {
             // Ajuster l'année en fonction du mois précédent de 4 mois
             DateTime moisPrecedent = dtpDate.Value.AddMonths(-4);
-            int anneeAjustee = moisPrecedent.Month <= 2 ? moisPrecedent.Year - 1 : moisPrecedent.Year;
-            tbxAnnee.Text = (anneeAjustee % 100).ToString("00");
+            cbxMois.SelectedIndex = moisPrecedent.Month - 1;
+            tbxAnnee.Text = Convert.ToString(moisPrecedent.Year % 100);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Gestcom.Classes;
 using Gestcom.ModelAdo;
 using IronXL;
+using Microsoft.VisualBasic;
 
 namespace GestcomWF.Views
 {
@@ -31,6 +32,8 @@ namespace GestcomWF.Views
             cbxMois.DataSource = listeObjets;
             cbxMois.DisplayMember = "Mois";
             cbxMois.SelectedIndex = 1;
+
+            AjusterAnnee();
 
         }
 
@@ -79,7 +82,7 @@ namespace GestcomWF.Views
                         // Si l'entrée a une nouvelle valeur FRNUM
                         if (entreeLotFrom.FRNUM != valeurPrecedente)
                         {
-                         
+
                             // Initialisation de la feuille Excel avec le nom adapté
                             workSheet = workbook.CreateWorkSheet(nomFeuille);
                             workSheet["D7"].Value = entreeLotFrom.FRNDIR;
@@ -395,6 +398,19 @@ namespace GestcomWF.Views
                 System.Runtime.InteropServices.Marshal.ReleaseComObject(workbook);
                 System.Runtime.InteropServices.Marshal.ReleaseComObject(excelApp);
             }
+        }
+
+        private void dtpDateExcel_ValueChanged(object sender, EventArgs e)
+        {
+            AjusterAnnee();
+        }
+
+        private void AjusterAnnee()
+        {
+            // Ajuster l'année en fonction du mois précédent de 4 mois
+            DateTime moisPrecedent = dtpDateExcel.Value.AddMonths(-1);
+            cbxMois.SelectedIndex = moisPrecedent.Month - 1;
+            tbxAnnee.Text = Convert.ToString(moisPrecedent.Year % 100);
         }
     }
 }

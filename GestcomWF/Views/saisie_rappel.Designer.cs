@@ -44,6 +44,8 @@
             labelAnnee = new Label();
             buttonGenerer = new Button();
             dataGridView = new DataGridView();
+            label1 = new Label();
+            dtpDate = new DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
             SuspendLayout();
             // 
@@ -142,7 +144,7 @@
             // cbxMois
             // 
             cbxMois.FormattingEnabled = true;
-            cbxMois.Location = new System.Drawing.Point(75, 32);
+            cbxMois.Location = new System.Drawing.Point(81, 62);
             cbxMois.Margin = new Padding(3, 4, 3, 4);
             cbxMois.Name = "cbxMois";
             cbxMois.Size = new System.Drawing.Size(138, 28);
@@ -150,7 +152,7 @@
             // 
             // tbxAnnee
             // 
-            tbxAnnee.Location = new System.Drawing.Point(281, 32);
+            tbxAnnee.Location = new System.Drawing.Point(287, 62);
             tbxAnnee.Margin = new Padding(3, 4, 3, 4);
             tbxAnnee.MaxLength = 2;
             tbxAnnee.Name = "tbxAnnee";
@@ -160,7 +162,7 @@
             // labelMois
             // 
             labelMois.AutoSize = true;
-            labelMois.Location = new System.Drawing.Point(27, 36);
+            labelMois.Location = new System.Drawing.Point(33, 66);
             labelMois.Margin = new Padding(5, 0, 5, 0);
             labelMois.Name = "labelMois";
             labelMois.Size = new System.Drawing.Size(44, 20);
@@ -170,7 +172,7 @@
             // labelAnnee
             // 
             labelAnnee.AutoSize = true;
-            labelAnnee.Location = new System.Drawing.Point(222, 36);
+            labelAnnee.Location = new System.Drawing.Point(228, 66);
             labelAnnee.Margin = new Padding(5, 0, 5, 0);
             labelAnnee.Name = "labelAnnee";
             labelAnnee.Size = new System.Drawing.Size(54, 20);
@@ -179,7 +181,7 @@
             // 
             // buttonGenerer
             // 
-            buttonGenerer.Location = new System.Drawing.Point(363, 32);
+            buttonGenerer.Location = new System.Drawing.Point(369, 62);
             buttonGenerer.Margin = new Padding(5, 4, 5, 4);
             buttonGenerer.Name = "buttonGenerer";
             buttonGenerer.Size = new System.Drawing.Size(101, 36);
@@ -199,11 +201,30 @@
             dataGridView.TabIndex = 19;
             dataGridView.CellDoubleClick += dataGridView_CellDoubleClick;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(33, 19);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(41, 20);
+            label1.TabIndex = 33;
+            label1.Text = "Date";
+            // 
+            // dtpDate
+            // 
+            dtpDate.Location = new System.Drawing.Point(80, 14);
+            dtpDate.Margin = new Padding(3, 4, 3, 4);
+            dtpDate.Name = "dtpDate";
+            dtpDate.Size = new System.Drawing.Size(228, 27);
+            dtpDate.TabIndex = 32;
+            // 
             // saisie_rappel
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(968, 379);
+            Controls.Add(label1);
+            Controls.Add(dtpDate);
             Controls.Add(generate_excel);
             Controls.Add(tbx_c);
             Controls.Add(tbx_b);
@@ -306,5 +327,7 @@
         private Label labelAnnee;
         private Button buttonGenerer;
         private DataGridView dataGridView;
+        private Label label1;
+        private DateTimePicker dtpDate;
     }
 }

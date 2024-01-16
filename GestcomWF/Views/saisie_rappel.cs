@@ -625,7 +625,7 @@ namespace GestcomWF.Views
                 e.SuppressKeyPress = true;
             }
 
-            if(e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Enter)
             {
                 tbx_b.Focus();
             }

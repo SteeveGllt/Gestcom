@@ -46,9 +46,10 @@ namespace GestcomWF.Views
             // 
             // button1
             // 
-            button1.Location = new Point(172, 109);
+            button1.Location = new Point(197, 145);
+            button1.Margin = new Padding(3, 4, 3, 4);
             button1.Name = "button1";
-            button1.Size = new Size(75, 23);
+            button1.Size = new Size(86, 31);
             button1.TabIndex = 0;
             button1.Text = "Validation";
             button1.UseVisualStyleBackColor = true;
@@ -57,43 +58,46 @@ namespace GestcomWF.Views
             // lblMois
             // 
             lblMois.AutoSize = true;
-            lblMois.Location = new Point(27, 63);
+            lblMois.Location = new Point(31, 84);
             lblMois.Name = "lblMois";
-            lblMois.Size = new Size(39, 15);
+            lblMois.Size = new Size(48, 20);
             lblMois.TabIndex = 1;
             lblMois.Text = "Mois :";
             // 
             // lblAnnee
             // 
             lblAnnee.AutoSize = true;
-            lblAnnee.Location = new Point(232, 63);
+            lblAnnee.Location = new Point(265, 84);
             lblAnnee.Name = "lblAnnee";
-            lblAnnee.Size = new Size(47, 15);
+            lblAnnee.Size = new Size(58, 20);
             lblAnnee.TabIndex = 2;
             lblAnnee.Text = "Année :";
             // 
             // cbxMois
             // 
             cbxMois.FormattingEnabled = true;
-            cbxMois.Location = new Point(74, 61);
+            cbxMois.Location = new Point(85, 81);
+            cbxMois.Margin = new Padding(3, 4, 3, 4);
             cbxMois.Name = "cbxMois";
-            cbxMois.Size = new Size(121, 23);
+            cbxMois.Size = new Size(138, 28);
             cbxMois.TabIndex = 3;
             cbxMois.SelectedIndexChanged += cbxMois_SelectedIndexChanged;
             // 
             // tbxAnnee
             // 
-            tbxAnnee.Location = new Point(292, 61);
+            tbxAnnee.Location = new Point(334, 81);
+            tbxAnnee.Margin = new Padding(3, 4, 3, 4);
             tbxAnnee.MaxLength = 2;
             tbxAnnee.Name = "tbxAnnee";
-            tbxAnnee.Size = new Size(50, 23);
+            tbxAnnee.Size = new Size(57, 27);
             tbxAnnee.TabIndex = 4;
             // 
             // printExcel
             // 
-            printExcel.Location = new Point(245, 188);
+            printExcel.Location = new Point(280, 251);
+            printExcel.Margin = new Padding(3, 4, 3, 4);
             printExcel.Name = "printExcel";
-            printExcel.Size = new Size(75, 23);
+            printExcel.Size = new Size(86, 31);
             printExcel.TabIndex = 5;
             printExcel.Text = "Imprimer";
             printExcel.UseVisualStyleBackColor = true;
@@ -101,9 +105,10 @@ namespace GestcomWF.Views
             // 
             // btnRechercher
             // 
-            btnRechercher.Location = new Point(27, 188);
+            btnRechercher.Location = new Point(31, 251);
+            btnRechercher.Margin = new Padding(3, 4, 3, 4);
             btnRechercher.Name = "btnRechercher";
-            btnRechercher.Size = new Size(75, 23);
+            btnRechercher.Size = new Size(86, 31);
             btnRechercher.TabIndex = 6;
             btnRechercher.Text = "Rechercher";
             btnRechercher.UseVisualStyleBackColor = true;
@@ -111,33 +116,36 @@ namespace GestcomWF.Views
             // 
             // tbxRecherche
             // 
-            tbxRecherche.Location = new Point(123, 189);
+            tbxRecherche.Location = new Point(141, 252);
+            tbxRecherche.Margin = new Padding(3, 4, 3, 4);
             tbxRecherche.Name = "tbxRecherche";
-            tbxRecherche.Size = new Size(100, 23);
+            tbxRecherche.Size = new Size(114, 27);
             tbxRecherche.TabIndex = 7;
             // 
             // dtpDateExcel
             // 
-            dtpDateExcel.Location = new Point(74, 22);
+            dtpDateExcel.Location = new Point(85, 29);
+            dtpDateExcel.Margin = new Padding(3, 4, 3, 4);
             dtpDateExcel.Name = "dtpDateExcel";
-            dtpDateExcel.Size = new Size(200, 23);
+            dtpDateExcel.Size = new Size(228, 27);
             dtpDateExcel.TabIndex = 8;
+            dtpDateExcel.ValueChanged += dtpDateExcel_ValueChanged;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(27, 28);
+            label1.Location = new Point(31, 37);
             label1.Name = "label1";
-            label1.Size = new Size(31, 15);
+            label1.Size = new Size(41, 20);
             label1.TabIndex = 9;
             label1.Text = "Date";
             // 
             // edit_pesee
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = System.Drawing.Color.LightGray;
-            ClientSize = new Size(444, 243);
+            ClientSize = new Size(507, 324);
             Controls.Add(label1);
             Controls.Add(dtpDateExcel);
             Controls.Add(tbxRecherche);
@@ -148,6 +156,7 @@ namespace GestcomWF.Views
             Controls.Add(lblAnnee);
             Controls.Add(lblMois);
             Controls.Add(button1);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "edit_pesee";
             Text = "edit_pesee";
             ResumeLayout(false);
