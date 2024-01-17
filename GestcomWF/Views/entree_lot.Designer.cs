@@ -284,6 +284,7 @@ namespace GestcomWF.Views
             tbxPoidsNet.Name = "tbxPoidsNet";
             tbxPoidsNet.Size = new Size(100, 23);
             tbxPoidsNet.TabIndex = 36;
+            tbxPoidsNet.KeyUp += tbxFreinte_KeyUp;
             // 
             // tbxFreinte
             // 
