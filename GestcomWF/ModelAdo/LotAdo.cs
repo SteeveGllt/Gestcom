@@ -345,7 +345,7 @@ namespace Gestcom.ModelAdo
                 open();
                 OleDbCommand oleDbCommand = new OleDbCommand();
                 oleDbCommand.Connection = connection;
-                oleDbCommand.CommandText = "SELECT LOFROM, LOCEM1, LOC11, LOC12, LOC13 FROM TB_Lots INNER JOIN TB_Fromageries ON TB_Lots.LOFROM = TB_Fromageries.FRNUM WHERE ((TB_Fromageries.FRAFFINE)=True) AND ((TB_Fromageries.FRACTIF)=True) AND LOANNE = @LOANNE AND LOMOIS = @LOMOIS ";
+                oleDbCommand.CommandText = "SELECT LOFROM, LOCEM1, LOC11, LOC12, LOC13 FROM TB_Lots INNER JOIN TB_Fromageries ON TB_Lots.LOFROM = TB_Fromageries.FRNUM WHERE ((TB_Fromageries.FRACTIF)=True) AND LOANNE = @LOANNE AND LOMOIS = @LOMOIS ";
                 oleDbCommand.Prepare();
                 oleDbCommand.Parameters.AddWithValue("@LOANNE", loanne);
                 oleDbCommand.Parameters.AddWithValue("@LOMOIS", lomois);
