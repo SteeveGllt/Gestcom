@@ -3,6 +3,7 @@ using Gestcom.ModelAdo;
 using Gestcom.Models;
 using GestcomWF.Classes;
 using IronXL;
+using Microsoft.VisualBasic;
 
 namespace GestcomWF.Views
 {
@@ -12,6 +13,8 @@ namespace GestcomWF.Views
         private Lot _currentLot = null;
 
         private bool updateAllPrices = false;
+
+        private string moisExcel = string.Empty;
 
         // Liste des mois pour la combobox
         List<MoisNum> listeObjets = new List<MoisNum> {
@@ -33,21 +36,16 @@ namespace GestcomWF.Views
             InitializeComponent();
             InitializeDataGridView();
 
-            int test = DateTime.Now.Month;
             cbxMois.DataSource = listeObjets;
             cbxMois.DisplayMember = "Mois";
-            int moisValue = test - 2;
-            if (moisValue <= 0)
-            {
-                moisValue += 12;
-            }
-            MessageBox.Show(moisValue.ToString());
-            cbxMois.SelectedIndex = moisValue;
+      
+            cbxMois.SelectedIndex = 0;
             // Initialiser le DataGridView sans source de données
             dataGridView.DataSource = null;
 
             checkBoxUpdateAll.Checked = true;
 
+            AjusterAnnee();
 
 
         }
@@ -160,27 +158,12 @@ namespace GestcomWF.Views
 
                     decimal moisNumValue = moisNum.Numero;
                     decimal anneeValue = Convert.ToDecimal(tbx_annee.Text);
-                    string nomMoisDecale = "";
 
-                    decimal moisDecale = moisNumValue - 2;
-                    if (moisDecale <= 0)
-                    {
-                        moisDecale += 12;
-                        anneeValue -= 1;
-                    }
-
-                    MoisNum moisDecaleValue = listeObjets.FirstOrDefault(m => m.Numero == moisDecale);
-
-                    if (moisDecaleValue != null)
-                    {
-                        // Utilisez moisDecale.Mois pour obtenir le nom du mois décalé
-                        nomMoisDecale = moisDecaleValue.Mois;
-                    }
-
-                    Console.WriteLine(moisDecale);
+                    DateTime selectedDate = dtpAcompte.Value;
+                    string formattedDate = selectedDate.ToString("dd MMMM yyyy");
 
                     // Récupération de toutes les entrées pour le mois et l'année donnés
-                    List<LotFrom> lotFroms = LotAdo.generationFichierExcelAcompte(moisDecale, Convert.ToDecimal(tbx_annee.Text));
+                    List<LotFrom> lotFroms = LotAdo.generationFichierExcelAcompte(moisNumValue, Convert.ToDecimal(tbx_annee.Text));
                     if (lotFroms == null || lotFroms.Count <= 0)
                     {
                         MessageBox.Show("Aucune valeur");
@@ -208,12 +191,12 @@ namespace GestcomWF.Views
                                 workSheet["F11"].Value = lotFrom.FRNOM;
                                 workSheet["F12"].Value = lotFrom.FRADR;
                                 workSheet["F13"].Value = lotFrom.FRCPOS + " " + lotFrom.FRVILL;
-
+                                workSheet["D16"].Value = "Le" + " " + formattedDate;
                                 workSheet["A18"].Value = "      TB/PB";
                                 workSheet["G28"].Value = "Le" + " " + DateTime.Now.ToString("D");
                                 workSheet["B23"].Value = "Monsieur le Président";
                                 workSheet["B25"].Value = "          Nous vous prions de bien vouloir trouver ci-dessous, le détail";
-                                workSheet["B26"].Value = "du premier acompte sur votre lot de fabrication " + nomMoisDecale.ToUpper() + " " + annee + anneeValue;
+                                workSheet["B26"].Value = "du premier acompte sur votre lot de fabrication " + moisNum.Mois.ToUpper() + " " + annee + anneeValue;
 
                                 /* this.workSheet["F27"].StringValue = moisNum.Mois.ToUpper() + " " + (annee + tbxAnnee.Text);
                                  this.workSheet["F27"].Style.Font.Bold = true;*/
@@ -363,7 +346,16 @@ namespace GestcomWF.Views
                         SaveFileDialog saveFileDialog = new SaveFileDialog();
                         saveFileDialog.Filter = "Excel files(*.xls; *.xlsx)| *.xls; *.xlsx";
                         saveFileDialog.Title = "Enregistrez le fichier sous...";
-                        saveFileDialog.FileName = "acompte " + moisNum.Mois + ".xls";
+                        saveFileDialog.InitialDirectory = @"C:\DIRECTORY\Documents\Acompte\";
+                        if (moisNum.Numero < 10)
+                        {
+                            moisExcel = "0" + moisNum.Numero;
+                        }
+                        else
+                        {
+                            moisExcel = moisNum.Numero.ToString();
+                        }
+                        saveFileDialog.FileName = "Acomptes_" + tbx_annee.Text + moisExcel + ".xls";
                         if (saveFileDialog.ShowDialog() == DialogResult.OK)
                         {
                             string path = saveFileDialog.FileName;
@@ -396,6 +388,19 @@ namespace GestcomWF.Views
                 // Empêcher la gestion ultérieure de cette touche
                 e.SuppressKeyPress = true;
             }
+        }
+
+        private void dtpAcompte_ValueChanged(object sender, EventArgs e)
+        {
+            AjusterAnnee();
+        }
+
+        private void AjusterAnnee()
+        {
+            // Ajuster l'année en fonction du mois précédent de 4 mois
+            DateTime moisPrecedent = dtpAcompte.Value.AddMonths(-2);
+            cbxMois.SelectedIndex = moisPrecedent.Month - 1;
+            tbx_annee.Text = Convert.ToString(moisPrecedent.Year % 100);
         }
     }
 }

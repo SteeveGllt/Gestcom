@@ -592,6 +592,7 @@ namespace GestcomWF.Views
                         SaveFileDialog saveFileDialog = new SaveFileDialog();
                         saveFileDialog.Filter = "Excel files(*.xls; *.xlsx)| *.xls; *.xlsx";
                         saveFileDialog.Title = "Enregistrez le fichier sous...";
+                        saveFileDialog.InitialDirectory = @"C:\DIRECTORY\Documents\Rappel\";
                         saveFileDialog.FileName = "rappel " + moisNum.Mois + ".xls";
                         if (saveFileDialog.ShowDialog() == DialogResult.OK)
                         {

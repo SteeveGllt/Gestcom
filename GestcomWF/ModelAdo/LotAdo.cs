@@ -270,7 +270,7 @@ namespace Gestcom.ModelAdo
                 open();
                 OleDbCommand oleDbCommand = new OleDbCommand();
                 oleDbCommand.Connection = connection;
-                oleDbCommand.CommandText = "INSERT INTO TB_Entrée_Lots(LOFACO, LOFROM, LOANNE, LOMOIS, LODEP, Date_Entrée, LOCENM, LOCENB, LOCPES, LOCENN, LOTAUX) VALUES(1, @LOFROM, @LOANNE, @LOMOIS, 0, @Date_Entrée, @LOCENM, @LOCENB, 0, LOCENN, LOTAUX)";
+                oleDbCommand.CommandText = "INSERT INTO TB_Entrée_Lots(LOFACO, LOFROM, LOANNE, LOMOIS, LODEP, Date_Entrée, LOCENM, LOCENB, LOCPES, LOCENN, LOTAUX, PRIX) VALUES(1, @LOFROM, @LOANNE, @LOMOIS, 0, @Date_Entrée, @LOCENM, @LOCENB, 0, LOCENN, LOTAUX, @PRIX)";
                 oleDbCommand.Prepare();
                 oleDbCommand.Parameters.AddWithValue("@LOFROM", entreeLot.LOFROM);
                 oleDbCommand.Parameters.AddWithValue("@LOANNE", entreeLot.LOANNE);
@@ -281,6 +281,7 @@ namespace Gestcom.ModelAdo
                 oleDbCommand.Parameters.AddWithValue("@LOCENB", entreeLot.LOCENB); // Brut
                 oleDbCommand.Parameters.AddWithValue("@LOCENN", entreeLot.LOCENN); // Net
                 oleDbCommand.Parameters.AddWithValue("@LOTAUX", entreeLot.LOTAUX); // Freinte
+                oleDbCommand.Parameters.AddWithValue("@PRIX", entreeLot.PRIX); // Freinte
                 oleDbCommand.ExecuteNonQuery();
                 Console.WriteLine("Lot créé dans entrée lot");
                 MessageBox.Show("Lot créé dans entrée lot");

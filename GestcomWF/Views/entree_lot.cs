@@ -237,6 +237,7 @@ namespace GestcomWF.Views
                     entreeLotAffiner.LOCENN = Convert.ToDecimal(tbxPoidsNetAffine.Text);
                     entreeLotAffiner.LOCENB = entreeLotAffiner.LOCENN;
                     entreeLotAffiner.LOTAUX = Convert.ToDouble(tbxFreinte.Text);
+                    entreeLotAffiner.PRIX = Math.Round(Convert.ToDecimal(tbxPrixUnitaire.Text), 2);
                     LotAdo.createEntreeLotAffine(entreeLotAffiner);
                 }
                 else
@@ -346,8 +347,9 @@ namespace GestcomWF.Views
             tbxPoidsBrut.Text = "";
             tbxFreinte.Text = Calcul_Freinte().ToString();
             tbxAnnee.Text = (dtpDateEntree.Value.Year - 2000).ToString();
-
-            cbAffiner.Checked = false;
+            tbxPrixUnitaire.Text = "";
+            tbxPoidsNetAffine.Text = "";
+            tbxPainsAffine.Text = "";
         }
             
         private void cbxFromagerie_SelectedIndexChanged(object sender, EventArgs e)

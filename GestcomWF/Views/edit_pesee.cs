@@ -2,6 +2,7 @@
 using Gestcom.ModelAdo;
 using IronXL;
 using Microsoft.VisualBasic;
+using System.Reflection.Metadata;
 
 namespace GestcomWF.Views
 {
@@ -298,6 +299,7 @@ namespace GestcomWF.Views
                     SaveFileDialog saveFileDialog = new SaveFileDialog();
                     saveFileDialog.Filter = "Excel files(*.xls; *.xlsx)| *.xls; *.xlsx";
                     saveFileDialog.Title = "Enregistrez le fichier sous...";
+                    saveFileDialog.InitialDirectory = @"C:\DIRECTORY\Documents\Pesée\";
                     if (moisNum.Numero < 10)
                     {
                         moisExcel = "0" + moisNum.Numero;
@@ -310,7 +312,6 @@ namespace GestcomWF.Views
                     if (saveFileDialog.ShowDialog() == DialogResult.OK)
                     {
                         string path = saveFileDialog.FileName;
-
                         workbook.SaveAs(path);
                         workbook.Close();
 

@@ -14,6 +14,7 @@ namespace GestcomWF.Views
         private Lot _currentLot = null;
 
         private string moisExcel = string.Empty;
+        private int _temp = 0;
 
         // Liste des mois pour la combobox
         List<MoisNum> listeObjets = new List<MoisNum> {
@@ -103,18 +104,36 @@ namespace GestcomWF.Views
         }
 
         // Calcule et affiche le montant restant
-        private void CalculateRemaining()
+        private void CalculateRemainingB()
         {
             int total = Convert.ToInt32(tbx_total.Text);  // Vous pouvez récupérer cette valeur depuis un autre champ si nécessaire
             int valueA = 0;
+
+            int.TryParse(tbx_a.Text, out valueA);
+
+            int remaining = total - valueA;
+            _temp = remaining;
+
+            tbx_b.Text = remaining.ToString();
+
+            if (remaining < 0)
+            {
+                MessageBox.Show("La somme des valeurs dépasse le total!");
+                // Réinitialiser la valeur du champ qui a causé le dépassement, ou ajuster selon votre logique
+            }
+
+        }
+        private void CalculateRemainingC()
+        {
+            int total = Convert.ToInt32(tbx_total.Text);  // Vous pouvez récupérer cette valeur depuis un autre champ si nécessaire
+           
+            int valueA = 0;
             int valueB = 0;
-            int valueC = 0;
 
             int.TryParse(tbx_a.Text, out valueA);
             int.TryParse(tbx_b.Text, out valueB);
-            int.TryParse(tbx_c.Text, out valueC);
 
-            int remaining = total - valueA - valueB;
+            int remaining = _temp - valueB;
 
             tbx_c.Text = remaining.ToString();
 
@@ -131,7 +150,7 @@ namespace GestcomWF.Views
         {
             if (e.KeyCode == Keys.Enter)
             {
-                CalculateRemaining();
+                CalculateRemainingB();
                 tbx_b.Focus();
             }
 
@@ -142,7 +161,7 @@ namespace GestcomWF.Views
         {
             if (e.KeyCode == Keys.Enter)
             {
-                CalculateRemaining();
+                CalculateRemainingC();
                 tbx_c.Focus();
             }
 
@@ -153,7 +172,7 @@ namespace GestcomWF.Views
         {
             if (e.KeyCode == Keys.Enter)
             {
-                CalculateRemaining();
+             
             }
 
         }
@@ -189,8 +208,10 @@ namespace GestcomWF.Views
                     tbx_b.Text = "";
                     tbx_c.Text = "";
                     tbx_total.Text = "";
+                    dataGridView.Refresh();
 
                 }
+         
             }
 
         }
@@ -407,6 +428,7 @@ namespace GestcomWF.Views
                         SaveFileDialog saveFileDialog = new SaveFileDialog();
                         saveFileDialog.Filter = "Excel files(*.xls; *.xlsx)| *.xls; *.xlsx";
                         saveFileDialog.Title = "Enregistrez le fichier sous...";
+                        saveFileDialog.InitialDirectory = @"C:\DIRECTORY\Documents\Classement\";
                         if (moisNum.Numero < 10)
                         {
                             moisExcel = "0" + moisNum.Numero;
