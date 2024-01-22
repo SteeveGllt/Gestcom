@@ -46,6 +46,8 @@
             dataGridView = new DataGridView();
             label1 = new Label();
             dtpDate = new DateTimePicker();
+            label2 = new Label();
+            tbxNumFromagerie = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
             SuspendLayout();
             // 
@@ -62,7 +64,7 @@
             // 
             // tbx_c
             // 
-            tbx_c.Location = new System.Drawing.Point(84, 181);
+            tbx_c.Location = new System.Drawing.Point(84, 201);
             tbx_c.Name = "tbx_c";
             tbx_c.Size = new System.Drawing.Size(62, 23);
             tbx_c.TabIndex = 30;
@@ -70,7 +72,7 @@
             // 
             // tbx_b
             // 
-            tbx_b.Location = new System.Drawing.Point(84, 148);
+            tbx_b.Location = new System.Drawing.Point(84, 168);
             tbx_b.Name = "tbx_b";
             tbx_b.Size = new System.Drawing.Size(62, 23);
             tbx_b.TabIndex = 29;
@@ -78,7 +80,7 @@
             // 
             // tbx_a
             // 
-            tbx_a.Location = new System.Drawing.Point(84, 115);
+            tbx_a.Location = new System.Drawing.Point(84, 135);
             tbx_a.Name = "tbx_a";
             tbx_a.Size = new System.Drawing.Size(62, 23);
             tbx_a.TabIndex = 28;
@@ -86,7 +88,7 @@
             // 
             // tbx_total
             // 
-            tbx_total.Location = new System.Drawing.Point(84, 85);
+            tbx_total.Location = new System.Drawing.Point(84, 105);
             tbx_total.Name = "tbx_total";
             tbx_total.Size = new System.Drawing.Size(62, 23);
             tbx_total.TabIndex = 27;
@@ -98,14 +100,14 @@
             btn_valider.Name = "btn_valider";
             btn_valider.Size = new System.Drawing.Size(88, 27);
             btn_valider.TabIndex = 26;
-            btn_valider.Text = "Valider";
+            btn_valider.Text = "Sauvegarder";
             btn_valider.UseVisualStyleBackColor = true;
             btn_valider.Click += btn_valider_Click;
             // 
             // lbl_c
             // 
             lbl_c.AutoSize = true;
-            lbl_c.Location = new System.Drawing.Point(29, 184);
+            lbl_c.Location = new System.Drawing.Point(29, 204);
             lbl_c.Name = "lbl_c";
             lbl_c.Size = new System.Drawing.Size(18, 15);
             lbl_c.TabIndex = 25;
@@ -114,7 +116,7 @@
             // lbl_b
             // 
             lbl_b.AutoSize = true;
-            lbl_b.Location = new System.Drawing.Point(29, 151);
+            lbl_b.Location = new System.Drawing.Point(29, 171);
             lbl_b.Name = "lbl_b";
             lbl_b.Size = new System.Drawing.Size(17, 15);
             lbl_b.TabIndex = 24;
@@ -123,7 +125,7 @@
             // lbl_a
             // 
             lbl_a.AutoSize = true;
-            lbl_a.Location = new System.Drawing.Point(29, 118);
+            lbl_a.Location = new System.Drawing.Point(29, 138);
             lbl_a.Name = "lbl_a";
             lbl_a.Size = new System.Drawing.Size(18, 15);
             lbl_a.TabIndex = 23;
@@ -132,7 +134,7 @@
             // lbl_total
             // 
             lbl_total.AutoSize = true;
-            lbl_total.Location = new System.Drawing.Point(29, 88);
+            lbl_total.Location = new System.Drawing.Point(29, 108);
             lbl_total.Name = "lbl_total";
             lbl_total.Size = new System.Drawing.Size(35, 15);
             lbl_total.TabIndex = 22;
@@ -213,11 +215,29 @@
             dtpDate.TabIndex = 32;
             dtpDate.ValueChanged += dtpDate_ValueChanged;
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(2, 79);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(128, 15);
+            label2.TabIndex = 34;
+            label2.Text = "Numéro de fromagerie";
+            // 
+            // tbxNumFromagerie
+            // 
+            tbxNumFromagerie.Location = new System.Drawing.Point(136, 75);
+            tbxNumFromagerie.Name = "tbxNumFromagerie";
+            tbxNumFromagerie.Size = new System.Drawing.Size(62, 23);
+            tbxNumFromagerie.TabIndex = 35;
+            // 
             // saisie_rappel
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(847, 284);
+            Controls.Add(tbxNumFromagerie);
+            Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(dtpDate);
             Controls.Add(generate_excel);
@@ -325,5 +345,7 @@
         private DataGridView dataGridView;
         private Label label1;
         private DateTimePicker dtpDate;
+        private Label label2;
+        private TextBox tbxNumFromagerie;
     }
 }

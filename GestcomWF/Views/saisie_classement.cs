@@ -204,6 +204,9 @@ namespace GestcomWF.Views
                 {
 
                     LotAdo.updateLotClassement(_currentLot.LOFROM, Convert.ToDecimal(tbxAnnee.Text), moisNum.Numero, Convert.ToDecimal(tbx_a.Text), Convert.ToDecimal(tbx_b.Text), Convert.ToDecimal(tbx_c.Text));
+                    this._currentLot.LOC11 = Convert.ToDecimal(tbx_a.Text);
+                    this._currentLot.LOC12 = Convert.ToDecimal(tbx_b.Text);
+                    this._currentLot.LOC13 = Convert.ToDecimal(tbx_c.Text);
                     _currentLot = null;
                     tbx_a.Text = "";
                     tbx_b.Text = "";

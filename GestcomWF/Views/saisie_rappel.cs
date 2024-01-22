@@ -38,6 +38,9 @@ namespace GestcomWF.Views
             cbxMois.SelectedIndex = 0;
             // Initialiser le DataGridView sans source de données
             dataGridView.DataSource = null;
+            tbxNumFromagerie.Enabled = false;
+            dataGridView.DefaultCellStyle.Format = "N2";
+            dataGridView.DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopRight;
 
             AjusterAnnee();
         }
@@ -58,8 +61,6 @@ namespace GestcomWF.Views
             if (decimal.TryParse(tbx_a.Text, out a) && decimal.TryParse(tbx_b.Text, out b) && decimal.TryParse(tbx_c.Text, out c))
             {
 
-
-
                 MoisNum moisNum = (MoisNum)cbxMois.SelectedItem;
                 if (_currentLot == null)
                 {
@@ -76,18 +77,22 @@ namespace GestcomWF.Views
                 {
                     var montant = ((_currentLot.LOC11 * Convert.ToDecimal(tbx_a.Text) + _currentLot.LOC12 * Convert.ToDecimal(tbx_b.Text) + _currentLot.LOC13 * Convert.ToDecimal(tbx_c.Text)) / _currentLot.LOCEM1) * _currentLot.LOCEN1;
                     LotAdo.updateLotRappel(_currentLot.LOFROM, Convert.ToDecimal(tbxAnnee.Text), moisNum.Numero, Convert.ToDouble(a), Convert.ToDouble(b), Convert.ToDouble(c), Convert.ToDouble(Math.Round(montant, 2)));
+                    this._currentLot.LOPU1 = Math.Round(a, 2);
+                    this._currentLot.LOPU2 = Math.Round(b, 2);
+                    this._currentLot.LOPU3 = Math.Round(c, 2);
                     _currentLot = null;
                     tbx_a.Text = "";
                     tbx_b.Text = "";
                     tbx_c.Text = "";
                     tbx_total.Text = "";
                 }
+                
             }
             else
             {
                 MessageBox.Show("Ce n'est pas un decimal !");
             }
-
+            dataGridView.Refresh();
         }
 
         private void dataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -103,6 +108,7 @@ namespace GestcomWF.Views
                 tbx_a.Text = lot.LOPU1.ToString();
                 tbx_b.Text = lot.LOPU2.ToString();
                 tbx_c.Text = lot.LOPU3.ToString();
+                tbxNumFromagerie.Text = lot.LOFROM.ToString();
                 this._currentLot = lot;
                 // Assignez d'autres propriétés de l'objet `lot` à d'autres TextBox si nécessaire
             }
@@ -181,8 +187,9 @@ namespace GestcomWF.Views
 
                     decimal moisNumValue = moisNum.Numero;
                     decimal anneeValue = Convert.ToDecimal(tbxAnnee.Text);
-                    string nomMoisDecale = "";
-                    decimal moisDecale = 0;
+
+                    DateTime selectedDate = dtpDate.Value;
+                    string formattedDate = selectedDate.ToString("dd MMMM yyyy");
 
 
 
@@ -198,39 +205,12 @@ namespace GestcomWF.Views
                         decimal poidsMoyen = 0;
                         decimal acompte = 0;
                         string annee = (DateTime.Now.Year / 100).ToString();
-                        bool anneeDejaReduite = false;
+                        
                         // Traitement pour chaque entré
                         foreach (LotFrom lotFrom in lotFroms)
                         {
 
-
-                            if (lotFrom.FACTURATION == -5)
-                            {
-                                moisDecale = moisNumValue - 5;
-                            }
-                            else if (lotFrom.FACTURATION == -6)
-                            {
-                                moisDecale = moisNumValue - 6;
-                            }
-
-                            if (moisDecale <= 0)
-                            {
-                                moisDecale += 12;
-                                if (!anneeDejaReduite)
-                                {
-                                    anneeValue -= 1;
-                                    anneeDejaReduite = true;
-                                }
-                            }
-
-                            MoisNum moisDecaleValue = listeObjets.FirstOrDefault(m => m.Numero == moisDecale);
-
-                            if (moisDecaleValue != null)
-                            {
-                                // Utilisez moisDecale.Mois pour obtenir le nom du mois décalé
-                                nomMoisDecale = moisDecaleValue.Mois;
-                                // Vous pouvez maintenant utiliser nomMoisDecale pour vos besoins
-                            }
+                  
 
                             poidsMoyen = lotFrom.LOCEN1 / lotFrom.LOCEM1;
                             acompte = lotFrom.LOPUAC * lotFrom.LOCEN1;
@@ -247,10 +227,10 @@ namespace GestcomWF.Views
                                 workSheet["F11"].Value = lotFrom.FRCPOS + " " + lotFrom.FRVILL;
 
                                 workSheet["A16"].Value = "      TB/PB";
-                                workSheet["G16"].Value = "Le" + " " + DateTime.Now.ToString("D");
+                                workSheet["G16"].Value = "Le" + " " + formattedDate;
                                 workSheet["B20"].Value = "Monsieur le Président";
                                 workSheet["B22"].Value = "          Conformément à nos conditions d'achat, le décompte de votre";
-                                workSheet["B23"].Value = "lot de fabrication " + nomMoisDecale + " " + annee + anneeValue + " s'établit comme suit :";
+                                workSheet["B23"].Value = "lot de fabrication " + moisNum.Mois.ToUpper() + " " + annee + anneeValue + " s'établit comme suit :";
 
                                 /* this.workSheet["F27"].StringValue = moisNum.Mois.ToUpper() + " " + (annee + tbxAnnee.Text);
                                  this.workSheet["F27"].Style.Font.Bold = true;*/

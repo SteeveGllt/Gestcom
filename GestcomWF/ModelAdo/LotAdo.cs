@@ -589,10 +589,10 @@ namespace Gestcom.ModelAdo
                         reader.IsDBNull(reader.GetOrdinal("LOC11")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOC11")),
                         reader.IsDBNull(reader.GetOrdinal("LOC12")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOC12")),
                         reader.IsDBNull(reader.GetOrdinal("LOC13")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOC13")),
-                        reader.IsDBNull(reader.GetOrdinal("LOPU1")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOPU1")),
-                        reader.IsDBNull(reader.GetOrdinal("LOPU2")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOPU2")),
-                        reader.IsDBNull(reader.GetOrdinal("LOPU3")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOPU3")),
-                        reader.IsDBNull(reader.GetOrdinal("MONTANT")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("MONTANT"))
+                        reader.IsDBNull(reader.GetOrdinal("LOPU1")) ? defaultDecimal : Math.Round(reader.GetDecimal(reader.GetOrdinal("LOPU1")), 2),
+                        reader.IsDBNull(reader.GetOrdinal("LOPU2")) ? defaultDecimal : Math.Round(reader.GetDecimal(reader.GetOrdinal("LOPU2")), 2),
+                        reader.IsDBNull(reader.GetOrdinal("LOPU3")) ? defaultDecimal : Math.Round(reader.GetDecimal(reader.GetOrdinal("LOPU3")), 2),
+                        reader.IsDBNull(reader.GetOrdinal("MONTANT")) ? defaultDecimal : Math.Round(reader.GetDecimal(reader.GetOrdinal("MONTANT")), 2)
                     // Ajoutez tous les champs nécessaires pour le constructeur de Lot ici.
                     );
 

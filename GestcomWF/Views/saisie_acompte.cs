@@ -202,7 +202,7 @@ namespace GestcomWF.Views
                         foreach (LotFrom lotFrom in lotFroms)
                         {
 
-                            prix = Math.Round((lotFrom.LOCEN1 / 1000) * lotFrom.LOPUAC, 2);
+                            prix = Math.Round((lotFrom.LOCEN1 / 1000) * (lotFrom.LOPUAC * 1000), 2);
                             acompte = lotFrom.LOPUAC * lotFrom.LOCEN1;
                             string nomFeuille = lotFrom.FRNOM.Replace("/", "-");
 
@@ -239,7 +239,7 @@ namespace GestcomWF.Views
 
                                 workSheet["D28"].Value = "pains";
 
-                                workSheet["E28"].Value = lotFrom.LOCEN1 / 1000;
+                                workSheet["E28"].Value = Math.Round(lotFrom.LOCEN1 / 1000, 3);
                                 workSheet["E28"].Style.Font.Bold = true;
                                 workSheet["E28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
 
@@ -250,7 +250,7 @@ namespace GestcomWF.Views
                                 workSheet["G28"].Value = "x";
                                 workSheet["G28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Center;
 
-                                workSheet["H28"].Value = lotFrom.LOPUAC;
+                                workSheet["H28"].Value = lotFrom.LOPUAC * 1000;
                                 workSheet["H28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
                                 workSheet["H28"].FormatString = "# ##0.00€";
 
