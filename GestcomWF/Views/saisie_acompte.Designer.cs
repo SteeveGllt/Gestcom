@@ -135,6 +135,7 @@ namespace GestcomWF.Views
             cbxMois.Name = "cbxMois";
             cbxMois.Size = new System.Drawing.Size(133, 23);
             cbxMois.TabIndex = 9;
+            cbxMois.SelectedIndexChanged += cbxMois_SelectedIndexChanged;
             // 
             // checkBoxUpdateAll
             // 

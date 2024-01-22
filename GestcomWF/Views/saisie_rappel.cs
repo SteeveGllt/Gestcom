@@ -38,6 +38,8 @@ namespace GestcomWF.Views
             cbxMois.SelectedIndex = 0;
             // Initialiser le DataGridView sans source de données
             dataGridView.DataSource = null;
+
+            AjusterAnnee();
         }
 
         public decimal CustomParse(string incomingValue)
@@ -666,6 +668,18 @@ namespace GestcomWF.Views
                 // Empêcher la gestion ultérieure de cette touche
                 e.SuppressKeyPress = true;
             }
+        }
+
+        private void dtpDate_ValueChanged(object sender, EventArgs e)
+        {
+            AjusterAnnee();
+        }
+        private void AjusterAnnee()
+        {
+            // Ajuster l'année en fonction du mois précédent de 4 mois
+            DateTime moisPrecedent = dtpDate.Value.AddMonths(-5);
+            cbxMois.SelectedIndex = moisPrecedent.Month - 1;
+            tbxAnnee.Text = Convert.ToString(moisPrecedent.Year % 100);
         }
     }
 }

@@ -38,18 +38,42 @@ namespace GestcomWF.Views
 
             cbxMois.DataSource = listeObjets;
             cbxMois.DisplayMember = "Mois";
-      
+
             cbxMois.SelectedIndex = 0;
             // Initialiser le DataGridView sans source de données
             dataGridView.DataSource = null;
 
             checkBoxUpdateAll.Checked = true;
 
+            btn_valider_dg.Visible = false;
+
             AjusterAnnee();
 
-
+            GenererValeurs();
         }
+        private void GenererValeurs()
+        {
 
+            if (tbx_annee.Text == "" || tbx_annee.Text.Length < 2)
+            {
+
+            }
+            else
+            {
+                MoisNum moisNum = (MoisNum)cbxMois.SelectedItem;
+                List<Lot> lots = LotAdo.allLotAcompte(Convert.ToDecimal(tbx_annee.Text), moisNum.Numero);
+                /*if (lots == null || lots.Count == 0)
+                {
+                    MessageBox.Show("Aucune valeur");
+                }
+                else
+                {
+                    dataGridView.DataSource = lots;
+
+                }*/
+                dataGridView.DataSource = lots;
+            }
+        }
         private void btn_valider_dg_Click(object sender, EventArgs e)
         {
 
@@ -178,7 +202,7 @@ namespace GestcomWF.Views
                         foreach (LotFrom lotFrom in lotFroms)
                         {
 
-                            prix = Math.Round(lotFrom.LOCEN1 * lotFrom.LOPUAC, 2);
+                            prix = Math.Round((lotFrom.LOCEN1 / 1000) * lotFrom.LOPUAC, 2);
                             acompte = lotFrom.LOPUAC * lotFrom.LOCEN1;
                             string nomFeuille = lotFrom.FRNOM.Replace("/", "-");
 
@@ -191,9 +215,8 @@ namespace GestcomWF.Views
                                 workSheet["F11"].Value = lotFrom.FRNOM;
                                 workSheet["F12"].Value = lotFrom.FRADR;
                                 workSheet["F13"].Value = lotFrom.FRCPOS + " " + lotFrom.FRVILL;
-                                workSheet["D16"].Value = "Le" + " " + formattedDate;
+                                workSheet["G28"].Value = "Le" + " " + formattedDate;
                                 workSheet["A18"].Value = "      TB/PB";
-                                workSheet["G28"].Value = "Le" + " " + DateTime.Now.ToString("D");
                                 workSheet["B23"].Value = "Monsieur le Président";
                                 workSheet["B25"].Value = "          Nous vous prions de bien vouloir trouver ci-dessous, le détail";
                                 workSheet["B26"].Value = "du premier acompte sur votre lot de fabrication " + moisNum.Mois.ToUpper() + " " + annee + anneeValue;
@@ -213,9 +236,10 @@ namespace GestcomWF.Views
                                 workSheet["C28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
 
 
+
                                 workSheet["D28"].Value = "pains";
 
-                                workSheet["E28"].Value = lotFrom.LOCEN1;
+                                workSheet["E28"].Value = lotFrom.LOCEN1 / 1000;
                                 workSheet["E28"].Style.Font.Bold = true;
                                 workSheet["E28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
 
@@ -226,20 +250,24 @@ namespace GestcomWF.Views
                                 workSheet["G28"].Value = "x";
                                 workSheet["G28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Center;
 
-                                workSheet["H28"].Value = lotFrom.LOPUAC + " €";
+                                workSheet["H28"].Value = lotFrom.LOPUAC;
                                 workSheet["H28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
+                                workSheet["H28"].FormatString = "# ##0.00€";
 
 
 
-                                workSheet["I28"].Value = "'=";
+
+
+                                workSheet["I28"].Value = " =";
                                 workSheet["I28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Left;
 
-                                workSheet["J28"].Value = prix + " €";
+                                workSheet["J28"].Value = prix;
                                 workSheet["J28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
+                                workSheet["J28"].FormatString = "# ##0.00€";
 
-                                workSheet["J30"].Value = prix + " €";
+                                workSheet["J30"].Value = prix;
                                 workSheet["J30"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
-
+                                workSheet["J30"].FormatString = "# ##0.00€";
 
 
                                 /*foreach (var dateEntry in lotFroms.Where(item => item.FRNUM == lotFrom.FRNUM))
@@ -271,17 +299,20 @@ namespace GestcomWF.Views
                                 workSheet["F30"].Value = "Total HT";
                                 workSheet["F31"].Value = "T.V.A";
                                 workSheet["H31"].Value = "5,5";
+                                workSheet["H31"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
                                 workSheet["I31"].Value = "%";
                                 workSheet["J31"].Value = prix * 5.5m / 100;
+                                workSheet["J31"].FormatString = "# ##0.00€";
 
                                 workSheet["F33"].Value = "Total Réglé";
                                 workSheet["F33"].Style.Font.Bold = true;
 
-                                var sumPrixTVA = workSheet["J30:J31"];
+                                //var sumPrixTVA = workSheet["J30:J31"];
 
-                                workSheet["J33"].Value = sumPrixTVA.Sum() + "€";
+                                workSheet["J33"].Formula = "=SUM(J30:J31)";
                                 workSheet["J33"].Style.Font.Bold = true;
-
+                                workSheet["J33"].FormatString = "# ##0.00€";
+                                var sum = workSheet["J33"].Value;
 
 
                                 workSheet["B35"].Value = "          Vous en souhaitant bonne réception";
@@ -289,6 +320,11 @@ namespace GestcomWF.Views
                                 workSheet["B38"].Value = "salutations distinguées";
                                 workSheet["H40"].Value = "Service Comptabilité";
                                 workSheet["H40"].Style.Font.Bold = true;
+
+                                workSheet["B46"].Value = "PS : Nous virons ce jour, sur votre compte N° " + lotFrom.FRBANQ + " " + lotFrom.FRGUIC + " " + lotFrom.FRCOM1;
+                                workSheet["B47"].Value = lotFrom.FRDOMI + ", la somme de";
+                                workSheet["J47"].Value = sum;
+                                workSheet["J47"].FormatString = "# ##0.00€";
 
 
                                 valeurPrecedente = lotFrom.FRNUM;
@@ -393,6 +429,7 @@ namespace GestcomWF.Views
         private void dtpAcompte_ValueChanged(object sender, EventArgs e)
         {
             AjusterAnnee();
+            GenererValeurs();
         }
 
         private void AjusterAnnee()
@@ -401,6 +438,11 @@ namespace GestcomWF.Views
             DateTime moisPrecedent = dtpAcompte.Value.AddMonths(-2);
             cbxMois.SelectedIndex = moisPrecedent.Month - 1;
             tbx_annee.Text = Convert.ToString(moisPrecedent.Year % 100);
+        }
+
+        private void cbxMois_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GenererValeurs();
         }
     }
 }

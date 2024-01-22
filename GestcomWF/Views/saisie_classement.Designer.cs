@@ -52,29 +52,29 @@
             // labelMois
             // 
             labelMois.AutoSize = true;
-            labelMois.Location = new System.Drawing.Point(25, 57);
-            labelMois.Margin = new Padding(5, 0, 5, 0);
+            labelMois.Location = new System.Drawing.Point(22, 43);
+            labelMois.Margin = new Padding(4, 0, 4, 0);
             labelMois.Name = "labelMois";
-            labelMois.Size = new System.Drawing.Size(44, 20);
+            labelMois.Size = new System.Drawing.Size(36, 15);
             labelMois.TabIndex = 0;
             labelMois.Text = "Mois:";
             // 
             // labelAnnee
             // 
             labelAnnee.AutoSize = true;
-            labelAnnee.Location = new System.Drawing.Point(220, 57);
-            labelAnnee.Margin = new Padding(5, 0, 5, 0);
+            labelAnnee.Location = new System.Drawing.Point(192, 43);
+            labelAnnee.Margin = new Padding(4, 0, 4, 0);
             labelAnnee.Name = "labelAnnee";
-            labelAnnee.Size = new System.Drawing.Size(54, 20);
+            labelAnnee.Size = new System.Drawing.Size(44, 15);
             labelAnnee.TabIndex = 1;
             labelAnnee.Text = "Année:";
             // 
             // buttonGenerer
             // 
-            buttonGenerer.Location = new System.Drawing.Point(352, 15);
-            buttonGenerer.Margin = new Padding(5, 4, 5, 4);
+            buttonGenerer.Location = new System.Drawing.Point(308, 11);
+            buttonGenerer.Margin = new Padding(4, 3, 4, 3);
             buttonGenerer.Name = "buttonGenerer";
-            buttonGenerer.Size = new System.Drawing.Size(101, 36);
+            buttonGenerer.Size = new System.Drawing.Size(88, 27);
             buttonGenerer.TabIndex = 2;
             buttonGenerer.Text = "Afficher";
             buttonGenerer.UseVisualStyleBackColor = true;
@@ -83,74 +83,73 @@
             // dataGridView
             // 
             dataGridView.ColumnHeadersHeight = 29;
-            dataGridView.Location = new System.Drawing.Point(184, 115);
-            dataGridView.Margin = new Padding(5, 4, 5, 4);
+            dataGridView.Location = new System.Drawing.Point(161, 86);
+            dataGridView.Margin = new Padding(4, 3, 4, 3);
             dataGridView.Name = "dataGridView";
             dataGridView.RowHeadersWidth = 51;
-            dataGridView.Size = new System.Drawing.Size(534, 231);
+            dataGridView.Size = new System.Drawing.Size(467, 173);
             dataGridView.TabIndex = 3;
             dataGridView.CellDoubleClick += dataGridView_CellDoubleClick;
             // 
             // tbxAnnee
             // 
-            tbxAnnee.Location = new System.Drawing.Point(279, 53);
-            tbxAnnee.Margin = new Padding(3, 4, 3, 4);
+            tbxAnnee.Location = new System.Drawing.Point(244, 40);
             tbxAnnee.MaxLength = 2;
             tbxAnnee.Name = "tbxAnnee";
-            tbxAnnee.Size = new System.Drawing.Size(53, 27);
+            tbxAnnee.Size = new System.Drawing.Size(47, 23);
             tbxAnnee.TabIndex = 4;
             // 
             // cbxMois
             // 
             cbxMois.FormattingEnabled = true;
-            cbxMois.Location = new System.Drawing.Point(74, 53);
-            cbxMois.Margin = new Padding(3, 4, 3, 4);
+            cbxMois.Location = new System.Drawing.Point(65, 40);
             cbxMois.Name = "cbxMois";
-            cbxMois.Size = new System.Drawing.Size(138, 28);
+            cbxMois.Size = new System.Drawing.Size(121, 23);
             cbxMois.TabIndex = 5;
+            cbxMois.SelectedIndexChanged += cbxMois_SelectedIndexChanged;
             // 
             // lbl_total
             // 
             lbl_total.AutoSize = true;
-            lbl_total.Location = new System.Drawing.Point(23, 119);
+            lbl_total.Location = new System.Drawing.Point(20, 89);
             lbl_total.Name = "lbl_total";
-            lbl_total.Size = new System.Drawing.Size(45, 20);
+            lbl_total.Size = new System.Drawing.Size(35, 15);
             lbl_total.TabIndex = 6;
             lbl_total.Text = "Total:";
             // 
             // lbl_a
             // 
             lbl_a.AutoSize = true;
-            lbl_a.Location = new System.Drawing.Point(23, 159);
+            lbl_a.Location = new System.Drawing.Point(20, 119);
             lbl_a.Name = "lbl_a";
-            lbl_a.Size = new System.Drawing.Size(22, 20);
+            lbl_a.Size = new System.Drawing.Size(18, 15);
             lbl_a.TabIndex = 7;
             lbl_a.Text = "A:";
             // 
             // lbl_b
             // 
             lbl_b.AutoSize = true;
-            lbl_b.Location = new System.Drawing.Point(23, 203);
+            lbl_b.Location = new System.Drawing.Point(20, 152);
             lbl_b.Name = "lbl_b";
-            lbl_b.Size = new System.Drawing.Size(21, 20);
+            lbl_b.Size = new System.Drawing.Size(17, 15);
             lbl_b.TabIndex = 8;
             lbl_b.Text = "B:";
             // 
             // lbl_c
             // 
             lbl_c.AutoSize = true;
-            lbl_c.Location = new System.Drawing.Point(23, 247);
+            lbl_c.Location = new System.Drawing.Point(20, 185);
             lbl_c.Name = "lbl_c";
-            lbl_c.Size = new System.Drawing.Size(21, 20);
+            lbl_c.Size = new System.Drawing.Size(18, 15);
             lbl_c.TabIndex = 9;
             lbl_c.Text = "C:";
             // 
             // btn_valider
             // 
-            btn_valider.Location = new System.Drawing.Point(55, 309);
-            btn_valider.Margin = new Padding(5, 4, 5, 4);
+            btn_valider.Location = new System.Drawing.Point(48, 232);
+            btn_valider.Margin = new Padding(4, 3, 4, 3);
             btn_valider.Name = "btn_valider";
-            btn_valider.Size = new System.Drawing.Size(101, 36);
+            btn_valider.Size = new System.Drawing.Size(88, 27);
             btn_valider.TabIndex = 10;
             btn_valider.Text = "Sauvegarder";
             btn_valider.UseVisualStyleBackColor = true;
@@ -159,44 +158,41 @@
             // tbx_total
             // 
             tbx_total.Enabled = false;
-            tbx_total.Location = new System.Drawing.Point(86, 115);
-            tbx_total.Margin = new Padding(3, 4, 3, 4);
+            tbx_total.Location = new System.Drawing.Point(75, 86);
             tbx_total.Name = "tbx_total";
-            tbx_total.Size = new System.Drawing.Size(70, 27);
+            tbx_total.Size = new System.Drawing.Size(62, 23);
             tbx_total.TabIndex = 11;
             // 
             // tbx_a
             // 
-            tbx_a.Location = new System.Drawing.Point(86, 155);
-            tbx_a.Margin = new Padding(3, 4, 3, 4);
+            tbx_a.Location = new System.Drawing.Point(75, 116);
             tbx_a.Name = "tbx_a";
-            tbx_a.Size = new System.Drawing.Size(70, 27);
+            tbx_a.Size = new System.Drawing.Size(62, 23);
             tbx_a.TabIndex = 12;
             tbx_a.KeyUp += tbx_a_KeyUp;
             // 
             // tbx_b
             // 
-            tbx_b.Location = new System.Drawing.Point(86, 199);
-            tbx_b.Margin = new Padding(3, 4, 3, 4);
+            tbx_b.Location = new System.Drawing.Point(75, 149);
             tbx_b.Name = "tbx_b";
-            tbx_b.Size = new System.Drawing.Size(70, 27);
+            tbx_b.Size = new System.Drawing.Size(62, 23);
             tbx_b.TabIndex = 13;
             tbx_b.KeyUp += tbx_b_KeyUp;
             // 
             // tbx_c
             // 
-            tbx_c.Location = new System.Drawing.Point(86, 243);
-            tbx_c.Margin = new Padding(3, 4, 3, 4);
+            tbx_c.Location = new System.Drawing.Point(75, 182);
             tbx_c.Name = "tbx_c";
-            tbx_c.Size = new System.Drawing.Size(70, 27);
+            tbx_c.Size = new System.Drawing.Size(62, 23);
             tbx_c.TabIndex = 14;
             tbx_c.KeyUp += tbx_c_KeyUp;
             // 
             // generate_excel
             // 
-            generate_excel.Location = new System.Drawing.Point(570, 15);
+            generate_excel.Location = new System.Drawing.Point(499, 11);
+            generate_excel.Margin = new Padding(3, 2, 3, 2);
             generate_excel.Name = "generate_excel";
-            generate_excel.Size = new System.Drawing.Size(177, 29);
+            generate_excel.Size = new System.Drawing.Size(155, 22);
             generate_excel.TabIndex = 15;
             generate_excel.Text = "Générer le fichier Excel";
             generate_excel.UseVisualStyleBackColor = true;
@@ -204,27 +200,26 @@
             // 
             // dtpDate
             // 
-            dtpDate.Location = new System.Drawing.Point(72, 11);
-            dtpDate.Margin = new Padding(3, 4, 3, 4);
+            dtpDate.Location = new System.Drawing.Point(63, 8);
             dtpDate.Name = "dtpDate";
-            dtpDate.Size = new System.Drawing.Size(228, 27);
+            dtpDate.Size = new System.Drawing.Size(200, 23);
             dtpDate.TabIndex = 16;
             dtpDate.ValueChanged += dtpDate_ValueChanged;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(25, 16);
+            label1.Location = new System.Drawing.Point(22, 12);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(41, 20);
+            label1.Size = new System.Drawing.Size(31, 15);
             label1.TabIndex = 17;
             label1.Text = "Date";
             // 
             // saisie_classement
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(759, 373);
+            ClientSize = new System.Drawing.Size(664, 280);
             Controls.Add(label1);
             Controls.Add(dtpDate);
             Controls.Add(generate_excel);
@@ -243,7 +238,7 @@
             Controls.Add(labelAnnee);
             Controls.Add(buttonGenerer);
             Controls.Add(dataGridView);
-            Margin = new Padding(5, 4, 5, 4);
+            Margin = new Padding(4, 3, 4, 3);
             Name = "saisie_classement";
             Text = "Saisie classement";
             ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();

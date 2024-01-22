@@ -40,37 +40,38 @@ namespace GestcomWF.Views
             // Initialiser la combobox avec les mois
             cbxMois.DataSource = listeObjets;
             cbxMois.DisplayMember = "Mois";
-            cbxMois.SelectedIndex = 0;
             // Initialiser le DataGridView sans source de données
             dataGridView.DataSource = null;
+            buttonGenerer.Visible = false;
 
             AjusterAnnee();
+
+            GenererValeurs();
         }
 
 
         // Génère des lots basés sur le mois et l'année entrés
-        private void buttonGenerer_Click(object sender, EventArgs e)
+        private void GenererValeurs()
         {
 
 
             if (tbxAnnee.Text == "" || tbxAnnee.Text.Length < 2)
             {
-                MessageBox.Show("Veuillez entrer une année en deux chiffres");
             }
             else
             {
                 MoisNum moisNum = (MoisNum)cbxMois.SelectedItem;
                 List<Lot> lots = LotAdo.allLot(Convert.ToDecimal(tbxAnnee.Text), moisNum.Numero);
-                if (lots == null || lots.Count == 0)
+                /*if (lots == null || lots.Count == 0)
                 {
                     MessageBox.Show("Aucune valeur");
                 }
                 else
                 {
                     dataGridView.DataSource = lots;
-
-                }
-
+                
+                }*/
+                dataGridView.DataSource = lots;
 
             }
 
@@ -126,7 +127,7 @@ namespace GestcomWF.Views
         private void CalculateRemainingC()
         {
             int total = Convert.ToInt32(tbx_total.Text);  // Vous pouvez récupérer cette valeur depuis un autre champ si nécessaire
-           
+
             int valueA = 0;
             int valueB = 0;
 
@@ -172,7 +173,7 @@ namespace GestcomWF.Views
         {
             if (e.KeyCode == Keys.Enter)
             {
-             
+
             }
 
         }
@@ -211,7 +212,7 @@ namespace GestcomWF.Views
                     dataGridView.Refresh();
 
                 }
-         
+
             }
 
         }
@@ -256,6 +257,8 @@ namespace GestcomWF.Views
                 MoisNum moisNum = (MoisNum)cbxMois.SelectedItem;
 
                 // Récupération de toutes les entrées pour le mois et l'année donnés
+                DateTime selectedDate = dtpDate.Value;
+                string formattedDate = selectedDate.ToString("dd MMMM yyyy");
                 List<LotFrom> lotFroms = LotAdo.generationFichierExcelClassement(moisNum.Numero, Convert.ToDecimal(tbxAnnee.Text));
                 if (lotFroms == null || lotFroms.Count <= 0)
                 {
@@ -283,7 +286,7 @@ namespace GestcomWF.Views
                                 workSheet["D12"].Value = lotFrom.FRADR;
                                 workSheet["D13"].Value = lotFrom.FRCPOS + " " + lotFrom.FRVILL;
                                 workSheet["A18"].Value = "      TB/PB";
-                                workSheet["D19"].Value = "Le" + " " + DateTime.Now.ToString("D");
+                                workSheet["D19"].Value = "Le" + " " + formattedDate;
                                 workSheet["B24"].Value = "Monsieur le Président";
                                 workSheet["B26"].Value = "          Nous vous prions de bien vouloir trouver ci-dessous, pour information,";
                                 workSheet["B27"].Value = "le classement de votre lot de fabrication ";
@@ -456,8 +459,9 @@ namespace GestcomWF.Views
         }
 
         private void dtpDate_ValueChanged(object sender, EventArgs e)
-        { 
+        {
             AjusterAnnee();
+            GenererValeurs();
         }
 
 
@@ -467,6 +471,35 @@ namespace GestcomWF.Views
             DateTime moisPrecedent = dtpDate.Value.AddMonths(-4);
             cbxMois.SelectedIndex = moisPrecedent.Month - 1;
             tbxAnnee.Text = Convert.ToString(moisPrecedent.Year % 100);
+        }
+
+        private void cbxMois_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GenererValeurs();
+        }
+
+        private void buttonGenerer_Click(object sender, EventArgs e)
+        {
+            if (tbxAnnee.Text == "" || tbxAnnee.Text.Length < 2)
+            {
+                MessageBox.Show("Veuillez entrer une année en deux chiffres");
+            }
+            else
+            {
+                MoisNum moisNum = (MoisNum)cbxMois.SelectedItem;
+                List<Lot> lots = LotAdo.allLot(Convert.ToDecimal(tbxAnnee.Text), moisNum.Numero);
+                if (lots == null || lots.Count == 0)
+                {
+                    MessageBox.Show("Aucune valeur");
+                }
+                else
+                {
+                    dataGridView.DataSource = lots;
+
+                }
+
+
+            }
         }
     }
 }
