@@ -16,10 +16,10 @@ namespace GestcomWF.Classes
         public Decimal LOC11 { get; set; } // Pains
         public Decimal LOC12 { get; set; } // Pains
         public Decimal LOC13 { get; set; } // Pains
-        public Decimal LOPUAC { get; set; } 
-        public Decimal LOPU1 { get; set; } 
-        public Decimal LOPU2 { get; set; } 
-        public Decimal LOPU3 { get; set; } 
+        public Decimal LOPUAC { get; set; }
+        public Decimal LOPU1 { get; set; }
+        public Decimal LOPU2 { get; set; }
+        public Decimal LOPU3 { get; set; }
         public Decimal FRNUM { get; set; } // Num Fromagerie
         public String FRNOM { get; set; }
         public String FRADR { get; set; }
@@ -29,6 +29,7 @@ namespace GestcomWF.Classes
         public Decimal FRBANQ { get; set; }
         public Decimal FRGUIC { get; set; }
         public string FRCOM1 { get; set; }
+        public string FRCOM2 { get; set; }
         public string FRDOMI { get; set; }
 
         public Decimal FACTURATION { get; set; }
@@ -50,7 +51,7 @@ namespace GestcomWF.Classes
             FRNUM = fRNUM;
 
         }
-        public LotFrom(decimal lOFROM, string fRNOM, string fRNDIR, string fRADR, decimal fRCPOS, decimal lOCEN1, decimal lOCEM1, decimal lOC11, decimal lOC12, decimal lOC13, decimal lOPUAC, decimal lOPU1, decimal lOPU2, decimal lOPU3, decimal lOANNE, decimal lOMOIS, string fRVILL, decimal fRNUM, decimal facturation)
+        public LotFrom(decimal lOFROM, string fRNOM, string fRNDIR, string fRADR, decimal fRCPOS, decimal lOCEN1, decimal lOCEM1, decimal lOC11, decimal lOC12, decimal lOC13, decimal lOPUAC, decimal lOPU1, decimal lOPU2, decimal lOPU3, decimal lOANNE, decimal lOMOIS, string fRVILL, decimal fRNUM, decimal facturation, string fRDOMI, decimal fRBANQ, decimal fRGUIC, string fRCOM1, string fRCOM2)
         {
             LOFROM = lOFROM;
             FRNOM = fRNOM;
@@ -71,9 +72,14 @@ namespace GestcomWF.Classes
             FRVILL = fRVILL;
             FRNUM = fRNUM;
             FACTURATION = facturation;
+            FRDOMI = fRDOMI;
+            FRBANQ = fRBANQ;
+            FRGUIC = fRGUIC;
+            FRCOM1 = fRCOM1;
+            FRCOM2 = fRCOM2;
         }
 
-        public LotFrom(decimal lOFROM, string fRNOM, string fRNDIR, string fRADR, decimal fRCPOS, decimal lOCEN1, decimal lOCEM1, decimal lOPUAC, decimal lOANNE, decimal lOMOIS, string fRVILL, decimal fRNUM, string fRDOMI, decimal fRBANQ, decimal fRGUIC, string fRCOM1)
+        public LotFrom(decimal lOFROM, string fRNOM, string fRNDIR, string fRADR, decimal fRCPOS, decimal lOCEN1, decimal lOCEM1, decimal lOPUAC, decimal lOANNE, decimal lOMOIS, string fRVILL, decimal fRNUM, string fRDOMI, decimal fRBANQ, decimal fRGUIC, string fRCOM1, string fRCOM2)
         {
             LOFROM = lOFROM;
             FRNOM = fRNOM;
@@ -81,8 +87,8 @@ namespace GestcomWF.Classes
             FRADR = fRADR;
             FRCPOS = fRCPOS;
             LOCEN1 = lOCEN1;
-            LOCEM1 = lOCEM1;         
-            LOPUAC = lOPUAC;         
+            LOCEM1 = lOCEM1;
+            LOPUAC = lOPUAC;
             LOANNE = lOANNE;
             LOMOIS = lOMOIS;
             FRVILL = fRVILL;
@@ -91,6 +97,7 @@ namespace GestcomWF.Classes
             FRBANQ = fRBANQ;
             FRGUIC = fRGUIC;
             FRCOM1 = fRCOM1;
+            FRCOM2 = fRCOM2;
         }
     }
 }

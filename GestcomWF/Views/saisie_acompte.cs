@@ -242,6 +242,7 @@ namespace GestcomWF.Views
                                 workSheet["E28"].Value = Math.Round(lotFrom.LOCEN1 / 1000, 3);
                                 workSheet["E28"].Style.Font.Bold = true;
                                 workSheet["E28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
+                                workSheet["E28"].FormatString = "# ##0.000";
 
                                 workSheet["F28"].Value = "T";
                                 workSheet["F28"].Style.Font.Bold = true;
@@ -321,7 +322,7 @@ namespace GestcomWF.Views
                                 workSheet["H40"].Value = "Service Comptabilité";
                                 workSheet["H40"].Style.Font.Bold = true;
 
-                                workSheet["B46"].Value = "PS : Nous virons ce jour, sur votre compte N° " + lotFrom.FRBANQ + " " + lotFrom.FRGUIC + " " + lotFrom.FRCOM1;
+                                workSheet["B46"].Value = "PS : Nous virons ce jour, sur votre compte N° " + lotFrom.FRBANQ + " " + lotFrom.FRGUIC + " " + lotFrom.FRCOM1 + " " + lotFrom.FRCOM2;
                                 workSheet["B47"].Value = lotFrom.FRDOMI + ", la somme de";
                                 workSheet["J47"].Value = sum;
                                 workSheet["J47"].FormatString = "# ##0.00€";

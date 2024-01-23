@@ -116,7 +116,7 @@ namespace GestcomWF.Views
                             workSheet["C27"].Value = "Nombres";
                             workSheet["C27"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
 
-
+                            
 
                             workSheet["C28"].Value = "Meules";
                             workSheet["C28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
@@ -154,8 +154,6 @@ namespace GestcomWF.Views
                             int currentRow = 30;
 
 
-
-
                             foreach (var dateEntry in entreeLotFroms.Where(item => item.FRNUM == entreeLotFrom.FRNUM))
                             {
                                 // Remplissez les données pour chaque entrée de fromagerie
@@ -166,11 +164,11 @@ namespace GestcomWF.Views
 
                                 workSheet[$"C{currentRow}"].Value = dateEntry.LOCENM;
                                 workSheet[$"C{currentRow}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
-                                workSheet[$"C{currentRow}"].FormatString = "# ##0    "; ;
+                                workSheet[$"C{currentRow}"].FormatString = "# ##0    ";
 
                                 workSheet[$"D{currentRow}"].Value = dateEntry.LOCENB;
                                 workSheet[$"D{currentRow}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
-                                workSheet[$"D{currentRow}"].FormatString = "# ##0    "; ;
+                                workSheet[$"D{currentRow}"].FormatString = "# ##0    ";
 
 
                                 workSheet[$"E{currentRow}"].Value = dateEntry.LOTAUX.ToString("F2") + "%";

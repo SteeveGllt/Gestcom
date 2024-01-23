@@ -11,6 +11,7 @@ namespace GestcomWF.Views
         private const int MAGIC_YEAR_DIFFERENCE = 2001;
         List<Fromagerie> fromageries; // Liste des fromageries
 
+        CultureInfo clt = new CultureInfo("fr-FR");
         // Constructeur
         public entree_lot()
         {
@@ -237,7 +238,7 @@ namespace GestcomWF.Views
                     entreeLotAffiner.LOCENN = Convert.ToDecimal(tbxPoidsNetAffine.Text);
                     entreeLotAffiner.LOCENB = entreeLotAffiner.LOCENN;
                     entreeLotAffiner.LOTAUX = Convert.ToDouble(tbxFreinte.Text);
-                    entreeLotAffiner.PRIX = Math.Round(Convert.ToDecimal(tbxPrixUnitaire.Text), 2);
+                    entreeLotAffiner.PRIX = Math.Round(Convert.ToDecimal(tbxPrixUnitaire.Text, new CultureInfo("FR-fr")), 2);
                     LotAdo.createEntreeLotAffine(entreeLotAffiner);
                 }
                 else
