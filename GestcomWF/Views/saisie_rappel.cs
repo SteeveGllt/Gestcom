@@ -12,6 +12,7 @@ namespace GestcomWF.Views
         private Lot _currentLot = null;
         private decimal testMontant = 0m;
         private string moisExcel = string.Empty;
+        private string _lastPathSaved = string.Empty;
 
         // Liste des mois pour la combobox
         List<MoisNum> listeObjets = new List<MoisNum> {
@@ -40,6 +41,7 @@ namespace GestcomWF.Views
             dataGridView.DataSource = null;
             tbxNumFromagerie.Enabled = false;
             dataGridView.DefaultCellStyle.Format = "N2";
+            dataGridView.Columns[0].DefaultCellStyle.Format = "0";
             dataGridView.DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopRight;
 
             AjusterAnnee();
@@ -740,6 +742,78 @@ namespace GestcomWF.Views
         private void cbxMois_SelectedIndexChanged(object sender, EventArgs e)
         {
             GenererValeurs();
+        }
+
+        private void btnImprimer_Click(object sender, EventArgs e)
+        {
+            PrintDialog printDialog = new PrintDialog();
+            if (string.IsNullOrEmpty(_lastPathSaved))
+            {
+                _lastPathSaved = GetLatestFilePath("E:/Dossier Dev/Informatique/Excel");
+                if (printDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string selectedPrinter = printDialog.PrinterSettings.PrinterName;
+                    // Utilisez selectedPrinter avec votre méthode d'impression
+                    PrintAllSheets(_lastPathSaved, selectedPrinter);
+                }
+            }
+            else
+            {
+
+                if (printDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string selectedPrinter = printDialog.PrinterSettings.PrinterName;
+                    // Utilisez selectedPrinter avec votre méthode d'impression
+                    PrintAllSheets(_lastPathSaved, selectedPrinter);
+                }
+            }
+
+        }
+
+        private void PrintAllSheets(string filePath, string printerName)
+        {
+            // Initialise les objets pour l'application Excel et le classeur.
+            Microsoft.Office.Interop.Excel.Application excelApp = new Microsoft.Office.Interop.Excel.Application();
+            Microsoft.Office.Interop.Excel.Workbook workbook = excelApp.Workbooks.Open(filePath);
+
+            try
+            {
+                // Parcourt et imprime chaque feuille du classeur.
+                foreach (Microsoft.Office.Interop.Excel.Worksheet worksheet in workbook.Sheets)
+                {
+                    worksheet.PrintOutEx(Type.Missing, Type.Missing, Type.Missing, Type.Missing, printerName);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Affiche un message d'erreur en cas de problème lors de l'impression.
+                MessageBox.Show($"Une erreur est survenue lors de la tentative d'impression: {ex.Message}");
+            }
+            finally
+            {
+                // Ferme le classeur et l'application Excel.
+                workbook.Close(false);
+                excelApp.Quit();
+
+                // Libère les ressources pour éviter les fuites de mémoire.
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(workbook);
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(excelApp);
+            }
+        }
+
+        string GetLatestFilePath(string directoryPath)
+        {
+            if (string.IsNullOrEmpty(directoryPath) || !Directory.Exists(directoryPath))
+            {
+                throw new ArgumentException("Le chemin du répertoire est invalide.");
+            }
+
+            var directoryInfo = new DirectoryInfo(directoryPath);
+            var latestFile = directoryInfo.GetFiles()
+                                          .OrderByDescending(f => f.LastWriteTime)
+                                          .FirstOrDefault();
+
+            return latestFile?.FullName;
         }
     }
 }

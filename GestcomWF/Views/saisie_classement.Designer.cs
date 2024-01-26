@@ -46,6 +46,7 @@
             generate_excel = new Button();
             dtpDate = new DateTimePicker();
             label1 = new Label();
+            btnImprimer = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
             SuspendLayout();
             // 
@@ -215,11 +216,22 @@
             label1.TabIndex = 17;
             label1.Text = "Date";
             // 
+            // btnImprimer
+            // 
+            btnImprimer.Location = new System.Drawing.Point(532, 54);
+            btnImprimer.Name = "btnImprimer";
+            btnImprimer.Size = new System.Drawing.Size(75, 23);
+            btnImprimer.TabIndex = 18;
+            btnImprimer.Text = "Imprimer";
+            btnImprimer.UseVisualStyleBackColor = true;
+            btnImprimer.Click += btnImprimer_Click;
+            // 
             // saisie_classement
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(664, 280);
+            Controls.Add(btnImprimer);
             Controls.Add(label1);
             Controls.Add(dtpDate);
             Controls.Add(generate_excel);
@@ -301,5 +313,6 @@
         private Button generate_excel;
         private DateTimePicker dtpDate;
         private Label label1;
+        private Button btnImprimer;
     }
 }

@@ -45,6 +45,7 @@ namespace GestcomWF.Views
             tbxNumFromagerie = new TextBox();
             dtpAcompte = new DateTimePicker();
             label2 = new Label();
+            btnImprimer = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
             SuspendLayout();
             // 
@@ -151,7 +152,7 @@ namespace GestcomWF.Views
             // 
             // generate_excel
             // 
-            generate_excel.Location = new System.Drawing.Point(549, 12);
+            generate_excel.Location = new System.Drawing.Point(468, 11);
             generate_excel.Name = "generate_excel";
             generate_excel.Size = new System.Drawing.Size(139, 23);
             generate_excel.TabIndex = 11;
@@ -193,11 +194,22 @@ namespace GestcomWF.Views
             label2.TabIndex = 15;
             label2.Text = "Date";
             // 
+            // btnImprimer
+            // 
+            btnImprimer.Location = new System.Drawing.Point(613, 11);
+            btnImprimer.Name = "btnImprimer";
+            btnImprimer.Size = new System.Drawing.Size(75, 23);
+            btnImprimer.TabIndex = 16;
+            btnImprimer.Text = "Impression";
+            btnImprimer.UseVisualStyleBackColor = true;
+            btnImprimer.Click += btnImprimer_Click;
+            // 
             // saisie_acompte
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(700, 338);
+            Controls.Add(btnImprimer);
             Controls.Add(label2);
             Controls.Add(dtpAcompte);
             Controls.Add(tbxNumFromagerie);
@@ -263,5 +275,6 @@ namespace GestcomWF.Views
         private TextBox tbxNumFromagerie;
         private DateTimePicker dtpAcompte;
         private Label label2;
+        private Button btnImprimer;
     }
 }
