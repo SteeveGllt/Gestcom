@@ -74,6 +74,7 @@ namespace GestcomWF.Views
             tbx_annee.Name = "tbx_annee";
             tbx_annee.Size = new System.Drawing.Size(49, 23);
             tbx_annee.TabIndex = 2;
+            tbx_annee.KeyDown += tbx_annee_KeyDown;
             // 
             // dataGridView
             // 

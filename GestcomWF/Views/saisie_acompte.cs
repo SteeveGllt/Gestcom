@@ -518,5 +518,16 @@ namespace GestcomWF.Views
 
             return latestFile?.FullName;
         }
+
+        private void tbx_annee_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (tbx_annee.Text.Length == 2)
+                {
+                    GenererValeurs();
+                }
+            }
+        }
     }
 }

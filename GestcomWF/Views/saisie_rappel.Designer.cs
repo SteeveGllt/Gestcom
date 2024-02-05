@@ -159,6 +159,7 @@
             tbxAnnee.Name = "tbxAnnee";
             tbxAnnee.Size = new System.Drawing.Size(47, 23);
             tbxAnnee.TabIndex = 20;
+            tbxAnnee.KeyDown += tbxAnnee_KeyDown;
             // 
             // labelMois
             // 

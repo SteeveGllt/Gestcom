@@ -40,8 +40,12 @@ namespace GestcomWF.Views
             // Initialiser le DataGridView sans source de données
             dataGridView.DataSource = null;
             tbxNumFromagerie.Enabled = false;
-            dataGridView.DefaultCellStyle.Format = "N2";
-            dataGridView.Columns[0].DefaultCellStyle.Format = "0";
+            dataGridView.DefaultCellStyle.Format = "0";
+            dataGridView.Columns[2].DefaultCellStyle.Format = "N3";
+            dataGridView.Columns[4].DefaultCellStyle.Format = "N3";
+            dataGridView.Columns[6].DefaultCellStyle.Format = "N3";
+            dataGridView.Columns[8].DefaultCellStyle.Format = "N3";
+            dataGridView.Columns[9].DefaultCellStyle.Format = "N3";
             dataGridView.DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopRight;
 
             AjusterAnnee();
@@ -814,6 +818,18 @@ namespace GestcomWF.Views
                                           .FirstOrDefault();
 
             return latestFile?.FullName;
+        }
+
+        private void tbxAnnee_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if(tbxAnnee.Text.Length == 2)
+                {
+                    GenererValeurs();
+                }
+              
+            }
         }
     }
 }
