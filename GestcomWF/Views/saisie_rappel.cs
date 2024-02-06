@@ -824,11 +824,11 @@ namespace GestcomWF.Views
         {
             if (e.KeyCode == Keys.Enter)
             {
-                if(tbxAnnee.Text.Length == 2)
+                if (tbxAnnee.Text.Length == 2)
                 {
                     GenererValeurs();
                 }
-              
+
             }
         }
     }

@@ -1,6 +1,7 @@
 ﻿using Gestcom.ModelAdo;
 using Gestcom.Models;
 using System.Globalization;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace GestcomWF.Views
 {
@@ -187,11 +188,17 @@ namespace GestcomWF.Views
                     Console.WriteLine(lot.LOCEM1 + " " + lot.LOCEB1 + " " + lot.LOCEN1);
                     if (cbAffiner.Checked)
                     {
+                        decimal prixUnitaire;
+                        var prixUnitaireSansPoint = tbxPrixUnitaire.Text.Replace('.', ',');
+                       
                         lot.LOCEM1 = Convert.ToDecimal(tbxPainsAffine.Text);
                         lot.LOCEN1 = Convert.ToDecimal(tbxPoidsNetAffine.Text);
                         lot.LOCEB1 = lot.LOCEN1;
-                        lot.LOPUAC = Convert.ToDecimal(tbxPrixUnitaire.Text);
-                        var montant = lot.LOPUAC * lot.LOCEN1;
+                        if (decimal.TryParse(prixUnitaireSansPoint, out prixUnitaire))
+                        {
+                            lot.LOPUAC = prixUnitaire;
+                        }
+                        var montant = prixUnitaire * lot.LOCEN1;
                         LotAdo.updateLotAffine(lot.LOFROM, lot.LOANNE, lot.LOMOIS, lot.LOCEM1, lot.LOCEB1, lot.LOCEN1, montant);
                     }
                     else
@@ -213,7 +220,14 @@ namespace GestcomWF.Views
                     if (cbAffiner.Checked)
                     {
                         newLot.LOCEM1 = Convert.ToDecimal(tbxPainsAffine.Text);
-                        newLot.LOPUAC = Convert.ToDecimal(tbxPrixUnitaire.Text);
+                        decimal prixUnitaire;
+                        var prixUnitaireSansPoint = tbxPrixUnitaire.Text.Replace('.', ',');
+                        if (decimal.TryParse(prixUnitaireSansPoint, out prixUnitaire))
+                        {
+                            newLot.LOPUAC = prixUnitaire;
+                        }
+                        //var value = decimal.Parse(tbxPrixUnitaire.Text, NumberStyles.Any);
+                        //newLot.LOPUAC = value;
                         newLot.LOCEN1 = Convert.ToDecimal(tbxPoidsNetAffine.Text);
                         newLot.LOCEB1 = newLot.LOCEN1;
                         LotAdo.createLotAffine(newLot);
@@ -229,6 +243,9 @@ namespace GestcomWF.Views
                 }
                 if (cbAffiner.Checked)
                 {
+                    decimal prixUnitaire;
+                    var prixUnitaireSansPoint = tbxPrixUnitaire.Text.Replace('.', ',');
+                  
                     EntreeLot entreeLotAffiner = new EntreeLot();
                     entreeLotAffiner.LOFROM = Convert.ToDecimal(cbxFromagerie.Text);
                     entreeLotAffiner.LOANNE = Convert.ToDecimal(tbxAnnee.Text);
@@ -238,7 +255,10 @@ namespace GestcomWF.Views
                     entreeLotAffiner.LOCENN = Convert.ToDecimal(tbxPoidsNetAffine.Text);
                     entreeLotAffiner.LOCENB = entreeLotAffiner.LOCENN;
                     entreeLotAffiner.LOTAUX = Convert.ToDouble(tbxFreinte.Text);
-                    entreeLotAffiner.PRIX = Math.Round(Convert.ToDecimal(tbxPrixUnitaire.Text, new CultureInfo("FR-fr")), 2);
+                    if (decimal.TryParse(prixUnitaireSansPoint, out prixUnitaire))
+                    {
+                        entreeLotAffiner.PRIX = prixUnitaire;
+                    }
                     LotAdo.createEntreeLotAffine(entreeLotAffiner);
                 }
                 else
@@ -352,7 +372,7 @@ namespace GestcomWF.Views
             tbxPoidsNetAffine.Text = "";
             tbxPainsAffine.Text = "";
         }
-            
+
         private void cbxFromagerie_SelectedIndexChanged(object sender, EventArgs e)
         {
 

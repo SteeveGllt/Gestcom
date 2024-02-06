@@ -6,6 +6,7 @@ using Microsoft.VisualBasic;
 using System.Data.OleDb;
 using System.Data.SqlTypes;
 using System.Globalization;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace Gestcom.ModelAdo
@@ -114,7 +115,7 @@ namespace Gestcom.ModelAdo
                 oleDbCommand.Parameters.AddWithValue("@LOCEM1", nbPains);
                 oleDbCommand.Parameters.AddWithValue("@LOCEB1", ((double)poidsBrut));
                 oleDbCommand.Parameters.AddWithValue("@LOCEN1", poidsNet);
-                oleDbCommand.Parameters.AddWithValue("@MONTANT", montant);
+                oleDbCommand.Parameters.AddWithValue("@MONTANT", (double)montant);
                 oleDbCommand.Parameters.AddWithValue("@LOFROM", lofrom);
                 oleDbCommand.Parameters.AddWithValue("@LOANNE", loanne);
                 oleDbCommand.Parameters.AddWithValue("@LOMOIS", lomois);
@@ -218,8 +219,8 @@ namespace Gestcom.ModelAdo
                 oleDbCommand.Parameters.AddWithValue("@LOCEM1", lot.LOCEM1);
                 oleDbCommand.Parameters.AddWithValue("@LOCEB1", ((double)lot.LOCEB1));
                 oleDbCommand.Parameters.AddWithValue("@LOCEN1", lot.LOCEN1);
-                oleDbCommand.Parameters.AddWithValue("@LOPUAC", lot.LOPUAC);
-                oleDbCommand.Parameters.AddWithValue("@MONTANT", lot.LOPUAC * lot.LOCEN1);
+                oleDbCommand.Parameters.AddWithValue("@LOPUAC", Convert.ToDouble(lot.LOPUAC));
+                oleDbCommand.Parameters.AddWithValue("@MONTANT", Convert.ToDouble(lot.LOPUAC) * Convert.ToDouble(lot.LOCEN1));
                 oleDbCommand.ExecuteNonQuery();
                 Console.WriteLine("Lot créé");
                 MessageBox.Show("Lot créé");
@@ -281,7 +282,7 @@ namespace Gestcom.ModelAdo
                 oleDbCommand.Parameters.AddWithValue("@LOCENB", entreeLot.LOCENB); // Brut
                 oleDbCommand.Parameters.AddWithValue("@LOCENN", entreeLot.LOCENN); // Net
                 oleDbCommand.Parameters.AddWithValue("@LOTAUX", entreeLot.LOTAUX); // Freinte
-                oleDbCommand.Parameters.AddWithValue("@PRIX", entreeLot.PRIX); // Freinte
+                oleDbCommand.Parameters.AddWithValue("@PRIX", Convert.ToDouble(entreeLot.PRIX)); // Freinte
                 oleDbCommand.ExecuteNonQuery();
                 Console.WriteLine("Lot créé dans entrée lot");
                 MessageBox.Show("Lot créé dans entrée lot");
