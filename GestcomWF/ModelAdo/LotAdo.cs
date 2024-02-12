@@ -667,7 +667,7 @@ namespace Gestcom.ModelAdo
                         (Decimal)reader["LOPUAC"],
                         (Decimal)reader["LOPU1"],
                         (Decimal)reader["LOPU2"],
-                        (Decimal)reader["LOPU3"],
+                        (Decimal)reader["LOPU3"],²
                         (Decimal)reader["LOANNE"],
                         (Decimal)reader["LOMOIS"],
                         (String)reader["FRVILL"],

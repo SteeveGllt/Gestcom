@@ -223,7 +223,8 @@ namespace GestcomWF.Views
                     string formattedDate = selectedDate.ToString("dd MMMM yyyy");
 
 
-
+                    string nomMoisDecale = "";
+                    decimal moisDecale = 0;
 
                     // Récupération de toutes les entrées pour le mois et l'année donnés
                     List<LotFrom> lotFroms = LotAdo.generationFichierExcelRappel(moisNum.Numero, Convert.ToDecimal(tbxAnnee.Text));
@@ -236,12 +237,39 @@ namespace GestcomWF.Views
                         decimal poidsMoyen = 0;
                         decimal acompte = 0;
                         string annee = (DateTime.Now.Year / 100).ToString();
+                        bool anneeDejaReduite = false;
 
                         // Traitement pour chaque entré
                         foreach (LotFrom lotFrom in lotFroms)
                         {
 
+                            if (lotFrom.FACTURATION == -5)
+                            {
+                                moisDecale = moisNumValue;
+                            }
+                            else if (lotFrom.FACTURATION == -6)
+                            {
+                                moisDecale = moisNumValue - 1;
+                            }
 
+                            if (moisDecale <= 0)
+                            {
+                                moisDecale += 12;
+                                if (!anneeDejaReduite)
+                                {
+                                    anneeValue -= 1;
+                                    anneeDejaReduite = true;
+                                }
+                            }
+
+                            MoisNum moisDecaleValue = listeObjets.FirstOrDefault(m => m.Numero == moisDecale);
+
+                            if (moisDecaleValue != null)
+                            {
+                                // Utilisez moisDecale.Mois pour obtenir le nom du mois décalé
+                                nomMoisDecale = moisDecaleValue.Mois;
+                                // Vous pouvez maintenant utiliser nomMoisDecale pour vos besoins
+                            }
 
                             poidsMoyen = lotFrom.LOCEN1 / lotFrom.LOCEM1;
                             acompte = lotFrom.LOPUAC * lotFrom.LOCEN1;
@@ -261,7 +289,7 @@ namespace GestcomWF.Views
                                 workSheet["G16"].Value = "Le" + " " + formattedDate;
                                 workSheet["B20"].Value = "Monsieur le Président";
                                 workSheet["B22"].Value = "          Conformément à nos conditions d'achat, le décompte de votre";
-                                workSheet["B23"].Value = "lot de fabrication " + moisNum.Mois.ToUpper() + " " + annee + anneeValue + " s'établit comme suit :";
+                                workSheet["B23"].Value = "lot de fabrication " + nomMoisDecale.ToUpper() + " " + annee + anneeValue + " s'établit comme suit :";
 
                                 /* this.workSheet["F27"].StringValue = moisNum.Mois.ToUpper() + " " + (annee + tbxAnnee.Text);
                                  this.workSheet["F27"].Style.Font.Bold = true;*/
@@ -296,7 +324,7 @@ namespace GestcomWF.Views
 
                                     workSheet["H25"].Value = Math.Round(lotFrom.LOPU1 * 1000, 2);
                                     workSheet["H25"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
-                                    workSheet["H25"].FormatString = "# ##0.00€";
+                                    workSheet["H25"].FormatString = "# ##0.00 ";
 
                                     workSheet["I25"].Value = "€/T";
                                     workSheet["I25"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Left;
@@ -308,6 +336,8 @@ namespace GestcomWF.Views
                                     workSheet["K25"].Value = Math.Round((poidsMoyen * lotFrom.LOC11) * lotFrom.LOPU1, 2);
                                     workSheet["K25"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
                                     workSheet["K25"].FormatString = "# ##0.00€";
+
+                                    workSheet["C27"].Value = "Prime";
 
                                 }
 
@@ -340,7 +370,7 @@ namespace GestcomWF.Views
 
                                     workSheet["H26"].Value = Math.Round(lotFrom.LOPU2 * 1000, 2);
                                     workSheet["H26"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
-                                    workSheet["H26"].FormatString = "# ##0.00€";
+                                    workSheet["H26"].FormatString = "# ##0.00 ";
 
                                     workSheet["I26"].Value = "€/T";
                                     workSheet["I26"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Left;
@@ -351,6 +381,8 @@ namespace GestcomWF.Views
                                     workSheet["K26"].Value = Math.Round((poidsMoyen * lotFrom.LOC12) * lotFrom.LOPU2, 2);
                                     workSheet["K26"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
                                     workSheet["K26"].FormatString = "# ##0.00€";
+
+                                    workSheet["C28"].Value = "Prime";
 
                                 }
                                 if (lotFrom.LOC13 != 0)
@@ -379,7 +411,7 @@ namespace GestcomWF.Views
 
                                     workSheet["H27"].Value = Math.Round(lotFrom.LOPU3 * 1000, 2);
                                     workSheet["H27"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
-                                    workSheet["H27"].FormatString = "# ##0.00€";
+                                    workSheet["H27"].FormatString = "# ##0.00 ";
 
                                     workSheet["I27"].Value = "€/T";
                                     workSheet["I27"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Left;
@@ -390,6 +422,8 @@ namespace GestcomWF.Views
                                     workSheet["K27"].Value = Math.Round((poidsMoyen * lotFrom.LOC13) * lotFrom.LOPU3, 2);
                                     workSheet["K27"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
                                     workSheet["K27"].FormatString = "# ##0.00€";
+
+                                    workSheet["C29"].Value = "Prime";
                                 }
 
                                 if (lotFrom.LOC11 != 0 && lotFrom.LOC12 == 0 && lotFrom.LOC13 == 0)
