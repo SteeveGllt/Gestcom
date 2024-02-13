@@ -1,5 +1,6 @@
 ﻿using Gestcom.Classes;
 using Gestcom.ModelAdo;
+using GestcomWF.DataAccess;
 using IronXL;
 using Microsoft.VisualBasic;
 using System.Reflection.Metadata;
@@ -12,6 +13,7 @@ namespace GestcomWF.Views
 
         private string selectedFilePath = string.Empty;
         private string moisExcel = string.Empty;
+        DataPath dataPath = new DataPath();
 
         List<MoisNum> listeObjets = new List<MoisNum> {
             new MoisNum { Mois = "Janvier", Numero = 1 },
@@ -297,7 +299,7 @@ namespace GestcomWF.Views
                     SaveFileDialog saveFileDialog = new SaveFileDialog();
                     saveFileDialog.Filter = "Excel files(*.xls; *.xlsx)| *.xls; *.xlsx";
                     saveFileDialog.Title = "Enregistrez le fichier sous...";
-                    saveFileDialog.InitialDirectory = @"C:\DIRECTORY\Documents\Pesée\";
+                    saveFileDialog.InitialDirectory = dataPath.PathPesee;
                     if (moisNum.Numero < 10)
                     {
                         moisExcel = "0" + moisNum.Numero;

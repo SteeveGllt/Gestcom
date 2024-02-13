@@ -2,6 +2,7 @@
 using Gestcom.ModelAdo;
 using Gestcom.Models;
 using GestcomWF.Classes;
+using GestcomWF.DataAccess;
 using IronXL;
 using Microsoft.VisualBasic;
 
@@ -16,6 +17,7 @@ namespace GestcomWF.Views
 
         private string moisExcel = string.Empty;
         private string _lastPathSaved = string.Empty;
+        DataPath dataPath = new DataPath();
 
         // Liste des mois pour la combobox
         List<MoisNum> listeObjets = new List<MoisNum> {
@@ -384,7 +386,7 @@ namespace GestcomWF.Views
                         SaveFileDialog saveFileDialog = new SaveFileDialog();
                         saveFileDialog.Filter = "Excel files(*.xls; *.xlsx)| *.xls; *.xlsx";
                         saveFileDialog.Title = "Enregistrez le fichier sous...";
-                        saveFileDialog.InitialDirectory = @"C:\DIRECTORY\Documents\Acompte\";
+                        saveFileDialog.InitialDirectory = dataPath.PathAcompte;
                         if (moisNum.Numero < 10)
                         {
                             moisExcel = "0" + moisNum.Numero;
@@ -452,7 +454,7 @@ namespace GestcomWF.Views
             PrintDialog printDialog = new PrintDialog();
             if (string.IsNullOrEmpty(_lastPathSaved))
             {
-                _lastPathSaved = GetLatestFilePath("E:/Dossier Dev/Informatique/Excel");
+                _lastPathSaved = GetLatestFilePath(dataPath.PathAcompte);
                 if (printDialog.ShowDialog() == DialogResult.OK)
                 {
                     string selectedPrinter = printDialog.PrinterSettings.PrinterName;
