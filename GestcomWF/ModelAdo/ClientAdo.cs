@@ -7,6 +7,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolTip;
 using System.Security.Claims;
 using GestcomWF.Views;
+using Microsoft.VisualBasic.Logging;
 
 namespace GestcomWF.ModelAdo
 {
@@ -267,6 +268,54 @@ namespace GestcomWF.ModelAdo
             finally { close(); }
         }
 
+        public static Client ExisteNumClient(decimal clnum)
+        {
+            try
+            {
+                // Initialisation de l'objet Lot
+                Client client = new Client();
+                OleDbDataReader reader;
 
+                // Ouverture de la connexion
+                open();
+                OleDbCommand oleDbCommand = new OleDbCommand();
+                oleDbCommand.Connection = connection;
+
+                // Requête SQL pour vérifier l'existence d'un lot
+                oleDbCommand.CommandText = "SELECT CLNUM FROM TB_Clients WHERE  CLNUM = @CLNUM";
+
+                // Préparation et exécution de la requête
+                oleDbCommand.Prepare();
+                oleDbCommand.Parameters.AddWithValue("@CLNUM", lofrom);
+                oleDbCommand.ExecuteNonQuery();
+                reader = oleDbCommand.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    // Si la requête a retourné des résultats, créez un objet Lot
+                    client = new Client
+                    {
+                        // Assurez-vous de récupérer les valeurs appropriées depuis le reader
+                        CLNUM = reader.GetDecimal(0)
+                    };
+                    return client;
+                }
+                else
+                {
+                    return null;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                MessageBox.Show("Erreur de communication avec la base de données!");
+                return null;
+            }
+            finally
+            {
+                close();
+            }
+        }
     }
 }

@@ -92,6 +92,8 @@
             button1 = new Button();
             label29 = new Label();
             tbxFacturation = new TextBox();
+            label30 = new Label();
+            tbxPrime = new TextBox();
             SuspendLayout();
             // 
             // btnModifier
@@ -649,11 +651,30 @@
             tbxFacturation.Size = new System.Drawing.Size(110, 23);
             tbxFacturation.TabIndex = 64;
             // 
+            // label30
+            // 
+            label30.AutoSize = true;
+            label30.Location = new System.Drawing.Point(585, 405);
+            label30.Name = "label30";
+            label30.Size = new System.Drawing.Size(41, 15);
+            label30.TabIndex = 67;
+            label30.Text = "PRIME";
+            // 
+            // tbxPrime
+            // 
+            tbxPrime.Location = new System.Drawing.Point(585, 422);
+            tbxPrime.Margin = new Padding(3, 2, 3, 2);
+            tbxPrime.Name = "tbxPrime";
+            tbxPrime.Size = new System.Drawing.Size(110, 23);
+            tbxPrime.TabIndex = 66;
+            // 
             // fromageries
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(800, 450);
+            Controls.Add(label30);
+            Controls.Add(tbxPrime);
             Controls.Add(label29);
             Controls.Add(tbxFacturation);
             Controls.Add(button1);
@@ -789,5 +810,7 @@
         private Button button1;
         private Label label29;
         private TextBox tbxFacturation;
+        private Label label30;
+        private TextBox tbxPrime;
     }
 }

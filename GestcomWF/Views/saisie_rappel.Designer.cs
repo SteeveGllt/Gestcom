@@ -51,8 +51,7 @@
             label3 = new Label();
             tbxMontant = new TextBox();
             btnImprimer = new Button();
-            tbxPrime = new TextBox();
-            label4 = new Label();
+            checkboxPrime = new CheckBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
             SuspendLayout();
             // 
@@ -263,29 +262,22 @@
             btnImprimer.UseVisualStyleBackColor = true;
             btnImprimer.Click += btnImprimer_Click;
             // 
-            // tbxPrime
+            // checkboxPrime
             // 
-            tbxPrime.Location = new System.Drawing.Point(82, 289);
-            tbxPrime.Name = "tbxPrime";
-            tbxPrime.Size = new System.Drawing.Size(95, 23);
-            tbxPrime.TabIndex = 40;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new System.Drawing.Point(29, 292);
-            label4.Name = "label4";
-            label4.Size = new System.Drawing.Size(44, 15);
-            label4.TabIndex = 39;
-            label4.Text = "Prime :";
+            checkboxPrime.AutoSize = true;
+            checkboxPrime.Location = new System.Drawing.Point(29, 291);
+            checkboxPrime.Name = "checkboxPrime";
+            checkboxPrime.Size = new System.Drawing.Size(118, 19);
+            checkboxPrime.TabIndex = 39;
+            checkboxPrime.Text = "Inclure les primes";
+            checkboxPrime.UseVisualStyleBackColor = true;
             // 
             // saisie_rappel
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(964, 380);
-            Controls.Add(tbxPrime);
-            Controls.Add(label4);
+            Controls.Add(checkboxPrime);
             Controls.Add(btnImprimer);
             Controls.Add(tbxMontant);
             Controls.Add(label3);
@@ -403,7 +395,6 @@
         private Label label3;
         private TextBox tbxMontant;
         private Button btnImprimer;
-        private TextBox tbxPrime;
-        private Label label4;
+        private CheckBox checkboxPrime;
     }
 }

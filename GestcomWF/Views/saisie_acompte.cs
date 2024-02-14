@@ -134,14 +134,14 @@ namespace GestcomWF.Views
                             // Mettre à jour le prix pour chaque lot affiché dans le DataGridView
                             foreach (Lot lot in lots)
                             {
-                                LotAdo.updateLotPrix(lot.LOFROM, Convert.ToDecimal(tbx_annee.Text), moisNum.Numero, Convert.ToDouble(newPrice));
+                                LotAdo.updateLotPrix(lot.LOFROM, Convert.ToDecimal(tbx_annee.Text), moisNum.Numero, Convert.ToDouble(newPrice * 1000));
                                 lot.LOPUAC = newPrice;
                             }
                         }
                         else
                         {
                             // Mettre à jour un seul lot
-                            LotAdo.updateLotPrix(this._currentLot.LOFROM, Convert.ToDecimal(tbx_annee.Text), moisNum.Numero, Convert.ToDouble(newPrice));
+                            LotAdo.updateLotPrix(this._currentLot.LOFROM, Convert.ToDecimal(tbx_annee.Text), moisNum.Numero, Convert.ToDouble(newPrice * 1000));
                             this._currentLot.LOPUAC = newPrice;
                         }
                         // Rafraîchissez le DataGridView
@@ -205,7 +205,7 @@ namespace GestcomWF.Views
                         foreach (LotFrom lotFrom in lotFroms)
                         {
 
-                            prix = Math.Round((lotFrom.LOCEN1 / 1000) * (lotFrom.LOPUAC * 1000), 2);
+                            prix = Math.Round((lotFrom.LOCEN1 / 1000) * (lotFrom.LOPUAC / 1000), 2);
                             acompte = lotFrom.LOPUAC * lotFrom.LOCEN1;
                             string nomFeuille = lotFrom.FRNOM.Replace("/", "-");
 
@@ -254,7 +254,7 @@ namespace GestcomWF.Views
                                 workSheet["G28"].Value = "x";
                                 workSheet["G28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Center;
 
-                                workSheet["H28"].Value = lotFrom.LOPUAC * 1000;
+                                workSheet["H28"].Value = lotFrom.LOPUAC / 1000;
                                 workSheet["H28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
                                 workSheet["H28"].FormatString = "# ##0.00€";
 

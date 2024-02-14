@@ -87,9 +87,9 @@ namespace GestcomWF.Views
                 {
                     var montant = ((_currentLot.LOC11 * Convert.ToDecimal(tbx_a.Text) + _currentLot.LOC12 * Convert.ToDecimal(tbx_b.Text) + _currentLot.LOC13 * Convert.ToDecimal(tbx_c.Text)) / _currentLot.LOCEM1) * _currentLot.LOCEN1;
                     LotAdo.updateLotRappel(_currentLot.LOFROM, Convert.ToDecimal(tbxAnnee.Text), moisNum.Numero, Convert.ToDouble(a), Convert.ToDouble(b), Convert.ToDouble(c), Convert.ToDouble(Math.Round(montant, 2)));
-                    this._currentLot.LOPU1 = Math.Round(a, 2);
-                    this._currentLot.LOPU2 = Math.Round(b, 2);
-                    this._currentLot.LOPU3 = Math.Round(c, 2);
+                    this._currentLot.LOPU1 = Math.Round(a, 3);
+                    this._currentLot.LOPU2 = Math.Round(b, 3);
+                    this._currentLot.LOPU3 = Math.Round(c, 3);
                     _currentLot = null;
                     tbx_a.Text = "";
                     tbx_b.Text = "";
