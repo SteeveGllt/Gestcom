@@ -40,16 +40,22 @@ namespace GestcomWF.Models
         public String CLDIV { get; set; }
         public String CLINTRA { get; set; }
         public String CLSUPP { get; set; }
+        public int CLDLUO { get; set; }
+        public Decimal CLEBP { get; set; }
 
         public Client(decimal cLNUM, string cLNOM)
         {
             CLNUM = cLNUM;
             CLNOM = cLNOM;
         }
+        public Client(decimal cLNUM)
+        {
+            CLNUM = cLNUM;
+        }
 
         public Client() { }
 
-        public Client(decimal cLNUM, string cLNOM, string cLMTDI, string cLADR1, string cLADR2, decimal cLCPOS, string cLVILL, string cLREGL, decimal cLBASE, decimal cLDEPA, decimal cLECHE, decimal cLARRI, decimal cLBQUE, decimal cLGUI, string cLCPTE, string cLRIB, string cLDOM, decimal cLREP, decimal cLEDIT, string cLFAMI, string cLTRAN, decimal cLLIVR, decimal cLFACT, decimal cLCOMP, decimal cLRIST, decimal cLREMI, string cLCODE, decimal cLTVA, decimal cLENSE, string cLDIV, string cLINTRA, string cLSUPP) : this(cLNUM, cLNOM)
+        public Client(decimal cLNUM, string cLNOM, string cLMTDI, string cLADR1, string cLADR2, decimal cLCPOS, string cLVILL, string cLREGL, decimal cLBASE, decimal cLDEPA, decimal cLECHE, decimal cLARRI, decimal cLBQUE, decimal cLGUI, string cLCPTE, string cLRIB, string cLDOM, decimal cLREP, decimal cLEDIT, string cLFAMI, string cLTRAN, decimal cLLIVR, decimal cLFACT, decimal cLCOMP, decimal cLRIST, decimal cLREMI, string cLCODE, decimal cLTVA, decimal cLENSE, string cLDIV, string cLINTRA, string cLSUPP, int cLDLUO, decimal cLEBP) : this(cLNUM, cLNOM)
         {
             CLNUM = cLNUM;
             CLNOM = cLNOM;
@@ -83,6 +89,8 @@ namespace GestcomWF.Models
             CLDIV = cLDIV;
             CLINTRA = cLINTRA;
             CLSUPP = cLSUPP;
+            CLDLUO = cLDLUO;
+            CLEBP = cLEBP;
         }
     }
 }

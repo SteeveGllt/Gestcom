@@ -91,6 +91,7 @@ namespace GestcomWF.Views
                     tbxFrVver.Text = fromagerieComplete.FRVVER.ToString();
                     tbxFrEver.Text = fromagerieComplete.FREVER;
                     tbxFrActif.Text = fromagerieComplete.FRACTIF.ToString();
+                    tbxFacturation.Text = fromagerieComplete.FACTURATION.ToString();
                     tbxPrime.Text = fromagerieComplete.FRPRIME.ToString();
                     //tbxFacturation.Text = fromagerieComplete.FACTURATION.ToString();
                     this._currentFromagerie = fromagerieComplete;
@@ -173,7 +174,7 @@ namespace GestcomWF.Views
                          );
 
                     // Appeler la méthode pour mettre à jour la base de données avec le fromagerie modifié
-                    // FromagerieAdo.updateFromagerie(fromagerie);
+                    FromagerieAdo.updateFromagerie(fromagerie);
 
 
                 }

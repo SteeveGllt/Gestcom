@@ -94,6 +94,7 @@ namespace GestcomWF.ModelAdo
                 while (reader.Read())
                 {
                     decimal defaultDecimal = 0m;
+                    int defaultInt = 0;
                     string defaultString = "";
                     bool defaultBool = true;
                     // Création d'un objet Client à partir du numéro récupéré.
@@ -129,7 +130,9 @@ namespace GestcomWF.ModelAdo
     reader.IsDBNull(reader.GetOrdinal("CLENSE")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("CLENSE")),
     reader.IsDBNull(reader.GetOrdinal("CLDIV")) ? defaultString : reader.GetString(reader.GetOrdinal("CLDIV")),
     reader.IsDBNull(reader.GetOrdinal("CLINTRA")) ? defaultString : reader.GetString(reader.GetOrdinal("CLINTRA")),
-    reader.IsDBNull(reader.GetOrdinal("CLSUPP")) ? defaultString : reader.GetString(reader.GetOrdinal("CLSUPP"))
+    reader.IsDBNull(reader.GetOrdinal("CLSUPP")) ? defaultString : reader.GetString(reader.GetOrdinal("CLSUPP")),
+    reader.IsDBNull(reader.GetOrdinal("CLDLUO")) ? defaultInt : reader.GetInt32(reader.GetOrdinal("CLDLUO")),
+    reader.IsDBNull(reader.GetOrdinal("CLEBP")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("CLEBP"))
 
                          );
 
@@ -169,7 +172,7 @@ namespace GestcomWF.ModelAdo
 
 
                 // Création de la commande SQL pour sélectionner les fromageries actives.
-                oleDbCommand.CommandText = "INSERT INTO TB_Clients(CLNUM, CLNOM, CLMTDI, CLADR1, CLADR2, CLCPOS, CLVILL, CLREGL, CLBASE, CLDEPA, CLECHE, CLARRI, CLBQUE, CLGUI, CLCPTE, CLRIB, CLDOM, CLREP, CLEDIT, CLFAMI, CLTRAN, CLLIVR, CLFACT, CLCOMP, CLRIST, CLREMI, CLCODE, CLTVA, CLENSE, CLDIV, CLINTRA, CLSUPP) VALUES (@CLNUM, @CLNOM, @CLMTDI, @CLADR1, @CLADR2, @CLCPOS, @CLVILL, @CLREGL, @CLBASE, @CLDEPA, @CLECHE, @CLARRI, @CLBQUE, @CLGUI, @CLCPTE, @CLRIB, @CLDOM, @CLREP, @CLEDIT, @CLFAMI, @CLTRAN, @CLLIVR, @CLFACT, @CLCOMP, @CLRIST, @CLREMI, @CLCODE, @CLTVA, @CLENSE, @CLDIV, @CLINTRA, @CLSUPP);";
+                oleDbCommand.CommandText = "INSERT INTO TB_Clients(CLNUM, CLNOM, CLMTDI, CLADR1, CLADR2, CLCPOS, CLVILL, CLREGL, CLBASE, CLDEPA, CLECHE, CLARRI, CLBQUE, CLGUI, CLCPTE, CLRIB, CLDOM, CLREP, CLEDIT, CLFAMI, CLTRAN, CLLIVR, CLFACT, CLCOMP, CLRIST, CLREMI, CLCODE, CLTVA, CLENSE, CLDIV, CLINTRA, CLSUPP, CLDLUO, CLEBP) VALUES (@CLNUM, @CLNOM, @CLMTDI, @CLADR1, @CLADR2, @CLCPOS, @CLVILL, @CLREGL, @CLBASE, @CLDEPA, @CLECHE, @CLARRI, @CLBQUE, @CLGUI, @CLCPTE, @CLRIB, @CLDOM, @CLREP, @CLEDIT, @CLFAMI, @CLTRAN, @CLLIVR, @CLFACT, @CLCOMP, @CLRIST, @CLREMI, @CLCODE, @CLTVA, @CLENSE, @CLDIV, @CLINTRA, @CLSUPP, @CLDLUO, @CLEBP);";
                 oleDbCommand.Prepare();
                 oleDbCommand.Parameters.AddWithValue("@CLNUM", cl.CLNUM);
                 oleDbCommand.Parameters.AddWithValue("@CLNOM", cl.CLNOM);
@@ -203,6 +206,8 @@ namespace GestcomWF.ModelAdo
                 oleDbCommand.Parameters.AddWithValue("@CLDIV", cl.CLDIV);
                 oleDbCommand.Parameters.AddWithValue("@CLINTRA", cl.CLINTRA);
                 oleDbCommand.Parameters.AddWithValue("@CLSUPP", cl.CLSUPP);
+                oleDbCommand.Parameters.AddWithValue("@CLDLUO", cl.CLDLUO);
+                oleDbCommand.Parameters.AddWithValue("@CLEBP", cl.CLEBP);
                 oleDbCommand.ExecuteNonQuery();
                 Console.WriteLine("Client créé");
                 MessageBox.Show("Client crée");
@@ -221,7 +226,7 @@ namespace GestcomWF.ModelAdo
                 open();
                 OleDbCommand oleDbCommand = new OleDbCommand();
                 oleDbCommand.Connection = connection;
-                oleDbCommand.CommandText = "UPDATE TB_Clients SET CLNUM = @CLNUM, CLNOM = @CLNOM, CLMTDI = @CLMTDI, CLADR1 = @CLADR1, CLADR2 = @CLADR2, CLCPOS = @CLCPOS, CLVILL = @CLVILL, CLREGL = @CLREGL, CLBASE = @CLBASE, CLDEPA = @CLDEPA, CLECHE = @CLECHE, CLARRI = @CLARRI, CLBQUE = @CLBQUE, CLGUI = @CLGUI, CLCPTE = @CLCPTE, CLRIB = @CLRIB, CLDOM = @CLDOM, CLREP = @CLREP, CLEDIT = @CLEDIT, CLFAMI = @CLFAMI, CLTRAN = @CLTRAN, CLLIVR = @CLLIVR, CLFACT = @CLFACT, CLCOMP = @CLCOMP, CLRIST = @CLRIST, CLREMI = @CLREMI, CLCODE = @CLCODE, CLTVA = @CLTVA, CLENSE = @CLENSE, CLDIV = @CLDIV, CLINTRA = @CLINTRA WHERE CLNUM = " + ancienneValeurId;
+                oleDbCommand.CommandText = "UPDATE TB_Clients SET CLNUM = @CLNUM, CLNOM = @CLNOM, CLMTDI = @CLMTDI, CLADR1 = @CLADR1, CLADR2 = @CLADR2, CLCPOS = @CLCPOS, CLVILL = @CLVILL, CLREGL = @CLREGL, CLBASE = @CLBASE, CLDEPA = @CLDEPA, CLECHE = @CLECHE, CLARRI = @CLARRI, CLBQUE = @CLBQUE, CLGUI = @CLGUI, CLCPTE = @CLCPTE, CLRIB = @CLRIB, CLDOM = @CLDOM, CLREP = @CLREP, CLEDIT = @CLEDIT, CLFAMI = @CLFAMI, CLTRAN = @CLTRAN, CLLIVR = @CLLIVR, CLFACT = @CLFACT, CLCOMP = @CLCOMP, CLRIST = @CLRIST, CLREMI = @CLREMI, CLCODE = @CLCODE, CLTVA = @CLTVA, CLENSE = @CLENSE, CLDIV = @CLDIV, CLINTRA = @CLINTRA, CLDLUO = @CLDLUO, CLEBP = @CLEBP WHERE CLNUM = " + ancienneValeurId;
                 oleDbCommand.Prepare();
                 oleDbCommand.Parameters.AddWithValue("@CLNUM", client.CLNUM);
                 oleDbCommand.Parameters.AddWithValue("@CLNOM", client.CLNOM);
@@ -286,7 +291,7 @@ namespace GestcomWF.ModelAdo
 
                 // Préparation et exécution de la requête
                 oleDbCommand.Prepare();
-                oleDbCommand.Parameters.AddWithValue("@CLNUM", lofrom);
+                oleDbCommand.Parameters.AddWithValue("@CLNUM", clnum);
                 oleDbCommand.ExecuteNonQuery();
                 reader = oleDbCommand.ExecuteReader();
 
@@ -317,5 +322,161 @@ namespace GestcomWF.ModelAdo
                 close();
             }
         }
+        public static List<Decimal> ExisteNumList()
+        {
+            try
+            {
+                // Initialisation de la liste pour stocker les articles récupérés.
+                List<Decimal> numeroClients = new List<Decimal>();
+
+                OleDbDataReader reader;
+
+                // Ouverture de la connexion à la base de données (héritée de DataAdo).
+                open();
+
+                // Création de la commande SQL pour sélectionner tous les articles.
+                OleDbCommand oleDbCommand = new OleDbCommand("SELECT CLNUM FROM TB_Clients");
+
+                // Liaison de la commande à la connexion.
+                oleDbCommand.Connection = connection;
+
+                // Exécution de la commande et récupération du résultat dans le reader.
+                reader = oleDbCommand.ExecuteReader();
+
+                // Parcours du résultat ligne par ligne.
+                while (reader.Read())
+                {
+                    // Création d'un objet Article à partir des données de la ligne actuelle.
+                    Client client = new Client((Decimal)reader["CLNUM"]);
+
+                    // Ajout de l'article à la liste.
+                    numeroClients.Add(client.CLNUM);
+                }
+
+                // Ce WriteLine semble inutile. Il affichera simplement le type d'objet OleDbDataReader.
+                Console.WriteLine(reader);
+
+                // Fermeture du reader.
+                reader.Close();
+
+                // Retour de la liste d'articles.
+                return numeroClients;
+            }
+            catch (Exception ex) // En cas d'erreur lors de l'exécution.
+            {
+                // Affichage du message d'erreur dans la console.
+                Console.WriteLine(ex.Message);
+
+                // Affichage d'une boîte de message avec un message d'erreur générique pour l'utilisateur.
+                MessageBox.Show("Erreur de communication avec la base de données!");
+
+                // Retour null en cas d'erreur.
+                return null;
+            }
+            finally
+            {
+                // Assure que la connexion à la base de données est fermée, quelle que soit l'issue de la méthode.
+                close();
+            }
+        }
+
+        /* public static Client ExisteNumCompta(decimal clcomp)
+         {
+             try
+             {
+                 // Initialisation de l'objet Lot
+                 Client client = new Client();
+                 OleDbDataReader reader;
+
+                 // Ouverture de la connexion
+                 open();
+                 OleDbCommand oleDbCommand = new OleDbCommand();
+                 oleDbCommand.Connection = connection;
+
+                 // Requête SQL pour vérifier l'existence d'un lot
+                 oleDbCommand.CommandText = "SELECT CLCOMP FROM TB_Clients WHERE CLNUM = @CLNUM";
+
+                 // Préparation et exécution de la requête
+                 oleDbCommand.Prepare();
+                 oleDbCommand.Parameters.AddWithValue("@CLNUM", clcomp);
+                 oleDbCommand.ExecuteNonQuery();
+                 reader = oleDbCommand.ExecuteReader();
+
+                 if (reader.Read())
+                 {
+                     // Si la requête a retourné des résultats, créez un objet Lot
+                     client = new Client
+                     {
+                         // Assurez-vous de récupérer les valeurs appropriées depuis le reader
+                         CLCOMP = reader.GetDecimal(0)
+                     };
+                     return client;
+                 }
+                 else
+                 {
+                     return null;
+                 }
+
+             }
+             catch (Exception ex)
+             {
+                 Console.WriteLine(ex.Message);
+                 MessageBox.Show("Erreur de communication avec la base de données!");
+                 return null;
+             }
+             finally
+             {
+                 close();
+             }
+         }
+         public static Client ExisteNumRist(decimal clrist)
+         {
+             try
+             {
+                 // Initialisation de l'objet Lot
+                 Client client = new Client();
+                 OleDbDataReader reader;
+
+                 // Ouverture de la connexion
+                 open();
+                 OleDbCommand oleDbCommand = new OleDbCommand();
+                 oleDbCommand.Connection = connection;
+
+                 // Requête SQL pour vérifier l'existence d'un lot
+                 oleDbCommand.CommandText = "SELECT CLRIST FROM TB_Clients WHERE CLNUM = @CLNUM";
+
+                 // Préparation et exécution de la requête
+                 oleDbCommand.Prepare();
+                 oleDbCommand.Parameters.AddWithValue("@CLNUM", clrist);
+                 oleDbCommand.ExecuteNonQuery();
+                 reader = oleDbCommand.ExecuteReader();
+
+                 if (reader.Read())
+                 {
+                     // Si la requête a retourné des résultats, créez un objet Lot
+                     client = new Client
+                     {
+                         // Assurez-vous de récupérer les valeurs appropriées depuis le reader
+                         CLCOMP = reader.GetDecimal(0)
+                     };
+                     return client;
+                 }
+                 else
+                 {
+                     return null;
+                 }
+
+             }
+             catch (Exception ex)
+             {
+                 Console.WriteLine(ex.Message);
+                 MessageBox.Show("Erreur de communication avec la base de données!");
+                 return null;
+             }
+             finally
+             {
+                 close();
+             }
+         }*/
     }
 }

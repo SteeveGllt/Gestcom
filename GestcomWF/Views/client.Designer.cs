@@ -26,9 +26,12 @@ namespace GestcomWF.Views
 
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(client));
             listView1 = new ListView();
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
+            pbRistCheck = new PictureBox();
+            pbRistCroix = new PictureBox();
             tbxNumClient = new TextBox();
             label32 = new Label();
             tbxIntra = new TextBox();
@@ -93,17 +96,25 @@ namespace GestcomWF.Views
             cbxReglement = new ComboBox();
             label13 = new Label();
             tabPage4 = new TabPage();
-            btnCreate = new Button();
-            button1 = new Button();
-            tbxComp = new TextBox();
-            label24 = new Label();
+            tbxCompteEbp = new TextBox();
+            label34 = new Label();
+            pbCheckCompta = new PictureBox();
+            pbComptaCroix = new PictureBox();
             tbxDluo = new TextBox();
             label33 = new Label();
+            tbxComp = new TextBox();
+            label24 = new Label();
+            btnCreate = new Button();
+            button1 = new Button();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pbRistCheck).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbRistCroix).BeginInit();
             tabPage2.SuspendLayout();
             tabPage3.SuspendLayout();
             tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pbCheckCompta).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbComptaCroix).BeginInit();
             SuspendLayout();
             // 
             // listView1
@@ -131,6 +142,8 @@ namespace GestcomWF.Views
             // 
             // tabPage1
             // 
+            tabPage1.Controls.Add(pbRistCheck);
+            tabPage1.Controls.Add(pbRistCroix);
             tabPage1.Controls.Add(tbxNumClient);
             tabPage1.Controls.Add(label32);
             tabPage1.Controls.Add(tbxIntra);
@@ -177,6 +190,26 @@ namespace GestcomWF.Views
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Informations générales";
             tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // pbRistCheck
+            // 
+            pbRistCheck.Image = (System.Drawing.Image)resources.GetObject("pbRistCheck.Image");
+            pbRistCheck.Location = new System.Drawing.Point(439, 217);
+            pbRistCheck.Name = "pbRistCheck";
+            pbRistCheck.Size = new System.Drawing.Size(25, 23);
+            pbRistCheck.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbRistCheck.TabIndex = 42;
+            pbRistCheck.TabStop = false;
+            // 
+            // pbRistCroix
+            // 
+            pbRistCroix.Image = (System.Drawing.Image)resources.GetObject("pbRistCroix.Image");
+            pbRistCroix.Location = new System.Drawing.Point(412, 219);
+            pbRistCroix.Name = "pbRistCroix";
+            pbRistCroix.Size = new System.Drawing.Size(21, 21);
+            pbRistCroix.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbRistCroix.TabIndex = 41;
+            pbRistCroix.TabStop = false;
             // 
             // tbxNumClient
             // 
@@ -728,6 +761,10 @@ namespace GestcomWF.Views
             // 
             // tabPage4
             // 
+            tabPage4.Controls.Add(tbxCompteEbp);
+            tabPage4.Controls.Add(label34);
+            tabPage4.Controls.Add(pbCheckCompta);
+            tabPage4.Controls.Add(pbComptaCroix);
             tabPage4.Controls.Add(tbxDluo);
             tabPage4.Controls.Add(label33);
             tabPage4.Controls.Add(tbxComp);
@@ -739,6 +776,77 @@ namespace GestcomWF.Views
             tabPage4.TabIndex = 3;
             tabPage4.Text = "Autre";
             tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // tbxCompteEbp
+            // 
+            tbxCompteEbp.Location = new System.Drawing.Point(139, 99);
+            tbxCompteEbp.MaxLength = 10;
+            tbxCompteEbp.Name = "tbxCompteEbp";
+            tbxCompteEbp.Size = new System.Drawing.Size(48, 23);
+            tbxCompteEbp.TabIndex = 45;
+            // 
+            // label34
+            // 
+            label34.AutoSize = true;
+            label34.Location = new System.Drawing.Point(15, 102);
+            label34.Name = "label34";
+            label34.Size = new System.Drawing.Size(118, 15);
+            label34.TabIndex = 44;
+            label34.Text = "Numéro compte EBP";
+            // 
+            // pbCheckCompta
+            // 
+            pbCheckCompta.Image = (System.Drawing.Image)resources.GetObject("pbCheckCompta.Image");
+            pbCheckCompta.Location = new System.Drawing.Point(243, 14);
+            pbCheckCompta.Name = "pbCheckCompta";
+            pbCheckCompta.Size = new System.Drawing.Size(25, 23);
+            pbCheckCompta.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbCheckCompta.TabIndex = 43;
+            pbCheckCompta.TabStop = false;
+            // 
+            // pbComptaCroix
+            // 
+            pbComptaCroix.Image = (System.Drawing.Image)resources.GetObject("pbComptaCroix.Image");
+            pbComptaCroix.Location = new System.Drawing.Point(216, 14);
+            pbComptaCroix.Name = "pbComptaCroix";
+            pbComptaCroix.Size = new System.Drawing.Size(21, 21);
+            pbComptaCroix.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbComptaCroix.TabIndex = 28;
+            pbComptaCroix.TabStop = false;
+            // 
+            // tbxDluo
+            // 
+            tbxDluo.Location = new System.Drawing.Point(126, 52);
+            tbxDluo.MaxLength = 10;
+            tbxDluo.Name = "tbxDluo";
+            tbxDluo.Size = new System.Drawing.Size(48, 23);
+            tbxDluo.TabIndex = 26;
+            // 
+            // label33
+            // 
+            label33.AutoSize = true;
+            label33.Location = new System.Drawing.Point(15, 55);
+            label33.Name = "label33";
+            label33.Size = new System.Drawing.Size(96, 15);
+            label33.TabIndex = 25;
+            label33.Text = "Nombre de jours";
+            // 
+            // tbxComp
+            // 
+            tbxComp.Location = new System.Drawing.Point(178, 11);
+            tbxComp.MaxLength = 4;
+            tbxComp.Name = "tbxComp";
+            tbxComp.Size = new System.Drawing.Size(32, 23);
+            tbxComp.TabIndex = 24;
+            // 
+            // label24
+            // 
+            label24.AutoSize = true;
+            label24.Location = new System.Drawing.Point(15, 14);
+            label24.Name = "label24";
+            label24.Size = new System.Drawing.Size(143, 15);
+            label24.TabIndex = 23;
+            label24.Text = "Numéro client comptable";
             // 
             // btnCreate
             // 
@@ -760,40 +868,6 @@ namespace GestcomWF.Views
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
-            // tbxComp
-            // 
-            tbxComp.Location = new System.Drawing.Point(178, 11);
-            tbxComp.MaxLength = 4;
-            tbxComp.Name = "tbxComp";
-            tbxComp.Size = new System.Drawing.Size(32, 23);
-            tbxComp.TabIndex = 24;
-            // 
-            // label24
-            // 
-            label24.AutoSize = true;
-            label24.Location = new System.Drawing.Point(15, 14);
-            label24.Name = "label24";
-            label24.Size = new System.Drawing.Size(143, 15);
-            label24.TabIndex = 23;
-            label24.Text = "Numéro client comptable";
-            // 
-            // tbxDluo
-            // 
-            tbxDluo.Location = new System.Drawing.Point(126, 52);
-            tbxDluo.MaxLength = 10;
-            tbxDluo.Name = "tbxDluo";
-            tbxDluo.Size = new System.Drawing.Size(48, 23);
-            tbxDluo.TabIndex = 26;
-            // 
-            // label33
-            // 
-            label33.AutoSize = true;
-            label33.Location = new System.Drawing.Point(15, 55);
-            label33.Name = "label33";
-            label33.Size = new System.Drawing.Size(96, 15);
-            label33.TabIndex = 25;
-            label33.Text = "Nombre de jours";
-            // 
             // client
             // 
             ClientSize = new System.Drawing.Size(1019, 666);
@@ -805,12 +879,16 @@ namespace GestcomWF.Views
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
             tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pbRistCheck).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbRistCroix).EndInit();
             tabPage2.ResumeLayout(false);
             tabPage2.PerformLayout();
             tabPage3.ResumeLayout(false);
             tabPage3.PerformLayout();
             tabPage4.ResumeLayout(false);
             tabPage4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pbCheckCompta).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbComptaCroix).EndInit();
             ResumeLayout(false);
         }
 
@@ -895,5 +973,11 @@ namespace GestcomWF.Views
         private Label label33;
         private TextBox tbxComp;
         private Label label24;
+        private PictureBox pbComptaCroix;
+        private PictureBox pbRistCroix;
+        private PictureBox pbRistCheck;
+        private PictureBox pbCheckCompta;
+        private TextBox tbxCompteEbp;
+        private Label label34;
     }
 }
