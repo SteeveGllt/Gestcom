@@ -45,11 +45,21 @@
             listViewArticle = new ListView();
             comboBox1 = new ComboBox();
             button1 = new Button();
-            button2 = new Button();
-            button3 = new Button();
-            button4 = new Button();
+            btnModifier = new Button();
+            btnEnregistrer = new Button();
+            btnSupprimer = new Button();
             tbxPrixArt = new TextBox();
             label8 = new Label();
+            tbxComp1 = new TextBox();
+            label9 = new Label();
+            tbxComp2 = new TextBox();
+            label10 = new Label();
+            tbxDluo = new TextBox();
+            label11 = new Label();
+            tbxEan13 = new TextBox();
+            label12 = new Label();
+            tbxDiv = new TextBox();
+            label13 = new Label();
             SuspendLayout();
             // 
             // label1
@@ -132,6 +142,7 @@
             // tbxFamiArt
             // 
             tbxFamiArt.Location = new System.Drawing.Point(318, 36);
+            tbxFamiArt.MaxLength = 2;
             tbxFamiArt.Name = "tbxFamiArt";
             tbxFamiArt.Size = new System.Drawing.Size(45, 23);
             tbxFamiArt.TabIndex = 9;
@@ -139,6 +150,7 @@
             // tbxUnitArt
             // 
             tbxUnitArt.Location = new System.Drawing.Point(437, 36);
+            tbxUnitArt.MaxLength = 1;
             tbxUnitArt.Name = "tbxUnitArt";
             tbxUnitArt.Size = new System.Drawing.Size(35, 23);
             tbxUnitArt.TabIndex = 10;
@@ -160,6 +172,7 @@
             // tbxCecArt
             // 
             tbxCecArt.Location = new System.Drawing.Point(740, 36);
+            tbxCecArt.MaxLength = 1;
             tbxCecArt.Name = "tbxCecArt";
             tbxCecArt.Size = new System.Drawing.Size(36, 23);
             tbxCecArt.TabIndex = 13;
@@ -169,7 +182,7 @@
             listViewArticle.FullRowSelect = true;
             listViewArticle.Location = new System.Drawing.Point(12, 186);
             listViewArticle.Name = "listViewArticle";
-            listViewArticle.Size = new System.Drawing.Size(776, 252);
+            listViewArticle.Size = new System.Drawing.Size(1006, 252);
             listViewArticle.TabIndex = 14;
             listViewArticle.UseCompatibleStateImageBehavior = false;
             listViewArticle.DoubleClick += listViewArticle_DoubleClick;
@@ -192,32 +205,35 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
-            // button2
+            // btnModifier
             // 
-            button2.Location = new System.Drawing.Point(196, 92);
-            button2.Name = "button2";
-            button2.Size = new System.Drawing.Size(75, 23);
-            button2.TabIndex = 17;
-            button2.Text = "Modifier";
-            button2.UseVisualStyleBackColor = true;
+            btnModifier.Location = new System.Drawing.Point(205, 143);
+            btnModifier.Name = "btnModifier";
+            btnModifier.Size = new System.Drawing.Size(75, 23);
+            btnModifier.TabIndex = 17;
+            btnModifier.Text = "Modifier";
+            btnModifier.UseVisualStyleBackColor = true;
+            btnModifier.Click += btnModifier_Click;
             // 
-            // button3
+            // btnEnregistrer
             // 
-            button3.Location = new System.Drawing.Point(302, 92);
-            button3.Name = "button3";
-            button3.Size = new System.Drawing.Size(75, 23);
-            button3.TabIndex = 18;
-            button3.Text = "Enregistrer";
-            button3.UseVisualStyleBackColor = true;
+            btnEnregistrer.Location = new System.Drawing.Point(311, 143);
+            btnEnregistrer.Name = "btnEnregistrer";
+            btnEnregistrer.Size = new System.Drawing.Size(75, 23);
+            btnEnregistrer.TabIndex = 18;
+            btnEnregistrer.Text = "Enregistrer";
+            btnEnregistrer.UseVisualStyleBackColor = true;
+            btnEnregistrer.Click += btnEnregistrer_Click;
             // 
-            // button4
+            // btnSupprimer
             // 
-            button4.Location = new System.Drawing.Point(409, 92);
-            button4.Name = "button4";
-            button4.Size = new System.Drawing.Size(75, 23);
-            button4.TabIndex = 19;
-            button4.Text = "Supprimer";
-            button4.UseVisualStyleBackColor = true;
+            btnSupprimer.Location = new System.Drawing.Point(418, 143);
+            btnSupprimer.Name = "btnSupprimer";
+            btnSupprimer.Size = new System.Drawing.Size(75, 23);
+            btnSupprimer.TabIndex = 19;
+            btnSupprimer.Text = "Supprimer";
+            btnSupprimer.UseVisualStyleBackColor = true;
+            btnSupprimer.Click += btnSupprimer_Click;
             // 
             // tbxPrixArt
             // 
@@ -235,16 +251,106 @@
             label8.TabIndex = 21;
             label8.Text = "Prix";
             // 
+            // tbxComp1
+            // 
+            tbxComp1.Location = new System.Drawing.Point(23, 93);
+            tbxComp1.Name = "tbxComp1";
+            tbxComp1.Size = new System.Drawing.Size(30, 23);
+            tbxComp1.TabIndex = 23;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new System.Drawing.Point(23, 75);
+            label9.Name = "label9";
+            label9.Size = new System.Drawing.Size(100, 15);
+            label9.TabIndex = 22;
+            label9.Text = "Compte compta1";
+            // 
+            // tbxComp2
+            // 
+            tbxComp2.Location = new System.Drawing.Point(181, 93);
+            tbxComp2.Name = "tbxComp2";
+            tbxComp2.Size = new System.Drawing.Size(30, 23);
+            tbxComp2.TabIndex = 25;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Location = new System.Drawing.Point(181, 75);
+            label10.Name = "label10";
+            label10.Size = new System.Drawing.Size(100, 15);
+            label10.TabIndex = 24;
+            label10.Text = "Compte compta2";
+            // 
+            // tbxDluo
+            // 
+            tbxDluo.Location = new System.Drawing.Point(318, 93);
+            tbxDluo.Name = "tbxDluo";
+            tbxDluo.Size = new System.Drawing.Size(31, 23);
+            tbxDluo.TabIndex = 27;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Location = new System.Drawing.Point(318, 75);
+            label11.Name = "label11";
+            label11.Size = new System.Drawing.Size(38, 15);
+            label11.TabIndex = 26;
+            label11.Text = "DLUO";
+            // 
+            // tbxEan13
+            // 
+            tbxEan13.Location = new System.Drawing.Point(437, 93);
+            tbxEan13.Name = "tbxEan13";
+            tbxEan13.Size = new System.Drawing.Size(42, 23);
+            tbxEan13.TabIndex = 29;
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Location = new System.Drawing.Point(437, 75);
+            label12.Name = "label12";
+            label12.Size = new System.Drawing.Size(42, 15);
+            label12.TabIndex = 28;
+            label12.Text = "EAN13";
+            // 
+            // tbxDiv
+            // 
+            tbxDiv.Location = new System.Drawing.Point(870, 36);
+            tbxDiv.Name = "tbxDiv";
+            tbxDiv.Size = new System.Drawing.Size(36, 23);
+            tbxDiv.TabIndex = 31;
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Location = new System.Drawing.Point(870, 18);
+            label13.Name = "label13";
+            label13.Size = new System.Drawing.Size(25, 15);
+            label13.TabIndex = 30;
+            label13.Text = "DIV";
+            // 
             // article
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(800, 450);
+            ClientSize = new System.Drawing.Size(1030, 450);
+            Controls.Add(tbxDiv);
+            Controls.Add(label13);
+            Controls.Add(tbxEan13);
+            Controls.Add(label12);
+            Controls.Add(tbxDluo);
+            Controls.Add(label11);
+            Controls.Add(tbxComp2);
+            Controls.Add(label10);
+            Controls.Add(tbxComp1);
+            Controls.Add(label9);
             Controls.Add(label8);
             Controls.Add(tbxPrixArt);
-            Controls.Add(button4);
-            Controls.Add(button3);
-            Controls.Add(button2);
+            Controls.Add(btnSupprimer);
+            Controls.Add(btnEnregistrer);
+            Controls.Add(btnModifier);
             Controls.Add(button1);
             Controls.Add(comboBox1);
             Controls.Add(listViewArticle);
@@ -287,10 +393,20 @@
         private ListView listViewArticle;
         private ComboBox comboBox1;
         private Button button1;
-        private Button button2;
-        private Button button3;
-        private Button button4;
+        private Button btnModifier;
+        private Button btnEnregistrer;
+        private Button btnSupprimer;
         private TextBox tbxPrixArt;
         private Label label8;
+        private TextBox tbxComp1;
+        private Label label9;
+        private TextBox tbxComp2;
+        private Label label10;
+        private TextBox tbxDluo;
+        private Label label11;
+        private TextBox tbxEan13;
+        private Label label12;
+        private TextBox tbxDiv;
+        private Label label13;
     }
 }

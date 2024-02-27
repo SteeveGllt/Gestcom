@@ -138,40 +138,40 @@ namespace GestcomWF.Views
             {
                 if (this._currentFromagerie != null)
                 {
-                     Fromagerie fromagerie = new Fromagerie(
+                    Fromagerie fromagerie = new Fromagerie(
 
-                     // Mettre à jour l'objet fromagerie avec les valeurs actuelles des TextBox
-                     Convert.ToDecimal(tbxFrNum.Text),
-                     tbxFrNom.Text,
-                     tbxFrAdr.Text,
-                    Convert.ToDecimal(tbxFrCpos.Text),
-                     tbxFrVill.Text,
-                     tbxFrNdir.Text,
-                     Convert.ToDecimal(tbxFrType.Text),
-                    Convert.ToDecimal(tbxFrTcon.Text),
-                     Convert.ToDecimal(tbxFrCmeu.Text),
-                     Convert.ToDecimal(tbxFrCpoi.Text),
-                    tbxFrModr.Text,
-                    tbxFrDomi.Text,
-                     Convert.ToDecimal(tbxFrBanq.Text),
-                     Convert.ToDecimal(tbxFrGuic.Text),
-                     tbxFrCom1.Text,
-                     tbxFrCom2.Text,
-                     Convert.ToDecimal(tbxCoe1.Text),
-                     Convert.ToDecimal(tbxCoe2.Text),
-                     Convert.ToDecimal(tbxCoe3.Text),
-                     Convert.ToDecimal(tbxCoe4.Text),
-                     Convert.ToDecimal(tbxFrRefa.Text),
-                     Convert.ToDecimal(tbxFrPuac.Text),
-                     Convert.ToDecimal(tbxFrEtre.Text),
-                     tbxFrHive.Text,
-                    tbxFrCver.Text,
-                     Convert.ToDecimal(tbxFrVver.Text),
-                     tbxFrEver.Text,
-                     Convert.ToBoolean(tbxFrActif.Text),
-                     Convert.ToDecimal(tbxFacturation.Text),
-                     Convert.ToDecimal(tbxPrime.Text)
-                         );
+                    // Mettre à jour l'objet fromagerie avec les valeurs actuelles des TextBox
+                    Convert.ToDecimal(tbxFrNum.Text),
+                    tbxFrNom.Text,
+                    tbxFrAdr.Text,
+                   Convert.ToDecimal(tbxFrCpos.Text),
+                    tbxFrVill.Text,
+                    tbxFrNdir.Text,
+                    Convert.ToDecimal(tbxFrType.Text),
+                   Convert.ToDecimal(tbxFrTcon.Text),
+                    Convert.ToDecimal(tbxFrCmeu.Text),
+                    Convert.ToDecimal(tbxFrCpoi.Text),
+                   tbxFrModr.Text,
+                   tbxFrDomi.Text,
+                    Convert.ToDecimal(tbxFrBanq.Text),
+                    Convert.ToDecimal(tbxFrGuic.Text),
+                    tbxFrCom1.Text,
+                    tbxFrCom2.Text,
+                    Convert.ToDecimal(tbxCoe1.Text),
+                    Convert.ToDecimal(tbxCoe2.Text),
+                    Convert.ToDecimal(tbxCoe3.Text),
+                    Convert.ToDecimal(tbxCoe4.Text),
+                    Convert.ToDecimal(tbxFrRefa.Text),
+                    Convert.ToDecimal(tbxFrPuac.Text),
+                    Convert.ToDecimal(tbxFrEtre.Text),
+                    tbxFrHive.Text,
+                   tbxFrCver.Text,
+                    Convert.ToDecimal(tbxFrVver.Text),
+                    tbxFrEver.Text,
+                    Convert.ToBoolean(tbxFrActif.Text),
+                    Convert.ToDecimal(tbxFacturation.Text),
+                    Convert.ToDecimal(tbxPrime.Text)
+                        );
 
                     // Appeler la méthode pour mettre à jour la base de données avec le fromagerie modifié
                     FromagerieAdo.updateFromagerie(fromagerie);
@@ -186,6 +186,11 @@ namespace GestcomWF.Views
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSupprimer_Click(object sender, EventArgs e)
         {
 
         }

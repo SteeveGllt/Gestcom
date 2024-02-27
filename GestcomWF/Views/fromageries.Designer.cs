@@ -114,6 +114,7 @@
             btnSupprimer.TabIndex = 2;
             btnSupprimer.Text = "Supprimer";
             btnSupprimer.UseVisualStyleBackColor = true;
+            btnSupprimer.Click += btnSupprimer_Click;
             // 
             // btnAjouter
             // 
