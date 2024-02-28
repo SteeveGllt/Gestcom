@@ -259,6 +259,8 @@ namespace GestcomWF.ModelAdo
                 oleDbCommand.Parameters.AddWithValue("@CLENSE", client.CLENSE);
                 oleDbCommand.Parameters.AddWithValue("@CLDIV", client.CLDIV);
                 oleDbCommand.Parameters.AddWithValue("@CLINTRA", client.CLINTRA);
+                oleDbCommand.Parameters.AddWithValue("@CLDLUO", client.CLDLUO);
+                oleDbCommand.Parameters.AddWithValue("@CLEBP", client.CLEBP);
 
                 // oleDbCommand.Parameters.AddWithValue("@FACTURATION", fromagerie.FACTURATION);
 

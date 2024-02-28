@@ -190,7 +190,7 @@ namespace GestcomWF.Views
                     {
                         decimal prixUnitaire;
                         var prixUnitaireSansPoint = tbxPrixUnitaire.Text.Replace('.', ',');
-                       
+
                         lot.LOCEM1 = Convert.ToDecimal(tbxPainsAffine.Text);
                         lot.LOCEN1 = Convert.ToDecimal(tbxPoidsNetAffine.Text);
                         lot.LOCEB1 = lot.LOCEN1;
@@ -245,7 +245,7 @@ namespace GestcomWF.Views
                 {
                     decimal prixUnitaire;
                     var prixUnitaireSansPoint = tbxPrixUnitaire.Text.Replace('.', ',');
-                  
+
                     EntreeLot entreeLotAffiner = new EntreeLot();
                     entreeLotAffiner.LOFROM = Convert.ToDecimal(cbxFromagerie.Text);
                     entreeLotAffiner.LOANNE = Convert.ToDecimal(tbxAnnee.Text);
@@ -301,7 +301,7 @@ namespace GestcomWF.Views
         {
             if (cbAffiner.Checked)
             {
-                this.fromageries = FromagerieAdo.all();
+                this.fromageries = FromagerieAdo.allAffine();
                 cbxFromagerie.DataSource = null;
                 cbxFromagerie.DataSource = this.fromageries;
                 cbxFromagerie.DisplayMember = "FRNUM";

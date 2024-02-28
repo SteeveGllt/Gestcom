@@ -22,7 +22,7 @@ namespace Gestcom.Models
         public int ARDLUO { get; set; }
         public int AREAN13 { get; set; }
 
-        public Article(Decimal ARNUM, string ARDESI, string ARFAMI, string ARUNIT, Decimal ARPRIX, Decimal ARTVA, Decimal ARPOID, string ARCEC, int ARCOMP1, int ARCOMP2, int ARDLUO, int AREAN13) {
+        public Article(decimal ARNUM, string ARDESI, string ARFAMI, string ARUNIT, decimal ARPRIX, decimal ARTVA, decimal ARPOID, string ARCEC, int ARCOMP1, int ARCOMP2, int ARDLUO, int AREAN13) {
             this.ARNUM = ARNUM;
             this.ARDESI = ARDESI;
             this.ARFAMI = ARFAMI;

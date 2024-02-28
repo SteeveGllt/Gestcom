@@ -33,6 +33,7 @@ namespace GestcomWF.Classes
         public string FRDOMI { get; set; }
 
         public Decimal FACTURATION { get; set; }
+        public Decimal FRPRIME { get; set; }
 
         public LotFrom(decimal lOFROM, string fRNOM, string fRNDIR, string fRADR, decimal fRCPOS, decimal lOCEM1, decimal lOC11, decimal lOC12, decimal lOC13, decimal lOANNE, decimal lOMOIS, string fRVILL, decimal fRNUM)
         {
@@ -51,13 +52,14 @@ namespace GestcomWF.Classes
             FRNUM = fRNUM;
 
         }
-        public LotFrom(decimal lOFROM, string fRNOM, string fRNDIR, string fRADR, decimal fRCPOS, decimal lOCEN1, decimal lOCEM1, decimal lOC11, decimal lOC12, decimal lOC13, decimal lOPUAC, decimal lOPU1, decimal lOPU2, decimal lOPU3, decimal lOANNE, decimal lOMOIS, string fRVILL, decimal fRNUM, decimal facturation, string fRDOMI, decimal fRBANQ, decimal fRGUIC, string fRCOM1, string fRCOM2)
+        public LotFrom(decimal lOFROM, string fRNOM, string fRNDIR, string fRADR, decimal fRCPOS, decimal fRPRIME, decimal lOCEN1, decimal lOCEM1, decimal lOC11, decimal lOC12, decimal lOC13, decimal lOPUAC, decimal lOPU1, decimal lOPU2, decimal lOPU3, decimal lOANNE, decimal lOMOIS, string fRVILL, decimal fRNUM, decimal facturation, string fRDOMI, decimal fRBANQ, decimal fRGUIC, string fRCOM1, string fRCOM2)
         {
             LOFROM = lOFROM;
             FRNOM = fRNOM;
             FRNDIR = fRNDIR;
             FRADR = fRADR;
             FRCPOS = fRCPOS;
+            FRPRIME = fRPRIME;
             LOCEN1 = lOCEN1;
             LOCEM1 = lOCEM1;
             LOC11 = lOC11;

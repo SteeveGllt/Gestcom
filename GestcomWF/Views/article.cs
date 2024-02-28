@@ -89,7 +89,7 @@ namespace GestcomWF.Views
         {
             if (_articleSelectionne != null)
             {
-                ArticleAdo.updateArticle(Convert.ToDecimal(tbxNumArt.Text), tbxDesiArt.Text, tbxFamiArt.Text, tbxUnitArt.Text, Convert.ToDecimal(tbxPrixArt.Text), Convert.ToDecimal(tbxTvaArt.Text), Convert.ToDecimal(tbxPoidArt.Text), tbxCecArt.Text, Convert.ToInt32(tbxComp1.Text), Convert.ToInt32(tbxComp2.Text), Convert.ToInt32(tbxDluo.Text), Convert.ToInt32(tbxEan13.Text));
+                ArticleAdo.updateArticle(Convert.ToDecimal(tbxNumArt.Text), tbxDesiArt.Text, tbxFamiArt.Text, tbxUnitArt.Text, Convert.ToDouble(tbxPrixArt.Text), Convert.ToDecimal(tbxTvaArt.Text), Convert.ToDecimal(tbxPoidArt.Text), tbxCecArt.Text, Convert.ToInt16(tbxComp1.Text), Convert.ToInt16(tbxComp2.Text), Convert.ToInt16(tbxDluo.Text), Convert.ToInt16(tbxEan13.Text));
             }
             else
             {

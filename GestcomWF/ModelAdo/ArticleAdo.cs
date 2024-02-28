@@ -127,16 +127,16 @@ namespace Gestcom.ModelAdo
             finally { close(); }
         }
 
-        public static void updateArticle(decimal arnum, string ardesi, string arfami, string arunit, decimal arprix, decimal artva, decimal arpoid, string arcec, int arcomp1, int arcomp2, int ardluo, int arean13)
+        public static void updateArticle(decimal arnum, string ardesi, string arfami, string arunit, double arprix, decimal artva, decimal arpoid, string arcec, int arcomp1, int arcomp2, int ardluo, int arean13)
         {
             try
             {
                 open();
                 OleDbCommand oleDbCommand = new OleDbCommand();
                 oleDbCommand.Connection = connection;
-                oleDbCommand.CommandText = "UPDATE TB_Articles SET ARNUM = @ARNUM, ARDESI = @ARDESI, ARFAMI = @ARFAMI, ARUNIT = @ARUNIT, ARPRIX = @ARPRIX, ARTVA = @ARTVA, ARPOID = @ARPOID, ARCEC = @ARCEC, ARCOMP1 = @ARCOMP1, ARCOMP2 = @ARCOMP2, ARDLUO = @ARDLUO, AREAN13 = @AREAN13 WHERE ARNUM = @ARNUM;";
+                oleDbCommand.CommandText = "UPDATE TB_Articles SET ARDESI = @ARDESI, ARFAMI = @ARFAMI, ARUNIT = @ARUNIT, ARPRIX = @ARPRIX, ARTVA = @ARTVA, ARPOID = @ARPOID, ARCEC = @ARCEC, ARCOMP1 = @ARCOMP1, ARCOMP2 = @ARCOMP2, ARDLUO = @ARDLUO, AREAN13 = @AREAN13 WHERE ARNUM = @ARNUM;";
                 oleDbCommand.Prepare();
-                oleDbCommand.Parameters.AddWithValue("@ARNUM", arnum);
+               
                 oleDbCommand.Parameters.AddWithValue("@ARDESI", ardesi);
                 oleDbCommand.Parameters.AddWithValue("@ARFAMI", arfami);
                 oleDbCommand.Parameters.AddWithValue("@ARUNIT", arunit);
@@ -148,6 +148,7 @@ namespace Gestcom.ModelAdo
                 oleDbCommand.Parameters.AddWithValue("@ARCOMP2", arcomp2);
                 oleDbCommand.Parameters.AddWithValue("@ARDLUO", ardluo);
                 oleDbCommand.Parameters.AddWithValue("@AREAN13", arean13);
+                oleDbCommand.Parameters.AddWithValue("@ARNUM", arnum);
                 oleDbCommand.ExecuteNonQuery();
                 MessageBox.Show("Article Modifié");
             }
