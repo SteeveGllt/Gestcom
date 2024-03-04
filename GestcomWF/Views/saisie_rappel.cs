@@ -12,6 +12,7 @@ namespace GestcomWF.Views
     {
         private Lot _currentLot = null;
         private decimal testMontant = 0m;
+        private decimal _currentMontant = 0m;
         private string moisExcel = string.Empty;
         private string _lastPathSaved = string.Empty;
         DataPath dataPath = new DataPath();
@@ -43,16 +44,16 @@ namespace GestcomWF.Views
             dataGridView.DataSource = null;
             tbxNumFromagerie.Enabled = false;
             dataGridView.DefaultCellStyle.Format = "0";
-            dataGridView.Columns[2].DefaultCellStyle.Format = "N3";
-            dataGridView.Columns[4].DefaultCellStyle.Format = "N3";
-            dataGridView.Columns[6].DefaultCellStyle.Format = "N3";
-            dataGridView.Columns[8].DefaultCellStyle.Format = "N3";
-            dataGridView.Columns[9].DefaultCellStyle.Format = "N3";
+            dataGridView.Columns[4].DefaultCellStyle.Format = "N5";
+            dataGridView.Columns[6].DefaultCellStyle.Format = "N5";
+            dataGridView.Columns[8].DefaultCellStyle.Format = "N5";
+            dataGridView.Columns[9].DefaultCellStyle.Format = "N2";
             dataGridView.DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopRight;
 
             AjusterAnnee();
 
             GenererValeurs();
+           
         }
 
         public decimal CustomParse(string incomingValue)
@@ -89,10 +90,11 @@ namespace GestcomWF.Views
                     double valueA = Convert.ToDouble(a);
                     double valueB = Convert.ToDouble(b);
                     double valueC = Convert.ToDouble(c);
-                    LotAdo.updateLotRappel(_currentLot.LOFROM, Convert.ToDecimal(tbxAnnee.Text), moisNum.Numero, Math.Round(valueA, 3), Math.Round(valueB, 3), Math.Round(valueC, 3), Convert.ToDouble(Math.Round(montant, 2)));
-                    this._currentLot.LOPU1 = Math.Round(a, 3);
-                    this._currentLot.LOPU2 = Math.Round(b, 3);
-                    this._currentLot.LOPU3 = Math.Round(c, 3);
+                    LotAdo.updateLotRappel(_currentLot.LOFROM, Convert.ToDecimal(tbxAnnee.Text), moisNum.Numero, Math.Round(valueA, 5), Math.Round(valueB, 5), Math.Round(valueC, 5), Convert.ToDouble(Math.Round(montant, 2)));
+                    this._currentLot.LOPU1 = Math.Round(a, 5);
+                    this._currentLot.LOPU2 = Math.Round(b, 5);
+                    this._currentLot.LOPU3 = Math.Round(c, 5);
+                    this._currentLot.MONTANT = montant;
                     _currentLot = null;
                     tbx_a.Text = "";
                     tbx_b.Text = "";
@@ -110,6 +112,7 @@ namespace GestcomWF.Views
 
         private void dataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            
             if (e.RowIndex < 0) // Assurez-vous que le double-clic n'est pas sur l'en-tête
                 return;
 
@@ -122,7 +125,11 @@ namespace GestcomWF.Views
                 tbx_b.Text = lot.LOPU2.ToString();
                 tbx_c.Text = lot.LOPU3.ToString();
                 tbxNumFromagerie.Text = lot.LOFROM.ToString();
+               
                 this._currentLot = lot;
+                MoisNum moisNum = (MoisNum)cbxMois.SelectedItem;
+                _currentMontant = Math.Round(LotAdo.MontantLot(_currentLot.LOFROM, Convert.ToDecimal(tbxAnnee.Text), moisNum.Numero), 2);
+                tbxMontant.Text = _currentMontant.ToString();
                 // Assignez d'autres propriétés de l'objet `lot` à d'autres TextBox si nécessaire
             }
         }
@@ -429,7 +436,7 @@ namespace GestcomWF.Views
 
                                 if (lotFrom.LOC11 != 0 && lotFrom.LOC12 == 0 && lotFrom.LOC13 == 0)
                                 {
-                                    if(lotFrom.FRPRIME > 0)
+                                    if (lotFrom.FRPRIME > 0)
                                     {
                                         workSheet["B27"].Value = "Prime qualité:";
                                         workSheet["E27"].Value = workSheet["E25"].Value;
@@ -459,12 +466,13 @@ namespace GestcomWF.Views
 
                                         workSheet["K36"].Value = workSheet["K35"].DecimalValue * 5.5m / 100;
                                         workSheet["K36"].FormatString = "# ##0.00€";
-                                        
+
                                         var sumQuandPrime = workSheet["K35:K36"];
                                         workSheet["K38"].Value = Math.Round(sumQuandPrime.Sum(), 2);
                                         workSheet["K38"].Style.Font.Bold = true;
                                         workSheet["K38"].FormatString = "# ##0.00€";
-                                    } else
+                                    }
+                                    else
                                     {
                                         var resultatSumPrixTotal = workSheet["K25"];
                                         var resultatSumPoidsTotal = workSheet["E25"];
@@ -486,12 +494,12 @@ namespace GestcomWF.Views
                                         workSheet["K38"].Style.Font.Bold = true;
                                         workSheet["K38"].FormatString = "# ##0.00€";
                                     }
-                                   
+
                                 }
 
                                 if (lotFrom.LOC12 != 0 && lotFrom.LOC13 == 0)
                                 {
-                                   
+
                                     workSheet["C26"].Style.BottomBorder.SetColor("#000000");
                                     workSheet["C26"].Style.BottomBorder.Type = IronXL.Styles.BorderType.Thin;
 
@@ -829,12 +837,22 @@ namespace GestcomWF.Views
 
             if (e.KeyCode == Keys.Enter)
             {
-
+              
                 decimal montant = decimal.Parse(tbx_a.Text) + decimal.Parse(tbx_b.Text) + decimal.Parse(tbx_c.Text);
-                tbxMontant.Text = montant.ToString();
+                decimal montantRounded = Math.Round(_currentMontant + montant, 5);
+                tbxMontant.Text = montantRounded.ToString();
+
+                //testMontant = Math.Round(currentMontant + montant, 2);
+                decimal a;
+                if (decimal.TryParse(tbx_a.Text, out a))
+                {
+
+                    this._currentLot.LOPU1 = Math.Round(a, 5);
+                    this._currentLot.MONTANT = montantRounded;
+
+                }
+                dataGridView.Refresh();
                 tbx_b.Focus();
-
-
             }
         }
 
@@ -855,7 +873,17 @@ namespace GestcomWF.Views
             if (e.KeyCode == Keys.Enter)
             {
                 decimal montant = decimal.Parse(tbx_a.Text) + decimal.Parse(tbx_b.Text) + decimal.Parse(tbx_c.Text);
-                tbxMontant.Text = montant.ToString();
+                decimal montantRounded = Math.Round(_currentMontant + montant, 5);
+                tbxMontant.Text = montantRounded.ToString();
+                decimal b;
+                if (decimal.TryParse(tbx_b.Text, out b))
+                {
+
+                    this._currentLot.LOPU2 = Math.Round(b, 5);
+                    this._currentLot.MONTANT = montantRounded;
+
+                }
+                dataGridView.Refresh();
                 tbx_c.Focus();
             }
         }
@@ -877,7 +905,17 @@ namespace GestcomWF.Views
             if (e.KeyCode == Keys.Enter)
             {
                 decimal montant = decimal.Parse(tbx_a.Text) + decimal.Parse(tbx_b.Text) + decimal.Parse(tbx_c.Text);
-                tbxMontant.Text = montant.ToString();
+                decimal montantRounded = Math.Round(_currentMontant + montant, 5);
+                tbxMontant.Text = montantRounded.ToString();
+                decimal c;
+                if (decimal.TryParse(tbx_c.Text, out c))
+                {
+
+                    this._currentLot.LOPU3 = Math.Round(c, 5);
+                    this._currentLot.MONTANT = montantRounded;
+
+                }
+                dataGridView.Refresh();
             }
         }
 

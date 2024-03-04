@@ -8,6 +8,7 @@ using System.Data.SqlTypes;
 using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using static System.ComponentModel.Design.ObjectSelectorEditor;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
 namespace Gestcom.ModelAdo
@@ -591,9 +592,9 @@ namespace Gestcom.ModelAdo
                         reader.IsDBNull(reader.GetOrdinal("LOC11")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOC11")),
                         reader.IsDBNull(reader.GetOrdinal("LOC12")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOC12")),
                         reader.IsDBNull(reader.GetOrdinal("LOC13")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOC13")),
-                        reader.IsDBNull(reader.GetOrdinal("LOPU1")) ? defaultDecimal : Math.Round(reader.GetDecimal(reader.GetOrdinal("LOPU1")), 2),
-                        reader.IsDBNull(reader.GetOrdinal("LOPU2")) ? defaultDecimal : Math.Round(reader.GetDecimal(reader.GetOrdinal("LOPU2")), 2),
-                        reader.IsDBNull(reader.GetOrdinal("LOPU3")) ? defaultDecimal : Math.Round(reader.GetDecimal(reader.GetOrdinal("LOPU3")), 2),
+                        reader.IsDBNull(reader.GetOrdinal("LOPU1")) ? defaultDecimal : Math.Round(reader.GetDecimal(reader.GetOrdinal("LOPU1")), 5),
+                        reader.IsDBNull(reader.GetOrdinal("LOPU2")) ? defaultDecimal : Math.Round(reader.GetDecimal(reader.GetOrdinal("LOPU2")), 5),
+                        reader.IsDBNull(reader.GetOrdinal("LOPU3")) ? defaultDecimal : Math.Round(reader.GetDecimal(reader.GetOrdinal("LOPU3")), 5),
                         reader.IsDBNull(reader.GetOrdinal("MONTANT")) ? defaultDecimal : Math.Round(reader.GetDecimal(reader.GetOrdinal("MONTANT")), 2)
                     // Ajoutez tous les champs nécessaires pour le constructeur de Lot ici.
                     );
@@ -791,6 +792,60 @@ namespace Gestcom.ModelAdo
                 Console.WriteLine(ex.Message);
                 MessageBox.Show("Erreur de communication avec la base de données!");
                 return null;
+            }
+            finally
+            {
+                close();
+            }
+        }
+
+        public static Decimal MontantLot(decimal lofrom, decimal loanne, decimal lomois)
+        {
+            try
+            {
+                // Initialisation de l'objet Lot
+                decimal montant = 0m;
+                Lot lot = new Lot();
+                OleDbDataReader reader;
+
+                // Ouverture de la connexion
+                open();
+                OleDbCommand oleDbCommand = new OleDbCommand();
+                oleDbCommand.Connection = connection;
+
+                // Requête SQL pour vérifier l'existence d'un lot
+                oleDbCommand.CommandText = "SELECT MONTANT FROM TB_Lots WHERE LOFACO = 1 AND LOFROM = @LOFROM AND LOANNE = @LOANNE AND LOMOIS = @LOMOIS AND LODEP = 0";
+
+                // Préparation et exécution de la requête
+                oleDbCommand.Prepare();
+                oleDbCommand.Parameters.AddWithValue("@LOFROM", lofrom);
+                oleDbCommand.Parameters.AddWithValue("@LOANNE", loanne);
+                oleDbCommand.Parameters.AddWithValue("@LOMOIS", lomois);
+                oleDbCommand.ExecuteNonQuery();
+                reader = oleDbCommand.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    // Si la requête a retourné des résultats, créez un objet Lot
+                    lot = new Lot
+                    {
+                        // Assurez-vous de récupérer les valeurs appropriées depuis le reader
+                        MONTANT = reader.GetDecimal(0)
+                    };
+                    montant = lot.MONTANT;
+                    return montant;
+                }
+                else
+                {
+                    return 0;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                MessageBox.Show("Erreur de communication avec la base de données!");
+                return 0;
             }
             finally
             {
