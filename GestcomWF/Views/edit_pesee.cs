@@ -1,9 +1,10 @@
 ﻿using Gestcom.Classes;
 using Gestcom.ModelAdo;
 using GestcomWF.DataAccess;
-using IronXL;
 using Microsoft.Office.Interop.Excel;
+using Excel = Microsoft.Office.Interop.Excel;
 using Microsoft.VisualBasic;
+using System.Reflection;
 using System.Reflection.Metadata;
 
 namespace GestcomWF.Views
@@ -46,317 +47,299 @@ namespace GestcomWF.Views
 
         }
 
-        // Gestionnaire de l'événement clic sur le bouton1
-        private void button1_Click(object sender, EventArgs e)
+        private void Excel()
         {
+            Excel.Application objApp;
+            Excel._Workbook objBook;
 
             // Vérification que le champ 'année' est correctement rempli
             if (tbxAnnee.Text == "" || tbxAnnee.Text.Length < 2)
             {
                 MessageBox.Show("Veuillez entrer une année en deux chiffres");
-                return;
 
             }
-
-            // Récupération du mois sélectionné depuis la comboBox
-            MoisNum moisNum = (MoisNum)cbxMois.SelectedItem;
-
-            DateTime selectedDate = dtpDateExcel.Value;
-            string formattedDate = selectedDate.ToString("dd MMMM yyyy");
-            // Récupération de toutes les entrées pour le mois et l'année donnés
-            List<EntreeLotFrom> entreeLotFroms = LotAdo.allEntreeEnFonctionDuMoisEtDeLannee(moisNum.Numero, Convert.ToDecimal(tbxAnnee.Text));
-            if (entreeLotFroms.Count <= 0)
+            else
             {
-                MessageBox.Show("Aucune valeur");
-            }
+                Excel.Workbooks objBooks;
+                Excel.Sheets objSheets;
+                Excel._Worksheet objSheet;
+                Excel.Range range;
+
+                objApp = new Excel.Application();
+                objApp.Visible = false;
+                objBooks = objApp.Workbooks;
+                objBook = objBooks.Add(Missing.Value);
+                objSheets = objBook.Worksheets;
+                //objSheet = (Excel._Worksheet)objSheets.get_Item(1);
 
 
-            var excelApp = new Microsoft.Office.Interop.Excel.Application();
-            if (excelApp == null)
-            {
-                MessageBox.Show("Excel n'est pas correctement installé !");
-                return;
-            }
-            excelApp.Visible = true;
-            var workbooks = excelApp.Workbooks;
-            var workbook = workbooks.Add(Type.Missing);
-            Worksheet worksheet = null;
-
-            Decimal valeurPrecedente = 0;
+                Decimal valeurPrecedente = 0;
 
 
-            try
-            {
+                // Récupération du mois sélectionné depuis la comboBox
+                MoisNum moisNum = (MoisNum)cbxMois.SelectedItem;
 
-                worksheet = workbook.ActiveSheet;
-                string annee = (DateTime.Now.Year / 100).ToString();
-                // Traitement pour chaque entré
-                foreach (EntreeLotFrom entreeLotFrom in entreeLotFroms)
+                DateTime selectedDate = dtpDateExcel.Value;
+                string formattedDate = selectedDate.ToString("dd MMMM yyyy");
+                // Récupération de toutes les entrées pour le mois et l'année donnés
+                List<EntreeLotFrom> entreeLotFroms = LotAdo.allEntreeEnFonctionDuMoisEtDeLannee(moisNum.Numero, Convert.ToDecimal(tbxAnnee.Text));
+                if (entreeLotFroms.Count <= 0)
                 {
-                    if (worksheet == null)
-                        worksheet = (Microsoft.Office.Interop.Excel.Worksheet)workbook.Sheets.Add();
-
-                    string nomFeuille = entreeLotFrom.FRNOM.Replace("/", "-");
-
-                   
-                    // Si l'entrée a une nouvelle valeur FRNUM
-                    if (entreeLotFrom.FRNUM != valeurPrecedente)
-                    {
-                        if (valeurPrecedente != 0) // sauf pour la première fois
-                        {
-                            worksheet = (Microsoft.Office.Interop.Excel.Worksheet)workbook.Sheets.Add();
-                            worksheet.Name = nomFeuille;
-                        }
-                        worksheet.Name = nomFeuille;
-                        // Initialisation de la feuille Excel avec le nom adapté
-
-                        worksheet.Cells[7, 4] = entreeLotFrom.FRNDIR;
-                        worksheet.Cells[8, 4] = "Président " + entreeLotFrom.FRNOM;
-                        worksheet.Cells[9, 4] = entreeLotFrom.FRADR;
-                        worksheet.Cells[10, 4] = entreeLotFrom.FRCPOS + " " + entreeLotFrom.FRVILL;
-                        worksheet.Cells[15, 1] = "      TB/PB";
-                        worksheet.Cells[16, 4] = "Le" + " " + formattedDate;
-                        worksheet.Cells[21, 2] = "Monsieur le Président";
-                        worksheet.Cells[23, 2] = "Nous vous prions de bien vouloir trouver ci-dessous, le détail des";
-                        worksheet.Cells[24, 2] = "pesées concernant vos fabrications de ";
-
-                        worksheet.Cells[24, 5] = moisNum.Mois.ToUpper() + " " + (annee + tbxAnnee.Text);
-                        worksheet.Cells[24, 5].EntireRow.Font.Bold = true;
-
-                        // Mise en forme d'une cellule (exemple avec B27:F27)
-                        Microsoft.Office.Interop.Excel.Range range = worksheet.Range[worksheet.Cells[27, 2], worksheet.Cells[27, 6]];
-                        range.Borders[XlBordersIndex.xlEdgeTop].LineStyle = XlLineStyle.xlContinuous;
-                        range.Borders[XlBordersIndex.xlEdgeTop].Color = System.Drawing.Color.Black;
-
-
-                        worksheet.Cells[27, 2].Value = "Date";
-                        worksheet.Cells[27, 2].HorizontalAlignment = XlHAlign.xlHAlignCenter;
-
-                        //this.workSheet["B27:B35"].Style.RightBorder.SetColor("#000000");
-                        //this.workSheet["B27:B35"].Style.RightBorder.Type = IronXL.Styles.BorderType.Medium;
-                        Microsoft.Office.Interop.Excel.Range range = worksheet.UsedRange;
-
-                        range.Borders[XlBordersIndex.xlEdgeTop].LineStyle = XlLineStyle.xlContinuous;
-                        range.Borders[XlBordersIndex.xlEdgeTop].Color = System.Drawing.Color.Black;
-
-                        workSheet["B28"].Value = "Entrée";
-                        workSheet["B28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
-
-
-                        workSheet["C27"].Value = "Nombres";
-                        workSheet["C27"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
-
-
-
-                        workSheet["C28"].Value = "Meules";
-                        workSheet["C28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
-
-                        workSheet["D27"].Value = "Poids";
-                        workSheet["D27"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
-
-
-
-                        workSheet["D28"].Value = "brut";
-                        workSheet["D28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
-
-                        workSheet["E27"].Value = "%";
-                        workSheet["E27"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
-
-
-
-                        workSheet["E28"].Value = "Réfaction";
-                        workSheet["E28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
-
-                        workSheet["F27"].Value = "Poids";
-                        workSheet["F27"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
-
-                        workSheet["F28"].Value = "Net";
-                        workSheet["F28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
-
-
-
-
-                        workSheet["B28:F28"].Style.BottomBorder.SetColor("#000000");
-                        workSheet["B28:F28"].Style.BottomBorder.Type = IronXL.Styles.BorderType.Thin;
-
-
-                        // Initialisez la ligne actuelle
-                        int currentRow = 30;
-
-
-                        foreach (var dateEntry in entreeLotFroms.Where(item => item.FRNUM == entreeLotFrom.FRNUM))
-                        {
-                            // Remplissez les données pour chaque entrée de fromagerie
-                            workSheet[$"B{currentRow}"].Value = dateEntry.Date_Entrée;
-
-                            workSheet[$"B{currentRow}"].FormatString = "dd/MM/yyyy";
-                            workSheet[$"B{currentRow}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
-
-                            workSheet[$"C{currentRow}"].Value = dateEntry.LOCENM;
-                            workSheet[$"C{currentRow}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
-                            workSheet[$"C{currentRow}"].FormatString = "# ##0    ";
-
-                            workSheet[$"D{currentRow}"].Value = dateEntry.LOCENB;
-                            workSheet[$"D{currentRow}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
-                            workSheet[$"D{currentRow}"].FormatString = "# ##0    ";
-
-
-                            workSheet[$"E{currentRow}"].Value = dateEntry.LOTAUX.ToString("F2") + "%";
-                            workSheet[$"E{currentRow}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
-
-                            workSheet[$"F{currentRow}"].Value = dateEntry.LOCENN;
-                            workSheet[$"F{currentRow}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
-                            workSheet[$"F{currentRow}"].FormatString = "# ##0    ";
-
-
-
-                            currentRow++;
-                        }
-
-                        int totalRow = currentRow + 2;
-
-                        workSheet.Merge($"B{totalRow}:B{totalRow - 1}");
-                        workSheet[$"B{totalRow - 1}"].Value = "Totaux";
-
-                        // Appliquer l'alignement horizontal et vertical au contenu
-                        workSheet[$"B{totalRow - 1}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.CenterSelection;
-                        workSheet[$"B{totalRow - 1}"].Style.VerticalAlignment = IronXL.Styles.VerticalAlignment.Center;
-
-                        // Ligne en bas du tableau
-                        workSheet[$"B{totalRow}:F{totalRow}"].Style.BottomBorder.SetColor("#000000");
-                        workSheet[$"B{totalRow}:F{totalRow}"].Style.BottomBorder.Type = IronXL.Styles.BorderType.Thin;
-
-
-
-
-
-                        workSheet.Merge($"C{totalRow}:C{totalRow - 1}");
-                        workSheet.Merge($"F{totalRow}:F{totalRow - 1}");
-
-                        var sumRange = workSheet[$"C30:C{currentRow - 1}"];
-                        workSheet[$"C{totalRow - 1}"].Formula = "=SUM(C29:" + $"C{currentRow - 1})";
-
-                        workSheet[$"C{totalRow - 1}"].Style.Font.Bold = true;
-
-                        // Appliquer l'alignement horizontal et vertical au contenu
-                        workSheet[$"C{totalRow - 1}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
-                        workSheet[$"C{totalRow - 1}"].FormatString = "# ##0    ";
-                        workSheet[$"C{totalRow - 1}"].Style.VerticalAlignment = IronXL.Styles.VerticalAlignment.Center;
-
-                        workSheet[$"C{totalRow - 1}:C{currentRow + 2}"].Style.TopBorder.SetColor("#000000");
-                        workSheet[$"C{totalRow - 1}:C{currentRow + 2}"].Style.TopBorder.Type = IronXL.Styles.BorderType.Thin;
-
-                        var sumRangePoidsNet = workSheet[$"F30:F{currentRow - 1}"];
-                        workSheet[$"F{totalRow - 1}"].Formula = "=SUM(F29:" + $"F{currentRow - 1})";
-                        workSheet[$"F{totalRow - 1}"].Style.Font.Bold = true;
-
-                        // Appliquer l'alignement horizontal et vertical au contenu
-                        workSheet[$"F{totalRow - 1}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
-                        workSheet[$"F{totalRow - 1}"].FormatString = "# ##0    ";
-                        workSheet[$"F{totalRow - 1}"].Style.VerticalAlignment = IronXL.Styles.VerticalAlignment.Center;
-
-                        workSheet[$"F{totalRow - 1}:F{currentRow + 2}"].Style.TopBorder.SetColor("#000000");
-                        workSheet[$"F{totalRow - 1}:F{currentRow + 2}"].Style.TopBorder.Type = IronXL.Styles.BorderType.Thin;
-
-                        workSheet[$"C27:C{currentRow + 2}"].Style.RightBorder.SetColor("#000000");
-                        workSheet[$"C27:C{currentRow + 2}"].Style.RightBorder.Type = IronXL.Styles.BorderType.Thin;
-
-
-
-                        //this.workSheet[$"B27:B{totalRow}"].Style.RightBorder.SetColor("#000000");
-                        //this.workSheet[$"B27:B{totalRow}"].Style.RightBorder.Type = IronXL.Styles.BorderType.Medium;
-                        // Bordure à droite de la colonne C
-                        workSheet[$"C27:C{currentRow + 2}"].Style.RightBorder.SetColor("#000000");
-                        workSheet[$"C27:C{currentRow + 2}"].Style.RightBorder.Type = IronXL.Styles.BorderType.Thin;
-
-                        // Ligne à droite de la cellule D
-                        workSheet[$"D27:D{currentRow + 2}"].Style.RightBorder.SetColor("#000000");
-                        workSheet[$"D27:D{currentRow + 2}"].Style.RightBorder.Type = IronXL.Styles.BorderType.Thin;
-
-                        // Ligne à droite de la colonne E
-                        workSheet[$"E27:E{currentRow + 2}"].Style.RightBorder.SetColor("#000000");
-                        workSheet[$"E27:E{currentRow + 2}"].Style.RightBorder.Type = IronXL.Styles.BorderType.Thin;
-
-                        // Ligne à droite du tableau
-                        workSheet[$"F27:F{totalRow}"].Style.RightBorder.SetColor("#000000");
-                        workSheet[$"F27:F{totalRow}"].Style.RightBorder.Type = IronXL.Styles.BorderType.Thin;
-
-                        // Bordure à gauche du tableau
-                        workSheet[$"B27:B{totalRow}"].Style.LeftBorder.SetColor("#000000");
-                        workSheet[$"B27:B{totalRow}"].Style.LeftBorder.Type = IronXL.Styles.BorderType.Thin;
-
-                        // Bordure à droite de la colonne B
-                        workSheet[$"B27:B{currentRow + 2}"].Style.RightBorder.SetColor("#000000");
-                        workSheet[$"B27:B{currentRow + 2}"].Style.RightBorder.Type = IronXL.Styles.BorderType.Thin;
-
-
-                        workSheet["B39"].Value = "          Vous en souhaitant bonne réception";
-                        workSheet["B41"].Value = "          Nous vous prions d'agréer, Monsieur le Président, nos";
-                        workSheet["B42"].Value = "salutations distinguées";
-                        workSheet["E45"].Value = "Service Technique";
-                        workSheet[$"E45"].Style.Font.Bold = true;*/
-
-                        valeurPrecedente = entreeLotFrom.FRNUM;
-                    }
-
-
-
-                    /*RangeColumn col0 = workSheet.GetColumn(0);
-                    col0.Width = 7210; // Set width
-
-                    RangeColumn col1 = workSheet.GetColumn(1);
-                    col1.Width = 3300; // Set width
-
-                    RangeColumn col2 = workSheet.GetColumn(2);
-                    col2.Width = 3300; // Set width
-
-                    RangeColumn col3 = workSheet.GetColumn(3);
-                    col3.Width = 3300; // Set width
-
-                    RangeColumn col4 = workSheet.GetColumn(4);
-                    col4.Width = 3300; // Set width
-
-                    RangeColumn col5 = workSheet.GetColumn(5);
-                    col5.Width = 3300; // Set width
-
-                    // Configuration du style de la feuille (police, ...)
-                    workSheet.Style.Font.Name = "Arial";*/
-
-                }
-                // Propose à l'utilisateur d'enregistrer le fichier Excel
-                SaveFileDialog saveFileDialog = new SaveFileDialog();
-                saveFileDialog.Filter = "Excel files(*.xls; *.xlsx)| *.xls; *.xlsx";
-                saveFileDialog.Title = "Enregistrez le fichier sous...";
-                saveFileDialog.InitialDirectory = dataPath.PathPesee;
-                if (moisNum.Numero < 10)
-                {
-                    moisExcel = "0" + moisNum.Numero;
+                    MessageBox.Show("Aucune valeur");
                 }
                 else
                 {
-                    moisExcel = moisNum.Numero.ToString();
+                    string annee = (DateTime.Now.Year / 100).ToString();
+                    // Traitement pour chaque entré
+                    foreach (EntreeLotFrom entreeLotFrom in entreeLotFroms)
+                    {
+                        string nomFeuille = entreeLotFrom.FRNOM.Replace("/", "-");
+
+                        // Si l'entrée a une nouvelle valeur FRNUM
+                        if (entreeLotFrom.FRNUM != valeurPrecedente)
+                        {
+
+                            // Initialisation de la feuille Excel avec le nom adapté
+                            objSheet = objBook.Sheets.Add(Missing.Value, objBook.Worksheets[objBook.Worksheets.Count], Missing.Value, Missing.Value);
+                            objSheet.Name = nomFeuille;
+
+                            objSheet.Cells[7, "D"].Value = entreeLotFrom.FRNDIR;
+                            objSheet.Cells[8, "D"].Value = "Président " + entreeLotFrom.FRNOM;
+                            objSheet.Cells[9, "D"].Value = entreeLotFrom.FRADR;
+                            objSheet.Cells[10, "D"].Value = entreeLotFrom.FRCPOS + " " + entreeLotFrom.FRVILL;
+
+                            objSheet.Cells[15, "A"].Value = "      TB/PB";
+                            objSheet.Cells[16, "D"].Value = "Le" + " " + formattedDate;
+
+                            objSheet.Cells[21, "B"].Value = "Monsieur le Président";
+                            objSheet.Cells[23, "B"].Value = "Nous vous prions de bien vouloir trouver ci-dessous, le détail des";
+                            objSheet.Cells[24, "B"].Value = "pesées concernant vos fabrications de ";
+
+                            objSheet.Cells[24, "E"].Value = moisNum.Mois.ToUpper() + " " + (annee + tbxAnnee.Text);
+                            objSheet.Cells[24, "E"].Font.Bold = true;
+                            //objSheet.Cells[24, "E"].Style.Font.Bold = true;
+
+
+
+                            objSheet.Range["B27", "F27"].Borders[XlBordersIndex.xlEdgeTop].LineStyle = XlLineStyle.xlContinuous;
+                            objSheet.Range["B27", "F27"].Borders[XlBordersIndex.xlEdgeTop].Weight = XlBorderWeight.xlThin;
+                            objSheet.Range["B27", "F27"].Borders[XlBordersIndex.xlEdgeTop].ColorIndex = 0;
+
+                            objSheet.Columns[1].Columnwidth = 27.53;
+                            objSheet.Columns[2].Columnwidth = 12.27;
+                            objSheet.Columns[3].Columnwidth = 12.27;
+                            objSheet.Columns[4].Columnwidth = 12.27;
+                            objSheet.Columns[5].Columnwidth = 12.27;
+
+                            objSheet.Cells.Font.Name = "Arial";
+
+
+                            objSheet.Cells[27, "B"] = "Date";
+                            objSheet.Cells[27, "B"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
+
+
+                            //this.workSheet["B27:B35"].Style.RightBorder.SetColor("#000000");
+                            //this.workSheet["B27:B35"].Style.RightBorder.Type = IronXL.Styles.BorderType.Medium;
+
+                            objSheet.Cells[28, "B"] = "Entrée";
+                            objSheet.Cells[28, "B"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
+
+                            objSheet.Cells[27, "C"] = "Nombres";
+                            objSheet.Cells[27, "C"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
+
+
+
+                            objSheet.Cells[28, "C"] = "Meules";
+                            objSheet.Cells[28, "C"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
+
+                            objSheet.Cells[27, "D"] = "Poids";
+                            objSheet.Cells[27, "D"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
+
+
+
+                            objSheet.Cells[28, "D"] = "brut";
+                            objSheet.Cells[28, "D"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
+
+                            objSheet.Cells[27, "E"] = "%";
+                            objSheet.Cells[27, "E"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
+
+
+
+                            objSheet.Cells[28, "E"] = "Réfaction";
+                            objSheet.Cells[28, "E"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
+
+                            objSheet.Cells[27, "F"] = "Poids";
+                            objSheet.Cells[27, "F"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
+
+                            objSheet.Cells[28, "F"] = "Net";
+                            objSheet.Cells[28, "F"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
+
+
+                            objSheet.Range["B28", "F28"].Borders[XlBordersIndex.xlEdgeBottom].LineStyle = XlLineStyle.xlContinuous;
+                            objSheet.Range["B28", "F28"].Borders[XlBordersIndex.xlEdgeBottom].Weight = XlBorderWeight.xlThin;
+                            objSheet.Range["B28", "F28"].Borders[XlBordersIndex.xlEdgeBottom].ColorIndex = 0;
+
+
+
+                            // Initialisez la ligne actuelle
+                            int currentRow = 30;
+
+
+                            foreach (var dateEntry in entreeLotFroms.Where(item => item.FRNUM == entreeLotFrom.FRNUM))
+                            {
+                                // Remplissez les données pour chaque entrée de fromagerie
+
+                                objSheet.Cells[currentRow, "B"] = dateEntry.Date_Entrée.ToString("dd/MM/yyyy");
+                                objSheet.Cells[currentRow, "B"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
+
+                                objSheet.Cells[currentRow, "C"] = dateEntry.LOCENM;
+                                objSheet.Cells[currentRow, "C"].HorizontalAlignment = XlHAlign.xlHAlignRight;
+                                objSheet.Cells[currentRow, "C"].NumberFormat = "# ##0    ";
+
+                                objSheet.Cells[currentRow, "D"] = dateEntry.LOCENB;
+                                objSheet.Cells[currentRow, "D"].HorizontalAlignment = XlHAlign.xlHAlignRight;
+                                objSheet.Cells[currentRow, "D"].NumberFormat = "# ##0    ";
+
+
+                                objSheet.Cells[currentRow, "E"] = dateEntry.LOTAUX.ToString("F2") + "%";
+                                objSheet.Cells[currentRow, "E"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
+
+                                objSheet.Cells[currentRow, "F"] = dateEntry.LOCENN;
+                                objSheet.Cells[currentRow, "F"].HorizontalAlignment = XlHAlign.xlHAlignRight;
+                                objSheet.Cells[currentRow, "F"].NumberFormat = "# ##0    ";
+
+
+
+                                currentRow++;
+                            }
+
+                            int totalRow = currentRow + 2;
+
+                            objSheet.Range[objSheet.Cells[totalRow, "B"], objSheet.Cells[totalRow - 1, "B"]].Merge();
+
+                            objSheet.Cells[totalRow - 1, "B"] = "Totaux";
+
+                            // Appliquer l'alignement horizontal et vertical au contenu
+                            objSheet.Cells[totalRow - 1, "B"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
+                            objSheet.Cells[totalRow - 1, "B"].VerticalAlignment = XlHAlign.xlHAlignCenter;
+
+                            // Ligne en bas du tableau
+
+                            objSheet.Range[$"B{totalRow}", $"F{totalRow}"].Borders[XlBordersIndex.xlEdgeBottom].LineStyle = XlLineStyle.xlContinuous;
+                            objSheet.Range[$"B{totalRow}", $"F{totalRow}"].Borders[XlBordersIndex.xlEdgeBottom].Weight = XlBorderWeight.xlThin;
+                            objSheet.Range[$"B{totalRow}", $"F{totalRow}"].Borders[XlBordersIndex.xlEdgeBottom].ColorIndex = 0;
+
+                            objSheet.Range[objSheet.Cells[totalRow, "C"], objSheet.Cells[totalRow - 1, "C"]].Merge();
+                            objSheet.Range[objSheet.Cells[totalRow, "F"], objSheet.Cells[totalRow - 1, "F"]].Merge();
+
+                            
+                            //var sumRange = objSheet.Cells[30, "C"][$"C{currentRow - 1}"];
+                            objSheet.Cells[totalRow - 1, "C"].Formula = "=SUM(C29:" + $"C{currentRow - 1})";
+
+                            objSheet.Cells[totalRow - 1, "C"].Font.Bold = true;
+
+                            // Appliquer l'alignement horizontal et vertical au contenu
+                            objSheet.Cells[totalRow - 1, "C"].HorizontalAlignment = XlHAlign.xlHAlignRight;
+                            objSheet.Cells[totalRow - 1, "C"].NumberFormat = "# ##0    ";
+                            objSheet.Cells[totalRow - 1, "C"].VerticalAlignment = XlHAlign.xlHAlignCenter;
+
+                  
+
+                            objSheet.Range[$"C{totalRow - 1}", $"C{currentRow + 2}"].Borders[XlBordersIndex.xlEdgeTop].LineStyle = XlLineStyle.xlContinuous;
+                            objSheet.Range[$"C{totalRow - 1}", $"C{currentRow + 2}"].Borders[XlBordersIndex.xlEdgeTop].Weight = XlBorderWeight.xlThin;
+                            objSheet.Range[$"C{totalRow - 1}", $"C{currentRow + 2}"].Borders[XlBordersIndex.xlEdgeTop].ColorIndex = 0;
+
+                            //var sumRangePoidsNet = workSheet[$"F30:F{currentRow - 1}"];
+                            objSheet.Cells[totalRow - 1, "F"].Formula = "=SUM(F29:" + $"F{currentRow - 1})";
+                            objSheet.Cells[totalRow - 1, "F"].Font.Bold = true;
+
+                            // Appliquer l'alignement horizontal et vertical au contenu
+                            objSheet.Cells[totalRow - 1, "F"].HorizontalAlignment = XlHAlign.xlHAlignRight;
+                            objSheet.Cells[totalRow - 1, "F"].NumberFormat = "# ##0    ";
+                            objSheet.Cells[totalRow - 1, "F"].VerticalAlignment = XlHAlign.xlHAlignCenter;
+
+                            objSheet.Range[$"F{totalRow - 1}", $"F{currentRow + 2}"].Borders[XlBordersIndex.xlEdgeTop].LineStyle = XlLineStyle.xlContinuous;
+                            objSheet.Range[$"F{totalRow - 1}", $"F{currentRow + 2}"].Borders[XlBordersIndex.xlEdgeTop].Weight = XlBorderWeight.xlThin;
+                            objSheet.Range[$"F{totalRow - 1}", $"F{currentRow + 2}"].Borders[XlBordersIndex.xlEdgeTop].ColorIndex = 0;
+
+
+
+
+
+                            //this.workSheet[$"B27:B{totalRow}"].Style.RightBorder.SetColor("#000000");
+                            //this.workSheet[$"B27:B{totalRow}"].Style.RightBorder.Type = IronXL.Styles.BorderType.Medium;
+                            // Bordure à droite de la colonne C
+                            objSheet.Range["C27", $"C{currentRow + 2}"].Borders[XlBordersIndex.xlEdgeRight].LineStyle = XlLineStyle.xlContinuous;
+                            objSheet.Range["C27", $"C{currentRow + 2}"].Borders[XlBordersIndex.xlEdgeRight].Weight = XlBorderWeight.xlThin;
+                            objSheet.Range["C27", $"C{currentRow + 2}"].Borders[XlBordersIndex.xlEdgeRight].ColorIndex = 0;
+
+                            // Ligne à droite de la cellule D
+                            objSheet.Range["D27", $"D{currentRow + 2}"].Borders[XlBordersIndex.xlEdgeRight].LineStyle = XlLineStyle.xlContinuous;
+                            objSheet.Range["D27", $"D{currentRow + 2}"].Borders[XlBordersIndex.xlEdgeRight].Weight = XlBorderWeight.xlThin;
+                            objSheet.Range["D27", $"D{currentRow + 2}"].Borders[XlBordersIndex.xlEdgeRight].ColorIndex = 0;
+
+                            // Ligne à droite de la colonne E
+                            objSheet.Range["E27", $"E{currentRow + 2}"].Borders[XlBordersIndex.xlEdgeRight].LineStyle = XlLineStyle.xlContinuous;
+                            objSheet.Range["E27", $"E{currentRow + 2}"].Borders[XlBordersIndex.xlEdgeRight].Weight = XlBorderWeight.xlThin;
+                            objSheet.Range["E27", $"E{currentRow + 2}"].Borders[XlBordersIndex.xlEdgeRight].ColorIndex = 0;
+
+                            // Ligne à droite du tableau
+                            objSheet.Range["F27", $"F{totalRow}"].Borders[XlBordersIndex.xlEdgeRight].LineStyle = XlLineStyle.xlContinuous;
+                            objSheet.Range["F27", $"F{totalRow}"].Borders[XlBordersIndex.xlEdgeRight].Weight = XlBorderWeight.xlThin;
+                            objSheet.Range["F27", $"F{totalRow}"].Borders[XlBordersIndex.xlEdgeRight].ColorIndex = 0;
+
+                            // Bordure à gauche du tableau
+                            objSheet.Range["B27", $"B{totalRow}"].Borders[XlBordersIndex.xlEdgeLeft].LineStyle = XlLineStyle.xlContinuous;
+                            objSheet.Range["B27", $"B{totalRow}"].Borders[XlBordersIndex.xlEdgeLeft].Weight = XlBorderWeight.xlThin;
+                            objSheet.Range["B27", $"B{totalRow}"].Borders[XlBordersIndex.xlEdgeLeft].ColorIndex = 0;
+
+                            // Bordure à droite de la colonne B
+                            objSheet.Range["B27", $"B{currentRow + 2}"].Borders[XlBordersIndex.xlEdgeRight].LineStyle = XlLineStyle.xlContinuous;
+                            objSheet.Range["B27", $"B{currentRow + 2}"].Borders[XlBordersIndex.xlEdgeRight].Weight = XlBorderWeight.xlThin;
+                            objSheet.Range["B27", $"B{currentRow + 2}"].Borders[XlBordersIndex.xlEdgeRight].ColorIndex = 0;
+
+
+                            objSheet.Cells[39, "B"] = "          Vous en souhaitant bonne réception";
+                            objSheet.Cells[41, "B"] = "          Nous vous prions d'agréer, Monsieur le Président, nos";
+                            objSheet.Cells[42, "B"] = "salutations distinguées";
+                            objSheet.Cells[45, "E"] = "Service Technique";
+                            objSheet.Cells[45, "E"].Font.Bold = true;
+
+                            valeurPrecedente = entreeLotFrom.FRNUM;
+                        }
+
+                    }
+                    // Propose à l'utilisateur d'enregistrer le fichier Excel
+                    SaveFileDialog saveFileDialog = new SaveFileDialog();
+                    saveFileDialog.Filter = "Excel files(*.xls; *.xlsx)| *.xls; *.xlsx";
+                    saveFileDialog.Title = "Enregistrez le fichier sous...";
+                    saveFileDialog.InitialDirectory = dataPath.PathPesee;
+                    MessageBox.Show(saveFileDialog.InitialDirectory);
+                    if (moisNum.Numero < 10)
+                    {
+                        moisExcel = "0" + moisNum.Numero;
+                    }
+                    else
+                    {
+                        moisExcel = moisNum.Numero.ToString();
+                    }
+                    saveFileDialog.FileName = "Pesées_" + tbxAnnee.Text + moisExcel + ".xls";
+                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        string path = saveFileDialog.FileName;
+                        objBook.SaveAs(path);
+                        objBook.Close();
+
+                    }
                 }
-                saveFileDialog.FileName = "Pesées_" + tbxAnnee.Text + moisExcel + ".xls";
-                if (saveFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    string path = saveFileDialog.FileName;
-                    workbook.SaveAs(path);
-                    workbook.Close();
-
-                }
-
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
-            finally
-            {
-                workbook.Close(false);
-                excelApp.Quit();
+        }
 
-                // Libération des ressources COM
-                System.Runtime.InteropServices.Marshal.ReleaseComObject(workbook);
-                System.Runtime.InteropServices.Marshal.ReleaseComObject(workbooks);
-                System.Runtime.InteropServices.Marshal.ReleaseComObject(excelApp);
-            }
+        // Gestionnaire de l'événement clic sur le bouton1
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            Excel();
 
 
 
