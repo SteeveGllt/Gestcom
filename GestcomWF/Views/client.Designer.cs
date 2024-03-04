@@ -27,864 +27,866 @@ namespace GestcomWF.Views
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(client));
-            listView1 = new ListView();
-            tabControl1 = new TabControl();
-            tabPage1 = new TabPage();
-            pbRistCheck = new PictureBox();
-            pbRistCroix = new PictureBox();
-            tbxNumClient = new TextBox();
-            label32 = new Label();
-            tbxIntra = new TextBox();
-            label31 = new Label();
-            label5 = new Label();
-            tbxDiv = new TextBox();
-            tbxCp = new TextBox();
-            label30 = new Label();
-            tbxVille = new TextBox();
-            label6 = new Label();
-            tbxEnse = new TextBox();
-            label29 = new Label();
-            tbxTVA = new TextBox();
-            tbxLivr = new TextBox();
-            tbxTran = new TextBox();
-            label28 = new Label();
-            tbxCode = new TextBox();
-            label27 = new Label();
-            tbxRemi = new TextBox();
-            label26 = new Label();
-            tbxRist = new TextBox();
-            label25 = new Label();
-            label23 = new Label();
-            label22 = new Label();
-            tbxEdit = new TextBox();
-            label21 = new Label();
-            tbxRep = new TextBox();
-            label20 = new Label();
-            tbxFamilleClient = new TextBox();
-            label19 = new Label();
-            tbxAdresse2 = new TextBox();
-            tbxAdresse1 = new TextBox();
-            tbxMtdi = new TextBox();
-            tbxNom = new TextBox();
-            label7 = new Label();
-            label4 = new Label();
-            label3 = new Label();
-            label2 = new Label();
-            label1 = new Label();
-            tabPage2 = new TabPage();
-            tbxDom = new TextBox();
-            label12 = new Label();
-            tbxRib = new TextBox();
-            label11 = new Label();
-            tbxCompte = new TextBox();
-            label10 = new Label();
-            tbxGui = new TextBox();
-            label9 = new Label();
-            tbxBanque = new TextBox();
-            label8 = new Label();
-            tabPage3 = new TabPage();
-            tbxFacturation = new TextBox();
-            label18 = new Label();
-            tbxDecalageArrive = new TextBox();
-            label17 = new Label();
-            tbxEche = new TextBox();
-            label16 = new Label();
-            tbxDecalageDepart = new TextBox();
-            label15 = new Label();
-            tbxBaseDepart = new TextBox();
-            label14 = new Label();
-            cbxReglement = new ComboBox();
-            label13 = new Label();
-            tabPage4 = new TabPage();
-            tbxCompteEbp = new TextBox();
-            label34 = new Label();
-            pbCheckCompta = new PictureBox();
-            pbComptaCroix = new PictureBox();
-            tbxDluo = new TextBox();
-            label33 = new Label();
-            tbxComp = new TextBox();
-            label24 = new Label();
-            btnCreate = new Button();
-            button1 = new Button();
-            tabControl1.SuspendLayout();
-            tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pbRistCheck).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pbRistCroix).BeginInit();
-            tabPage2.SuspendLayout();
-            tabPage3.SuspendLayout();
-            tabPage4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pbCheckCompta).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pbComptaCroix).BeginInit();
-            SuspendLayout();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.pbRistCheck = new System.Windows.Forms.PictureBox();
+            this.pbRistCroix = new System.Windows.Forms.PictureBox();
+            this.tbxNumClient = new System.Windows.Forms.TextBox();
+            this.label32 = new System.Windows.Forms.Label();
+            this.tbxIntra = new System.Windows.Forms.TextBox();
+            this.label31 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.tbxDiv = new System.Windows.Forms.TextBox();
+            this.tbxCp = new System.Windows.Forms.TextBox();
+            this.label30 = new System.Windows.Forms.Label();
+            this.tbxVille = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.tbxEnse = new System.Windows.Forms.TextBox();
+            this.label29 = new System.Windows.Forms.Label();
+            this.tbxTVA = new System.Windows.Forms.TextBox();
+            this.tbxLivr = new System.Windows.Forms.TextBox();
+            this.tbxTran = new System.Windows.Forms.TextBox();
+            this.label28 = new System.Windows.Forms.Label();
+            this.tbxCode = new System.Windows.Forms.TextBox();
+            this.label27 = new System.Windows.Forms.Label();
+            this.tbxRemi = new System.Windows.Forms.TextBox();
+            this.label26 = new System.Windows.Forms.Label();
+            this.tbxRist = new System.Windows.Forms.TextBox();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.tbxEdit = new System.Windows.Forms.TextBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.tbxRep = new System.Windows.Forms.TextBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.tbxFamilleClient = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.tbxAdresse2 = new System.Windows.Forms.TextBox();
+            this.tbxAdresse1 = new System.Windows.Forms.TextBox();
+            this.tbxMtdi = new System.Windows.Forms.TextBox();
+            this.tbxNom = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tbxDom = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.tbxRib = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.tbxCompte = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.tbxGui = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.tbxBanque = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tbxFacturation = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.tbxDecalageArrive = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.tbxEche = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.tbxDecalageDepart = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.tbxBaseDepart = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.cbxReglement = new System.Windows.Forms.ComboBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.tbxCompteEbp = new System.Windows.Forms.TextBox();
+            this.label34 = new System.Windows.Forms.Label();
+            this.pbCheckCompta = new System.Windows.Forms.PictureBox();
+            this.pbComptaCroix = new System.Windows.Forms.PictureBox();
+            this.tbxDluo = new System.Windows.Forms.TextBox();
+            this.label33 = new System.Windows.Forms.Label();
+            this.tbxComp = new System.Windows.Forms.TextBox();
+            this.label24 = new System.Windows.Forms.Label();
+            this.btnCreate = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbRistCheck)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbRistCroix)).BeginInit();
+            this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbCheckCompta)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbComptaCroix)).BeginInit();
+            this.SuspendLayout();
             // 
             // listView1
             // 
-            listView1.FullRowSelect = true;
-            listView1.Location = new System.Drawing.Point(12, 12);
-            listView1.Name = "listView1";
-            listView1.Size = new System.Drawing.Size(315, 567);
-            listView1.TabIndex = 0;
-            listView1.UseCompatibleStateImageBehavior = false;
-            listView1.SelectedIndexChanged += listView1_SelectedIndexChanged;
-            listView1.DoubleClick += listView1_DoubleClick;
+            this.listView1.FullRowSelect = true;
+            this.listView1.Location = new System.Drawing.Point(12, 12);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(315, 567);
+            this.listView1.TabIndex = 0;
+            this.listView1.UseCompatibleStateImageBehavior = false;
             // 
             // tabControl1
             // 
-            tabControl1.Controls.Add(tabPage1);
-            tabControl1.Controls.Add(tabPage2);
-            tabControl1.Controls.Add(tabPage3);
-            tabControl1.Controls.Add(tabPage4);
-            tabControl1.Location = new System.Drawing.Point(344, 12);
-            tabControl1.Name = "tabControl1";
-            tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new System.Drawing.Size(604, 571);
-            tabControl1.TabIndex = 1;
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Location = new System.Drawing.Point(344, 12);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(604, 571);
+            this.tabControl1.TabIndex = 1;
             // 
             // tabPage1
             // 
-            tabPage1.Controls.Add(pbRistCheck);
-            tabPage1.Controls.Add(pbRistCroix);
-            tabPage1.Controls.Add(tbxNumClient);
-            tabPage1.Controls.Add(label32);
-            tabPage1.Controls.Add(tbxIntra);
-            tabPage1.Controls.Add(label31);
-            tabPage1.Controls.Add(label5);
-            tabPage1.Controls.Add(tbxDiv);
-            tabPage1.Controls.Add(tbxCp);
-            tabPage1.Controls.Add(label30);
-            tabPage1.Controls.Add(tbxVille);
-            tabPage1.Controls.Add(label6);
-            tabPage1.Controls.Add(tbxEnse);
-            tabPage1.Controls.Add(label29);
-            tabPage1.Controls.Add(tbxTVA);
-            tabPage1.Controls.Add(tbxLivr);
-            tabPage1.Controls.Add(tbxTran);
-            tabPage1.Controls.Add(label28);
-            tabPage1.Controls.Add(tbxCode);
-            tabPage1.Controls.Add(label27);
-            tabPage1.Controls.Add(tbxRemi);
-            tabPage1.Controls.Add(label26);
-            tabPage1.Controls.Add(tbxRist);
-            tabPage1.Controls.Add(label25);
-            tabPage1.Controls.Add(label23);
-            tabPage1.Controls.Add(label22);
-            tabPage1.Controls.Add(tbxEdit);
-            tabPage1.Controls.Add(label21);
-            tabPage1.Controls.Add(tbxRep);
-            tabPage1.Controls.Add(label20);
-            tabPage1.Controls.Add(tbxFamilleClient);
-            tabPage1.Controls.Add(label19);
-            tabPage1.Controls.Add(tbxAdresse2);
-            tabPage1.Controls.Add(tbxAdresse1);
-            tabPage1.Controls.Add(tbxMtdi);
-            tabPage1.Controls.Add(tbxNom);
-            tabPage1.Controls.Add(label7);
-            tabPage1.Controls.Add(label4);
-            tabPage1.Controls.Add(label3);
-            tabPage1.Controls.Add(label2);
-            tabPage1.Controls.Add(label1);
-            tabPage1.Location = new System.Drawing.Point(4, 29);
-            tabPage1.Name = "tabPage1";
-            tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new System.Drawing.Size(596, 538);
-            tabPage1.TabIndex = 0;
-            tabPage1.Text = "Informations générales";
-            tabPage1.UseVisualStyleBackColor = true;
+            this.tabPage1.Controls.Add(this.pbRistCheck);
+            this.tabPage1.Controls.Add(this.pbRistCroix);
+            this.tabPage1.Controls.Add(this.tbxNumClient);
+            this.tabPage1.Controls.Add(this.label32);
+            this.tabPage1.Controls.Add(this.tbxIntra);
+            this.tabPage1.Controls.Add(this.label31);
+            this.tabPage1.Controls.Add(this.label5);
+            this.tabPage1.Controls.Add(this.tbxDiv);
+            this.tabPage1.Controls.Add(this.tbxCp);
+            this.tabPage1.Controls.Add(this.label30);
+            this.tabPage1.Controls.Add(this.tbxVille);
+            this.tabPage1.Controls.Add(this.label6);
+            this.tabPage1.Controls.Add(this.tbxEnse);
+            this.tabPage1.Controls.Add(this.label29);
+            this.tabPage1.Controls.Add(this.tbxTVA);
+            this.tabPage1.Controls.Add(this.tbxLivr);
+            this.tabPage1.Controls.Add(this.tbxTran);
+            this.tabPage1.Controls.Add(this.label28);
+            this.tabPage1.Controls.Add(this.tbxCode);
+            this.tabPage1.Controls.Add(this.label27);
+            this.tabPage1.Controls.Add(this.tbxRemi);
+            this.tabPage1.Controls.Add(this.label26);
+            this.tabPage1.Controls.Add(this.tbxRist);
+            this.tabPage1.Controls.Add(this.label25);
+            this.tabPage1.Controls.Add(this.label23);
+            this.tabPage1.Controls.Add(this.label22);
+            this.tabPage1.Controls.Add(this.tbxEdit);
+            this.tabPage1.Controls.Add(this.label21);
+            this.tabPage1.Controls.Add(this.tbxRep);
+            this.tabPage1.Controls.Add(this.label20);
+            this.tabPage1.Controls.Add(this.tbxFamilleClient);
+            this.tabPage1.Controls.Add(this.label19);
+            this.tabPage1.Controls.Add(this.tbxAdresse2);
+            this.tabPage1.Controls.Add(this.tbxAdresse1);
+            this.tabPage1.Controls.Add(this.tbxMtdi);
+            this.tabPage1.Controls.Add(this.tbxNom);
+            this.tabPage1.Controls.Add(this.label7);
+            this.tabPage1.Controls.Add(this.label4);
+            this.tabPage1.Controls.Add(this.label3);
+            this.tabPage1.Controls.Add(this.label2);
+            this.tabPage1.Controls.Add(this.label1);
+            this.tabPage1.Location = new System.Drawing.Point(4, 34);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(596, 533);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Informations générales";
+            this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // pbRistCheck
             // 
-            pbRistCheck.Image = (System.Drawing.Image)resources.GetObject("pbRistCheck.Image");
-            pbRistCheck.Location = new System.Drawing.Point(439, 217);
-            pbRistCheck.Name = "pbRistCheck";
-            pbRistCheck.Size = new System.Drawing.Size(29, 27);
-            pbRistCheck.SizeMode = PictureBoxSizeMode.StretchImage;
-            pbRistCheck.TabIndex = 42;
-            pbRistCheck.TabStop = false;
+            this.pbRistCheck.Image = ((System.Drawing.Image)(resources.GetObject("pbRistCheck.Image")));
+            this.pbRistCheck.Location = new System.Drawing.Point(439, 217);
+            this.pbRistCheck.Name = "pbRistCheck";
+            this.pbRistCheck.Size = new System.Drawing.Size(29, 27);
+            this.pbRistCheck.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbRistCheck.TabIndex = 42;
+            this.pbRistCheck.TabStop = false;
             // 
             // pbRistCroix
             // 
-            pbRistCroix.Image = (System.Drawing.Image)resources.GetObject("pbRistCroix.Image");
-            pbRistCroix.Location = new System.Drawing.Point(412, 219);
-            pbRistCroix.Name = "pbRistCroix";
-            pbRistCroix.Size = new System.Drawing.Size(21, 21);
-            pbRistCroix.SizeMode = PictureBoxSizeMode.StretchImage;
-            pbRistCroix.TabIndex = 41;
-            pbRistCroix.TabStop = false;
+            this.pbRistCroix.Image = ((System.Drawing.Image)(resources.GetObject("pbRistCroix.Image")));
+            this.pbRistCroix.Location = new System.Drawing.Point(412, 219);
+            this.pbRistCroix.Name = "pbRistCroix";
+            this.pbRistCroix.Size = new System.Drawing.Size(21, 21);
+            this.pbRistCroix.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbRistCroix.TabIndex = 41;
+            this.pbRistCroix.TabStop = false;
             // 
             // tbxNumClient
             // 
-            tbxNumClient.Location = new System.Drawing.Point(122, 18);
-            tbxNumClient.MaxLength = 4;
-            tbxNumClient.Name = "tbxNumClient";
-            tbxNumClient.Size = new System.Drawing.Size(30, 27);
-            tbxNumClient.TabIndex = 40;
+            this.tbxNumClient.Location = new System.Drawing.Point(122, 18);
+            this.tbxNumClient.MaxLength = 4;
+            this.tbxNumClient.Name = "tbxNumClient";
+            this.tbxNumClient.Size = new System.Drawing.Size(30, 31);
+            this.tbxNumClient.TabIndex = 40;
             // 
             // label32
             // 
-            label32.AutoSize = true;
-            label32.Location = new System.Drawing.Point(13, 24);
-            label32.Name = "label32";
-            label32.Size = new System.Drawing.Size(103, 20);
-            label32.TabIndex = 39;
-            label32.Text = "Numéro client";
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(13, 24);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(123, 25);
+            this.label32.TabIndex = 39;
+            this.label32.Text = "Numéro client";
             // 
             // tbxIntra
             // 
-            tbxIntra.Location = new System.Drawing.Point(138, 450);
-            tbxIntra.Name = "tbxIntra";
-            tbxIntra.Size = new System.Drawing.Size(130, 27);
-            tbxIntra.TabIndex = 38;
+            this.tbxIntra.Location = new System.Drawing.Point(138, 450);
+            this.tbxIntra.Name = "tbxIntra";
+            this.tbxIntra.Size = new System.Drawing.Size(130, 31);
+            this.tbxIntra.TabIndex = 38;
             // 
             // label31
             // 
-            label31.AutoSize = true;
-            label31.Location = new System.Drawing.Point(6, 453);
-            label31.Name = "label31";
-            label31.Size = new System.Drawing.Size(126, 20);
-            label31.TabIndex = 37;
-            label31.Text = "Numéro intracom";
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(6, 453);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(152, 25);
+            this.label31.TabIndex = 37;
+            this.label31.Text = "Numéro intracom";
             // 
             // label5
             // 
-            label5.AutoSize = true;
-            label5.Location = new System.Drawing.Point(331, 184);
-            label5.Name = "label5";
-            label5.Size = new System.Drawing.Size(89, 20);
-            label5.TabIndex = 4;
-            label5.Text = "Code postal";
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(331, 184);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(108, 25);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "Code postal";
             // 
             // tbxDiv
             // 
-            tbxDiv.Location = new System.Drawing.Point(105, 488);
-            tbxDiv.Name = "tbxDiv";
-            tbxDiv.Size = new System.Drawing.Size(374, 27);
-            tbxDiv.TabIndex = 36;
+            this.tbxDiv.Location = new System.Drawing.Point(105, 488);
+            this.tbxDiv.Name = "tbxDiv";
+            this.tbxDiv.Size = new System.Drawing.Size(374, 31);
+            this.tbxDiv.TabIndex = 36;
             // 
             // tbxCp
             // 
-            tbxCp.Location = new System.Drawing.Point(426, 181);
-            tbxCp.Name = "tbxCp";
-            tbxCp.Size = new System.Drawing.Size(53, 27);
-            tbxCp.TabIndex = 10;
+            this.tbxCp.Location = new System.Drawing.Point(426, 181);
+            this.tbxCp.Name = "tbxCp";
+            this.tbxCp.Size = new System.Drawing.Size(53, 31);
+            this.tbxCp.TabIndex = 10;
             // 
             // label30
             // 
-            label30.AutoSize = true;
-            label30.Location = new System.Drawing.Point(6, 491);
-            label30.Name = "label30";
-            label30.Size = new System.Drawing.Size(99, 20);
-            label30.TabIndex = 35;
-            label30.Text = "Commentaire";
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(6, 491);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(119, 25);
+            this.label30.TabIndex = 35;
+            this.label30.Text = "Commentaire";
             // 
             // tbxVille
             // 
-            tbxVille.Location = new System.Drawing.Point(51, 181);
-            tbxVille.Name = "tbxVille";
-            tbxVille.Size = new System.Drawing.Size(271, 27);
-            tbxVille.TabIndex = 11;
+            this.tbxVille.Location = new System.Drawing.Point(51, 181);
+            this.tbxVille.Name = "tbxVille";
+            this.tbxVille.Size = new System.Drawing.Size(271, 31);
+            this.tbxVille.TabIndex = 11;
             // 
             // label6
             // 
-            label6.AutoSize = true;
-            label6.Location = new System.Drawing.Point(7, 184);
-            label6.Name = "label6";
-            label6.Size = new System.Drawing.Size(38, 20);
-            label6.TabIndex = 5;
-            label6.Text = "Ville";
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(7, 184);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(44, 25);
+            this.label6.TabIndex = 5;
+            this.label6.Text = "Ville";
             // 
             // tbxEnse
             // 
-            tbxEnse.Location = new System.Drawing.Point(328, 371);
-            tbxEnse.Name = "tbxEnse";
-            tbxEnse.Size = new System.Drawing.Size(37, 27);
-            tbxEnse.TabIndex = 34;
+            this.tbxEnse.Location = new System.Drawing.Point(328, 371);
+            this.tbxEnse.Name = "tbxEnse";
+            this.tbxEnse.Size = new System.Drawing.Size(37, 31);
+            this.tbxEnse.TabIndex = 34;
             // 
             // label29
             // 
-            label29.AutoSize = true;
-            label29.Location = new System.Drawing.Point(215, 374);
-            label29.Name = "label29";
-            label29.Size = new System.Drawing.Size(107, 20);
-            label29.TabIndex = 33;
-            label29.Text = "Code enseigne";
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(215, 374);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(129, 25);
+            this.label29.TabIndex = 33;
+            this.label29.Text = "Code enseigne";
             // 
             // tbxTVA
             // 
-            tbxTVA.Location = new System.Drawing.Point(276, 336);
-            tbxTVA.Name = "tbxTVA";
-            tbxTVA.Size = new System.Drawing.Size(25, 27);
-            tbxTVA.TabIndex = 32;
+            this.tbxTVA.Location = new System.Drawing.Point(276, 336);
+            this.tbxTVA.Name = "tbxTVA";
+            this.tbxTVA.Size = new System.Drawing.Size(25, 31);
+            this.tbxTVA.TabIndex = 32;
             // 
             // tbxLivr
             // 
-            tbxLivr.Location = new System.Drawing.Point(170, 371);
-            tbxLivr.Name = "tbxLivr";
-            tbxLivr.Size = new System.Drawing.Size(27, 27);
-            tbxLivr.TabIndex = 31;
+            this.tbxLivr.Location = new System.Drawing.Point(170, 371);
+            this.tbxLivr.Name = "tbxLivr";
+            this.tbxLivr.Size = new System.Drawing.Size(27, 31);
+            this.tbxLivr.TabIndex = 31;
             // 
             // tbxTran
             // 
-            tbxTran.Location = new System.Drawing.Point(132, 336);
-            tbxTran.Name = "tbxTran";
-            tbxTran.Size = new System.Drawing.Size(25, 27);
-            tbxTran.TabIndex = 30;
+            this.tbxTran.Location = new System.Drawing.Point(132, 336);
+            this.tbxTran.Name = "tbxTran";
+            this.tbxTran.Size = new System.Drawing.Size(25, 31);
+            this.tbxTran.TabIndex = 30;
             // 
             // label28
             // 
-            label28.AutoSize = true;
-            label28.Location = new System.Drawing.Point(189, 339);
-            label28.Name = "label28";
-            label28.Size = new System.Drawing.Size(74, 20);
-            label28.TabIndex = 29;
-            label28.Text = "Code TVA";
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(189, 339);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(90, 25);
+            this.label28.TabIndex = 29;
+            this.label28.Text = "Code TVA";
             // 
             // tbxCode
             // 
-            tbxCode.Location = new System.Drawing.Point(377, 300);
-            tbxCode.Name = "tbxCode";
-            tbxCode.Size = new System.Drawing.Size(29, 27);
-            tbxCode.TabIndex = 28;
+            this.tbxCode.Location = new System.Drawing.Point(377, 300);
+            this.tbxCode.Name = "tbxCode";
+            this.tbxCode.Size = new System.Drawing.Size(29, 31);
+            this.tbxCode.TabIndex = 28;
             // 
             // label27
             // 
-            label27.AutoSize = true;
-            label27.Location = new System.Drawing.Point(192, 300);
-            label27.Name = "label27";
-            label27.Size = new System.Drawing.Size(179, 20);
-            label27.TabIndex = 27;
-            label27.Text = "Code remise (P ou V ou /)";
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(192, 300);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(216, 25);
+            this.label27.TabIndex = 27;
+            this.label27.Text = "Code remise (P ou V ou /)";
             // 
             // tbxRemi
             // 
-            tbxRemi.Location = new System.Drawing.Point(336, 256);
-            tbxRemi.Name = "tbxRemi";
-            tbxRemi.Size = new System.Drawing.Size(29, 27);
-            tbxRemi.TabIndex = 26;
+            this.tbxRemi.Location = new System.Drawing.Point(336, 256);
+            this.tbxRemi.Name = "tbxRemi";
+            this.tbxRemi.Size = new System.Drawing.Size(29, 31);
+            this.tbxRemi.TabIndex = 26;
             // 
             // label26
             // 
-            label26.AutoSize = true;
-            label26.Location = new System.Drawing.Point(196, 259);
-            label26.Name = "label26";
-            label26.Size = new System.Drawing.Size(134, 20);
-            label26.TabIndex = 25;
-            label26.Text = "% ou valeur remise";
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(196, 259);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(162, 25);
+            this.label26.TabIndex = 25;
+            this.label26.Text = "% ou valeur remise";
             // 
             // tbxRist
             // 
-            tbxRist.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            tbxRist.Location = new System.Drawing.Point(371, 217);
-            tbxRist.Name = "tbxRist";
-            tbxRist.Size = new System.Drawing.Size(35, 27);
-            tbxRist.TabIndex = 24;
+            this.tbxRist.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbxRist.Location = new System.Drawing.Point(371, 217);
+            this.tbxRist.Name = "tbxRist";
+            this.tbxRist.Size = new System.Drawing.Size(35, 31);
+            this.tbxRist.TabIndex = 24;
             // 
             // label25
             // 
-            label25.AutoSize = true;
-            label25.Location = new System.Drawing.Point(200, 220);
-            label25.Name = "label25";
-            label25.Size = new System.Drawing.Size(165, 20);
-            label25.TabIndex = 23;
-            label25.Text = "Numéro client ristourne";
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(200, 220);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(198, 25);
+            this.label25.TabIndex = 23;
+            this.label25.Text = "Numéro client ristourne";
             // 
             // label23
             // 
-            label23.AutoSize = true;
-            label23.Location = new System.Drawing.Point(7, 374);
-            label23.Name = "label23";
-            label23.Size = new System.Drawing.Size(161, 20);
-            label23.TabIndex = 20;
-            label23.Text = "Code livraison habituel";
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(7, 374);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(192, 25);
+            this.label23.TabIndex = 20;
+            this.label23.Text = "Code livraison habituel";
             // 
             // label22
             // 
-            label22.AutoSize = true;
-            label22.Location = new System.Drawing.Point(6, 339);
-            label22.Name = "label22";
-            label22.Size = new System.Drawing.Size(129, 20);
-            label22.TabIndex = 19;
-            label22.Text = "Code transporteur";
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(6, 339);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(157, 25);
+            this.label22.TabIndex = 19;
+            this.label22.Text = "Code transporteur";
             // 
             // tbxEdit
             // 
-            tbxEdit.Location = new System.Drawing.Point(147, 297);
-            tbxEdit.Name = "tbxEdit";
-            tbxEdit.Size = new System.Drawing.Size(24, 27);
-            tbxEdit.TabIndex = 18;
+            this.tbxEdit.Location = new System.Drawing.Point(147, 297);
+            this.tbxEdit.Name = "tbxEdit";
+            this.tbxEdit.Size = new System.Drawing.Size(24, 31);
+            this.tbxEdit.TabIndex = 18;
             // 
             // label21
             // 
-            label21.AutoSize = true;
-            label21.Location = new System.Drawing.Point(6, 298);
-            label21.Name = "label21";
-            label21.Size = new System.Drawing.Size(138, 20);
-            label21.TabIndex = 17;
-            label21.Text = "Code édition sur BL";
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(6, 298);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(166, 25);
+            this.label21.TabIndex = 17;
+            this.label21.Text = "Code édition sur BL";
             // 
             // tbxRep
             // 
-            tbxRep.Location = new System.Drawing.Point(143, 256);
-            tbxRep.Name = "tbxRep";
-            tbxRep.Size = new System.Drawing.Size(28, 27);
-            tbxRep.TabIndex = 16;
+            this.tbxRep.Location = new System.Drawing.Point(143, 256);
+            this.tbxRep.Name = "tbxRep";
+            this.tbxRep.Size = new System.Drawing.Size(28, 31);
+            this.tbxRep.TabIndex = 16;
             // 
             // label20
             // 
-            label20.AutoSize = true;
-            label20.Location = new System.Drawing.Point(6, 259);
-            label20.Name = "label20";
-            label20.Size = new System.Drawing.Size(131, 20);
-            label20.TabIndex = 15;
-            label20.Text = "Code représentant";
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(6, 259);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(158, 25);
+            this.label20.TabIndex = 15;
+            this.label20.Text = "Code représentant";
             // 
             // tbxFamilleClient
             // 
-            tbxFamilleClient.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            tbxFamilleClient.Location = new System.Drawing.Point(129, 217);
-            tbxFamilleClient.Name = "tbxFamilleClient";
-            tbxFamilleClient.Size = new System.Drawing.Size(28, 27);
-            tbxFamilleClient.TabIndex = 14;
+            this.tbxFamilleClient.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbxFamilleClient.Location = new System.Drawing.Point(129, 217);
+            this.tbxFamilleClient.Name = "tbxFamilleClient";
+            this.tbxFamilleClient.Size = new System.Drawing.Size(28, 31);
+            this.tbxFamilleClient.TabIndex = 14;
             // 
             // label19
             // 
-            label19.AutoSize = true;
-            label19.Location = new System.Drawing.Point(6, 220);
-            label19.Name = "label19";
-            label19.Size = new System.Drawing.Size(117, 20);
-            label19.TabIndex = 13;
-            label19.Text = "Famille du client";
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(6, 220);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(138, 25);
+            this.label19.TabIndex = 13;
+            this.label19.Text = "Famille du client";
             // 
             // tbxAdresse2
             // 
-            tbxAdresse2.Location = new System.Drawing.Point(92, 137);
-            tbxAdresse2.Name = "tbxAdresse2";
-            tbxAdresse2.Size = new System.Drawing.Size(387, 27);
-            tbxAdresse2.TabIndex = 12;
+            this.tbxAdresse2.Location = new System.Drawing.Point(92, 137);
+            this.tbxAdresse2.Name = "tbxAdresse2";
+            this.tbxAdresse2.Size = new System.Drawing.Size(387, 31);
+            this.tbxAdresse2.TabIndex = 12;
             // 
             // tbxAdresse1
             // 
-            tbxAdresse1.Location = new System.Drawing.Point(92, 97);
-            tbxAdresse1.Name = "tbxAdresse1";
-            tbxAdresse1.Size = new System.Drawing.Size(387, 27);
-            tbxAdresse1.TabIndex = 9;
+            this.tbxAdresse1.Location = new System.Drawing.Point(92, 97);
+            this.tbxAdresse1.Name = "tbxAdresse1";
+            this.tbxAdresse1.Size = new System.Drawing.Size(387, 31);
+            this.tbxAdresse1.TabIndex = 9;
             // 
             // tbxMtdi
             // 
-            tbxMtdi.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            tbxMtdi.Location = new System.Drawing.Point(235, 17);
-            tbxMtdi.Name = "tbxMtdi";
-            tbxMtdi.Size = new System.Drawing.Size(244, 27);
-            tbxMtdi.TabIndex = 8;
+            this.tbxMtdi.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbxMtdi.Location = new System.Drawing.Point(235, 17);
+            this.tbxMtdi.Name = "tbxMtdi";
+            this.tbxMtdi.Size = new System.Drawing.Size(244, 31);
+            this.tbxMtdi.TabIndex = 8;
             // 
             // tbxNom
             // 
-            tbxNom.Location = new System.Drawing.Point(61, 58);
-            tbxNom.Name = "tbxNom";
-            tbxNom.Size = new System.Drawing.Size(418, 27);
-            tbxNom.TabIndex = 7;
+            this.tbxNom.Location = new System.Drawing.Point(61, 58);
+            this.tbxNom.Name = "tbxNom";
+            this.tbxNom.Size = new System.Drawing.Size(418, 31);
+            this.tbxNom.TabIndex = 7;
             // 
             // label7
             // 
-            label7.AutoSize = true;
-            label7.Location = new System.Drawing.Point(13, 140);
-            label7.Name = "label7";
-            label7.Size = new System.Drawing.Size(73, 20);
-            label7.TabIndex = 6;
-            label7.Text = "Adresse 2";
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(13, 140);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(90, 25);
+            this.label7.TabIndex = 6;
+            this.label7.Text = "Adresse 2";
             // 
             // label4
             // 
-            label4.AutoSize = true;
-            label4.Location = new System.Drawing.Point(13, 100);
-            label4.Name = "label4";
-            label4.Size = new System.Drawing.Size(73, 20);
-            label4.TabIndex = 3;
-            label4.Text = "Adresse 1";
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(13, 100);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(90, 25);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "Adresse 1";
             // 
             // label3
             // 
-            label3.AutoSize = true;
-            label3.Location = new System.Drawing.Point(181, 21);
-            label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(45, 20);
-            label3.TabIndex = 2;
-            label3.Text = "MTDI";
-            label3.Click += label3_Click;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(181, 21);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(55, 25);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "MTDI";
             // 
             // label2
             // 
-            label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(13, 61);
-            label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(42, 20);
-            label2.TabIndex = 1;
-            label2.Text = "Nom";
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(13, 61);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(52, 25);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Nom";
             // 
             // label1
             // 
-            label1.Location = new System.Drawing.Point(0, 24);
-            label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(100, 23);
-            label1.TabIndex = 0;
+            this.label1.Location = new System.Drawing.Point(0, 24);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(100, 23);
+            this.label1.TabIndex = 0;
             // 
             // tabPage2
             // 
-            tabPage2.Controls.Add(tbxDom);
-            tabPage2.Controls.Add(label12);
-            tabPage2.Controls.Add(tbxRib);
-            tabPage2.Controls.Add(label11);
-            tabPage2.Controls.Add(tbxCompte);
-            tabPage2.Controls.Add(label10);
-            tabPage2.Controls.Add(tbxGui);
-            tabPage2.Controls.Add(label9);
-            tabPage2.Controls.Add(tbxBanque);
-            tabPage2.Controls.Add(label8);
-            tabPage2.Location = new System.Drawing.Point(4, 29);
-            tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new System.Drawing.Size(596, 538);
-            tabPage2.TabIndex = 1;
-            tabPage2.Text = "Banque";
-            tabPage2.UseVisualStyleBackColor = true;
+            this.tabPage2.Controls.Add(this.tbxDom);
+            this.tabPage2.Controls.Add(this.label12);
+            this.tabPage2.Controls.Add(this.tbxRib);
+            this.tabPage2.Controls.Add(this.label11);
+            this.tabPage2.Controls.Add(this.tbxCompte);
+            this.tabPage2.Controls.Add(this.label10);
+            this.tabPage2.Controls.Add(this.tbxGui);
+            this.tabPage2.Controls.Add(this.label9);
+            this.tabPage2.Controls.Add(this.tbxBanque);
+            this.tabPage2.Controls.Add(this.label8);
+            this.tabPage2.Location = new System.Drawing.Point(4, 34);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(596, 533);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Banque";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // tbxDom
             // 
-            tbxDom.Location = new System.Drawing.Point(115, 160);
-            tbxDom.Name = "tbxDom";
-            tbxDom.Size = new System.Drawing.Size(259, 27);
-            tbxDom.TabIndex = 10;
+            this.tbxDom.Location = new System.Drawing.Point(115, 160);
+            this.tbxDom.Name = "tbxDom";
+            this.tbxDom.Size = new System.Drawing.Size(259, 31);
+            this.tbxDom.TabIndex = 10;
             // 
             // label12
             // 
-            label12.AutoSize = true;
-            label12.Location = new System.Drawing.Point(10, 163);
-            label12.Name = "label12";
-            label12.Size = new System.Drawing.Size(99, 20);
-            label12.TabIndex = 9;
-            label12.Text = "Domiciliation";
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(10, 163);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(116, 25);
+            this.label12.TabIndex = 9;
+            this.label12.Text = "Domiciliation";
             // 
             // tbxRib
             // 
-            tbxRib.Location = new System.Drawing.Point(343, 107);
-            tbxRib.MaxLength = 2;
-            tbxRib.Name = "tbxRib";
-            tbxRib.Size = new System.Drawing.Size(31, 27);
-            tbxRib.TabIndex = 8;
+            this.tbxRib.Location = new System.Drawing.Point(343, 107);
+            this.tbxRib.MaxLength = 2;
+            this.tbxRib.Name = "tbxRib";
+            this.tbxRib.Size = new System.Drawing.Size(31, 31);
+            this.tbxRib.TabIndex = 8;
             // 
             // label11
             // 
-            label11.AutoSize = true;
-            label11.Location = new System.Drawing.Point(306, 110);
-            label11.Name = "label11";
-            label11.Size = new System.Drawing.Size(31, 20);
-            label11.TabIndex = 7;
-            label11.Text = "RIB";
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(306, 110);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(38, 25);
+            this.label11.TabIndex = 7;
+            this.label11.Text = "RIB";
             // 
             // tbxCompte
             // 
-            tbxCompte.Location = new System.Drawing.Point(157, 107);
-            tbxCompte.MaxLength = 11;
-            tbxCompte.Name = "tbxCompte";
-            tbxCompte.Size = new System.Drawing.Size(123, 27);
-            tbxCompte.TabIndex = 6;
+            this.tbxCompte.Location = new System.Drawing.Point(157, 107);
+            this.tbxCompte.MaxLength = 11;
+            this.tbxCompte.Name = "tbxCompte";
+            this.tbxCompte.Size = new System.Drawing.Size(123, 31);
+            this.tbxCompte.TabIndex = 6;
             // 
             // label10
             // 
-            label10.AutoSize = true;
-            label10.Location = new System.Drawing.Point(10, 110);
-            label10.Name = "label10";
-            label10.Size = new System.Drawing.Size(141, 20);
-            label10.TabIndex = 5;
-            label10.Text = "Numéro de Compte";
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(10, 110);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(171, 25);
+            this.label10.TabIndex = 5;
+            this.label10.Text = "Numéro de Compte";
             // 
             // tbxGui
             // 
-            tbxGui.Location = new System.Drawing.Point(114, 54);
-            tbxGui.MaxLength = 5;
-            tbxGui.Name = "tbxGui";
-            tbxGui.Size = new System.Drawing.Size(50, 27);
-            tbxGui.TabIndex = 4;
+            this.tbxGui.Location = new System.Drawing.Point(114, 54);
+            this.tbxGui.MaxLength = 5;
+            this.tbxGui.Name = "tbxGui";
+            this.tbxGui.Size = new System.Drawing.Size(50, 31);
+            this.tbxGui.TabIndex = 4;
             // 
             // label9
             // 
-            label9.AutoSize = true;
-            label9.Location = new System.Drawing.Point(10, 57);
-            label9.Name = "label9";
-            label9.Size = new System.Drawing.Size(98, 20);
-            label9.TabIndex = 3;
-            label9.Text = "Code Guichet";
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(10, 57);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(118, 25);
+            this.label9.TabIndex = 3;
+            this.label9.Text = "Code Guichet";
             // 
             // tbxBanque
             // 
-            tbxBanque.Location = new System.Drawing.Point(114, 7);
-            tbxBanque.MaxLength = 5;
-            tbxBanque.Name = "tbxBanque";
-            tbxBanque.Size = new System.Drawing.Size(50, 27);
-            tbxBanque.TabIndex = 2;
+            this.tbxBanque.Location = new System.Drawing.Point(114, 7);
+            this.tbxBanque.MaxLength = 5;
+            this.tbxBanque.Name = "tbxBanque";
+            this.tbxBanque.Size = new System.Drawing.Size(50, 31);
+            this.tbxBanque.TabIndex = 2;
             // 
             // label8
             // 
-            label8.AutoSize = true;
-            label8.Location = new System.Drawing.Point(10, 10);
-            label8.Name = "label8";
-            label8.Size = new System.Drawing.Size(98, 20);
-            label8.TabIndex = 0;
-            label8.Text = "Code Banque";
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(10, 10);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(118, 25);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "Code Banque";
             // 
             // tabPage3
             // 
-            tabPage3.Controls.Add(tbxFacturation);
-            tabPage3.Controls.Add(label18);
-            tabPage3.Controls.Add(tbxDecalageArrive);
-            tabPage3.Controls.Add(label17);
-            tabPage3.Controls.Add(tbxEche);
-            tabPage3.Controls.Add(label16);
-            tabPage3.Controls.Add(tbxDecalageDepart);
-            tabPage3.Controls.Add(label15);
-            tabPage3.Controls.Add(tbxBaseDepart);
-            tabPage3.Controls.Add(label14);
-            tabPage3.Controls.Add(cbxReglement);
-            tabPage3.Controls.Add(label13);
-            tabPage3.Location = new System.Drawing.Point(4, 29);
-            tabPage3.Name = "tabPage3";
-            tabPage3.Padding = new Padding(3);
-            tabPage3.Size = new System.Drawing.Size(596, 538);
-            tabPage3.TabIndex = 2;
-            tabPage3.Text = "Règlement";
-            tabPage3.UseVisualStyleBackColor = true;
+            this.tabPage3.Controls.Add(this.tbxFacturation);
+            this.tabPage3.Controls.Add(this.label18);
+            this.tabPage3.Controls.Add(this.tbxDecalageArrive);
+            this.tabPage3.Controls.Add(this.label17);
+            this.tabPage3.Controls.Add(this.tbxEche);
+            this.tabPage3.Controls.Add(this.label16);
+            this.tabPage3.Controls.Add(this.tbxDecalageDepart);
+            this.tabPage3.Controls.Add(this.label15);
+            this.tabPage3.Controls.Add(this.tbxBaseDepart);
+            this.tabPage3.Controls.Add(this.label14);
+            this.tabPage3.Controls.Add(this.cbxReglement);
+            this.tabPage3.Controls.Add(this.label13);
+            this.tabPage3.Location = new System.Drawing.Point(4, 34);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(596, 533);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Règlement";
+            this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // tbxFacturation
             // 
-            tbxFacturation.Location = new System.Drawing.Point(142, 234);
-            tbxFacturation.MaxLength = 1;
-            tbxFacturation.Name = "tbxFacturation";
-            tbxFacturation.Size = new System.Drawing.Size(30, 27);
-            tbxFacturation.TabIndex = 11;
+            this.tbxFacturation.Location = new System.Drawing.Point(142, 234);
+            this.tbxFacturation.MaxLength = 1;
+            this.tbxFacturation.Name = "tbxFacturation";
+            this.tbxFacturation.Size = new System.Drawing.Size(30, 31);
+            this.tbxFacturation.TabIndex = 11;
             // 
             // label18
             // 
-            label18.AutoSize = true;
-            label18.Location = new System.Drawing.Point(16, 237);
-            label18.Name = "label18";
-            label18.Size = new System.Drawing.Size(120, 20);
-            label18.TabIndex = 10;
-            label18.Text = "Code facturation";
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(16, 237);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(144, 25);
+            this.label18.TabIndex = 10;
+            this.label18.Text = "Code facturation";
             // 
             // tbxDecalageArrive
             // 
-            tbxDecalageArrive.Location = new System.Drawing.Point(133, 188);
-            tbxDecalageArrive.MaxLength = 1;
-            tbxDecalageArrive.Name = "tbxDecalageArrive";
-            tbxDecalageArrive.Size = new System.Drawing.Size(28, 27);
-            tbxDecalageArrive.TabIndex = 9;
+            this.tbxDecalageArrive.Location = new System.Drawing.Point(133, 188);
+            this.tbxDecalageArrive.MaxLength = 1;
+            this.tbxDecalageArrive.Name = "tbxDecalageArrive";
+            this.tbxDecalageArrive.Size = new System.Drawing.Size(28, 31);
+            this.tbxDecalageArrive.TabIndex = 9;
             // 
             // label17
             // 
-            label17.AutoSize = true;
-            label17.Location = new System.Drawing.Point(16, 191);
-            label17.Name = "label17";
-            label17.Size = new System.Drawing.Size(113, 20);
-            label17.TabIndex = 8;
-            label17.Text = "Décalage arrivé";
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(16, 191);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(132, 25);
+            this.label17.TabIndex = 8;
+            this.label17.Text = "Décalage arrivé";
             // 
             // tbxEche
             // 
-            tbxEche.Location = new System.Drawing.Point(221, 142);
-            tbxEche.MaxLength = 2;
-            tbxEche.Name = "tbxEche";
-            tbxEche.Size = new System.Drawing.Size(30, 27);
-            tbxEche.TabIndex = 7;
+            this.tbxEche.Location = new System.Drawing.Point(221, 142);
+            this.tbxEche.MaxLength = 2;
+            this.tbxEche.Name = "tbxEche";
+            this.tbxEche.Size = new System.Drawing.Size(30, 31);
+            this.tbxEche.TabIndex = 7;
             // 
             // label16
             // 
-            label16.AutoSize = true;
-            label16.Location = new System.Drawing.Point(16, 145);
-            label16.Name = "label16";
-            label16.Size = new System.Drawing.Size(199, 20);
-            label16.TabIndex = 6;
-            label16.Text = "Nombre de jours d'échéance";
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(16, 145);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(239, 25);
+            this.label16.TabIndex = 6;
+            this.label16.Text = "Nombre de jours d\'échéance";
             // 
             // tbxDecalageDepart
             // 
-            tbxDecalageDepart.Location = new System.Drawing.Point(142, 95);
-            tbxDecalageDepart.MaxLength = 1;
-            tbxDecalageDepart.Name = "tbxDecalageDepart";
-            tbxDecalageDepart.Size = new System.Drawing.Size(30, 27);
-            tbxDecalageDepart.TabIndex = 5;
+            this.tbxDecalageDepart.Location = new System.Drawing.Point(142, 95);
+            this.tbxDecalageDepart.MaxLength = 1;
+            this.tbxDecalageDepart.Name = "tbxDecalageDepart";
+            this.tbxDecalageDepart.Size = new System.Drawing.Size(30, 31);
+            this.tbxDecalageDepart.TabIndex = 5;
             // 
             // label15
             // 
-            label15.AutoSize = true;
-            label15.Location = new System.Drawing.Point(16, 98);
-            label15.Name = "label15";
-            label15.Size = new System.Drawing.Size(120, 20);
-            label15.TabIndex = 4;
-            label15.Text = "Décalage départ";
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(16, 98);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(141, 25);
+            this.label15.TabIndex = 4;
+            this.label15.Text = "Décalage départ";
             // 
             // tbxBaseDepart
             // 
-            tbxBaseDepart.Location = new System.Drawing.Point(163, 53);
-            tbxBaseDepart.Name = "tbxBaseDepart";
-            tbxBaseDepart.Size = new System.Drawing.Size(28, 27);
-            tbxBaseDepart.TabIndex = 3;
+            this.tbxBaseDepart.Location = new System.Drawing.Point(163, 53);
+            this.tbxBaseDepart.Name = "tbxBaseDepart";
+            this.tbxBaseDepart.Size = new System.Drawing.Size(28, 31);
+            this.tbxBaseDepart.TabIndex = 3;
             // 
             // label14
             // 
-            label14.AutoSize = true;
-            label14.Location = new System.Drawing.Point(16, 56);
-            label14.Name = "label14";
-            label14.Size = new System.Drawing.Size(145, 20);
-            label14.TabIndex = 2;
-            label14.Text = "Date de base départ";
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(16, 56);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(173, 25);
+            this.label14.TabIndex = 2;
+            this.label14.Text = "Date de base départ";
             // 
             // cbxReglement
             // 
-            cbxReglement.FormattingEnabled = true;
-            cbxReglement.Location = new System.Drawing.Point(163, 11);
-            cbxReglement.Name = "cbxReglement";
-            cbxReglement.Size = new System.Drawing.Size(52, 28);
-            cbxReglement.TabIndex = 1;
+            this.cbxReglement.FormattingEnabled = true;
+            this.cbxReglement.Location = new System.Drawing.Point(163, 11);
+            this.cbxReglement.Name = "cbxReglement";
+            this.cbxReglement.Size = new System.Drawing.Size(52, 33);
+            this.cbxReglement.TabIndex = 1;
             // 
             // label13
             // 
-            label13.AutoSize = true;
-            label13.Location = new System.Drawing.Point(16, 14);
-            label13.Name = "label13";
-            label13.Size = new System.Drawing.Size(141, 20);
-            label13.TabIndex = 0;
-            label13.Text = "Mode de réglement";
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(16, 14);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(169, 25);
+            this.label13.TabIndex = 0;
+            this.label13.Text = "Mode de réglement";
             // 
             // tabPage4
             // 
-            tabPage4.Controls.Add(tbxCompteEbp);
-            tabPage4.Controls.Add(label34);
-            tabPage4.Controls.Add(pbCheckCompta);
-            tabPage4.Controls.Add(pbComptaCroix);
-            tabPage4.Controls.Add(tbxDluo);
-            tabPage4.Controls.Add(label33);
-            tabPage4.Controls.Add(tbxComp);
-            tabPage4.Controls.Add(label24);
-            tabPage4.Location = new System.Drawing.Point(4, 29);
-            tabPage4.Name = "tabPage4";
-            tabPage4.Padding = new Padding(3);
-            tabPage4.Size = new System.Drawing.Size(596, 538);
-            tabPage4.TabIndex = 3;
-            tabPage4.Text = "Autre";
-            tabPage4.UseVisualStyleBackColor = true;
+            this.tabPage4.Controls.Add(this.tbxCompteEbp);
+            this.tabPage4.Controls.Add(this.label34);
+            this.tabPage4.Controls.Add(this.pbCheckCompta);
+            this.tabPage4.Controls.Add(this.pbComptaCroix);
+            this.tabPage4.Controls.Add(this.tbxDluo);
+            this.tabPage4.Controls.Add(this.label33);
+            this.tabPage4.Controls.Add(this.tbxComp);
+            this.tabPage4.Controls.Add(this.label24);
+            this.tabPage4.Location = new System.Drawing.Point(4, 34);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(596, 533);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Autre";
+            this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // tbxCompteEbp
             // 
-            tbxCompteEbp.Location = new System.Drawing.Point(163, 99);
-            tbxCompteEbp.MaxLength = 10;
-            tbxCompteEbp.Name = "tbxCompteEbp";
-            tbxCompteEbp.Size = new System.Drawing.Size(48, 27);
-            tbxCompteEbp.TabIndex = 45;
+            this.tbxCompteEbp.Location = new System.Drawing.Point(163, 99);
+            this.tbxCompteEbp.MaxLength = 10;
+            this.tbxCompteEbp.Name = "tbxCompteEbp";
+            this.tbxCompteEbp.Size = new System.Drawing.Size(48, 31);
+            this.tbxCompteEbp.TabIndex = 45;
             // 
             // label34
             // 
-            label34.AutoSize = true;
-            label34.Location = new System.Drawing.Point(15, 102);
-            label34.Name = "label34";
-            label34.Size = new System.Drawing.Size(147, 20);
-            label34.TabIndex = 44;
-            label34.Text = "Numéro compte EBP";
+            this.label34.AutoSize = true;
+            this.label34.Location = new System.Drawing.Point(15, 102);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(177, 25);
+            this.label34.TabIndex = 44;
+            this.label34.Text = "Numéro compte EBP";
             // 
             // pbCheckCompta
             // 
-            pbCheckCompta.Image = (System.Drawing.Image)resources.GetObject("pbCheckCompta.Image");
-            pbCheckCompta.Location = new System.Drawing.Point(243, 14);
-            pbCheckCompta.Name = "pbCheckCompta";
-            pbCheckCompta.Size = new System.Drawing.Size(25, 23);
-            pbCheckCompta.SizeMode = PictureBoxSizeMode.StretchImage;
-            pbCheckCompta.TabIndex = 43;
-            pbCheckCompta.TabStop = false;
+            this.pbCheckCompta.Image = ((System.Drawing.Image)(resources.GetObject("pbCheckCompta.Image")));
+            this.pbCheckCompta.Location = new System.Drawing.Point(243, 14);
+            this.pbCheckCompta.Name = "pbCheckCompta";
+            this.pbCheckCompta.Size = new System.Drawing.Size(25, 23);
+            this.pbCheckCompta.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbCheckCompta.TabIndex = 43;
+            this.pbCheckCompta.TabStop = false;
             // 
             // pbComptaCroix
             // 
-            pbComptaCroix.Image = (System.Drawing.Image)resources.GetObject("pbComptaCroix.Image");
-            pbComptaCroix.Location = new System.Drawing.Point(216, 14);
-            pbComptaCroix.Name = "pbComptaCroix";
-            pbComptaCroix.Size = new System.Drawing.Size(21, 21);
-            pbComptaCroix.SizeMode = PictureBoxSizeMode.StretchImage;
-            pbComptaCroix.TabIndex = 28;
-            pbComptaCroix.TabStop = false;
+            this.pbComptaCroix.Image = ((System.Drawing.Image)(resources.GetObject("pbComptaCroix.Image")));
+            this.pbComptaCroix.Location = new System.Drawing.Point(216, 14);
+            this.pbComptaCroix.Name = "pbComptaCroix";
+            this.pbComptaCroix.Size = new System.Drawing.Size(21, 21);
+            this.pbComptaCroix.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbComptaCroix.TabIndex = 28;
+            this.pbComptaCroix.TabStop = false;
             // 
             // tbxDluo
             // 
-            tbxDluo.Location = new System.Drawing.Point(126, 52);
-            tbxDluo.MaxLength = 10;
-            tbxDluo.Name = "tbxDluo";
-            tbxDluo.Size = new System.Drawing.Size(48, 27);
-            tbxDluo.TabIndex = 26;
+            this.tbxDluo.Location = new System.Drawing.Point(126, 52);
+            this.tbxDluo.MaxLength = 10;
+            this.tbxDluo.Name = "tbxDluo";
+            this.tbxDluo.Size = new System.Drawing.Size(48, 31);
+            this.tbxDluo.TabIndex = 26;
             // 
             // label33
             // 
-            label33.AutoSize = true;
-            label33.Location = new System.Drawing.Point(15, 55);
-            label33.Name = "label33";
-            label33.Size = new System.Drawing.Size(121, 20);
-            label33.TabIndex = 25;
-            label33.Text = "Nombre de jours";
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(15, 55);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(147, 25);
+            this.label33.TabIndex = 25;
+            this.label33.Text = "Nombre de jours";
             // 
             // tbxComp
             // 
-            tbxComp.Location = new System.Drawing.Point(178, 11);
-            tbxComp.MaxLength = 4;
-            tbxComp.Name = "tbxComp";
-            tbxComp.Size = new System.Drawing.Size(32, 27);
-            tbxComp.TabIndex = 24;
+            this.tbxComp.Location = new System.Drawing.Point(178, 11);
+            this.tbxComp.MaxLength = 4;
+            this.tbxComp.Name = "tbxComp";
+            this.tbxComp.Size = new System.Drawing.Size(32, 31);
+            this.tbxComp.TabIndex = 24;
             // 
             // label24
             // 
-            label24.AutoSize = true;
-            label24.Location = new System.Drawing.Point(15, 14);
-            label24.Name = "label24";
-            label24.Size = new System.Drawing.Size(179, 20);
-            label24.TabIndex = 23;
-            label24.Text = "Numéro client comptable";
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(15, 14);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(213, 25);
+            this.label24.TabIndex = 23;
+            this.label24.Text = "Numéro client comptable";
             // 
             // btnCreate
             // 
-            btnCreate.Location = new System.Drawing.Point(792, 598);
-            btnCreate.Name = "btnCreate";
-            btnCreate.Size = new System.Drawing.Size(152, 38);
-            btnCreate.TabIndex = 2;
-            btnCreate.Text = "Dupliquer";
-            btnCreate.UseVisualStyleBackColor = true;
-            btnCreate.Click += btnCreate_Click;
+            this.btnCreate.Location = new System.Drawing.Point(792, 598);
+            this.btnCreate.Name = "btnCreate";
+            this.btnCreate.Size = new System.Drawing.Size(152, 38);
+            this.btnCreate.TabIndex = 2;
+            this.btnCreate.Text = "Dupliquer";
+            this.btnCreate.UseVisualStyleBackColor = true;
             // 
             // button1
             // 
-            button1.Location = new System.Drawing.Point(638, 598);
-            button1.Name = "button1";
-            button1.Size = new System.Drawing.Size(130, 38);
-            button1.TabIndex = 3;
-            button1.Text = "Modifier";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            this.button1.Location = new System.Drawing.Point(638, 598);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(130, 38);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "Modifier";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // client
             // 
-            ClientSize = new System.Drawing.Size(1019, 666);
-            Controls.Add(button1);
-            Controls.Add(btnCreate);
-            Controls.Add(tabControl1);
-            Controls.Add(listView1);
-            Name = "client";
-            tabControl1.ResumeLayout(false);
-            tabPage1.ResumeLayout(false);
-            tabPage1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pbRistCheck).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pbRistCroix).EndInit();
-            tabPage2.ResumeLayout(false);
-            tabPage2.PerformLayout();
-            tabPage3.ResumeLayout(false);
-            tabPage3.PerformLayout();
-            tabPage4.ResumeLayout(false);
-            tabPage4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pbCheckCompta).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pbComptaCroix).EndInit();
-            ResumeLayout(false);
+            this.ClientSize = new System.Drawing.Size(966, 648);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnCreate);
+            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.listView1);
+            this.Name = "client";
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbRistCheck)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbRistCroix)).EndInit();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbCheckCompta)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbComptaCroix)).EndInit();
+            this.ResumeLayout(false);
+
         }
 
         private void LayoutControls()

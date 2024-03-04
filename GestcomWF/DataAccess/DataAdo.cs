@@ -9,8 +9,9 @@ namespace GestcomWF.DataAccess
         public static OleDbConnection connection;
         protected static void open()
         {
-            string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\steev\Desktop\Informatique\Bases\TB_GestCom_Bis.accdb;Persist Security Info=False;";
-            //string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source=F:\Projets\Informatique\Bases\TB_GestCom_Bis.accdb;Persist Security Info=False;";
+            //string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\steev\Desktop\Informatique\Bases\TB_GestCom_Bis.accdb;Persist Security Info=False;";
+            //string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source=\\SRVBRUN-FILES\Bases\TB_GestCom_Bis.accdb;Persist Security Info=False;";
+            string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source=F:\Projets\Informatique\Bases\TB_GestCom_Bis.accdb;Persist Security Info=False;";
             try
             {
                 connection = new OleDbConnection(connectionString);

@@ -28,234 +28,239 @@
         /// </summary>
         private void InitializeComponent()
         {
-            labelMois = new Label();
-            labelAnnee = new Label();
-            buttonGenerer = new Button();
-            dataGridView = new DataGridView();
-            tbxAnnee = new TextBox();
-            cbxMois = new ComboBox();
-            lbl_total = new Label();
-            lbl_a = new Label();
-            lbl_b = new Label();
-            lbl_c = new Label();
-            btn_valider = new Button();
-            tbx_total = new TextBox();
-            tbx_a = new TextBox();
-            tbx_b = new TextBox();
-            tbx_c = new TextBox();
-            generate_excel = new Button();
-            dtpDate = new DateTimePicker();
-            label1 = new Label();
-            btnImprimer = new Button();
-            ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
-            SuspendLayout();
+            this.labelMois = new System.Windows.Forms.Label();
+            this.labelAnnee = new System.Windows.Forms.Label();
+            this.buttonGenerer = new System.Windows.Forms.Button();
+            this.dataGridView = new System.Windows.Forms.DataGridView();
+            this.tbxAnnee = new System.Windows.Forms.TextBox();
+            this.cbxMois = new System.Windows.Forms.ComboBox();
+            this.lbl_total = new System.Windows.Forms.Label();
+            this.lbl_a = new System.Windows.Forms.Label();
+            this.lbl_b = new System.Windows.Forms.Label();
+            this.lbl_c = new System.Windows.Forms.Label();
+            this.btn_valider = new System.Windows.Forms.Button();
+            this.tbx_total = new System.Windows.Forms.TextBox();
+            this.tbx_a = new System.Windows.Forms.TextBox();
+            this.tbx_b = new System.Windows.Forms.TextBox();
+            this.tbx_c = new System.Windows.Forms.TextBox();
+            this.generate_excel = new System.Windows.Forms.Button();
+            this.dtpDate = new System.Windows.Forms.DateTimePicker();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnImprimer = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
+            this.SuspendLayout();
             // 
             // labelMois
             // 
-            labelMois.AutoSize = true;
-            labelMois.Location = new System.Drawing.Point(22, 43);
-            labelMois.Margin = new Padding(4, 0, 4, 0);
-            labelMois.Name = "labelMois";
-            labelMois.Size = new System.Drawing.Size(36, 15);
-            labelMois.TabIndex = 0;
-            labelMois.Text = "Mois:";
+            this.labelMois.AutoSize = true;
+            this.labelMois.Location = new System.Drawing.Point(31, 72);
+            this.labelMois.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.labelMois.Name = "labelMois";
+            this.labelMois.Size = new System.Drawing.Size(55, 25);
+            this.labelMois.TabIndex = 0;
+            this.labelMois.Text = "Mois:";
             // 
             // labelAnnee
             // 
-            labelAnnee.AutoSize = true;
-            labelAnnee.Location = new System.Drawing.Point(192, 43);
-            labelAnnee.Margin = new Padding(4, 0, 4, 0);
-            labelAnnee.Name = "labelAnnee";
-            labelAnnee.Size = new System.Drawing.Size(44, 15);
-            labelAnnee.TabIndex = 1;
-            labelAnnee.Text = "Année:";
+            this.labelAnnee.AutoSize = true;
+            this.labelAnnee.Location = new System.Drawing.Point(274, 72);
+            this.labelAnnee.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.labelAnnee.Name = "labelAnnee";
+            this.labelAnnee.Size = new System.Drawing.Size(66, 25);
+            this.labelAnnee.TabIndex = 1;
+            this.labelAnnee.Text = "Année:";
             // 
             // buttonGenerer
             // 
-            buttonGenerer.Location = new System.Drawing.Point(308, 11);
-            buttonGenerer.Margin = new Padding(4, 3, 4, 3);
-            buttonGenerer.Name = "buttonGenerer";
-            buttonGenerer.Size = new System.Drawing.Size(88, 27);
-            buttonGenerer.TabIndex = 2;
-            buttonGenerer.Text = "Afficher";
-            buttonGenerer.UseVisualStyleBackColor = true;
-            buttonGenerer.Click += buttonGenerer_Click;
+            this.buttonGenerer.Location = new System.Drawing.Point(440, 18);
+            this.buttonGenerer.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
+            this.buttonGenerer.Name = "buttonGenerer";
+            this.buttonGenerer.Size = new System.Drawing.Size(126, 45);
+            this.buttonGenerer.TabIndex = 2;
+            this.buttonGenerer.Text = "Afficher";
+            this.buttonGenerer.UseVisualStyleBackColor = true;
             // 
             // dataGridView
             // 
-            dataGridView.ColumnHeadersHeight = 29;
-            dataGridView.Location = new System.Drawing.Point(161, 86);
-            dataGridView.Margin = new Padding(4, 3, 4, 3);
-            dataGridView.Name = "dataGridView";
-            dataGridView.RowHeadersWidth = 51;
-            dataGridView.Size = new System.Drawing.Size(467, 173);
-            dataGridView.TabIndex = 3;
-            dataGridView.CellDoubleClick += dataGridView_CellDoubleClick;
+            this.dataGridView.ColumnHeadersHeight = 29;
+            this.dataGridView.Location = new System.Drawing.Point(230, 143);
+            this.dataGridView.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
+            this.dataGridView.Name = "dataGridView";
+            this.dataGridView.RowHeadersWidth = 51;
+            this.dataGridView.Size = new System.Drawing.Size(667, 288);
+            this.dataGridView.TabIndex = 3;
             // 
             // tbxAnnee
             // 
-            tbxAnnee.Location = new System.Drawing.Point(244, 40);
-            tbxAnnee.MaxLength = 2;
-            tbxAnnee.Name = "tbxAnnee";
-            tbxAnnee.Size = new System.Drawing.Size(47, 23);
-            tbxAnnee.TabIndex = 4;
+            this.tbxAnnee.Location = new System.Drawing.Point(349, 67);
+            this.tbxAnnee.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbxAnnee.MaxLength = 2;
+            this.tbxAnnee.Name = "tbxAnnee";
+            this.tbxAnnee.Size = new System.Drawing.Size(65, 31);
+            this.tbxAnnee.TabIndex = 4;
             // 
             // cbxMois
             // 
-            cbxMois.FormattingEnabled = true;
-            cbxMois.Location = new System.Drawing.Point(65, 40);
-            cbxMois.Name = "cbxMois";
-            cbxMois.Size = new System.Drawing.Size(121, 23);
-            cbxMois.TabIndex = 5;
-            cbxMois.SelectedIndexChanged += cbxMois_SelectedIndexChanged;
+            this.cbxMois.FormattingEnabled = true;
+            this.cbxMois.Location = new System.Drawing.Point(93, 67);
+            this.cbxMois.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cbxMois.Name = "cbxMois";
+            this.cbxMois.Size = new System.Drawing.Size(171, 33);
+            this.cbxMois.TabIndex = 5;
             // 
             // lbl_total
             // 
-            lbl_total.AutoSize = true;
-            lbl_total.Location = new System.Drawing.Point(20, 89);
-            lbl_total.Name = "lbl_total";
-            lbl_total.Size = new System.Drawing.Size(35, 15);
-            lbl_total.TabIndex = 6;
-            lbl_total.Text = "Total:";
+            this.lbl_total.AutoSize = true;
+            this.lbl_total.Location = new System.Drawing.Point(29, 148);
+            this.lbl_total.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_total.Name = "lbl_total";
+            this.lbl_total.Size = new System.Drawing.Size(53, 25);
+            this.lbl_total.TabIndex = 6;
+            this.lbl_total.Text = "Total:";
             // 
             // lbl_a
             // 
-            lbl_a.AutoSize = true;
-            lbl_a.Location = new System.Drawing.Point(20, 119);
-            lbl_a.Name = "lbl_a";
-            lbl_a.Size = new System.Drawing.Size(18, 15);
-            lbl_a.TabIndex = 7;
-            lbl_a.Text = "A:";
+            this.lbl_a.AutoSize = true;
+            this.lbl_a.Location = new System.Drawing.Point(29, 198);
+            this.lbl_a.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_a.Name = "lbl_a";
+            this.lbl_a.Size = new System.Drawing.Size(28, 25);
+            this.lbl_a.TabIndex = 7;
+            this.lbl_a.Text = "A:";
             // 
             // lbl_b
             // 
-            lbl_b.AutoSize = true;
-            lbl_b.Location = new System.Drawing.Point(20, 152);
-            lbl_b.Name = "lbl_b";
-            lbl_b.Size = new System.Drawing.Size(17, 15);
-            lbl_b.TabIndex = 8;
-            lbl_b.Text = "B:";
+            this.lbl_b.AutoSize = true;
+            this.lbl_b.Location = new System.Drawing.Point(29, 253);
+            this.lbl_b.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_b.Name = "lbl_b";
+            this.lbl_b.Size = new System.Drawing.Size(26, 25);
+            this.lbl_b.TabIndex = 8;
+            this.lbl_b.Text = "B:";
             // 
             // lbl_c
             // 
-            lbl_c.AutoSize = true;
-            lbl_c.Location = new System.Drawing.Point(20, 185);
-            lbl_c.Name = "lbl_c";
-            lbl_c.Size = new System.Drawing.Size(18, 15);
-            lbl_c.TabIndex = 9;
-            lbl_c.Text = "C:";
+            this.lbl_c.AutoSize = true;
+            this.lbl_c.Location = new System.Drawing.Point(29, 308);
+            this.lbl_c.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_c.Name = "lbl_c";
+            this.lbl_c.Size = new System.Drawing.Size(27, 25);
+            this.lbl_c.TabIndex = 9;
+            this.lbl_c.Text = "C:";
             // 
             // btn_valider
             // 
-            btn_valider.Location = new System.Drawing.Point(48, 232);
-            btn_valider.Margin = new Padding(4, 3, 4, 3);
-            btn_valider.Name = "btn_valider";
-            btn_valider.Size = new System.Drawing.Size(88, 27);
-            btn_valider.TabIndex = 10;
-            btn_valider.Text = "Sauvegarder";
-            btn_valider.UseVisualStyleBackColor = true;
-            btn_valider.Click += btn_valider_Click;
+            this.btn_valider.Location = new System.Drawing.Point(69, 387);
+            this.btn_valider.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
+            this.btn_valider.Name = "btn_valider";
+            this.btn_valider.Size = new System.Drawing.Size(126, 45);
+            this.btn_valider.TabIndex = 10;
+            this.btn_valider.Text = "Sauvegarder";
+            this.btn_valider.UseVisualStyleBackColor = true;
             // 
             // tbx_total
             // 
-            tbx_total.Enabled = false;
-            tbx_total.Location = new System.Drawing.Point(75, 86);
-            tbx_total.Name = "tbx_total";
-            tbx_total.Size = new System.Drawing.Size(62, 23);
-            tbx_total.TabIndex = 11;
+            this.tbx_total.Enabled = false;
+            this.tbx_total.Location = new System.Drawing.Point(107, 143);
+            this.tbx_total.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbx_total.Name = "tbx_total";
+            this.tbx_total.Size = new System.Drawing.Size(87, 31);
+            this.tbx_total.TabIndex = 11;
             // 
             // tbx_a
             // 
-            tbx_a.Location = new System.Drawing.Point(75, 116);
-            tbx_a.Name = "tbx_a";
-            tbx_a.Size = new System.Drawing.Size(62, 23);
-            tbx_a.TabIndex = 12;
-            tbx_a.KeyUp += tbx_a_KeyUp;
+            this.tbx_a.Location = new System.Drawing.Point(107, 193);
+            this.tbx_a.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbx_a.Name = "tbx_a";
+            this.tbx_a.Size = new System.Drawing.Size(87, 31);
+            this.tbx_a.TabIndex = 12;
             // 
             // tbx_b
             // 
-            tbx_b.Location = new System.Drawing.Point(75, 149);
-            tbx_b.Name = "tbx_b";
-            tbx_b.Size = new System.Drawing.Size(62, 23);
-            tbx_b.TabIndex = 13;
-            tbx_b.KeyUp += tbx_b_KeyUp;
+            this.tbx_b.Location = new System.Drawing.Point(107, 248);
+            this.tbx_b.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbx_b.Name = "tbx_b";
+            this.tbx_b.Size = new System.Drawing.Size(87, 31);
+            this.tbx_b.TabIndex = 13;
             // 
             // tbx_c
             // 
-            tbx_c.Location = new System.Drawing.Point(75, 182);
-            tbx_c.Name = "tbx_c";
-            tbx_c.Size = new System.Drawing.Size(62, 23);
-            tbx_c.TabIndex = 14;
-            tbx_c.KeyUp += tbx_c_KeyUp;
+            this.tbx_c.Location = new System.Drawing.Point(107, 303);
+            this.tbx_c.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbx_c.Name = "tbx_c";
+            this.tbx_c.Size = new System.Drawing.Size(87, 31);
+            this.tbx_c.TabIndex = 14;
             // 
             // generate_excel
             // 
-            generate_excel.Location = new System.Drawing.Point(499, 11);
-            generate_excel.Margin = new Padding(3, 2, 3, 2);
-            generate_excel.Name = "generate_excel";
-            generate_excel.Size = new System.Drawing.Size(155, 22);
-            generate_excel.TabIndex = 15;
-            generate_excel.Text = "Générer le fichier Excel";
-            generate_excel.UseVisualStyleBackColor = true;
-            generate_excel.Click += generate_excel_Click;
+            this.generate_excel.Location = new System.Drawing.Point(713, 18);
+            this.generate_excel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.generate_excel.Name = "generate_excel";
+            this.generate_excel.Size = new System.Drawing.Size(221, 37);
+            this.generate_excel.TabIndex = 15;
+            this.generate_excel.Text = "Générer le fichier Excel";
+            this.generate_excel.UseVisualStyleBackColor = true;
+            this.generate_excel.Click += new System.EventHandler(this.generate_excel_Click);
             // 
             // dtpDate
             // 
-            dtpDate.Location = new System.Drawing.Point(63, 8);
-            dtpDate.Name = "dtpDate";
-            dtpDate.Size = new System.Drawing.Size(200, 23);
-            dtpDate.TabIndex = 16;
-            dtpDate.ValueChanged += dtpDate_ValueChanged;
+            this.dtpDate.Location = new System.Drawing.Point(90, 13);
+            this.dtpDate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dtpDate.Name = "dtpDate";
+            this.dtpDate.Size = new System.Drawing.Size(284, 31);
+            this.dtpDate.TabIndex = 16;
             // 
             // label1
             // 
-            label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(22, 12);
-            label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(31, 15);
-            label1.TabIndex = 17;
-            label1.Text = "Date";
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(31, 20);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(49, 25);
+            this.label1.TabIndex = 17;
+            this.label1.Text = "Date";
             // 
             // btnImprimer
             // 
-            btnImprimer.Location = new System.Drawing.Point(532, 54);
-            btnImprimer.Name = "btnImprimer";
-            btnImprimer.Size = new System.Drawing.Size(75, 23);
-            btnImprimer.TabIndex = 18;
-            btnImprimer.Text = "Imprimer";
-            btnImprimer.UseVisualStyleBackColor = true;
-            btnImprimer.Click += btnImprimer_Click;
+            this.btnImprimer.Location = new System.Drawing.Point(760, 90);
+            this.btnImprimer.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnImprimer.Name = "btnImprimer";
+            this.btnImprimer.Size = new System.Drawing.Size(107, 38);
+            this.btnImprimer.TabIndex = 18;
+            this.btnImprimer.Text = "Imprimer";
+            this.btnImprimer.UseVisualStyleBackColor = true;
             // 
             // saisie_classement
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(664, 280);
-            Controls.Add(btnImprimer);
-            Controls.Add(label1);
-            Controls.Add(dtpDate);
-            Controls.Add(generate_excel);
-            Controls.Add(tbx_c);
-            Controls.Add(tbx_b);
-            Controls.Add(tbx_a);
-            Controls.Add(tbx_total);
-            Controls.Add(btn_valider);
-            Controls.Add(lbl_c);
-            Controls.Add(lbl_b);
-            Controls.Add(lbl_a);
-            Controls.Add(lbl_total);
-            Controls.Add(cbxMois);
-            Controls.Add(tbxAnnee);
-            Controls.Add(labelMois);
-            Controls.Add(labelAnnee);
-            Controls.Add(buttonGenerer);
-            Controls.Add(dataGridView);
-            Margin = new Padding(4, 3, 4, 3);
-            Name = "saisie_classement";
-            Text = "Saisie classement";
-            ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
-            ResumeLayout(false);
-            PerformLayout();
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(949, 467);
+            this.Controls.Add(this.btnImprimer);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.dtpDate);
+            this.Controls.Add(this.generate_excel);
+            this.Controls.Add(this.tbx_c);
+            this.Controls.Add(this.tbx_b);
+            this.Controls.Add(this.tbx_a);
+            this.Controls.Add(this.tbx_total);
+            this.Controls.Add(this.btn_valider);
+            this.Controls.Add(this.lbl_c);
+            this.Controls.Add(this.lbl_b);
+            this.Controls.Add(this.lbl_a);
+            this.Controls.Add(this.lbl_total);
+            this.Controls.Add(this.cbxMois);
+            this.Controls.Add(this.tbxAnnee);
+            this.Controls.Add(this.labelMois);
+            this.Controls.Add(this.labelAnnee);
+            this.Controls.Add(this.buttonGenerer);
+            this.Controls.Add(this.dataGridView);
+            this.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
+            this.Name = "saisie_classement";
+            this.Text = "Saisie classement";
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         private void InitializeDataGridView()
