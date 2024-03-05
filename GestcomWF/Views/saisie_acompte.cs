@@ -3,8 +3,10 @@ using Gestcom.ModelAdo;
 using Gestcom.Models;
 using GestcomWF.Classes;
 using GestcomWF.DataAccess;
-using IronXL;
+using Microsoft.Office.Interop.Excel;
+using Excel = Microsoft.Office.Interop.Excel;
 using Microsoft.VisualBasic;
+using System.Reflection;
 
 namespace GestcomWF.Views
 {
@@ -164,17 +166,25 @@ namespace GestcomWF.Views
         {
             try
             {
-
+                Excel.Application objApp;
+                Excel._Workbook objBook;
                 // Vérification que le champ 'année' est correctement rempli
                 if (tbx_annee.Text == "" || tbx_annee.Text.Length < 2)
                 {
                     MessageBox.Show("Veuillez entrer une année en deux chiffres");
-
                 }
                 else
                 {
-                    WorkSheet workSheet = null;
-                    WorkBook workbook = new WorkBook(ExcelFileFormat.XLSX);
+                    Excel.Workbooks objBooks;
+                    Excel.Sheets objSheets;
+                    Excel._Worksheet objSheet;
+                    Excel.Range range;
+
+                    objApp = new Excel.Application();
+                    objApp.Visible = false;
+                    objBooks = objApp.Workbooks;
+                    objBook = objBooks.Add(Missing.Value);
+                    objSheets = objBook.Worksheets;
 
                     decimal valeurPrecedente = 0;
 
@@ -213,16 +223,37 @@ namespace GestcomWF.Views
                             if (lotFrom.FRNUM != valeurPrecedente)
                             {
                                 // Initialisation de la feuille Excel avec le nom adapté
-                                workSheet = workbook.CreateWorkSheet(nomFeuille);
-                                workSheet["F10"].Value = lotFrom.FRNDIR;
-                                workSheet["F11"].Value = lotFrom.FRNOM;
-                                workSheet["F12"].Value = lotFrom.FRADR;
-                                workSheet["F13"].Value = lotFrom.FRCPOS + " " + lotFrom.FRVILL;
-                                workSheet["G28"].Value = "Le" + " " + formattedDate;
-                                workSheet["A18"].Value = "      TB/PB";
-                                workSheet["B23"].Value = "Monsieur le Président";
-                                workSheet["B25"].Value = "          Nous vous prions de bien vouloir trouver ci-dessous, le détail";
-                                workSheet["B26"].Value = "du premier acompte sur votre lot de fabrication " + moisNum.Mois.ToUpper() + " " + annee + anneeValue;
+                                objSheet = objBook.Sheets.Add(Missing.Value, objBook.Worksheets[objBook.Worksheets.Count], Missing.Value, Missing.Value);
+                                objSheet.Name = nomFeuille;
+
+                                objSheet.Cells[10, "F"].Value = lotFrom.FRNDIR;
+                                objSheet.Cells[11, "F"].Value = lotFrom.FRNOM;
+                                objSheet.Cells[12, "F"].Value = lotFrom.FRADR;
+                                objSheet.Cells[13, "F"].Value = lotFrom.FRCPOS + " " + lotFrom.FRVILL;
+                                objSheet.Cells[28, "G"].Value = "Le" + " " + formattedDate;
+                                objSheet.Cells[18, "A"].Value = "      TB/PB";
+                                objSheet.Cells[23, "B"].Value = "Monsieur le Président";
+                                objSheet.Cells[25, "B"].Value = "          Nous vous prions de bien vouloir trouver ci-dessous, le détail";
+                                objSheet.Cells[26, "B"].Value = "du premier acompte sur votre lot de fabrication " + moisNum.Mois.ToUpper() + " " + annee + anneeValue;
+
+
+                                objSheet.Columns[1].Columnwidth = 19.11;
+                                objSheet.Columns[2].Columnwidth = 3.56;
+                                objSheet.Columns[3].Columnwidth = 5.89;
+                                objSheet.Columns[4].Columnwidth = 6.78;
+                                objSheet.Columns[5].Columnwidth = 11.11;
+                                objSheet.Columns[6].Columnwidth = 3.56;
+                                objSheet.Columns[7].Columnwidth = 2.33;
+                                objSheet.Columns[8].Columnwidth = 12.22;
+                                objSheet.Columns[9].Columnwidth = 4.33;
+                                objSheet.Columns[10].Columnwidth = 15.22;
+
+                                objSheet.Rows[29].Rowheight = 4.20;
+                                objSheet.Rows[32].Rowheight = 4.20;
+
+
+                                // Configuration du style de la feuille (police, ...)
+                                objSheet.Cells.Font.Name = "Arial";
 
                                 /* this.workSheet["F27"].StringValue = moisNum.Mois.ToUpper() + " " + (annee + tbxAnnee.Text);
                                  this.workSheet["F27"].Style.Font.Bold = true;*/
@@ -231,47 +262,44 @@ namespace GestcomWF.Views
                                 // Initialisez la ligne actuelle
 
 
-                                workSheet["B28"].Value = "-";
-                                workSheet["B28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
+                                objSheet.Cells[28, "B"].Value = "-";
+                                objSheet.Cells[28, "B"].HorizontalAlignment = XlHAlign.xlHAlignRight;
 
-                                workSheet["C28"].Value = lotFrom.LOCEM1;
-                                workSheet["C28"].Style.Font.Bold = true;
-                                workSheet["C28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
-
-
-
-                                workSheet["D28"].Value = "pains";
-
-                                workSheet["E28"].Value = Math.Round(lotFrom.LOCEN1 / 1000, 3);
-                                workSheet["E28"].Style.Font.Bold = true;
-                                workSheet["E28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
-                                workSheet["E28"].FormatString = "# ##0.000";
-
-                                workSheet["F28"].Value = "T";
-                                workSheet["F28"].Style.Font.Bold = true;
-                                workSheet["F28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Left;
-
-                                workSheet["G28"].Value = "x";
-                                workSheet["G28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Center;
-
-                                workSheet["H28"].Value = lotFrom.LOPUAC / 1000;
-                                workSheet["H28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
-                                workSheet["H28"].FormatString = "# ##0.00€";
+                                objSheet.Cells[28, "C"].Value = lotFrom.LOCEM1;
+                                objSheet.Cells[28, "C"].Font.Bold = true;
+                                objSheet.Cells[28, "C"].HorizontalAlignment = XlHAlign.xlHAlignRight;
 
 
 
+                                objSheet.Cells[28, "D"].Value = "pains";
+
+                                objSheet.Cells[28, "E"].Value = Math.Round(lotFrom.LOCEN1 / 1000, 3);
+                                objSheet.Cells[28, "E"].Font.Bold = true;
+                                objSheet.Cells[28, "E"].HorizontalAlignment = XlHAlign.xlHAlignRight;
+                                objSheet.Cells[28, "E"].NumberFormat = @"#\ ##0,000";
+
+                                objSheet.Cells[28, "F"].Value = "T";
+                                objSheet.Cells[28, "F"].Font.Bold = true;
+                                objSheet.Cells[28, "F"].HorizontalAlignment = XlHAlign.xlHAlignLeft;
+
+                                objSheet.Cells[28, "G"].Value = "x";
+                                objSheet.Cells[28, "G"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
+
+                                objSheet.Cells[28, "H"].Value = lotFrom.LOPUAC / 1000;
+                                objSheet.Cells[28, "H"].HorizontalAlignment = XlHAlign.xlHAlignRight;
+                                objSheet.Cells[28, "H"].NumberFormat = @"#\ ##0,00€";
 
 
-                                workSheet["I28"].Value = " =";
-                                workSheet["I28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Left;
+                                objSheet.Cells[28, "I"].Value = " =";
+                                objSheet.Cells[28, "I"].HorizontalAlignment = XlHAlign.xlHAlignLeft;
 
-                                workSheet["J28"].Value = prix;
-                                workSheet["J28"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
-                                workSheet["J28"].FormatString = "# ##0.00€";
+                                objSheet.Cells[28, "J"].Value = prix;
+                                objSheet.Cells[28, "J"].HorizontalAlignment = XlHAlign.xlHAlignRight;
+                                objSheet.Cells[28, "J"].NumberFormat = @"#\ ##0,00€";
 
-                                workSheet["J30"].Value = prix;
-                                workSheet["J30"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
-                                workSheet["J30"].FormatString = "# ##0.00€";
+                                objSheet.Cells[30, "J"].Value = prix;
+                                objSheet.Cells[30, "J"].HorizontalAlignment = XlHAlign.xlHAlignRight;
+                                objSheet.Cells[30, "J"].NumberFormat = @"#\ ##0,00€";
 
 
                                 /*foreach (var dateEntry in lotFroms.Where(item => item.FRNUM == lotFrom.FRNUM))
@@ -289,96 +317,52 @@ namespace GestcomWF.Views
 
                                 // int totalRow = currentRow + 4;
 
-                                workSheet["J28"].Style.BottomBorder.SetColor("#000000");
-                                workSheet["J28"].Style.BottomBorder.Type = IronXL.Styles.BorderType.Thin;
+
+                                objSheet.Cells[28, "J"].Borders[XlBordersIndex.xlEdgeBottom].LineStyle = XlLineStyle.xlContinuous;
+                                objSheet.Cells[28, "J"].Borders[XlBordersIndex.xlEdgeBottom].Weight = XlBorderWeight.xlThin;
+                                objSheet.Cells[28, "J"].Borders[XlBordersIndex.xlEdgeBottom].ColorIndex = 0;
 
 
-
-                                workSheet["J31"].Style.BottomBorder.SetColor("#000000");
-                                workSheet["J31"].Style.BottomBorder.Type = IronXL.Styles.BorderType.Thin;
+                                objSheet.Cells[31, "J"].Borders[XlBordersIndex.xlEdgeBottom].LineStyle = XlLineStyle.xlContinuous;
+                                objSheet.Cells[31, "J"].Borders[XlBordersIndex.xlEdgeBottom].Weight = XlBorderWeight.xlThin;
+                                objSheet.Cells[31, "J"].Borders[XlBordersIndex.xlEdgeBottom].ColorIndex = 0;
 
 
 
                                 //this.workSheet["D33"].Value = "A déduire N/Acompte du ";
-                                workSheet["F30"].Value = "Total HT";
-                                workSheet["F31"].Value = "T.V.A";
-                                workSheet["H31"].Value = "5,5";
-                                workSheet["H31"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
-                                workSheet["I31"].Value = "%";
-                                workSheet["J31"].Value = prix * 5.5m / 100;
-                                workSheet["J31"].FormatString = "# ##0.00€";
+                                objSheet.Cells[30, "F"].Value = "Total HT";
+                                objSheet.Cells[31, "F"].Value = "T.V.A";
+                                objSheet.Cells[31, "H"].Value = "5,5";
+                                objSheet.Cells[31, "H"].HorizontalAlignment = XlHAlign.xlHAlignRight;
+                                objSheet.Cells[31, "I"].Value = "%";
+                                objSheet.Cells[31, "J"].Value = prix * 5.5m / 100;
+                                objSheet.Cells[31, "J"].NumberFormat = @"#\ ##0,00€";
 
-                                workSheet["F33"].Value = "Total Réglé";
-                                workSheet["F33"].Style.Font.Bold = true;
+                                objSheet.Cells[33, "F"].Value = "Total Réglé";
+                                objSheet.Cells[33, "F"].Font.Bold = true;
 
                                 //var sumPrixTVA = workSheet["J30:J31"];
 
-                                workSheet["J33"].Formula = "=SUM(J30:J31)";
-                                workSheet["J33"].Style.Font.Bold = true;
-                                workSheet["J33"].FormatString = "# ##0.00€";
-                                var sum = workSheet["J33"].Value;
+                                objSheet.Cells[33, "J"].Formula = "=SUM(J30:J31)";
+                                objSheet.Cells[33, "J"].Font.Bold = true;
+                                objSheet.Cells[33, "J"].NumberFormat = @"#\ ##0,00€";
+                                var sum = objSheet.Cells[33, "J"].Value;
 
 
-                                workSheet["B35"].Value = "          Vous en souhaitant bonne réception";
-                                workSheet["B37"].Value = "          Nous vous prions d'agréer, Monsieur le Président, nos";
-                                workSheet["B38"].Value = "salutations distinguées";
-                                workSheet["H40"].Value = "Service Comptabilité";
-                                workSheet["H40"].Style.Font.Bold = true;
+                                objSheet.Cells[35, "B"].Value = "          Vous en souhaitant bonne réception";
+                                objSheet.Cells[37, "B"].Value = "          Nous vous prions d'agréer, Monsieur le Président, nos";
+                                objSheet.Cells[38, "B"].Value = "salutations distinguées";
+                                objSheet.Cells[40, "H"].Value = "Service Comptabilité";
+                                objSheet.Cells[40, "H"].Font.Bold = true;
 
-                                workSheet["B46"].Value = "PS : Nous virons ce jour, sur votre compte N° " + lotFrom.FRBANQ + " " + lotFrom.FRGUIC + " " + lotFrom.FRCOM1 + " " + lotFrom.FRCOM2;
-                                workSheet["B47"].Value = lotFrom.FRDOMI + ", la somme de";
-                                workSheet["J47"].Value = sum;
-                                workSheet["J47"].FormatString = "# ##0.00€";
+                                objSheet.Cells[46, "B"].Value = "PS : Nous virons ce jour, sur votre compte N° " + lotFrom.FRBANQ + " " + lotFrom.FRGUIC + " " + lotFrom.FRCOM1 + " " + lotFrom.FRCOM2;
+                                objSheet.Cells[47, "B"].Value = lotFrom.FRDOMI + ", la somme de";
+                                objSheet.Cells[47, "J"].Value = sum;
+                                objSheet.Cells[47, "J"].NumberFormat = @"#\ ##0,00€";
 
 
                                 valeurPrecedente = lotFrom.FRNUM;
                             }
-
-                            RangeColumn col0 = workSheet.GetColumn(0);
-                            col0.Width = 5086; // Set width
-
-                            RangeColumn col1 = workSheet.GetColumn(1);
-                            col1.Width = 1098; // Set width
-
-                            RangeColumn col2 = workSheet.GetColumn(2);
-                            col2.Width = 1720; // Set width
-
-                            RangeColumn col3 = workSheet.GetColumn(3);
-                            col3.Width = 1939; // Set width
-
-                            RangeColumn col4 = workSheet.GetColumn(4);
-                            col4.Width = 3037; // Set width
-
-                            RangeColumn col5 = workSheet.GetColumn(5);
-                            col5.Width = 1098; // Set width
-
-                            RangeColumn col6 = workSheet.GetColumn(6);
-                            col6.Width = 805; // Set width
-
-                            RangeColumn col7 = workSheet.GetColumn(7);
-                            col7.Width = 3330; // Set width
-
-                            RangeColumn col8 = workSheet.GetColumn(8);
-                            col8.Width = 1317; // Set width
-
-                            RangeColumn col9 = workSheet.GetColumn(9);
-                            col9.Width = 4094; // Set width
-
-
-                            workSheet["A29"].Value = " ";
-                            RangeRow row1 = workSheet.GetRow(28);
-                            row1.Height = 87; // Set height
-
-                            workSheet["A32"].Value = " ";
-                            RangeRow row2 = workSheet.GetRow(31);
-                            row2.Height = 87; // Set height
-
-
-
-
-                            // Configuration du style de la feuille (police, ...)
-                            workSheet.Style.Font.Name = "Arial";
-
 
 
                         }
@@ -395,13 +379,14 @@ namespace GestcomWF.Views
                         {
                             moisExcel = moisNum.Numero.ToString();
                         }
-                        saveFileDialog.FileName = "Acomptes_" + tbx_annee.Text + moisExcel + ".xls";
+                        saveFileDialog.FileName = "Acomptes_" + tbx_annee.Text + moisExcel + ".xlsx";
                         if (saveFileDialog.ShowDialog() == DialogResult.OK)
                         {
                             string path = saveFileDialog.FileName;
 
-                            workbook.SaveAs(path);
-                            workbook.Close();
+                            objBook.SaveAs(path);
+                            objBook.Close();
+                            objApp.Quit();
 
                         }
                     }

@@ -6,6 +6,7 @@ using Excel = Microsoft.Office.Interop.Excel;
 using Microsoft.VisualBasic;
 using System.Reflection;
 using System.Reflection.Metadata;
+using IronXL;
 
 namespace GestcomWF.Views
 {
@@ -192,13 +193,14 @@ namespace GestcomWF.Views
                                 objSheet.Cells[currentRow, "B"] = dateEntry.Date_Entrée.ToString("dd/MM/yyyy");
                                 objSheet.Cells[currentRow, "B"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
 
-                                objSheet.Cells[currentRow, "C"] = dateEntry.LOCENM;
+                                
+                                objSheet.Cells[currentRow, "C"].Value = dateEntry.LOCENM;
                                 objSheet.Cells[currentRow, "C"].HorizontalAlignment = XlHAlign.xlHAlignRight;
-                                objSheet.Cells[currentRow, "C"].NumberFormat = "# ##0    ";
+                                objSheet.Cells[currentRow, "C"].NumberFormat = @"#\ ##0\    ";
 
                                 objSheet.Cells[currentRow, "D"] = dateEntry.LOCENB;
                                 objSheet.Cells[currentRow, "D"].HorizontalAlignment = XlHAlign.xlHAlignRight;
-                                objSheet.Cells[currentRow, "D"].NumberFormat = "# ##0    ";
+                                objSheet.Cells[currentRow, "D"].NumberFormat = @"#\ ##0\    ";
 
 
                                 objSheet.Cells[currentRow, "E"] = dateEntry.LOTAUX.ToString("F2") + "%";
@@ -206,7 +208,7 @@ namespace GestcomWF.Views
 
                                 objSheet.Cells[currentRow, "F"] = dateEntry.LOCENN;
                                 objSheet.Cells[currentRow, "F"].HorizontalAlignment = XlHAlign.xlHAlignRight;
-                                objSheet.Cells[currentRow, "F"].NumberFormat = "# ##0    ";
+                                objSheet.Cells[currentRow, "F"].NumberFormat = @"#\ ##0\    ";
 
 
 
@@ -240,7 +242,7 @@ namespace GestcomWF.Views
 
                             // Appliquer l'alignement horizontal et vertical au contenu
                             objSheet.Cells[totalRow - 1, "C"].HorizontalAlignment = XlHAlign.xlHAlignRight;
-                            objSheet.Cells[totalRow - 1, "C"].NumberFormat = "# ##0    ";
+                            objSheet.Cells[totalRow - 1, "C"].NumberFormat = @"#\ ##0\    ";
                             objSheet.Cells[totalRow - 1, "C"].VerticalAlignment = XlHAlign.xlHAlignCenter;
 
                   
@@ -255,7 +257,7 @@ namespace GestcomWF.Views
 
                             // Appliquer l'alignement horizontal et vertical au contenu
                             objSheet.Cells[totalRow - 1, "F"].HorizontalAlignment = XlHAlign.xlHAlignRight;
-                            objSheet.Cells[totalRow - 1, "F"].NumberFormat = "# ##0    ";
+                            objSheet.Cells[totalRow - 1, "F"].NumberFormat = @"#\ ##0\    ";
                             objSheet.Cells[totalRow - 1, "F"].VerticalAlignment = XlHAlign.xlHAlignCenter;
 
                             objSheet.Range[$"F{totalRow - 1}", $"F{currentRow + 2}"].Borders[XlBordersIndex.xlEdgeTop].LineStyle = XlLineStyle.xlContinuous;
@@ -314,7 +316,6 @@ namespace GestcomWF.Views
                     saveFileDialog.Filter = "Excel files(*.xls; *.xlsx)| *.xls; *.xlsx";
                     saveFileDialog.Title = "Enregistrez le fichier sous...";
                     saveFileDialog.InitialDirectory = dataPath.PathPesee;
-                    MessageBox.Show(saveFileDialog.InitialDirectory);
                     if (moisNum.Numero < 10)
                     {
                         moisExcel = "0" + moisNum.Numero;
@@ -323,12 +324,14 @@ namespace GestcomWF.Views
                     {
                         moisExcel = moisNum.Numero.ToString();
                     }
-                    saveFileDialog.FileName = "Pesées_" + tbxAnnee.Text + moisExcel + ".xls";
+                    saveFileDialog.FileName = "Pesées_" + tbxAnnee.Text + moisExcel + ".xlsx";
                     if (saveFileDialog.ShowDialog() == DialogResult.OK)
                     {
                         string path = saveFileDialog.FileName;
                         objBook.SaveAs(path);
                         objBook.Close();
+                        objApp.Quit();
+                        
 
                     }
                 }
