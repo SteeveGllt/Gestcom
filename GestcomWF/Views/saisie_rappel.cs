@@ -7,6 +7,7 @@ using System.Globalization;
 using System.Reflection;
 using Microsoft.Office.Interop.Excel;
 using Excel = Microsoft.Office.Interop.Excel;
+using IronXL;
 
 namespace GestcomWF.Views
 {
@@ -55,7 +56,7 @@ namespace GestcomWF.Views
             AjusterAnnee();
 
             GenererValeurs();
-           
+
         }
 
         public decimal CustomParse(string incomingValue)
@@ -114,7 +115,7 @@ namespace GestcomWF.Views
 
         private void dataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+
             if (e.RowIndex < 0) // Assurez-vous que le double-clic n'est pas sur l'en-tête
                 return;
 
@@ -127,7 +128,7 @@ namespace GestcomWF.Views
                 tbx_b.Text = lot.LOPU2.ToString();
                 tbx_c.Text = lot.LOPU3.ToString();
                 tbxNumFromagerie.Text = lot.LOFROM.ToString();
-               
+
                 this._currentLot = lot;
                 MoisNum moisNum = (MoisNum)cbxMois.SelectedItem;
                 _currentMontant = Math.Round(LotAdo.MontantLot(_currentLot.LOFROM, Convert.ToDecimal(tbxAnnee.Text), moisNum.Numero), 2);
@@ -360,7 +361,7 @@ namespace GestcomWF.Views
 
                                     objSheet.Cells[25, "K"].Value = Math.Round((poidsMoyen * lotFrom.LOC11) * lotFrom.LOPU1, 2);
                                     objSheet.Cells[25, "K"].HorizontalAlignment = XlHAlign.xlHAlignRight;
-                                    objSheet.Cells[25, "K"].FormatString = @"#\ ##0,00€";
+                                    objSheet.Cells[25, "K"].NumberFormat = @"#\ ##0,00€";
 
                                 }
 
@@ -403,47 +404,47 @@ namespace GestcomWF.Views
 
                                     objSheet.Cells[26, "K"].Value = Math.Round((poidsMoyen * lotFrom.LOC12) * lotFrom.LOPU2, 2);
                                     objSheet.Cells[26, "K"].HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
-                                    objSheet.Cells[26, "K"].FormatString = "# ##0.00€";
+                                    objSheet.Cells[26, "K"].NumberFormat = "# ##0.00€";
 
 
                                 }
                                 if (lotFrom.LOC13 != 0)
                                 {
-                                   /* workSheet["B27"].Value = "C";
-                                    workSheet["B27"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Center;
+                                    objSheet.Cells[27, "B"].Value = "C";
+                                    objSheet.Cells[27, "B"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
 
-                                    workSheet["C27"].Value = lotFrom.LOC13;
-                                    workSheet["C27"].Style.Font.Bold = true;
-                                    workSheet["C27"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
+                                    objSheet.Cells[27, "C"].Value = lotFrom.LOC13;
+                                    objSheet.Cells[27, "C"].Font.Bold = true;
+                                    objSheet.Cells[27, "C"].HorizontalAlignment = XlHAlign.xlHAlignRight;
 
 
-                                    workSheet["D27"].Value = "pains";
+                                    objSheet.Cells[27, "D"].Value = "pains";
 
-                                    workSheet["E27"].Value = Math.Round(poidsMoyen * lotFrom.LOC13 / 1000, 3);
-                                    workSheet["E27"].Style.Font.Bold = true;
-                                    workSheet["E27"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
-                                    workSheet["E27"].FormatString = "# ##0.000";
+                                    objSheet.Cells[27, "E"].Value = Math.Round(poidsMoyen * lotFrom.LOC13 / 1000, 3);
+                                    objSheet.Cells[27, "E"].Font.Bold = true;
+                                    objSheet.Cells[27, "E"].HorizontalAlignment = XlHAlign.xlHAlignRight;
+                                    objSheet.Cells[27, "E"].NumberFormat = @"#\ ##0,000";
 
-                                    workSheet["F27"].Value = "T";
-                                    workSheet["F27"].Style.Font.Bold = true;
-                                    workSheet["F27"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Left;
+                                    objSheet.Cells[27, "F"].Value = "T";
+                                    objSheet.Cells[27, "F"].Font.Bold = true;
+                                    objSheet.Cells[27, "F"].HorizontalAlignment = XlHAlign.xlHAlignLeft;
 
-                                    workSheet["G27"].Value = "x";
-                                    workSheet["G27"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Center;
+                                    objSheet.Cells[27, "G"].Value = "x";
+                                    objSheet.Cells[27, "G"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
 
-                                    workSheet["H27"].Value = Math.Round(lotFrom.LOPU3 * 1000, 2);
-                                    workSheet["H27"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
-                                    workSheet["H27"].FormatString = "# ##0.00 ";
+                                    objSheet.Cells[27, "H"].Value = Math.Round(lotFrom.LOPU3 * 1000, 2);
+                                    objSheet.Cells[27, "H"].HorizontalAlignment = XlHAlign.xlHAlignRight;
+                                    objSheet.Cells[27, "H"].NumberFormat = @"#\ ##0,00 ";
 
-                                    workSheet["I27"].Value = "€/T";
-                                    workSheet["I27"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Left;
+                                    objSheet.Cells[27, "I"].Value = "€/T";
+                                    objSheet.Cells[27, "I"].HorizontalAlignment = XlHAlign.xlHAlignLeft;
 
-                                    workSheet["J27"].Value = " =";
-                                    workSheet["J27"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Left;
+                                    objSheet.Cells[27, "J"].Value = " =";
+                                    objSheet.Cells[27, "J"].HorizontalAlignment = XlHAlign.xlHAlignLeft;
 
-                                    workSheet["K27"].Value = Math.Round((poidsMoyen * lotFrom.LOC13) * lotFrom.LOPU3, 2);
-                                    workSheet["K27"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
-                                    workSheet["K27"].FormatString = "# ##0.00€";*/
+                                    objSheet.Cells[27, "K"].Value = Math.Round((poidsMoyen * lotFrom.LOC13) * lotFrom.LOPU3, 2);
+                                    objSheet.Cells[27, "K"].Style.HorizontalAlignment = XlHAlign.xlHAlignRight;
+                                    objSheet.Cells[27, "K"].NumberFormat = @"#\ ##0,00€";
 
                                 }
 
@@ -451,213 +452,225 @@ namespace GestcomWF.Views
                                 {
                                     if (lotFrom.FRPRIME > 0)
                                     {
-                                       /* workSheet["B27"].Value = "Prime qualité:";
-                                        workSheet["E27"].Value = workSheet["E25"].Value;
-                                        workSheet["F27"].Value = "T";
-                                        workSheet["G27"].Value = "x";
+                                        objSheet.Cells[27, "B"].Value = "Prime qualité:";
+                                        objSheet.Cells[27, "E"].Value = objSheet.Cells[25, "E"].Value;
+                                        objSheet.Cells[27, "F"].Value = "T";
+                                        objSheet.Cells[27, "G"].Value = "x";
 
-                                        workSheet["H27"].Value = Math.Round((lotFrom.LOPU1 * 1000) * (lotFrom.FRPRIME / 100), 2);
+                                        objSheet.Cells[27, "H"].Value = Math.Round((lotFrom.LOPU1 * 1000) * (lotFrom.FRPRIME / 100), 2);
 
-                                        workSheet["J27"].Value = " =";
-                                        workSheet["J27"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Left;
+                                        objSheet.Cells[27, "J"].Value = " =";
+                                        objSheet.Cells[27, "J"].HorizontalAlignment = XlHAlign.xlHAlignLeft;
 
                                         var valeurE27 = Math.Round((poidsMoyen * lotFrom.LOC11) / 1000, 3);
                                         var valeurH27 = Math.Round((lotFrom.LOPU1 * 1000) * (lotFrom.FRPRIME / 100), 2);
-                                        workSheet["K27"].Value = Math.Round(valeurE27 * valeurH27, 2);
-                                        workSheet["K27"].FormatString = "# ##0.00€";
-                                        workSheet["K27"].Style.BottomBorder.SetColor("#000000");
-                                        workSheet["K27"].Style.BottomBorder.Type = IronXL.Styles.BorderType.Thin;
+                                        objSheet.Cells[27, "K"].Value = Math.Round(valeurE27 * valeurH27, 2);
+                                        objSheet.Cells[27, "K"].NumberFormat = @"#\ ##0,00€";
+
+                                        objSheet.Cells[27, "K"].Borders[XlBordersIndex.xlEdgeBottom].LineStyle = XlLineStyle.xlContinuous;
+                                        objSheet.Cells[27, "K"].Borders[XlBordersIndex.xlEdgeBottom].Weight = XlBorderWeight.xlThin;
+                                        objSheet.Cells[27, "K"].Borders[XlBordersIndex.xlEdgeBottom].ColorIndex = 0;
 
 
-                                        workSheet["H31"].Value = "Total";
-                                        var sumRangePrix = workSheet["K25:K27"];
-                                        workSheet["K31"].Value = sumRangePrix.Sum();
+                                        objSheet.Cells[31, "B"].Value = "Total";
+                                        var sumRangePrix = objSheet.Range["K25", "K27"].Value;
+                                        objSheet.Cells[31, "K"].Value = sumRangePrix.Sum();
 
-                                        var total = workSheet["K31"].DecimalValue;
-                                        workSheet["K35"].Value = Math.Round(total - acompte, 2);
-                                        workSheet["K35"].FormatString = "# ##0.00€";
+                                        var total = objSheet.Cells[31, "K"].Value;
+                                        objSheet.Cells[35, "K"].Value = Math.Round(total - acompte, 2);
+                                        objSheet.Cells[35, "K"].NumberFormat = @"#\ ##0,00€";
 
-                                        workSheet["K36"].Value = workSheet["K35"].DecimalValue * 5.5m / 100;
-                                        workSheet["K36"].FormatString = "# ##0.00€";
+                                        objSheet.Cells[36, "K"].Value = objSheet.Cells[35, "K"].Value * 5.5m / 100;
+                                        objSheet.Cells[36, "K"].NumberFormat = @"#\ ##0,00€";
 
-                                        var sumQuandPrime = workSheet["K35:K36"];
-                                        workSheet["K38"].Value = Math.Round(sumQuandPrime.Sum(), 2);
-                                        workSheet["K38"].Style.Font.Bold = true;
-                                        workSheet["K38"].FormatString = "# ##0.00€";*/
+                                        var sumQuandPrime = objSheet.Range["K35", "K36"].Value;
+                                        objSheet.Cells[38, "K"].Value = Math.Round(sumQuandPrime.Sum(), 2);
+                                        objSheet.Cells[38, "K"].Font.Bold = true;
+                                        objSheet.Cells[38, "K"].NumberFormat = @"#\ ##0,00€";
                                     }
                                     else
                                     {
-                                       /* var resultatSumPrixTotal = workSheet["K25"];
-                                        var resultatSumPoidsTotal = workSheet["E25"];
+                                        var resultatSumPrixTotal = objSheet.Cells[25, "K"].Value;
+                                        var resultatSumPoidsTotal = objSheet.Cells[25, "E"].Value;
 
-                                        var test = resultatSumPrixTotal.DecimalValue / resultatSumPoidsTotal.DecimalValue;
+                                        var test = resultatSumPrixTotal / resultatSumPoidsTotal;
                                         decimal temp = Math.Round((poidsMoyen * lotFrom.LOC11) * lotFrom.LOPU1, 2);
 
-                                        workSheet["E31"].Value = Math.Round(test, 2);
+                                        objSheet.Cells[31, "E"].Value = Math.Round(test, 2);
 
-                                        workSheet["K35"].Value = Math.Round(temp - acompte, 2);
-                                        workSheet["K35"].FormatString = "# ##0.00€";
+                                        objSheet.Cells[35, "K"].Value = Math.Round(temp - acompte, 2);
+                                        objSheet.Cells[35, "K"].NumberFormat = @"#\ ##0,00€";
 
 
-                                        workSheet["K36"].Value = Math.Round((temp - acompte) * 5.5m) / 100;
-                                        workSheet["K36"].FormatString = "# ##0.00€";
+                                        objSheet.Cells[36, "K"].Value = Math.Round((temp - acompte) * 5.5m) / 100;
+                                        objSheet.Cells[36, "K"].NumberFormat = @"#\ ##0,00€";
 
-                                        var sum = workSheet["K35:K36"];
-                                        workSheet["K38"].Value = Math.Round(sum.Sum(), 2);
-                                        workSheet["K38"].Style.Font.Bold = true;
-                                        workSheet["K38"].FormatString = "# ##0.00€";*/
+                                        var sum = objSheet.Range["K35", "K36"].Value;
+                                        objSheet.Cells[38, "K"].Value = Math.Round(sum.Sum(), 2);
+                                        objSheet.Cells[38, "K"].Font.Bold = true;
+                                        objSheet.Cells[38, "K"].NumberFormat = @"#\ ##0,00€";
                                     }
 
                                 }
 
                                 if (lotFrom.LOC12 != 0 && lotFrom.LOC13 == 0)
                                 {
+                                    objSheet.Cells[26, "C"].Borders[XlBordersIndex.xlEdgeBottom].LineStyle = XlLineStyle.xlContinuous;
+                                    objSheet.Cells[26, "C"].Borders[XlBordersIndex.xlEdgeBottom].Weight = XlBorderWeight.xlThin;
+                                    objSheet.Cells[26, "C"].Borders[XlBordersIndex.xlEdgeBottom].ColorIndex = 0;
 
-                                   /* workSheet["C26"].Style.BottomBorder.SetColor("#000000");
-                                    workSheet["C26"].Style.BottomBorder.Type = IronXL.Styles.BorderType.Thin;
-
-                                    workSheet["E26"].Style.BottomBorder.SetColor("#000000");
-                                    workSheet["E26"].Style.BottomBorder.Type = IronXL.Styles.BorderType.Thin;
-
-                                    workSheet["K26"].Style.BottomBorder.SetColor("#000000");
-                                    workSheet["K26"].Style.BottomBorder.Type = IronXL.Styles.BorderType.Thin;
-
-                                    workSheet["D27"].Value = "pains";
-
-                                    workSheet["F27"].Value = "T";
-
-                                    var sumRangePains = workSheet["C25:C26"];
-                                    workSheet["C27"].Value = sumRangePains.Sum();
-
-                                    workSheet["C27"].Style.Font.Bold = true;
-
-                                    var sumRangePoids = workSheet["E25:E26"];
-                                    workSheet["E27"].Value = sumRangePoids.Sum();
+                                    objSheet.Cells[26, "E"].Borders[XlBordersIndex.xlEdgeBottom].LineStyle = XlLineStyle.xlContinuous;
+                                    objSheet.Cells[26, "E"].Borders[XlBordersIndex.xlEdgeBottom].Weight = XlBorderWeight.xlThin;
+                                    objSheet.Cells[26, "E"].Borders[XlBordersIndex.xlEdgeBottom].ColorIndex = 0;
 
 
-                                    workSheet["E27"].Style.Font.Bold = true;
+                                    objSheet.Cells[26, "K"].Borders[XlBordersIndex.xlEdgeBottom].LineStyle = XlLineStyle.xlContinuous;
+                                    objSheet.Cells[26, "K"].Borders[XlBordersIndex.xlEdgeBottom].Weight = XlBorderWeight.xlThin;
+                                    objSheet.Cells[26, "K"].Borders[XlBordersIndex.xlEdgeBottom].ColorIndex = 0;
 
-                                    var sumRangePrix = workSheet["K25:K26"];
-                                    workSheet["K27"].Value = sumRangePrix.Sum();
-                                    workSheet["K27"].FormatString = "# ##0.00€";
+                                    objSheet.Cells[27, "D"].Value = "pains";
 
-                                    workSheet["K27"].Style.Font.Bold = true;
+                                    objSheet.Cells[27, "F"].Value = "T";
 
-                                    var resultatSumPrixTotal = workSheet["K27"];
-                                    var resultatSumPoidsTotal = workSheet["E27"];
+                                    var sumRangePains = objSheet.Range["C25", "C26"].Value;
+                                    objSheet.Cells[27, "C"].Value = sumRangePains.Sum();
 
-                                    var test = resultatSumPrixTotal.DecimalValue / resultatSumPoidsTotal.DecimalValue;
+                                    objSheet.Cells[27, "C"].Font.Bold = true;
 
-                                    workSheet["E31"].Value = Math.Round(test, 2);
+                                    var sumRangePoids = objSheet.Range["E25", "E26"].Value;
+                                    objSheet.Cells[27, "E"].Value = sumRangePoids.Sum();
+
+
+                                    objSheet.Cells[27, "E"].Font.Bold = true;
+
+                                    var sumRangePrix = objSheet.Range["K25", "K26"].Value;
+                                    objSheet.Cells[27, "K"].Value = sumRangePrix.Sum();
+                                    objSheet.Cells[27, "K"].NumberFormat = @"#\ ##0,00€";
+
+                                    objSheet.Cells[27, "K"].Font.Bold = true;
+
+                                    var resultatSumPrixTotal = objSheet.Cells[27, "K"];
+                                    var resultatSumPoidsTotal = objSheet.Cells[27, "E"];
+
+                                    var test = resultatSumPrixTotal.Value / resultatSumPoidsTotal.Value;
+
+                                    objSheet.Cells[31, "E"].Value = Math.Round(test, 2);
 
 
                                     decimal resultatSumPrixAcompte = Math.Round(sumRangePrix.Sum() - acompte, 2);
 
-                                    workSheet["K35"].Value = resultatSumPrixAcompte;
-                                    workSheet["K35"].FormatString = "# ##0.00€";
+                                    objSheet.Cells[35, "K"].Value = resultatSumPrixAcompte;
+                                    objSheet.Cells[35, "K"].NumberFormat = @"#\ ##0,00€";
 
-                                    workSheet["K36"].Value = Math.Round(resultatSumPrixAcompte * 5.5m) / 100;
-                                    workSheet["K36"].FormatString = "# ##0.00€";
+                                    objSheet.Cells[36, "K"].Value = Math.Round(resultatSumPrixAcompte * 5.5m) / 100;
+                                    objSheet.Cells[36, "K"].NumberFormat = @"#\ ##0,00€";
 
-                                    var sum = workSheet["K35:K36"];
-                                    workSheet["K38"].Value = Math.Round(sum.Sum(), 2);
-                                    workSheet["K38"].Style.Font.Bold = true;
-                                    workSheet["K38"].FormatString = "# ##0.00€";
-                                   */
+                                    var sum = objSheet.Range["K35", "K36"].Value;
+                                    objSheet.Cells[38, "K"].Value = Math.Round(sum.Sum(), 2);
+                                    objSheet.Cells[38, "K"].Font.Bold = true;
+                                    objSheet.Cells[38, "K"].NumberFormat = @"#\ ##0,00€";
+
                                     if (lotFrom.FRPRIME > 0)
                                     {
-                                       /* workSheet["B29"].Value = "Prime qualité:";
-                                        workSheet["E29"].Value = workSheet["E27"].Value;
-                                        workSheet["F29"].Value = "T";
-                                        workSheet["G29"].Value = "x";
+                                        objSheet.Cells[29, "B"].Value = "Prime qualité:";
+                                        objSheet.Cells[29, "E"].Value = objSheet.Cells[27, "E"].Value;
+                                        objSheet.Cells[29, "F"].Value = "T";
+                                        objSheet.Cells[29, "G"].Value = "x";
 
                                         var sumLopu12 = Math.Round((lotFrom.LOPU1 * 1000) + (lotFrom.LOPU2 * 1000), 2);
 
-                                        workSheet["H29"].Value = Math.Round(sumLopu12 * (lotFrom.FRPRIME / 100), 2);
+                                        objSheet.Cells[29, "H"].Value = Math.Round(sumLopu12 * (lotFrom.FRPRIME / 100), 2);
 
-                                        workSheet["J29"].Value = " =";
-                                        workSheet["J29"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Left;
+                                        objSheet.Cells[29, "J"].Value = " =";
+                                        objSheet.Cells[29, "J"].HorizontalAlignment = XlHAlign.xlHAlignLeft;
 
-                                        var valeurE27 = workSheet["E27"].DecimalValue;
-                                        var valeurH29 = workSheet["H29"].DecimalValue;
-                                        workSheet["K29"].Value = Math.Round(valeurE27 * valeurH29, 2);
-                                        workSheet["K29"].FormatString = "# ##0.00€";
-                                        workSheet["K29"].Style.BottomBorder.SetColor("#000000");
-                                        workSheet["K29"].Style.BottomBorder.Type = IronXL.Styles.BorderType.Thin;
+                                        var valeurE27 = objSheet.Cells[27, "E"].Value;
+                                        var valeurH29 = objSheet.Cells[29, "H"].Value;
+                                        objSheet.Cells[29, "K"].Value = Math.Round(valeurE27 * valeurH29, 2);
+                                        objSheet.Cells[29, "K"].NumberFormat = @"#\ ##0,00€";
 
 
-                                        workSheet["H31"].Value = "Total";
-                                        var sumRangeAvecPrime = workSheet["K27:K29"];
-                                        workSheet["K31"].Value = sumRangeAvecPrime.Sum();
-                                        workSheet["K31"].FormatString = "# ##0.00€";
+                                        objSheet.Cells[29, "K"].Borders[XlBordersIndex.xlEdgeBottom].LineStyle = XlLineStyle.xlContinuous;
+                                        objSheet.Cells[29, "K"].Borders[XlBordersIndex.xlEdgeBottom].Weight = XlBorderWeight.xlThin;
+                                        objSheet.Cells[29, "K"].Borders[XlBordersIndex.xlEdgeBottom].ColorIndex = 0;
 
-                                        var total = workSheet["K31"].DecimalValue;
-                                        workSheet["K35"].Value = Math.Round(total - acompte, 2);
-                                        workSheet["K35"].FormatString = "# ##0.00€";
 
-                                        workSheet["K36"].Value = workSheet["K35"].DecimalValue * 5.5m / 100;
-                                        workSheet["K36"].FormatString = "# ##0.00€";
+                                        objSheet.Cells[31, "H"].Value = "Total";
+                                        var sumRangeAvecPrime = objSheet.Range["K27", "K29"].Value;
+                                        objSheet.Cells[31, "K"].Value = sumRangeAvecPrime.Sum();
+                                        objSheet.Cells[31, "K"].NumberFormat = @"#\ ##0,00€";
 
-                                        var sumQuandPrime = workSheet["K35:K36"];
-                                        workSheet["K38"].Value = Math.Round(sumQuandPrime.Sum(), 2);
-                                        workSheet["K38"].Style.Font.Bold = true;
-                                        workSheet["K38"].FormatString = "# ##0.00€";*/
+                                        var total = objSheet.Cells[31, "K"].Value;
+                                        objSheet.Cells[35, "K"].Value = Math.Round(total - acompte, 2);
+                                        objSheet.Cells[35, "K"].NumberFormat = @"#\ ##0,00€";
+
+                                        objSheet.Cells[36, "K"].Value = objSheet.Cells[35, "K"].Value * 5.5m / 100;
+                                        objSheet.Cells[36, "K"].NumberFormat = @"#\ ##0,00€";
+
+                                        var sumQuandPrime = objSheet.Range["K35", "K36"].Value;
+                                        objSheet.Cells[38, "K"].Value = Math.Round(sumQuandPrime.Sum(), 2);
+                                        objSheet.Cells[38, "K"].Font.Bold = true;
+                                        objSheet.Cells[38, "K"].NumberFormat = @"#\ ##0,00€";
                                     }
 
 
                                 }
                                 if (lotFrom.LOC12 != 0 && lotFrom.LOC13 != 0)
                                 {
-                                   /* workSheet["C27"].Style.BottomBorder.SetColor("#000000");
-                                    workSheet["C27"].Style.BottomBorder.Type = IronXL.Styles.BorderType.Thin;
 
-                                    workSheet["E27"].Style.BottomBorder.SetColor("#000000");
-                                    workSheet["E27"].Style.BottomBorder.Type = IronXL.Styles.BorderType.Thin;
+                                    objSheet.Cells[27, "C"].Borders[XlBordersIndex.xlEdgeBottom].LineStyle = XlLineStyle.xlContinuous;
+                                    objSheet.Cells[27, "C"].Borders[XlBordersIndex.xlEdgeBottom].Weight = XlBorderWeight.xlThin;
+                                    objSheet.Cells[27, "C"].Borders[XlBordersIndex.xlEdgeBottom].ColorIndex = 0;
 
-                                    workSheet["K27"].Style.BottomBorder.SetColor("#000000");
-                                    workSheet["K27"].Style.BottomBorder.Type = IronXL.Styles.BorderType.Thin;
+                                    objSheet.Cells[27, "E"].Borders[XlBordersIndex.xlEdgeBottom].LineStyle = XlLineStyle.xlContinuous;
+                                    objSheet.Cells[27, "E"].Borders[XlBordersIndex.xlEdgeBottom].Weight = XlBorderWeight.xlThin;
+                                    objSheet.Cells[27, "E"].Borders[XlBordersIndex.xlEdgeBottom].ColorIndex = 0;
 
-                                    workSheet["D28"].Value = "pains";
-                                    workSheet["F28"].Value = "T";
+                                    objSheet.Cells[27, "K"].Borders[XlBordersIndex.xlEdgeBottom].LineStyle = XlLineStyle.xlContinuous;
+                                    objSheet.Cells[27, "K"].Borders[XlBordersIndex.xlEdgeBottom].Weight = XlBorderWeight.xlThin;
+                                    objSheet.Cells[27, "K"].Borders[XlBordersIndex.xlEdgeBottom].ColorIndex = 0;
 
-                                    var sumRangePains = workSheet["C25:C27"];
-                                    workSheet["C28"].Value = sumRangePains.Sum();
+                                    objSheet.Cells[28, "D"].Value = "pains";
+                                    objSheet.Cells[28, "F"].Value = "T";
 
-
-                                    workSheet["C28"].Style.Font.Bold = true;
-
-                                    var sumRangePoids = workSheet["E25:E27"];
-                                    workSheet["E28"].Value = sumRangePoids.Sum();
+                                    var sumRangePains = objSheet.Range["C25", "C27"].Value;
+                                    objSheet.Cells[28, "C"].Value = sumRangePains.Sum();
 
 
-                                    workSheet["E28"].Style.Font.Bold = true;
+                                    objSheet.Cells[28, "C"].Font.Bold = true;
 
-                                    var sumRangePrix = workSheet["K25:K27"];
-                                    workSheet["K28"].Value = sumRangePrix.Sum();
-                                    workSheet["K28"].FormatString = "# ##0.00€";
+                                    var sumRangePoids = objSheet.Range["E25", "E27"].Value;
+                                    objSheet.Cells[28, "E"].Value = sumRangePoids.Sum();
 
-                                    workSheet["K28"].Style.Font.Bold = true;
 
-                                    var resultatSumPrixTotal = workSheet["K28"];
-                                    var resultatSumPoidsTotal = workSheet["E28"];
+                                    objSheet.Cells[28, "E"].Font.Bold = true;
 
-                                    var test = resultatSumPrixTotal.DecimalValue / resultatSumPoidsTotal.DecimalValue;
+                                    var sumRangePrix = objSheet.Range["K25", "K27"].Value;
+                                    objSheet.Cells[28, "K"].Value = sumRangePrix.Sum();
+                                    objSheet.Cells[28, "K"].NumberFormat = @"#\ ##0,00€";
+
+                                    objSheet.Cells[28, "K"].Font.Bold = true;
+
+                                    var resultatSumPrixTotal = objSheet.Cells[28, "K"];
+                                    var resultatSumPoidsTotal = objSheet.Cells[28, "E"];
+
+                                    var test = resultatSumPrixTotal.Value / resultatSumPoidsTotal.Value;
                                     decimal resultatSumPrixAcompte = Math.Round(sumRangePrix.Sum() - acompte, 2);
-                                    workSheet["E31"].Value = Math.Round(test, 2);
+                                    objSheet.Cells[31, "E"].Value = Math.Round(test, 2);
 
-                                    workSheet["K35"].Value = resultatSumPrixAcompte;
-                                    workSheet["K36"].Value = Math.Round(resultatSumPrixAcompte * 5.5m / 100, 2);
-                                    workSheet["K35"].FormatString = "# ##0.00€";
-                                    workSheet["K36"].FormatString = "# ##0.00€";
+                                    objSheet.Cells[35, "K"].Value = resultatSumPrixAcompte;
+                                    objSheet.Cells[36, "K"] = Math.Round(resultatSumPrixAcompte * 5.5m / 100, 2);
+                                    objSheet.Cells[35, "K"].NumberFormat = @"#\ ##0,00€";
+                                    objSheet.Cells[36, "K"].NumberFormat = @"#\ ##0,00€";
 
-                                    var sum = workSheet["K35:K36"];
-                                    workSheet["K38"].Value = Math.Round(sum.Sum(), 2);
-                                    workSheet["K38"].Style.Font.Bold = true;
-                                    workSheet["K38"].FormatString = "# ##0.00€";*/
+                                    var sum = objSheet.Range["K35", "K36"].Value;
+                                    objSheet.Cells[38, "K"].Value = Math.Round(sum.Sum(), 2);
+                                    objSheet.Cells[38, "K"].Font.Bold = true;
+                                    objSheet.Cells[38, "K"].NumberFormat = @"#\ ##0,00€";
 
                                     if (lotFrom.FRPRIME > 0)
                                     {
-                                       /* workSheet["B29"].Value = "Prime qualité:";
+                                       /* objSheet.Cells[29, "B"].Value = "Prime qualité:";
                                         workSheet["E29"].Value = workSheet["E28"].Value;
                                         workSheet["F29"].Value = "T";
                                         workSheet["G29"].Value = "x";
@@ -669,8 +682,8 @@ namespace GestcomWF.Views
                                         workSheet["J29"].Value = " =";
                                         workSheet["J29"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Left;
 
-                                        var valeurE28 = workSheet["E28"].DecimalValue;
-                                        var valeurH29 = workSheet["H29"].DecimalValue;
+                                        var valeurE28 = workSheet["E28"].Value;
+                                        var valeurH29 = workSheet["H29"].Value;
                                         workSheet["K29"].Value = Math.Round(valeurE28 * valeurH29, 2);
                                         workSheet["K29"].FormatString = "# ##0.00€";
                                         workSheet["K29"].Style.BottomBorder.SetColor("#000000");
@@ -682,11 +695,11 @@ namespace GestcomWF.Views
                                         workSheet["K31"].Value = sumRangeAvecPrime.Sum();
                                         workSheet["K31"].FormatString = "# ##0.00€";
 
-                                        var total = workSheet["K31"].DecimalValue;
+                                        var total = workSheet["K31"].Value;
                                         workSheet["K35"].Value = Math.Round(total - acompte, 2);
                                         workSheet["K35"].FormatString = "# ##0.00€";
 
-                                        workSheet["K36"].Value = workSheet["K35"].DecimalValue * 5.5m / 100;
+                                        workSheet["K36"].Value = workSheet["K35"].Value * 5.5m / 100;
                                         workSheet["K36"].FormatString = "# ##0.00€";
 
                                         var sumQuandPrime = workSheet["K35:K36"];
@@ -743,13 +756,13 @@ namespace GestcomWF.Views
                                 workSheet["B50"].Value = "PS : Nous virons ce jour, sur votre compte N° " + lotFrom.FRBANQ + " " + lotFrom.FRGUIC + " " + lotFrom.FRCOM1 + " " + lotFrom.FRCOM2;
                                 workSheet["B51"].Value = lotFrom.FRDOMI + ", la somme de";
                                 workSheet["H51"].Value = sumPs;
-                                workSheet["H51"].FormatString = "# ##0.00€";
+                                workSheet["H51"].FormatString = "# ##0.00€";*/
 
-                                valeurPrecedente = lotFrom.FRNUM;*/
+                                valeurPrecedente = lotFrom.FRNUM;
 
                             }
 
-                            /*RangeColumn col0 = workSheet.GetColumn(0);
+                           /* RangeColumn col0 = workSheet.GetColumn(0);
                             col0.Width = 5086; // Set width
 
                             RangeColumn col1 = workSheet.GetColumn(1);
@@ -850,7 +863,7 @@ namespace GestcomWF.Views
 
             if (e.KeyCode == Keys.Enter)
             {
-              
+
                 decimal montant = decimal.Parse(tbx_a.Text) + decimal.Parse(tbx_b.Text) + decimal.Parse(tbx_c.Text);
                 decimal montantRounded = Math.Round(_currentMontant + montant, 5);
                 tbxMontant.Text = montantRounded.ToString();
