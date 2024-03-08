@@ -629,7 +629,7 @@ namespace Gestcom.ModelAdo
                 oleDbCommand.Connection = connection;
                 oleDbCommand.CommandText = "UPDATE TB_Lots SET LOPU1 = @LOPU1, LOPU2 = @LOPU2, LOPU3 = @LOPU3, MONTANT = @MONTANT WHERE LOFACO=1 AND LOFROM = @LOFROM AND LOANNE = @LOANNE AND LOMOIS = @LOMOIS AND LODEP=0";
                 oleDbCommand.Prepare();
-                oleDbCommand.Parameters.AddWithValue("@LOPU1", a.ToString("F3"));
+                oleDbCommand.Parameters.AddWithValue("@LOPU1", a);
                 oleDbCommand.Parameters.AddWithValue("@LOPU2", b);
                 oleDbCommand.Parameters.AddWithValue("@LOPU3", c);
                 oleDbCommand.Parameters.AddWithValue("@MONTANT", montant);
