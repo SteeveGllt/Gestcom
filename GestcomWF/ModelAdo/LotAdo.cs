@@ -647,7 +647,7 @@ namespace Gestcom.ModelAdo
             finally { close(); }
         }
 
-        public static List<LotFrom> generationFichierExcelRappel(decimal mois, decimal annee)
+        public static List<LotFrom> generationFichierExcelRappel(decimal mois, decimal annee, DateTime date)
         {
             try
             {
@@ -656,25 +656,26 @@ namespace Gestcom.ModelAdo
                 OleDbDataReader reader;
                 open();
 
-                decimal moisPrecedent = mois - 1;
+                /*decimal moisPrecedent = mois - 1;
                 decimal anneePrecedente = annee;
                 if (mois == 1)
                 {
                     moisPrecedent = 12;
                     anneePrecedente = annee - 1;
-                }
+                }*/
 
+                DateTime date5 = date.AddMonths(5);
                 //OleDbCommand oleDbCommand = new OleDbCommand("SELECT * FROM TB_Entrée_Lots WHERE LOMOIS = @LOMOIS AND LOANNE = @LOANNE");
                 OleDbCommand oleDbCommand = new OleDbCommand("SELECT TB_Lots.LOFROM, TB_Fromageries.FRNOM, TB_Fromageries.FRNDIR, TB_Fromageries.FRADR, TB_Fromageries.FRCPOS, TB_Fromageries.FRPRIME, TB_Lots.LOCEN1, TB_Lots.LOCEM1, TB_Lots.LOC11, TB_Lots.LOC12, TB_Lots.LOC13, " +
                     " TB_Lots.LOPUAC, TB_Lots.LOPU1, TB_Lots.LOPU2, TB_Lots.LOPU3, TB_Lots.LOANNE, TB_Lots.LOMOIS, TB_Fromageries.FRVILL, TB_Fromageries.FRNUM, TB_Fromageries.FACTURATION, TB_Fromageries.FRDOMI, TB_Fromageries.FRBANQ, TB_Fromageries.FRGUIC, TB_Fromageries.FRCOM1, TB_Fromageries.FRCOM2 FROM TB_Fromageries INNER JOIN TB_Lots ON TB_Fromageries.FRNUM = TB_Lots.LOFROM" +
-                    " WHERE ((TB_Fromageries.FRAFFINE)=False) AND ((TB_Fromageries.FRACTIF)=True) AND (TB_Lots.LOANNE = @LOANNE AND TB_Lots.LOMOIS = @LOMOIS OR TB_Lots.LOANNE = @ANNEEPRECEDENTE AND TB_Lots.LOMOIS = @LOMOISPRECEDENT) AND TB_Lots.LODEP = 0 ORDER BY TB_Lots.LOFROM; ");
+                    " WHERE ((TB_Fromageries.FRAFFINE)=False) AND ((TB_Fromageries.FRACTIF)=True) AND ((TB_Lots.LOANNE)=Year(DateAdd(\"m\",[TB_Fromageries].[FACTURATION], #" + date5.ToString("yyyy-MM-dd") + "#))-2000) AND ((TB_Lots.LOMOIS)=Month(DateAdd(\"m\",[TB_Fromageries].[FACTURATION], #" + date5.ToString("yyyy-MM-dd") + "#))) AND TB_Lots.LODEP = 0 ORDER BY TB_Lots.LOFROM; ");
                 
                 oleDbCommand.Connection = connection;
-                oleDbCommand.Prepare();
+                /*oleDbCommand.Prepare();
                 oleDbCommand.Parameters.AddWithValue("@LOANNE", annee);
                 oleDbCommand.Parameters.AddWithValue("@LOMOIS", mois);
                 oleDbCommand.Parameters.AddWithValue("@ANNEEPRECEDENTE", anneePrecedente);
-                oleDbCommand.Parameters.AddWithValue("@LOMOISPRECEDENT", moisPrecedent);
+                oleDbCommand.Parameters.AddWithValue("@LOMOISPRECEDENT", moisPrecedent);*/
                 reader = oleDbCommand.ExecuteReader();
                 while (reader.Read())
                 {

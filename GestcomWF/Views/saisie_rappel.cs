@@ -250,9 +250,14 @@ namespace GestcomWF.Views
                     string nomMoisDecale = "";
                     decimal moisDecale = 0;
 
-                    
+                    // Récupération des valeurs
+                    int mois = Convert.ToInt32(moisNum.Numero);
+                    int anneeTest = int.Parse(tbxAnnee.Text) + 2000; // Ajoute 2000 pour obtenir l'année complète
+
+                    DateTime date = new DateTime(anneeTest, mois, 1);
+
                     // Récupération de toutes les entrées pour le mois et l'année donnés
-                    List<LotFrom> lotFroms = LotAdo.generationFichierExcelRappel(moisNum.Numero, Convert.ToDecimal(tbxAnnee.Text));
+                    List<LotFrom> lotFroms = LotAdo.generationFichierExcelRappel(moisNum.Numero, Convert.ToDecimal(tbxAnnee.Text), date);
                     if (lotFroms == null || lotFroms.Count <= 0)
                     {
                         MessageBox.Show("Aucune valeur");
