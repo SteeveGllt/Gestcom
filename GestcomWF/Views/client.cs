@@ -88,7 +88,7 @@ namespace GestcomWF.Views
             tbxDiv.Text = clientDetails.CLDIV;
             tbxIntra.Text = clientDetails.CLINTRA;
             tbxDluo.Text = clientDetails.CLDLUO.ToString();
-            tbxCompteEbp.Text = clientDetails.CLEBP.ToString();
+            tbxCompteEbp.Text = clientDetails.CLCPT;
 
 
             clientSelectionne = clientDetails;
@@ -184,7 +184,7 @@ namespace GestcomWF.Views
                     clientUpdate.CLINTRA = tbxIntra.Text ?? string.Empty;
                     clientUpdate.CLSUPP = " ";
                     clientUpdate.CLDLUO = Convert.ToInt32(tbxDluo.Text);
-                    clientUpdate.CLEBP = Convert.ToDecimal(tbxCompteEbp.Text);
+                    clientUpdate.CLCPT = tbxCompteEbp.Text ?? string.Empty;
 
                     ClientAdo.CreateClient(clientUpdate);
                     listView1.Items.Clear();
@@ -241,7 +241,7 @@ namespace GestcomWF.Views
                 clientUpdate.CLDIV = tbxDiv.Text ?? string.Empty;
                 clientUpdate.CLINTRA = tbxIntra.Text ?? string.Empty;
                 clientUpdate.CLDLUO = Convert.ToInt32(tbxDluo.Text);
-                clientUpdate.CLEBP = Convert.ToDecimal(tbxCompteEbp.Text);
+                clientUpdate.CLCPT = tbxCompteEbp.Text ?? string.Empty;
 
 
                 ClientAdo.updateClient(clientUpdate, ancienneValeur);

@@ -25,8 +25,8 @@ namespace GestcomWF.Views
             listViewArticle.Columns.Add("ARTVA", -2, System.Windows.Forms.HorizontalAlignment.Left);
             listViewArticle.Columns.Add("ARPOID", -2, System.Windows.Forms.HorizontalAlignment.Left);
             listViewArticle.Columns.Add("ARCEC", -2, System.Windows.Forms.HorizontalAlignment.Left);
-            listViewArticle.Columns.Add("ARCOMP1", -2, System.Windows.Forms.HorizontalAlignment.Left);
-            listViewArticle.Columns.Add("ARCOMP2", -2, System.Windows.Forms.HorizontalAlignment.Left);
+            listViewArticle.Columns.Add("ARCPT1", -2, System.Windows.Forms.HorizontalAlignment.Left);
+            listViewArticle.Columns.Add("ARCPT2", -2, System.Windows.Forms.HorizontalAlignment.Left);
             listViewArticle.Columns.Add("ARDLUO", -2, System.Windows.Forms.HorizontalAlignment.Left);
             listViewArticle.Columns.Add("AREAN13", -2, System.Windows.Forms.HorizontalAlignment.Left);
         }
@@ -43,8 +43,8 @@ namespace GestcomWF.Views
                 item.SubItems.Add(article.ARTVA.ToString());
                 item.SubItems.Add(article.ARPOID.ToString());
                 item.SubItems.Add(article.ARCEC);
-                item.SubItems.Add(article.ARCOMP1.ToString());
-                item.SubItems.Add(article.ARCOMP2.ToString());
+                item.SubItems.Add(article.ARCPT1);
+                item.SubItems.Add(article.ARCPT2);
                 item.SubItems.Add(article.ARDLUO.ToString());
                 item.SubItems.Add(article.AREAN13.ToString());
                 listViewArticle.Items.Add(item);
@@ -75,8 +75,8 @@ namespace GestcomWF.Views
             tbxTvaArt.Text = articleDetails.ARTVA.ToString();
             tbxPoidArt.Text = articleDetails.ARPOID.ToString();
             tbxCecArt.Text = articleDetails.ARCEC;
-            tbxComp1.Text = articleDetails.ARCOMP1.ToString();
-            tbxComp2.Text = articleDetails.ARCOMP2.ToString();
+            tbxComp1.Text = articleDetails.ARCPT1;
+            tbxComp2.Text = articleDetails.ARCPT2;
             tbxDluo.Text = articleDetails.ARDLUO.ToString();
             tbxEan13.Text = articleDetails.AREAN13.ToString();
 
@@ -89,7 +89,7 @@ namespace GestcomWF.Views
         {
             if (_articleSelectionne != null)
             {
-                ArticleAdo.updateArticle(Convert.ToDecimal(tbxNumArt.Text), tbxDesiArt.Text, tbxFamiArt.Text, tbxUnitArt.Text, Convert.ToDouble(tbxPrixArt.Text), Convert.ToDecimal(tbxTvaArt.Text), Convert.ToDecimal(tbxPoidArt.Text), tbxCecArt.Text, Convert.ToInt16(tbxComp1.Text), Convert.ToInt16(tbxComp2.Text), Convert.ToInt16(tbxDluo.Text), Convert.ToInt16(tbxEan13.Text));
+                ArticleAdo.updateArticle(Convert.ToDecimal(tbxNumArt.Text), tbxDesiArt.Text, tbxFamiArt.Text, tbxUnitArt.Text, Convert.ToDouble(tbxPrixArt.Text), Convert.ToDecimal(tbxTvaArt.Text), Convert.ToDecimal(tbxPoidArt.Text), tbxCecArt.Text, tbxComp1.Text, tbxComp2.Text, Convert.ToInt16(tbxDluo.Text), Convert.ToDecimal(tbxEan13.Text));
             }
             else
             {
@@ -128,10 +128,10 @@ namespace GestcomWF.Views
                     articleNew.ARTVA = Convert.ToDecimal(tbxTvaArt.Text);
                     articleNew.ARPOID = Convert.ToDecimal(tbxPoidArt.Text);
                     articleNew.ARCEC = tbxCecArt.Text;
-                    articleNew.ARCOMP1 = Convert.ToInt16(tbxComp1.Text);
-                    articleNew.ARCOMP2 = Convert.ToInt16(tbxComp2.Text);
+                    articleNew.ARCPT1 = tbxComp1.Text;
+                    articleNew.ARCPT2 = tbxComp2.Text;
                     articleNew.ARDLUO = Convert.ToInt16(tbxDluo.Text);
-                    articleNew.AREAN13 = Convert.ToInt16(tbxEan13.Text);
+                    articleNew.AREAN13 = Convert.ToDecimal(tbxEan13.Text);
 
                     ArticleAdo.createArticle(articleNew);
                     listViewArticle.Items.Clear();

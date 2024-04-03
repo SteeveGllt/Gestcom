@@ -665,10 +665,11 @@ namespace Gestcom.ModelAdo
                 }*/
 
                 DateTime date5 = date.AddMonths(5);
+                MessageBox.Show(date5.ToString("MM/dd/yyyy"));
                 //OleDbCommand oleDbCommand = new OleDbCommand("SELECT * FROM TB_Entrée_Lots WHERE LOMOIS = @LOMOIS AND LOANNE = @LOANNE");
                 OleDbCommand oleDbCommand = new OleDbCommand("SELECT TB_Lots.LOFROM, TB_Fromageries.FRNOM, TB_Fromageries.FRNDIR, TB_Fromageries.FRADR, TB_Fromageries.FRCPOS, TB_Fromageries.FRPRIME, TB_Lots.LOCEN1, TB_Lots.LOCEM1, TB_Lots.LOC11, TB_Lots.LOC12, TB_Lots.LOC13, " +
-                    " TB_Lots.LOPUAC, TB_Lots.LOPU1, TB_Lots.LOPU2, TB_Lots.LOPU3, TB_Lots.LOANNE, TB_Lots.LOMOIS, TB_Fromageries.FRVILL, TB_Fromageries.FRNUM, TB_Fromageries.FACTURATION, TB_Fromageries.FRDOMI, TB_Fromageries.FRBANQ, TB_Fromageries.FRGUIC, TB_Fromageries.FRCOM1, TB_Fromageries.FRCOM2 FROM TB_Fromageries INNER JOIN TB_Lots ON TB_Fromageries.FRNUM = TB_Lots.LOFROM" +
-                    " WHERE ((TB_Fromageries.FRAFFINE)=False) AND ((TB_Fromageries.FRACTIF)=True) AND ((TB_Lots.LOANNE)=Year(DateAdd(\"m\",[TB_Fromageries].[FACTURATION], #" + date5.ToString("yyyy-MM-dd") + "#))-2000) AND ((TB_Lots.LOMOIS)=Month(DateAdd(\"m\",[TB_Fromageries].[FACTURATION], #" + date5.ToString("yyyy-MM-dd") + "#))) AND TB_Lots.LODEP = 0 ORDER BY TB_Lots.LOFROM; ");
+                    " TB_Lots.LOPUAC, TB_Lots.LOPU1, TB_Lots.LOPU2, TB_Lots.LOPU3, TB_Lots.LOANNE, TB_Lots.LOMOIS, TB_Fromageries.FRVILL, TB_Fromageries.FRNUM, TB_Fromageries.FRRAP, TB_Fromageries.FRDOMI, TB_Fromageries.FRBANQ, TB_Fromageries.FRGUIC, TB_Fromageries.FRCOM1, TB_Fromageries.FRCOM2 FROM TB_Fromageries INNER JOIN TB_Lots ON TB_Fromageries.FRNUM = TB_Lots.LOFROM" +
+                    " WHERE ((TB_Fromageries.FRAFFINE)=False) AND ((TB_Fromageries.FRACTIF)=True) AND ((TB_Lots.LOANNE)=Year(DateAdd(\"m\",[TB_Fromageries].[FRRAP], #" + date5.ToString("yyyy-MM-dd") + "#))-2000) AND ((TB_Lots.LOMOIS)=Month(DateAdd(\"m\",[TB_Fromageries].[FRRAP], #" + date5.ToString("yyyy-MM-dd") + "#))) AND TB_Lots.LODEP = 0 ORDER BY TB_Lots.LOFROM; ");
                 
                 oleDbCommand.Connection = connection;
                 /*oleDbCommand.Prepare();
@@ -710,7 +711,7 @@ namespace Gestcom.ModelAdo
                        reader.IsDBNull(reader.GetOrdinal("LOMOIS")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOMOIS")),
                         reader.IsDBNull(reader.GetOrdinal("FRVILL")) ? defaultString : reader.GetString(reader.GetOrdinal("FRVILL")),
                         reader.IsDBNull(reader.GetOrdinal("FRNUM")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("FRNUM")),
-                        reader.IsDBNull(reader.GetOrdinal("FACTURATION")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("FACTURATION")),
+                        reader.IsDBNull(reader.GetOrdinal("FRRAP")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("FRRAP")),
                         reader.IsDBNull(reader.GetOrdinal("FRDOMI")) ? defaultString : reader.GetString(reader.GetOrdinal("FRDOMI")),
                         reader.IsDBNull(reader.GetOrdinal("FRBANQ")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("FRBANQ")),
                         reader.IsDBNull(reader.GetOrdinal("FRGUIC")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("FRGUIC")),

@@ -205,7 +205,7 @@ namespace Gestcom.ModelAdo
                         reader.IsDBNull(reader.GetOrdinal("FRVVER")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("FRVVER")),
                         reader.IsDBNull(reader.GetOrdinal("FREVER")) ? defaultString : reader.GetString(reader.GetOrdinal("FREVER")),
                         reader.IsDBNull(reader.GetOrdinal("FRACTIF")) ? defaultBool : reader.GetBoolean(reader.GetOrdinal("FRACTIF")),
-                        reader.IsDBNull(reader.GetOrdinal("FACTURATION")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("FACTURATION")),
+                        reader.IsDBNull(reader.GetOrdinal("FRRAP")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("FRRAP")),
                         reader.IsDBNull(reader.GetOrdinal("FRPRIME")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("FRPRIME"))
                         );
 
@@ -238,7 +238,7 @@ namespace Gestcom.ModelAdo
                 open();
                 OleDbCommand oleDbCommand = new OleDbCommand();
                 oleDbCommand.Connection = connection;
-                oleDbCommand.CommandText = "UPDATE TB_Fromageries SET FRNUM = @FRNUM, FRNOM = @FRNOM, FRADR = @FRADR, FRCPOS = @FRCPOS, FRVILL = @FRVILL, FRNDIR = @FRNDIR, FRTYPE = @FRTYPE, FRTCON = @FRTCON, FRCMEU = @FRCMEU, FRCPOI = @FRCPOI, FRMODR = @FRMODR, FRDOMI = @FRDOMI, FRBANQ = @FRBANQ, FRGUIC = @FRGUIC, FRCOM1 = @FRCOM1, FRCOM2 = @FRCOM2, COE1 = @COE1, COE2 = @COE2, COE3 = @COE3, COE4 = @COE4, FRREFA = @FRREFA, FRPUAC = @FRPUAC, FRETRE = @FRETRE, FRHIVE = @FRHIVE, FRCVER = @FRCVER, FRVVER = @FRVVER, FREVER = @FREVER, FRACTIF = @FRACTIF, FACTURATION = @FACTURATION, FRPRIME = @FRPRIME WHERE FRNUM = @FRNUM";
+                oleDbCommand.CommandText = "UPDATE TB_Fromageries SET FRNUM = @FRNUM, FRNOM = @FRNOM, FRADR = @FRADR, FRCPOS = @FRCPOS, FRVILL = @FRVILL, FRNDIR = @FRNDIR, FRTYPE = @FRTYPE, FRTCON = @FRTCON, FRCMEU = @FRCMEU, FRCPOI = @FRCPOI, FRMODR = @FRMODR, FRDOMI = @FRDOMI, FRBANQ = @FRBANQ, FRGUIC = @FRGUIC, FRCOM1 = @FRCOM1, FRCOM2 = @FRCOM2, COE1 = @COE1, COE2 = @COE2, COE3 = @COE3, COE4 = @COE4, FRREFA = @FRREFA, FRPUAC = @FRPUAC, FRETRE = @FRETRE, FRHIVE = @FRHIVE, FRCVER = @FRCVER, FRVVER = @FRVVER, FREVER = @FREVER, FRACTIF = @FRACTIF, FRRAP = @FRRAP, FRPRIME = @FRPRIME WHERE FRNUM = @FRNUM";
                 oleDbCommand.Prepare();
                 oleDbCommand.Parameters.AddWithValue("@FRNUM", fromagerie.FRNUM);
                 oleDbCommand.Parameters.AddWithValue("@FRNOM", fromagerie.FRNOM);
@@ -268,7 +268,7 @@ namespace Gestcom.ModelAdo
                 oleDbCommand.Parameters.AddWithValue("@FRVVER", fromagerie.FRVVER);
                 oleDbCommand.Parameters.AddWithValue("@FREVER", fromagerie.FREVER);
                 oleDbCommand.Parameters.AddWithValue("@FRACTIF", fromagerie.FRACTIF);
-                oleDbCommand.Parameters.AddWithValue("@FACTURATION", fromagerie.FACTURATION);
+                oleDbCommand.Parameters.AddWithValue("@FRRAP", fromagerie.FRRAP);
                 oleDbCommand.Parameters.AddWithValue("@FRPRIME", fromagerie.FRPRIME);
 
                 oleDbCommand.ExecuteNonQuery();

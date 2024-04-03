@@ -164,7 +164,7 @@ namespace GestcomWF.Views
             {
                 double poidsBrut = Convert.ToDouble(tbxPoidsBrut.Text);
                 double freinte = Convert.ToDouble(tbxFreinte.Text);
-                int resultat = (int)(poidsBrut * (1 - freinte / 100));
+                int resultat = (int)Math.Round(poidsBrut * (1 - freinte / 100), MidpointRounding.AwayFromZero);
                 return resultat;
             }
             catch (FormatException)

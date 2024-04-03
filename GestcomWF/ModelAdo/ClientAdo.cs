@@ -131,8 +131,8 @@ namespace GestcomWF.ModelAdo
     reader.IsDBNull(reader.GetOrdinal("CLDIV")) ? defaultString : reader.GetString(reader.GetOrdinal("CLDIV")),
     reader.IsDBNull(reader.GetOrdinal("CLINTRA")) ? defaultString : reader.GetString(reader.GetOrdinal("CLINTRA")),
     reader.IsDBNull(reader.GetOrdinal("CLSUPP")) ? defaultString : reader.GetString(reader.GetOrdinal("CLSUPP")),
-    reader.IsDBNull(reader.GetOrdinal("CLDLUO")) ? defaultInt : reader.GetInt32(reader.GetOrdinal("CLDLUO")),
-    reader.IsDBNull(reader.GetOrdinal("CLEBP")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("CLEBP"))
+    reader.IsDBNull(reader.GetOrdinal("CLDLUO")) ? defaultInt : reader.GetInt16(reader.GetOrdinal("CLDLUO")),
+    reader.IsDBNull(reader.GetOrdinal("CLCPT")) ? defaultString : reader.GetString(reader.GetOrdinal("CLCPT"))
 
                          );
 
@@ -172,7 +172,7 @@ namespace GestcomWF.ModelAdo
 
 
                 // Création de la commande SQL pour sélectionner les fromageries actives.
-                oleDbCommand.CommandText = "INSERT INTO TB_Clients(CLNUM, CLNOM, CLMTDI, CLADR1, CLADR2, CLCPOS, CLVILL, CLREGL, CLBASE, CLDEPA, CLECHE, CLARRI, CLBQUE, CLGUI, CLCPTE, CLRIB, CLDOM, CLREP, CLEDIT, CLFAMI, CLTRAN, CLLIVR, CLFACT, CLCOMP, CLRIST, CLREMI, CLCODE, CLTVA, CLENSE, CLDIV, CLINTRA, CLSUPP, CLDLUO, CLEBP) VALUES (@CLNUM, @CLNOM, @CLMTDI, @CLADR1, @CLADR2, @CLCPOS, @CLVILL, @CLREGL, @CLBASE, @CLDEPA, @CLECHE, @CLARRI, @CLBQUE, @CLGUI, @CLCPTE, @CLRIB, @CLDOM, @CLREP, @CLEDIT, @CLFAMI, @CLTRAN, @CLLIVR, @CLFACT, @CLCOMP, @CLRIST, @CLREMI, @CLCODE, @CLTVA, @CLENSE, @CLDIV, @CLINTRA, @CLSUPP, @CLDLUO, @CLEBP);";
+                oleDbCommand.CommandText = "INSERT INTO TB_Clients(CLNUM, CLNOM, CLMTDI, CLADR1, CLADR2, CLCPOS, CLVILL, CLREGL, CLBASE, CLDEPA, CLECHE, CLARRI, CLBQUE, CLGUI, CLCPTE, CLRIB, CLDOM, CLREP, CLEDIT, CLFAMI, CLTRAN, CLLIVR, CLFACT, CLCOMP, CLRIST, CLREMI, CLCODE, CLTVA, CLENSE, CLDIV, CLINTRA, CLSUPP, CLDLUO, CLCPT) VALUES (@CLNUM, @CLNOM, @CLMTDI, @CLADR1, @CLADR2, @CLCPOS, @CLVILL, @CLREGL, @CLBASE, @CLDEPA, @CLECHE, @CLARRI, @CLBQUE, @CLGUI, @CLCPTE, @CLRIB, @CLDOM, @CLREP, @CLEDIT, @CLFAMI, @CLTRAN, @CLLIVR, @CLFACT, @CLCOMP, @CLRIST, @CLREMI, @CLCODE, @CLTVA, @CLENSE, @CLDIV, @CLINTRA, @CLSUPP, @CLDLUO, @CLCPT);";
                 oleDbCommand.Prepare();
                 oleDbCommand.Parameters.AddWithValue("@CLNUM", cl.CLNUM);
                 oleDbCommand.Parameters.AddWithValue("@CLNOM", cl.CLNOM);
@@ -207,7 +207,7 @@ namespace GestcomWF.ModelAdo
                 oleDbCommand.Parameters.AddWithValue("@CLINTRA", cl.CLINTRA);
                 oleDbCommand.Parameters.AddWithValue("@CLSUPP", cl.CLSUPP);
                 oleDbCommand.Parameters.AddWithValue("@CLDLUO", cl.CLDLUO);
-                oleDbCommand.Parameters.AddWithValue("@CLEBP", cl.CLEBP);
+                oleDbCommand.Parameters.AddWithValue("@CLCPT", cl.CLCPT);
                 oleDbCommand.ExecuteNonQuery();
                 Console.WriteLine("Client créé");
                 MessageBox.Show("Client crée");
@@ -226,7 +226,7 @@ namespace GestcomWF.ModelAdo
                 open();
                 OleDbCommand oleDbCommand = new OleDbCommand();
                 oleDbCommand.Connection = connection;
-                oleDbCommand.CommandText = "UPDATE TB_Clients SET CLNUM = @CLNUM, CLNOM = @CLNOM, CLMTDI = @CLMTDI, CLADR1 = @CLADR1, CLADR2 = @CLADR2, CLCPOS = @CLCPOS, CLVILL = @CLVILL, CLREGL = @CLREGL, CLBASE = @CLBASE, CLDEPA = @CLDEPA, CLECHE = @CLECHE, CLARRI = @CLARRI, CLBQUE = @CLBQUE, CLGUI = @CLGUI, CLCPTE = @CLCPTE, CLRIB = @CLRIB, CLDOM = @CLDOM, CLREP = @CLREP, CLEDIT = @CLEDIT, CLFAMI = @CLFAMI, CLTRAN = @CLTRAN, CLLIVR = @CLLIVR, CLFACT = @CLFACT, CLCOMP = @CLCOMP, CLRIST = @CLRIST, CLREMI = @CLREMI, CLCODE = @CLCODE, CLTVA = @CLTVA, CLENSE = @CLENSE, CLDIV = @CLDIV, CLINTRA = @CLINTRA, CLDLUO = @CLDLUO, CLEBP = @CLEBP WHERE CLNUM = " + ancienneValeurId;
+                oleDbCommand.CommandText = "UPDATE TB_Clients SET CLNUM = @CLNUM, CLNOM = @CLNOM, CLMTDI = @CLMTDI, CLADR1 = @CLADR1, CLADR2 = @CLADR2, CLCPOS = @CLCPOS, CLVILL = @CLVILL, CLREGL = @CLREGL, CLBASE = @CLBASE, CLDEPA = @CLDEPA, CLECHE = @CLECHE, CLARRI = @CLARRI, CLBQUE = @CLBQUE, CLGUI = @CLGUI, CLCPTE = @CLCPTE, CLRIB = @CLRIB, CLDOM = @CLDOM, CLREP = @CLREP, CLEDIT = @CLEDIT, CLFAMI = @CLFAMI, CLTRAN = @CLTRAN, CLLIVR = @CLLIVR, CLFACT = @CLFACT, CLCOMP = @CLCOMP, CLRIST = @CLRIST, CLREMI = @CLREMI, CLCODE = @CLCODE, CLTVA = @CLTVA, CLENSE = @CLENSE, CLDIV = @CLDIV, CLINTRA = @CLINTRA, CLDLUO = @CLDLUO, CLCPT = @CLCPT WHERE CLNUM = " + ancienneValeurId;
                 oleDbCommand.Prepare();
                 oleDbCommand.Parameters.AddWithValue("@CLNUM", client.CLNUM);
                 oleDbCommand.Parameters.AddWithValue("@CLNOM", client.CLNOM);
@@ -260,7 +260,7 @@ namespace GestcomWF.ModelAdo
                 oleDbCommand.Parameters.AddWithValue("@CLDIV", client.CLDIV);
                 oleDbCommand.Parameters.AddWithValue("@CLINTRA", client.CLINTRA);
                 oleDbCommand.Parameters.AddWithValue("@CLDLUO", client.CLDLUO);
-                oleDbCommand.Parameters.AddWithValue("@CLEBP", client.CLEBP);
+                oleDbCommand.Parameters.AddWithValue("@CLCPT", client.CLCPT);
 
                 // oleDbCommand.Parameters.AddWithValue("@FACTURATION", fromagerie.FACTURATION);
 

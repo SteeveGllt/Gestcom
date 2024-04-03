@@ -91,7 +91,7 @@ namespace GestcomWF.Views
                     tbxFrVver.Text = fromagerieComplete.FRVVER.ToString();
                     tbxFrEver.Text = fromagerieComplete.FREVER;
                     tbxFrActif.Text = fromagerieComplete.FRACTIF.ToString();
-                    tbxFacturation.Text = fromagerieComplete.FACTURATION.ToString();
+                    tbxFacturation.Text = fromagerieComplete.FRRAP.ToString();
                     tbxPrime.Text = fromagerieComplete.FRPRIME.ToString();
                     //tbxFacturation.Text = fromagerieComplete.FACTURATION.ToString();
                     this._currentFromagerie = fromagerieComplete;

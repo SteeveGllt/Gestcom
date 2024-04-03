@@ -57,10 +57,10 @@ namespace Gestcom.ModelAdo
                         reader.IsDBNull(reader.GetOrdinal("ARTVA")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("ARTVA")),
                         reader.IsDBNull(reader.GetOrdinal("ARPOID")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("ARPOID")),
                         reader.IsDBNull(reader.GetOrdinal("ARCEC")) ? defautString : reader.GetString(reader.GetOrdinal("ARCEC")),
-                        reader.IsDBNull(reader.GetOrdinal("ARCOMP1")) ? defautInt : reader.GetInt16(reader.GetOrdinal("ARCOMP1")),
-                        reader.IsDBNull(reader.GetOrdinal("ARCOMP2")) ? defautInt : reader.GetInt16(reader.GetOrdinal("ARCOMP2")),
+                        reader.IsDBNull(reader.GetOrdinal("ARCPT1")) ? defautString : reader.GetString(reader.GetOrdinal("ARCPT1")),
+                        reader.IsDBNull(reader.GetOrdinal("ARCPT2")) ? defautString : reader.GetString(reader.GetOrdinal("ARCPT2")),
                         reader.IsDBNull(reader.GetOrdinal("ARDLUO")) ? defautInt : reader.GetInt16(reader.GetOrdinal("ARDLUO")),
-                        reader.IsDBNull(reader.GetOrdinal("AREAN13")) ? defautInt : reader.GetInt16(reader.GetOrdinal("AREAN13"))
+                        reader.IsDBNull(reader.GetOrdinal("AREAN13")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("AREAN13"))
                         );
 
                     // Ajout de l'article à la liste.
@@ -101,7 +101,7 @@ namespace Gestcom.ModelAdo
                 open();
                 OleDbCommand oleDbCommand = new OleDbCommand();
                 oleDbCommand.Connection = connection;
-                oleDbCommand.CommandText = "INSERT INTO TB_Articles(ARNUM, ARDESI, ARFAMI, ARUNIT, ARPRIX, ARTVA, ARPOID, ARCEC, ARCOMP1, ARCOMP2, ARDLUO, AREAN13) VALUES(@ARNUM, @ARDESI, @ARFAMI, @ARUNIT, @ARPRIX, @ARTVA, @ARPOID, @ARCEC, @ARCOMP1, @ARCOMP2, @ARDLUO, @AREAN13)";
+                oleDbCommand.CommandText = "INSERT INTO TB_Articles(ARNUM, ARDESI, ARFAMI, ARUNIT, ARPRIX, ARTVA, ARPOID, ARCEC, ARCPT1, ARCPT2, ARDLUO, AREAN13) VALUES(@ARNUM, @ARDESI, @ARFAMI, @ARUNIT, @ARPRIX, @ARTVA, @ARPOID, @ARCEC, @ARCPT1, @ARCPT2, @ARDLUO, @AREAN13)";
                 oleDbCommand.Prepare();
                 oleDbCommand.Parameters.AddWithValue("@ARNUM", article.ARNUM);
                 oleDbCommand.Parameters.AddWithValue("@ARDESI", article.ARDESI);
@@ -111,8 +111,8 @@ namespace Gestcom.ModelAdo
                 oleDbCommand.Parameters.AddWithValue("@ARTVA", article.ARTVA);
                 oleDbCommand.Parameters.AddWithValue("@ARPOID", article.ARPOID);
                 oleDbCommand.Parameters.AddWithValue("@ARCEC", article.ARCEC);
-                oleDbCommand.Parameters.AddWithValue("@ARCOMP1", article.ARCOMP1);
-                oleDbCommand.Parameters.AddWithValue("@ARCOMP2", article.ARCOMP2);
+                oleDbCommand.Parameters.AddWithValue("@ARCPT1", article.ARCPT1);
+                oleDbCommand.Parameters.AddWithValue("@ARCPT2", article.ARCPT2);
                 oleDbCommand.Parameters.AddWithValue("@ARDLUO", article.ARDLUO);
                 oleDbCommand.Parameters.AddWithValue("@AREAN13", article.AREAN13);
                 oleDbCommand.ExecuteNonQuery();
@@ -127,14 +127,14 @@ namespace Gestcom.ModelAdo
             finally { close(); }
         }
 
-        public static void updateArticle(decimal arnum, string ardesi, string arfami, string arunit, double arprix, decimal artva, decimal arpoid, string arcec, int arcomp1, int arcomp2, int ardluo, int arean13)
+        public static void updateArticle(decimal arnum, string ardesi, string arfami, string arunit, double arprix, decimal artva, decimal arpoid, string arcec, string arcpt1, string arcpt2, int ardluo, decimal arean13)
         {
             try
             {
                 open();
                 OleDbCommand oleDbCommand = new OleDbCommand();
                 oleDbCommand.Connection = connection;
-                oleDbCommand.CommandText = "UPDATE TB_Articles SET ARDESI = @ARDESI, ARFAMI = @ARFAMI, ARUNIT = @ARUNIT, ARPRIX = @ARPRIX, ARTVA = @ARTVA, ARPOID = @ARPOID, ARCEC = @ARCEC, ARCOMP1 = @ARCOMP1, ARCOMP2 = @ARCOMP2, ARDLUO = @ARDLUO, AREAN13 = @AREAN13 WHERE ARNUM = @ARNUM;";
+                oleDbCommand.CommandText = "UPDATE TB_Articles SET ARDESI = @ARDESI, ARFAMI = @ARFAMI, ARUNIT = @ARUNIT, ARPRIX = @ARPRIX, ARTVA = @ARTVA, ARPOID = @ARPOID, ARCEC = @ARCEC, ARCPT1 = @ARCPT1, ARCPT2 = @ARCPT2, ARDLUO = @ARDLUO, AREAN13 = @AREAN13 WHERE ARNUM = @ARNUM;";
                 oleDbCommand.Prepare();
                
                 oleDbCommand.Parameters.AddWithValue("@ARDESI", ardesi);
@@ -144,8 +144,8 @@ namespace Gestcom.ModelAdo
                 oleDbCommand.Parameters.AddWithValue("@ARTVA", artva);
                 oleDbCommand.Parameters.AddWithValue("@ARPOID", arpoid);
                 oleDbCommand.Parameters.AddWithValue("@ARCEC", arcec);
-                oleDbCommand.Parameters.AddWithValue("@ARCOMP1", arcomp1);
-                oleDbCommand.Parameters.AddWithValue("@ARCOMP2", arcomp2);
+                oleDbCommand.Parameters.AddWithValue("@ARCPT1", arcpt1);
+                oleDbCommand.Parameters.AddWithValue("@ARCPT2", arcpt2);
                 oleDbCommand.Parameters.AddWithValue("@ARDLUO", ardluo);
                 oleDbCommand.Parameters.AddWithValue("@AREAN13", arean13);
                 oleDbCommand.Parameters.AddWithValue("@ARNUM", arnum);
@@ -224,10 +224,10 @@ namespace Gestcom.ModelAdo
                         reader.IsDBNull(reader.GetOrdinal("ARTVA")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("ARTVA")),
                         reader.IsDBNull(reader.GetOrdinal("ARPOID")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("ARPOID")),
                         reader.IsDBNull(reader.GetOrdinal("ARCEC")) ? defautString : reader.GetString(reader.GetOrdinal("ARCEC")),
-                        reader.IsDBNull(reader.GetOrdinal("ARCOMP1")) ? defautInt : reader.GetInt16(reader.GetOrdinal("ARCOMP1")),
-                        reader.IsDBNull(reader.GetOrdinal("ARCOMP2")) ? defautInt : reader.GetInt16(reader.GetOrdinal("ARCOMP2")),
+                        reader.IsDBNull(reader.GetOrdinal("ARCPT1")) ? defautString : reader.GetString(reader.GetOrdinal("ARCPT1")),
+                        reader.IsDBNull(reader.GetOrdinal("ARCPT2")) ? defautString : reader.GetString(reader.GetOrdinal("ARCPT2")),
                         reader.IsDBNull(reader.GetOrdinal("ARDLUO")) ? defautInt : reader.GetInt16(reader.GetOrdinal("ARDLUO")),
-                        reader.IsDBNull(reader.GetOrdinal("AREAN13")) ? defautInt : reader.GetInt16(reader.GetOrdinal("AREAN13"))
+                        reader.IsDBNull(reader.GetOrdinal("AREAN13")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("AREAN13"))
                         );
 
                 }

@@ -18,6 +18,12 @@ namespace GestcomWF.Views
         private decimal _currentMontant = 0m;
         private string moisExcel = string.Empty;
         private string _lastPathSaved = string.Empty;
+        private bool _isUpdate = false;
+
+        private decimal _lastValidA = 0m;
+        private decimal _lastValidB = 0m;
+        private decimal _lastValidC = 0m;
+
         DataPath dataPath = new DataPath();
 
         // Liste des mois pour la combobox
@@ -123,13 +129,17 @@ namespace GestcomWF.Views
 
             if (row != null && row.DataBoundItem is Lot lot)
             {
+
+                this._currentLot = lot;
+                _lastValidA = lot.LOPU1;
+                _lastValidB = lot.LOPU2;
+                _lastValidC = lot.LOPU3;
                 tbx_total.Text = lot.LOCEM1.ToString();
                 tbx_a.Text = lot.LOPU1.ToString();
                 tbx_b.Text = lot.LOPU2.ToString();
                 tbx_c.Text = lot.LOPU3.ToString();
                 tbxNumFromagerie.Text = lot.LOFROM.ToString();
 
-                this._currentLot = lot;
                 MoisNum moisNum = (MoisNum)cbxMois.SelectedItem;
                 _currentMontant = Math.Round(LotAdo.MontantLot(_currentLot.LOFROM, Convert.ToDecimal(tbxAnnee.Text), moisNum.Numero), 2);
                 tbxMontant.Text = _currentMontant.ToString();
@@ -273,11 +283,11 @@ namespace GestcomWF.Views
                         foreach (LotFrom lotFrom in lotFroms)
                         {
 
-                            if (lotFrom.FACTURATION == -5)
+                            if (lotFrom.FRRAP == -5)
                             {
                                 moisDecale = moisNumValue;
                             }
-                            else if (lotFrom.FACTURATION == -6)
+                            else if (lotFrom.FRRAP == -6)
                             {
                                 moisDecale = moisNumValue - 1;
                             }
@@ -322,11 +332,11 @@ namespace GestcomWF.Views
                                 objSheet.Cells[16, "A"].Value = "      TB/PB";
                                 objSheet.Cells[16, "G"].Value = "Le" + " " + formattedDate;
                                 objSheet.Cells[20, "B"].Value = "Monsieur le Président";
-                          
+
                                 objSheet.Cells[22, "B"].Value = "          Conformément à nos conditions d'achat, le décompte de votre";
-                              
+
                                 objSheet.Cells[23, "B"].Value = "lot de fabrication " + nomMoisDecale.ToUpper() + " " + annee + anneeValue + " s'établit comme suit :";
-                                
+
 
                                 /* this.workSheet["F27"].StringValue = moisNum.Mois.ToUpper() + " " + (annee + tbxAnnee.Text);
                                  this.workSheet["F27"].Style.Font.Bold = true;*/
@@ -342,7 +352,7 @@ namespace GestcomWF.Views
                                 objSheet.Columns[10].Columnwidth = 2.57;
                                 objSheet.Columns[11].Columnwidth = 13;
 
-                          
+
 
                                 objSheet.Rows[30].Rowheight = 3.75;
                                 objSheet.Rows[34].Rowheight = 3.75;
@@ -350,7 +360,7 @@ namespace GestcomWF.Views
 
                                 Excel.Range allCells = objSheet.Cells;
                                 allCells.HorizontalAlignment = Excel.XlHAlign.xlHAlignLeft;
-                              
+
                                 objSheet.Cells.Font.Name = "Arial";
 
                                 // Initialisez la ligne actuelle
@@ -576,7 +586,7 @@ namespace GestcomWF.Views
 
                                     objSheet.Cells[27, "F"].Value = "T";
 
-                                   // var sumRangePains = objSheet.Range["C25", "C26"].Value;
+                                    // var sumRangePains = objSheet.Range["C25", "C26"].Value;
                                     objSheet.Cells[27, "C"].Formula = "=SUM(C25:C26)";
                                     objSheet.Cells[27, "C"].HorizontalAlignment = XlHAlign.xlHAlignRight;
                                     //objSheet.Cells[27, "C"].Value = sumRangePains.Sum();
@@ -590,7 +600,7 @@ namespace GestcomWF.Views
 
                                     objSheet.Cells[27, "E"].Font.Bold = true;
 
-                                   // var sumRangePrix = objSheet.Range["K25", "K26"].Value;
+                                    // var sumRangePrix = objSheet.Range["K25", "K26"].Value;
                                     //objSheet.Cells[27, "K"].Value = sumRangePrix.Sum();
                                     objSheet.Cells[27, "K"].Formula = "=SUM(K25:K26)";
                                     objSheet.Cells[27, "K"].NumberFormat = @"#\ ##0,00€";
@@ -616,7 +626,7 @@ namespace GestcomWF.Views
                                     objSheet.Cells[36, "K"].HorizontalAlignment = XlHAlign.xlHAlignRight;
                                     objSheet.Cells[36, "K"].NumberFormat = @"#\ ##0,00€";
 
-                                   // var sum = objSheet.Range["K35", "K36"].Value;
+                                    // var sum = objSheet.Range["K35", "K36"].Value;
                                     objSheet.Cells[38, "K"].FormulaLocal = "=ARRONDI(SOMME(K35:K36); 2)";
                                     objSheet.Cells[38, "K"].HorizontalAlignment = XlHAlign.xlHAlignRight;
                                     //objSheet.Cells[38, "K"].Value = Math.Round(sum.Sum(), 2);
@@ -667,7 +677,7 @@ namespace GestcomWF.Views
                                         objSheet.Cells[36, "K"].HorizontalAlignment = XlHAlign.xlHAlignRight;
                                         objSheet.Cells[36, "K"].NumberFormat = @"#\ ##0,00€";
 
-                                       // var sumQuandPrime = objSheet.Range["K35", "K36"].Value;
+                                        // var sumQuandPrime = objSheet.Range["K35", "K36"].Value;
                                         objSheet.Cells[38, "K"].FormulaLocal = "=ARRONDI(SOMME(K35:K36); 2)";
                                         objSheet.Cells[38, "K"].HorizontalAlignment = XlHAlign.xlHAlignRight;
                                         //objSheet.Cells[38, "K"].Value = Math.Round(sumQuandPrime.Sum(), 2);
@@ -703,7 +713,7 @@ namespace GestcomWF.Views
                                     objSheet.Cells[28, "C"].Font.Bold = true;
 
                                     //var sumRangePoids = objSheet.Range["E25", "E27"].Value;
-                                   // objSheet.Cells[28, "E"].Value = sumRangePoids.Sum();
+                                    // objSheet.Cells[28, "E"].Value = sumRangePoids.Sum();
                                     objSheet.Cells[28, "E"].Formula = "=SUM(E25:E27)";
                                     objSheet.Cells[28, "E"].HorizontalAlignment = XlHAlign.xlHAlignRight;
 
@@ -721,7 +731,7 @@ namespace GestcomWF.Views
                                     var resultatSumPoidsTotal = objSheet.Cells[28, "E"];
 
                                     var test = resultatSumPrixTotal.Value / resultatSumPoidsTotal.Value;
-                                 
+
                                     decimal resultatSumPrixAcompte = Math.Round(objSheet.Cells[28, "K"].Value - acompte, 2);
                                     objSheet.Cells[31, "E"].Value = Math.Round(test, 2);
                                     objSheet.Cells[31, "E"].HorizontalAlignment = XlHAlign.xlHAlignRight;
@@ -732,7 +742,7 @@ namespace GestcomWF.Views
                                     objSheet.Cells[35, "K"].NumberFormat = @"#\ ##0,00€";
                                     objSheet.Cells[36, "K"].NumberFormat = @"#\ ##0,00€";
 
-                                   // var sum = objSheet.Range["K35", "K36"].Value;
+                                    // var sum = objSheet.Range["K35", "K36"].Value;
                                     objSheet.Cells[38, "K"].FormulaLocal = "=ARRONDI(SOMME(K35:K36); 2)";
                                     objSheet.Cells[38, "K"].HorizontalAlignment = XlHAlign.xlHAlignRight;
                                     // objSheet.Cells[38, "K"].Value = Math.Round(sum.Sum(), 2);
@@ -766,7 +776,7 @@ namespace GestcomWF.Views
 
 
                                         objSheet.Cells[31, "H"].Value = "Total";
-                                       // var sumRangeAvecPrime = objSheet.Range["K28", "K29"].Value;
+                                        // var sumRangeAvecPrime = objSheet.Range["K28", "K29"].Value;
                                         objSheet.Cells[31, "K"].Formula = "=SUM(K28:K29)";
                                         objSheet.Cells[31, "K"].HorizontalAlignment = XlHAlign.xlHAlignRight;
                                         // objSheet.Cells[31, "K"].Value = sumRangeAvecPrime.Sum();
@@ -781,7 +791,7 @@ namespace GestcomWF.Views
                                         objSheet.Cells[36, "K"].HorizontalAlignment = XlHAlign.xlHAlignRight;
                                         objSheet.Cells[36, "K"].NumberFormat = @"#\ ##0,00€";
 
-                                       // var sumQuandPrime = objSheet.Range["K35", "K36"].Value;
+                                        // var sumQuandPrime = objSheet.Range["K35", "K36"].Value;
                                         objSheet.Cells[38, "K"].FormulaLocal = "=ARRONDI(SOMME(K35:K36); 2)";
                                         objSheet.Cells[38, "K"].HorizontalAlignment = XlHAlign.xlHAlignRight;
                                         //objSheet.Cells[38, "K"].Value = Math.Round(sumQuandPrime.Sum(), 2);
@@ -894,20 +904,30 @@ namespace GestcomWF.Views
 
             if (e.KeyCode == Keys.Enter)
             {
+                decimal newValue;
 
-                decimal montant = decimal.Parse(tbx_a.Text) + decimal.Parse(tbx_b.Text) + decimal.Parse(tbx_c.Text);
-                decimal montantRounded = Math.Round(_currentMontant + montant, 5);
-                tbxMontant.Text = montantRounded.ToString();
-
-                //testMontant = Math.Round(currentMontant + montant, 2);
-                decimal a;
-                if (decimal.TryParse(tbx_a.Text, out a))
+                if (decimal.TryParse(tbx_a.Text, out newValue))
                 {
+                    if (newValue != _lastValidA)
+                    {
+                        _lastValidA = newValue; // Mettez à jour la dernière valeur valide.
+                        decimal montant = decimal.Parse(tbx_a.Text) + decimal.Parse(tbx_b.Text) + decimal.Parse(tbx_c.Text);
+                        decimal montantRounded = Math.Round(_currentMontant + montant, 5);
+                        tbxMontant.Text = montantRounded.ToString();
 
-                    this._currentLot.LOPU1 = Math.Round(a, 5);
-                    this._currentLot.MONTANT = montantRounded;
+                        //testMontant = Math.Round(currentMontant + montant, 2);
+                        decimal a;
+                        if (decimal.TryParse(tbx_a.Text, out a))
+                        {
 
+                            this._currentLot.LOPU1 = Math.Round(a, 5);
+                            this._currentLot.MONTANT = montantRounded;
+
+                        }
+                    }
                 }
+
+               
                 dataGridView.Refresh();
                 tbx_b.Focus();
             }
@@ -929,16 +949,27 @@ namespace GestcomWF.Views
             }
             if (e.KeyCode == Keys.Enter)
             {
-                decimal montant = decimal.Parse(tbx_a.Text) + decimal.Parse(tbx_b.Text) + decimal.Parse(tbx_c.Text);
-                decimal montantRounded = Math.Round(_currentMontant + montant, 5);
-                tbxMontant.Text = montantRounded.ToString();
-                decimal b;
-                if (decimal.TryParse(tbx_b.Text, out b))
+                decimal newValue;
+
+                if (decimal.TryParse(tbx_b.Text, out newValue))
                 {
+                    if (newValue != _lastValidB)
+                    {
+                        _lastValidB = newValue; // Mettez à jour la dernière valeur valide.
+                        decimal montant = decimal.Parse(tbx_a.Text) + decimal.Parse(tbx_b.Text) + decimal.Parse(tbx_c.Text);
+                        decimal montantRounded = Math.Round(_currentMontant + montant, 5);
+                        tbxMontant.Text = montantRounded.ToString();
 
-                    this._currentLot.LOPU2 = Math.Round(b, 5);
-                    this._currentLot.MONTANT = montantRounded;
+                        //testMontant = Math.Round(currentMontant + montant, 2);
+                        decimal b;
+                        if (decimal.TryParse(tbx_b.Text, out b))
+                        {
 
+                            this._currentLot.LOPU2 = Math.Round(b, 5);
+                            this._currentLot.MONTANT = montantRounded;
+
+                        }
+                    }
                 }
                 dataGridView.Refresh();
                 tbx_c.Focus();
@@ -960,17 +991,28 @@ namespace GestcomWF.Views
                 e.SuppressKeyPress = true;
             }
             if (e.KeyCode == Keys.Enter)
-            {
-                decimal montant = decimal.Parse(tbx_a.Text) + decimal.Parse(tbx_b.Text) + decimal.Parse(tbx_c.Text);
-                decimal montantRounded = Math.Round(_currentMontant + montant, 5);
-                tbxMontant.Text = montantRounded.ToString();
-                decimal c;
-                if (decimal.TryParse(tbx_c.Text, out c))
+            {    
+                decimal newValue;
+
+                if (decimal.TryParse(tbx_c.Text, out newValue))
                 {
+                    if (newValue != _lastValidC)
+                    {
+                        _lastValidC = newValue; // Mettez à jour la dernière valeur valide.
+                        decimal montant = decimal.Parse(tbx_a.Text) + decimal.Parse(tbx_b.Text) + decimal.Parse(tbx_c.Text);
+                        decimal montantRounded = Math.Round(_currentMontant + montant, 5);
+                        tbxMontant.Text = montantRounded.ToString();
 
-                    this._currentLot.LOPU3 = Math.Round(c, 5);
-                    this._currentLot.MONTANT = montantRounded;
+                        //testMontant = Math.Round(currentMontant + montant, 2);
+                        decimal c;  
+                        if (decimal.TryParse(tbx_c.Text, out c))
+                        {
 
+                            this._currentLot.LOPU3 = Math.Round(c, 5);
+                            this._currentLot.MONTANT = montantRounded;
+
+                        }
+                    }
                 }
                 dataGridView.Refresh();
             }

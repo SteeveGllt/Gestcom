@@ -17,7 +17,7 @@ namespace Gestcom.Models
             FRNOM = fRNOM;
         }
 
-        public Fromagerie(decimal fRNUM, string fRNOM, string fRADR, decimal fRCPOS, string fRVILL, string fRNDIR, decimal fRTYPE, decimal fRTCON, decimal fRCMEU, decimal fRCPOI, string fRMODR, string fRDOMI, decimal fRBANQ, decimal fRGUIC, string fRCOM1, string fRCOM2, decimal cOE1, decimal cOE2, decimal cOE3, decimal cOE4, decimal fRREFA, decimal fRPUAC, decimal fRETRE, string fRHIVE, string fRCVER, decimal fRVVER, string fREVER, bool fRACTIF, decimal facturation, decimal fRPRIME)
+        public Fromagerie(decimal fRNUM, string fRNOM, string fRADR, decimal fRCPOS, string fRVILL, string fRNDIR, decimal fRTYPE, decimal fRTCON, decimal fRCMEU, decimal fRCPOI, string fRMODR, string fRDOMI, decimal fRBANQ, decimal fRGUIC, string fRCOM1, string fRCOM2, decimal cOE1, decimal cOE2, decimal cOE3, decimal cOE4, decimal fRREFA, decimal fRPUAC, decimal fRETRE, string fRHIVE, string fRCVER, decimal fRVVER, string fREVER, bool fRACTIF, decimal fRRAP, decimal fRPRIME)
          {
              FRNUM = fRNUM;
              FRNOM = fRNOM;
@@ -47,7 +47,7 @@ namespace Gestcom.Models
              FRVVER = fRVVER;
              FREVER = fREVER;
              FRACTIF = fRACTIF;
-             FACTURATION = facturation;
+             FRRAP = fRRAP;
              FRPRIME = fRPRIME;
     }
 
@@ -79,7 +79,7 @@ namespace Gestcom.Models
         public Decimal FRVVER { get; set;}
         public String FREVER { get; set;}
         public Boolean FRACTIF { get; set;}
-        public Decimal FACTURATION { get; set;}
+        public Decimal FRRAP { get; set;}
         public Decimal FRPRIME { get; set;}
 
       
