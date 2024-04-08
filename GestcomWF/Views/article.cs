@@ -142,7 +142,7 @@ namespace GestcomWF.Views
 
         private void btnSupprimer_Click(object sender, EventArgs e)
         {
-            if(_articleSelectionne != null)
+            if (_articleSelectionne != null)
             {
                 decimal numArt = _articleSelectionne.ARNUM;
                 DialogResult dialogResult = MessageBox.Show("Voulez-vous vraiment supprimer ?", "Suppression", MessageBoxButtons.YesNo);
@@ -156,11 +156,29 @@ namespace GestcomWF.Views
                 {
                     //do something else
                 }
-            } else
+            }
+            else
             {
                 MessageBox.Show("Veuillez selectionner un article");
             }
-           
+
+        }
+
+        private void tbxPrixArt_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Decimal)
+            {
+                // Insérer une virgule à la position du curseur dans le TextBox
+                int selectionStart = tbxPrixArt.SelectionStart;
+                tbxPrixArt.Text = tbxPrixArt.Text.Insert(selectionStart, ",");
+
+                // Mettre à jour la position du curseur
+                tbxPrixArt.SelectionStart = selectionStart + 1;
+
+                // Empêcher la gestion ultérieure de cette touche
+                e.SuppressKeyPress = true;
+            }
+
         }
     }
 }

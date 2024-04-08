@@ -241,6 +241,7 @@
             tbxPrixArt.Name = "tbxPrixArt";
             tbxPrixArt.Size = new System.Drawing.Size(59, 23);
             tbxPrixArt.TabIndex = 20;
+            tbxPrixArt.KeyDown += tbxPrixArt_KeyDown;
             // 
             // label8
             // 
