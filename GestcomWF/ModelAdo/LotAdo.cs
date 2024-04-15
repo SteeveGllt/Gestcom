@@ -58,12 +58,10 @@ namespace Gestcom.ModelAdo
                         LOMOIS = reader.GetDecimal(3),
                         LODEP = reader.GetDecimal(4)
                     };
-                    MessageBox.Show("Le Lot Existe");
                     return lot;
                 }
                 else
                 {
-                    MessageBox.Show("Lot Nouveau");
                     return null;
                 }
 
@@ -96,7 +94,6 @@ namespace Gestcom.ModelAdo
                 oleDbCommand.Parameters.AddWithValue("@LOANNE", loanne);
                 oleDbCommand.Parameters.AddWithValue("@LOMOIS", lomois);
                 oleDbCommand.ExecuteNonQuery();
-                MessageBox.Show("Lot Modifié");
             }
             catch (Exception ex)
             {
@@ -125,7 +122,6 @@ namespace Gestcom.ModelAdo
 
                 oleDbCommand.CommandText = "UPDATE TB_Lots SET TB_Lots.LOPUAC = ROUND(TB_Lots.MONTANT / TB_Lots.LOCEN1, 2) WHERE LOFACO = 1 AND LOFROM = " + lofrom + "AND LOANNE =" + loanne + "AND LOMOIS =" + lomois + "AND LODEP = 0";
                 oleDbCommand.ExecuteNonQuery();
-                MessageBox.Show("Lot Modifié");
             }
             catch (Exception ex)
             {
@@ -165,7 +161,6 @@ namespace Gestcom.ModelAdo
                     oleDbCommand.Parameters.AddWithValue("@LOMOIS", lomois);
 
                     oleDbCommand.ExecuteNonQuery();
-                    MessageBox.Show("Lot Modifié");
                 }
                 else
                 {
@@ -197,7 +192,6 @@ namespace Gestcom.ModelAdo
                 oleDbCommand.Parameters.AddWithValue("@LOCEN1", lot.LOCEN1);
                 oleDbCommand.ExecuteNonQuery();
                 Console.WriteLine("Lot créé");
-                MessageBox.Show("Lot créé");
             }
             catch (Exception ex)
             {
@@ -225,7 +219,6 @@ namespace Gestcom.ModelAdo
                 oleDbCommand.Parameters.AddWithValue("@MONTANT", Convert.ToDouble(lot.LOPUAC) * Convert.ToDouble(lot.LOCEN1));
                 oleDbCommand.ExecuteNonQuery();
                 Console.WriteLine("Lot créé");
-                MessageBox.Show("Lot créé");
             }
             catch (Exception ex)
             {
@@ -257,7 +250,6 @@ namespace Gestcom.ModelAdo
                 oleDbCommand.Parameters.AddWithValue("@LOTAUX", entreeLot.LOTAUX); // Freinte
                 oleDbCommand.ExecuteNonQuery();
                 Console.WriteLine("Lot créé dans entrée lot");
-                MessageBox.Show("Lot créé dans entrée lot");
             }
             catch (Exception ex)
             {
@@ -287,7 +279,6 @@ namespace Gestcom.ModelAdo
                 oleDbCommand.Parameters.AddWithValue("@PRIX", Convert.ToDouble(entreeLot.PRIX)); // Freinte
                 oleDbCommand.ExecuteNonQuery();
                 Console.WriteLine("Lot créé dans entrée lot");
-                MessageBox.Show("Lot créé dans entrée lot");
             }
             catch (Exception ex)
             {
@@ -404,7 +395,6 @@ namespace Gestcom.ModelAdo
                 oleDbCommand.Parameters.AddWithValue("@LOANNE", loanne);
                 oleDbCommand.Parameters.AddWithValue("@LOMOIS", lomois);
                 oleDbCommand.ExecuteNonQuery();
-                MessageBox.Show("Lot Modifié");
             }
             catch (Exception ex)
             {
@@ -552,7 +542,6 @@ namespace Gestcom.ModelAdo
                 oleDbCommand.Prepare();
                 oleDbCommand.Parameters.AddWithValue("@LOPUAC", newPrix);
                 oleDbCommand.ExecuteNonQuery();
-                MessageBox.Show("Prix de tous les lots modifiés");
             }
             catch (Exception ex)
             {
@@ -637,7 +626,6 @@ namespace Gestcom.ModelAdo
                 oleDbCommand.Parameters.AddWithValue("@LOANNE", loanne);
                 oleDbCommand.Parameters.AddWithValue("@LOMOIS", lomois);
                 oleDbCommand.ExecuteNonQuery();
-                MessageBox.Show("Lot Modifié");
             }
             catch (Exception ex)
             {
