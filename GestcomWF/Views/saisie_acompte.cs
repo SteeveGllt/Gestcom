@@ -7,6 +7,7 @@ using Microsoft.Office.Interop.Excel;
 using Excel = Microsoft.Office.Interop.Excel;
 using Microsoft.VisualBasic;
 using System.Reflection;
+using System.Windows.Forms;
 
 namespace GestcomWF.Views
 {
@@ -370,7 +371,8 @@ namespace GestcomWF.Views
                         SaveFileDialog saveFileDialog = new SaveFileDialog();
                         saveFileDialog.Filter = "Excel files(*.xls; *.xlsx)| *.xls; *.xlsx";
                         saveFileDialog.Title = "Enregistrez le fichier sous...";
-                        saveFileDialog.InitialDirectory = dataPath.PathAcompte;
+                        string initialDir = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, dataPath.PathAcompte));
+                        saveFileDialog.InitialDirectory = initialDir;
                         if (moisNum.Numero < 10)
                         {
                             moisExcel = "0" + moisNum.Numero;
@@ -439,7 +441,13 @@ namespace GestcomWF.Views
             PrintDialog printDialog = new PrintDialog();
             if (string.IsNullOrEmpty(_lastPathSaved))
             {
-                _lastPathSaved = GetLatestFilePath(dataPath.PathAcompte);
+
+                string initialDir = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, dataPath.PathAcompte));
+                _lastPathSaved = GetLatestFilePath(initialDir);
+                if (string.IsNullOrEmpty(_lastPathSaved))
+                {
+                    return;
+                }
                 if (printDialog.ShowDialog() == DialogResult.OK)
                 {
                     string selectedPrinter = printDialog.PrinterSettings.PrinterName;

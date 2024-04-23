@@ -7,6 +7,7 @@ using Microsoft.VisualBasic;
 using System.Reflection;
 using System.Reflection.Metadata;
 using IronXL;
+using System.Windows.Forms;
 
 namespace GestcomWF.Views
 {
@@ -190,7 +191,7 @@ namespace GestcomWF.Views
                             {
                                 // Remplissez les données pour chaque entrée de fromagerie
 
-                                objSheet.Cells[currentRow, "B"] = dateEntry.Date_Entrée.ToString("dd/MM/yyyy");
+                                objSheet.Cells[currentRow, "B"] = dateEntry.Date_Entrée;
                                 objSheet.Cells[currentRow, "B"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
 
                                 
@@ -311,28 +312,40 @@ namespace GestcomWF.Views
                         }
 
                     }
-                    // Propose à l'utilisateur d'enregistrer le fichier Excel
-                    SaveFileDialog saveFileDialog = new SaveFileDialog();
-                    saveFileDialog.Filter = "Excel files(*.xls; *.xlsx)| *.xls; *.xlsx";
-                    saveFileDialog.Title = "Enregistrez le fichier sous...";
-                    saveFileDialog.InitialDirectory = dataPath.PathPesee;
-                    if (moisNum.Numero < 10)
+                    try
                     {
-                        moisExcel = "0" + moisNum.Numero;
-                    }
-                    else
-                    {
-                        moisExcel = moisNum.Numero.ToString();
-                    }
-                    saveFileDialog.FileName = "Pesées_" + tbxAnnee.Text + moisExcel + ".xlsx";
-                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
-                    {
-                        string path = saveFileDialog.FileName;
-                        objBook.SaveAs(path);
-                        objBook.Close();
-                        objApp.Quit();
-                        
+                        // Propose à l'utilisateur d'enregistrer le fichier Excel
+                        SaveFileDialog saveFileDialog = new SaveFileDialog();
+                        saveFileDialog.Filter = "Excel files(*.xls; *.xlsx)| *.xls; *.xlsx";
+                        saveFileDialog.Title = "Enregistrez le fichier sous...";
+                        string initialDir = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, dataPath.PathPesee));
+                        saveFileDialog.InitialDirectory = initialDir;
+                        if (moisNum.Numero < 10)
+                        {
+                            moisExcel = "0" + moisNum.Numero;
+                        }
+                        else
+                        {
+                            moisExcel = moisNum.Numero.ToString();
+                        }
+                        saveFileDialog.FileName = "Pesées_" + tbxAnnee.Text + moisExcel + ".xlsx";
+                        if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                        {
+                            string path = saveFileDialog.FileName;
+                            objBook.SaveAs(path);
+                            objBook.Close(false, Missing.Value, Missing.Value);
+                            objApp.Quit();
 
+                            // Nettoyer les interfaces COM
+                            System.Runtime.InteropServices.Marshal.ReleaseComObject(objSheets);
+                            System.Runtime.InteropServices.Marshal.ReleaseComObject(objBook);
+                            System.Runtime.InteropServices.Marshal.ReleaseComObject(objBooks);
+                            System.Runtime.InteropServices.Marshal.ReleaseComObject(objApp);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Erreur lors de la création ou de l'enregistrement du fichier : " + ex.Message);
                     }
                 }
             }
@@ -378,7 +391,8 @@ namespace GestcomWF.Views
             {
                 // Filtre les fichiers pour n'afficher que les fichiers Excel
                 openFileDialog.Filter = "Excel files (*.xls; *.xlsx)|*.xls;*.xlsx";
-
+                string initialDir = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, dataPath.PathPesee));
+                openFileDialog.InitialDirectory = initialDir;
                 // Affiche la boîte de dialogue de sélection de fichier.
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {

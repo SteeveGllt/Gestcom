@@ -263,7 +263,7 @@ namespace GestcomWF.Views
                 Excel.Range range;
 
                 objApp = new Excel.Application();
-                objApp.Visible = true;
+                objApp.Visible = false;
                 objBooks = objApp.Workbooks;
                 objBook = objBooks.Add(Missing.Value);
                 objSheets = objBook.Worksheets;
@@ -306,7 +306,7 @@ namespace GestcomWF.Views
                                 objSheet.Cells[10, "D"] = lotFrom.FRNOM;
                                 objSheet.Cells[11, "D"] = lotFrom.FRNDIR;
                                 objSheet.Cells[12, "D"] = lotFrom.FRADR;
-                                objSheet.Cells[12, "D"] = lotFrom.FRCPOS + " " + lotFrom.FRVILL;
+                                objSheet.Cells[13, "D"] = lotFrom.FRCPOS + " " + lotFrom.FRVILL;
                                 objSheet.Cells[18, "A"] = "      TB/PB";
                                 objSheet.Cells[19, "D"] = "Le" + " " + formattedDate;
                                 objSheet.Cells[24, "B"] = "Monsieur le Président";
@@ -438,7 +438,8 @@ namespace GestcomWF.Views
                         SaveFileDialog saveFileDialog = new SaveFileDialog();
                         saveFileDialog.Filter = "Excel files(*.xls; *.xlsx)| *.xls; *.xlsx";
                         saveFileDialog.Title = "Enregistrez le fichier sous...";
-                        saveFileDialog.InitialDirectory = dataPath.PathClassement;
+                        string initialDir = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, dataPath.PathClassement));
+                        saveFileDialog.InitialDirectory = initialDir;
                         if (moisNum.Numero < 10)
                         {
                             moisExcel = "0" + moisNum.Numero;
@@ -513,7 +514,12 @@ namespace GestcomWF.Views
             PrintDialog printDialog = new PrintDialog();
             if (string.IsNullOrEmpty(_lastPathSaved))
             {
-                _lastPathSaved = GetLatestFilePath(dataPath.PathClassement);
+                string initialDir = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, dataPath.PathClassement));
+                _lastPathSaved = GetLatestFilePath(initialDir);
+                if (string.IsNullOrEmpty(_lastPathSaved))
+                {
+                    return;
+                }
                 if (printDialog.ShowDialog() == DialogResult.OK)
                 {
                     string selectedPrinter = printDialog.PrinterSettings.PrinterName;
@@ -536,6 +542,7 @@ namespace GestcomWF.Views
 
         private void PrintAllSheets(string filePath, string printerName)
         {
+           
             // Initialise les objets pour l'application Excel et le classeur.
             Microsoft.Office.Interop.Excel.Application excelApp = new Microsoft.Office.Interop.Excel.Application();
             Microsoft.Office.Interop.Excel.Workbook workbook = excelApp.Workbooks.Open(filePath);

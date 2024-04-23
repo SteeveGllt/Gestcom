@@ -8,10 +8,10 @@ namespace GestcomWF.DataAccess
 {
     public class DataPath
     {
-        private string _pathAcompte = "../../../Documents/Acomptes";
-        private string _pathRappel = "../../../Documents/Rappels";
-        private string _pathPesee = "../../../Documents/Pesée";
-        private string _pathClassement = "../../../Documents/Classements";
+        private string _pathAcompte = @"..\..\..\..\Documents\Acomptes";
+        private string _pathRappel = @"..\..\..\..\Documents\Rappels";
+        private string _pathPesee = @"..\..\..\..\Documents\Pesées";
+        private string _pathClassement = @"..\..\..\..\Documents\Classements";
 
         public string PathAcompte { get => _pathAcompte; set => _pathAcompte = value; }
         public string PathRappel { get => _pathRappel; set => _pathRappel = value; }

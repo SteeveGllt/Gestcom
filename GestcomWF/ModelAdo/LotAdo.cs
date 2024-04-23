@@ -182,7 +182,24 @@ namespace Gestcom.ModelAdo
                 open();
                 OleDbCommand oleDbCommand = new OleDbCommand();
                 oleDbCommand.Connection = connection;
-                oleDbCommand.CommandText = "INSERT INTO TB_Lots(LOFACO, LOFROM, LOANNE, LOMOIS, LODEP, LOCEM1, LOCEB1, LOCEN1, LOCPES, LOCC1, LOC11, LOC12, LOC13) VALUES(1, @LOFROM, @LOANNE, @LOMOIS, 0, @LOCEM1, @LOCEB1, @LOCEN1, 0, 0, 0, 0, 0)";
+                oleDbCommand.CommandText = @"
+INSERT INTO TB_Lots(
+    LOFACO, LOFROM, LOANNE, LOMOIS, LODEP, LOCEM1, LOCEB1, LOCEN1, 
+    LOCPES, LOCC1, LOC11, LOC12, LOC13, LOC14, LOPUAC, LOCACO, LOPU1, 
+    LOPU2, LOPU3, LOPU4, LOCDEF, LOC21, LOC22, LOC23, LOC24, LOVM1, 
+    LOVM2, LOVM3, LOVM4, LOVV1, LOVV2, LOVV3, LOVV4, LOVP1, LOVP2, 
+    LOVP3, LOVP4, LOSM1, LOSM2, LOSM3, LOSM4, LOSP1, LOSP2, LOSP3, 
+    LOSP4, LOTCON, DATC1, DATC2, LOCC2N, DATACO, LOFR1, LOFR2, LOFR3, 
+    LOFR4, LOFV1, LOFV2, LOFV3, LOFV4, LOPSTK, MONTANT
+) VALUES (
+    1, @LOFROM, @LOANNE, @LOMOIS, 0, @LOCEM1, @LOCEB1, @LOCEN1, 
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 
+    0, 1, 0, 0, 0, 0, 0, 0, 0, 
+    0, 0, 0, 0, 0, 0, 0
+)";
                 oleDbCommand.Prepare();
                 oleDbCommand.Parameters.AddWithValue("@LOFROM", lot.LOFROM);
                 oleDbCommand.Parameters.AddWithValue("@LOANNE", lot.LOANNE);
@@ -207,7 +224,25 @@ namespace Gestcom.ModelAdo
                 open();
                 OleDbCommand oleDbCommand = new OleDbCommand();
                 oleDbCommand.Connection = connection;
-                oleDbCommand.CommandText = "INSERT INTO TB_Lots(LOFACO, LOFROM, LOANNE, LOMOIS, LODEP, LOCEM1, LOCEB1, LOCEN1, LOCPES, LOCC1, LOC11, LOC12, LOC13, LOPUAC, MONTANT) VALUES(1, @LOFROM, @LOANNE, @LOMOIS, 0, @LOCEM1, @LOCEB1, @LOCEN1, 0, 0, 0, 0, 0, @LOPUAC, @MONTANT)";
+               // oleDbCommand.CommandText = "INSERT INTO TB_Lots(LOFACO, LOFROM, LOANNE, LOMOIS, LODEP, LOCEM1, LOCEB1, LOCEN1, LOCPES, LOCC1, LOC11, LOC12, LOC13, LOPUAC, MONTANT) VALUES(1, @LOFROM, @LOANNE, @LOMOIS, 0, @LOCEM1, @LOCEB1, @LOCEN1, 0, 0, 0, 0, 0, @LOPUAC, @MONTANT)";
+                oleDbCommand.CommandText = @"
+INSERT INTO TB_Lots(
+    LOFACO, LOFROM, LOANNE, LOMOIS, LODEP, LOCEM1, LOCEB1, LOCEN1, 
+    LOCPES, LOCC1, LOC11, LOC12, LOC13, LOC14, LOPUAC, LOCACO, LOPU1, 
+    LOPU2, LOPU3, LOPU4, LOCDEF, LOC21, LOC22, LOC23, LOC24, LOVM1, 
+    LOVM2, LOVM3, LOVM4, LOVV1, LOVV2, LOVV3, LOVV4, LOVP1, LOVP2, 
+    LOVP3, LOVP4, LOSM1, LOSM2, LOSM3, LOSM4, LOSP1, LOSP2, LOSP3, 
+    LOSP4, LOTCON, DATC1, DATC2, LOCC2N, DATACO, LOFR1, LOFR2, LOFR3, 
+    LOFR4, LOFV1, LOFV2, LOFV3, LOFV4, LOPSTK, MONTANT
+) VALUES (
+    1, @LOFROM, @LOANNE, @LOMOIS, 0, @LOCEM1, @LOCEB1, @LOCEN1, 
+    0, 0, 0, 0, 0, 0, @LOPUAC, 0, 0, 
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 
+    0, 1, 0, 0, 0, 0, 0, 0, 0, 
+    0, 0, 0, 0, 0, 0, @MONTANT
+)";
                 oleDbCommand.Prepare();
                 oleDbCommand.Parameters.AddWithValue("@LOFROM", lot.LOFROM);
                 oleDbCommand.Parameters.AddWithValue("@LOANNE", lot.LOANNE);
@@ -658,7 +693,7 @@ namespace Gestcom.ModelAdo
                 OleDbCommand oleDbCommand = new OleDbCommand("SELECT TB_Lots.LOFROM, TB_Fromageries.FRNOM, TB_Fromageries.FRNDIR, TB_Fromageries.FRADR, TB_Fromageries.FRCPOS, TB_Fromageries.FRPRIME, TB_Lots.LOCEN1, TB_Lots.LOCEM1, TB_Lots.LOC11, TB_Lots.LOC12, TB_Lots.LOC13, " +
                     " TB_Lots.LOPUAC, TB_Lots.LOPU1, TB_Lots.LOPU2, TB_Lots.LOPU3, TB_Lots.LOANNE, TB_Lots.LOMOIS, TB_Fromageries.FRVILL, TB_Fromageries.FRNUM, TB_Fromageries.FRRAP, TB_Fromageries.FRDOMI, TB_Fromageries.FRBANQ, TB_Fromageries.FRGUIC, TB_Fromageries.FRCOM1, TB_Fromageries.FRCOM2 FROM TB_Fromageries INNER JOIN TB_Lots ON TB_Fromageries.FRNUM = TB_Lots.LOFROM" +
                     " WHERE ((TB_Fromageries.FRAFFINE)=False) AND ((TB_Fromageries.FRACTIF)=True) AND ((TB_Lots.LOANNE)=Year(DateAdd(\"m\",[TB_Fromageries].[FRRAP], #" + date5.ToString("yyyy-MM-dd") + "#))-2000) AND ((TB_Lots.LOMOIS)=Month(DateAdd(\"m\",[TB_Fromageries].[FRRAP], #" + date5.ToString("yyyy-MM-dd") + "#))) AND TB_Lots.LODEP = 0 ORDER BY TB_Lots.LOFROM; ");
-                
+
                 oleDbCommand.Connection = connection;
                 /*oleDbCommand.Prepare();
                 oleDbCommand.Parameters.AddWithValue("@LOANNE", annee);

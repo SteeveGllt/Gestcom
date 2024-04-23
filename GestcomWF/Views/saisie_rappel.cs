@@ -8,6 +8,7 @@ using System.Reflection;
 using Microsoft.Office.Interop.Excel;
 using Excel = Microsoft.Office.Interop.Excel;
 using IronXL;
+using System.Windows.Forms;
 
 namespace GestcomWF.Views
 {
@@ -238,7 +239,7 @@ namespace GestcomWF.Views
                     Excel.Range range;
 
                     objApp = new Excel.Application();
-                    objApp.Visible = true;
+                    objApp.Visible = false;
                     objBooks = objApp.Workbooks;
                     objBook = objBooks.Add(Missing.Value);
                     objSheets = objBook.Worksheets;
@@ -860,7 +861,8 @@ namespace GestcomWF.Views
                         SaveFileDialog saveFileDialog = new SaveFileDialog();
                         saveFileDialog.Filter = "Excel files(*.xls; *.xlsx)| *.xls; *.xlsx";
                         saveFileDialog.Title = "Enregistrez le fichier sous...";
-                        saveFileDialog.InitialDirectory = dataPath.PathRappel;
+                        string initialDir = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, dataPath.PathRappel));
+                        saveFileDialog.InitialDirectory = initialDir;
                         if (moisNum.Numero < 10)
                         {
                             moisExcel = "0" + moisNum.Numero;
@@ -1041,7 +1043,12 @@ namespace GestcomWF.Views
             PrintDialog printDialog = new PrintDialog();
             if (string.IsNullOrEmpty(_lastPathSaved))
             {
-                _lastPathSaved = GetLatestFilePath(dataPath.PathRappel);
+                string initialDir = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, dataPath.PathRappel));
+                _lastPathSaved = GetLatestFilePath(initialDir);
+                if (string.IsNullOrEmpty(_lastPathSaved))
+                {
+                    return;
+                }
                 if (printDialog.ShowDialog() == DialogResult.OK)
                 {
                     string selectedPrinter = printDialog.PrinterSettings.PrinterName;
