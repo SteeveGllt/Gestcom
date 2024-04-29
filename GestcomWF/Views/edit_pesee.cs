@@ -421,11 +421,17 @@ namespace GestcomWF.Views
 
             try
             {
-                // Parcourt et imprime chaque feuille du classeur.
-                foreach (Microsoft.Office.Interop.Excel.Worksheet worksheet in workbook.Sheets)
-                {
-                    worksheet.PrintOutEx();
-                }
+                // Configure les paramètres d'impression pour Microsoft Print to PDF
+                excelApp.PrintCommunication = false;
+                excelApp.ActiveWorkbook.PrintOutEx(
+                    From: 1,
+                    To: workbook.Sheets.Count,
+                    Copies: 1,
+                    Preview: false,
+                    PrintToFile: true,
+                    Collate: true
+                );
+                excelApp.PrintCommunication = true;
             }
             catch (Exception ex)
             {

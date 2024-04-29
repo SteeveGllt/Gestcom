@@ -448,7 +448,7 @@ namespace GestcomWF.Views
                         {
                             moisExcel = moisNum.Numero.ToString();
                         }
-                        saveFileDialog.FileName = "Classements_" + tbxAnnee.Text + moisExcel + ".xls";
+                        saveFileDialog.FileName = "Classements_" + tbxAnnee.Text + moisExcel + ".xlsx";
                         if (saveFileDialog.ShowDialog() == DialogResult.OK)
                         {
                             string path = saveFileDialog.FileName;

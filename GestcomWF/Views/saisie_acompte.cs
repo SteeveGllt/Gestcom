@@ -52,6 +52,7 @@ namespace GestcomWF.Views
             checkBoxUpdateAll.Checked = true;
 
             btn_valider_dg.Visible = false;
+            dataGridView.Columns[2].DefaultCellStyle.Format = "N2";
 
             AjusterAnnee();
 
@@ -137,14 +138,14 @@ namespace GestcomWF.Views
                             // Mettre à jour le prix pour chaque lot affiché dans le DataGridView
                             foreach (Lot lot in lots)
                             {
-                                LotAdo.updateLotPrix(lot.LOFROM, Convert.ToDecimal(tbx_annee.Text), moisNum.Numero, Convert.ToDouble(newPrice * 1000));
+                                LotAdo.updateLotPrix(lot.LOFROM, Convert.ToDecimal(tbx_annee.Text), moisNum.Numero, Convert.ToDouble(newPrice));
                                 lot.LOPUAC = newPrice;
                             }
                         }
                         else
                         {
                             // Mettre à jour un seul lot
-                            LotAdo.updateLotPrix(this._currentLot.LOFROM, Convert.ToDecimal(tbx_annee.Text), moisNum.Numero, Convert.ToDouble(newPrice * 1000));
+                            LotAdo.updateLotPrix(this._currentLot.LOFROM, Convert.ToDecimal(tbx_annee.Text), moisNum.Numero, Convert.ToDouble(newPrice));
                             this._currentLot.LOPUAC = newPrice;
                         }
                         // Rafraîchissez le DataGridView
@@ -216,7 +217,7 @@ namespace GestcomWF.Views
                         foreach (LotFrom lotFrom in lotFroms)
                         {
 
-                            prix = Math.Round((lotFrom.LOCEN1 / 1000) * (lotFrom.LOPUAC / 1000), 2);
+                            prix = Math.Round((lotFrom.LOCEN1 / 1000) * (lotFrom.LOPUAC), 2);
                             acompte = lotFrom.LOPUAC * lotFrom.LOCEN1;
                             string nomFeuille = lotFrom.FRNOM.Replace("/", "-");
 
@@ -286,7 +287,8 @@ namespace GestcomWF.Views
                                 objSheet.Cells[28, "G"].Value = "x";
                                 objSheet.Cells[28, "G"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
 
-                                objSheet.Cells[28, "H"].Value = lotFrom.LOPUAC / 1000;
+                                //objSheet.Cells[28, "H"].Value = lotFrom.LOPUAC / 1000;
+                                objSheet.Cells[28, "H"].Value = lotFrom.LOPUAC;
                                 objSheet.Cells[28, "H"].HorizontalAlignment = XlHAlign.xlHAlignRight;
                                 objSheet.Cells[28, "H"].NumberFormat = @"#\ ##0,00€";
 
