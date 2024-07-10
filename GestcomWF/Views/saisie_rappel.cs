@@ -885,7 +885,7 @@ namespace GestcomWF.Views
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Une erreur est survenue ou le fichier est déjà généré");
+                MessageBox.Show(ex + "Une erreur est survenue ou le fichier est déjà généré");
             }
         }
 

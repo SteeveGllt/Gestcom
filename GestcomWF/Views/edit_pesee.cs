@@ -127,7 +127,7 @@ namespace GestcomWF.Views
                             objSheet.Range["B27", "F27"].Borders[XlBordersIndex.xlEdgeTop].Weight = XlBorderWeight.xlThin;
                             objSheet.Range["B27", "F27"].Borders[XlBordersIndex.xlEdgeTop].ColorIndex = 0;
 
-                            objSheet.Columns[1].Columnwidth = 27.53;
+                            objSheet.Columns[1].Columnwidth = 20.53;
                             objSheet.Columns[2].Columnwidth = 12.27;
                             objSheet.Columns[3].Columnwidth = 12.27;
                             objSheet.Columns[4].Columnwidth = 12.27;
