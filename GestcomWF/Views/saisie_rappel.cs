@@ -54,9 +54,9 @@ namespace GestcomWF.Views
             dataGridView.DataSource = null;
             tbxNumFromagerie.Enabled = false;
             dataGridView.DefaultCellStyle.Format = "0";
-            dataGridView.Columns[4].DefaultCellStyle.Format = "N5";
-            dataGridView.Columns[6].DefaultCellStyle.Format = "N5";
-            dataGridView.Columns[8].DefaultCellStyle.Format = "N5";
+            dataGridView.Columns[4].DefaultCellStyle.Format = "N2";
+            dataGridView.Columns[6].DefaultCellStyle.Format = "N2";
+            dataGridView.Columns[8].DefaultCellStyle.Format = "N2";
             dataGridView.Columns[9].DefaultCellStyle.Format = "N2";
             dataGridView.DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopRight;
 
@@ -77,6 +77,7 @@ namespace GestcomWF.Views
         {
 
             decimal a, b, c;
+         
 
 
             if (decimal.TryParse(tbx_a.Text, out a) && decimal.TryParse(tbx_b.Text, out b) && decimal.TryParse(tbx_c.Text, out c))
@@ -91,6 +92,10 @@ namespace GestcomWF.Views
                 else if (!IsNonNegativeNumber(tbx_a.Text) || !IsNonNegativeNumber(tbx_b.Text) || !IsNonNegativeNumber(tbx_c.Text))
                 {
                     MessageBox.Show("Veuillez entrer des nombres valides dans chaque champ.");
+                    return;
+                } else if (!IsValidPriceFormat(tbx_a.Text) || !IsValidPriceFormat(tbx_b.Text) || !IsValidPriceFormat(tbx_c.Text))
+                {
+                    MessageBox.Show("Veuillez entrer un prix valide en tonne (max 9 chiffres avant la virgule et 2 chiffres après la virgule).");
                     return;
                 }
 
@@ -118,6 +123,23 @@ namespace GestcomWF.Views
                 MessageBox.Show("Ce n'est pas un decimal !");
             }
             dataGridView.Refresh();
+        }
+
+        private bool IsValidPriceFormat(string input)
+        {
+            if (decimal.TryParse(input, out decimal number))
+            {
+                string[] parts = input.Split('.');
+                if (parts.Length == 2)
+                {
+                    return parts[0].Length <= 9 && parts[1].Length <= 2;
+                }
+                else if (parts.Length == 1)
+                {
+                    return parts[0].Length <= 9;
+                }
+            }
+            return false;
         }
 
         private void dataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
