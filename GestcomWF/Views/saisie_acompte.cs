@@ -183,7 +183,7 @@ namespace GestcomWF.Views
                     Excel.Range range;
 
                     objApp = new Excel.Application();
-                    objApp.Visible = false;
+                    objApp.Visible = true;
                     objBooks = objApp.Workbooks;
                     objBook = objBooks.Add(Missing.Value);
                     objSheets = objBook.Worksheets;
@@ -290,7 +290,7 @@ namespace GestcomWF.Views
                                 //objSheet.Cells[28, "H"].Value = lotFrom.LOPUAC / 1000;
                                 objSheet.Cells[28, "H"].Value = lotFrom.LOPUAC;
                                 objSheet.Cells[28, "H"].HorizontalAlignment = XlHAlign.xlHAlignRight;
-                                objSheet.Cells[28, "H"].NumberFormat = @"#\ ##0,00€";
+                                objSheet.Cells[28, "H"].NumberFormat = @"#\ ##0,00 €";
 
 
                                 objSheet.Cells[28, "I"].Value = " =";
@@ -298,11 +298,11 @@ namespace GestcomWF.Views
 
                                 objSheet.Cells[28, "J"].Value = prix;
                                 objSheet.Cells[28, "J"].HorizontalAlignment = XlHAlign.xlHAlignRight;
-                                objSheet.Cells[28, "J"].NumberFormat = @"#\ ##0,00€";
+                                objSheet.Cells[28, "J"].NumberFormat = @"#\ ##0,00 €";
 
                                 objSheet.Cells[30, "J"].Value = prix;
                                 objSheet.Cells[30, "J"].HorizontalAlignment = XlHAlign.xlHAlignRight;
-                                objSheet.Cells[30, "J"].NumberFormat = @"#\ ##0,00€";
+                                objSheet.Cells[30, "J"].NumberFormat = @"#\ ##0,00 €";
 
 
                                 /*foreach (var dateEntry in lotFroms.Where(item => item.FRNUM == lotFrom.FRNUM))
@@ -339,7 +339,7 @@ namespace GestcomWF.Views
                                 objSheet.Cells[31, "H"].HorizontalAlignment = XlHAlign.xlHAlignRight;
                                 objSheet.Cells[31, "I"].Value = "%";
                                 objSheet.Cells[31, "J"].Value = prix * 5.5m / 100;
-                                objSheet.Cells[31, "J"].NumberFormat = @"#\ ##0,00€";
+                                objSheet.Cells[31, "J"].NumberFormat = @"#\ ##0,00 €";
 
                                 objSheet.Cells[33, "F"].Value = "Total Réglé";
                                 objSheet.Cells[33, "F"].Font.Bold = true;
@@ -348,7 +348,7 @@ namespace GestcomWF.Views
 
                                 objSheet.Cells[33, "J"].Formula = "=SUM(J30:J31)";
                                 objSheet.Cells[33, "J"].Font.Bold = true;
-                                objSheet.Cells[33, "J"].NumberFormat = @"#\ ##0,00€";
+                                objSheet.Cells[33, "J"].NumberFormat = @"#\ ##0,00 €";
                                 var sum = objSheet.Cells[33, "J"].Value;
 
 
@@ -361,7 +361,7 @@ namespace GestcomWF.Views
                                 objSheet.Cells[46, "B"].Value = "PS : Nous virons ce jour, sur votre compte N° " + lotFrom.FRBANQ + " " + lotFrom.FRGUIC + " " + lotFrom.FRCOM1 + " " + lotFrom.FRCOM2;
                                 objSheet.Cells[47, "B"].Value = lotFrom.FRDOMI + ", la somme de";
                                 objSheet.Cells[47, "J"].Value = sum;
-                                objSheet.Cells[47, "J"].NumberFormat = @"#\ ##0,00€";
+                                objSheet.Cells[47, "J"].NumberFormat = @"#\ ##0,00 €";
 
 
                                 valeurPrecedente = lotFrom.FRNUM;

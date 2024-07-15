@@ -101,11 +101,23 @@ namespace GestcomWF.Views
 
                 else
                 {
-                    var montant = ((_currentLot.LOC11 * Convert.ToDecimal(tbx_a.Text) + _currentLot.LOC12 * Convert.ToDecimal(tbx_b.Text) + _currentLot.LOC13 * Convert.ToDecimal(tbx_c.Text)) / _currentLot.LOCEM1) * _currentLot.LOCEN1;
+                   // var montant = ((_currentLot.LOC11 * Convert.ToDecimal(tbx_a.Text) + _currentLot.LOC12 * Convert.ToDecimal(tbx_b.Text) + _currentLot.LOC13 * Convert.ToDecimal(tbx_c.Text)) / _currentLot.LOCEM1) * _currentLot.LOCEN1;
+                    var tonnageA = Math.Round((_currentLot.LOC11 / _currentLot.LOCEM1) * (_currentLot.LOCEN1 / 1000), 3);
+                    var tonnageB = Math.Round((_currentLot.LOC12 / _currentLot.LOCEM1) * (_currentLot.LOCEN1 / 1000), 3);
+                    var tonnageC = Math.Round((_currentLot.LOC13 / _currentLot.LOCEM1) * _currentLot.LOCEN1 / 1000, 3);
+
+                    var montantA = Math.Round(tonnageA * Convert.ToDecimal(tbx_a.Text), 2);
+                    var montantB = Math.Round(tonnageB * Convert.ToDecimal(tbx_b.Text), 2);
+                    var montantC = Math.Round(tonnageC * Convert.ToDecimal(tbx_c.Text), 2);
+
+                    var montant = montantA + montantB + montantC;
+
+
+
                     double valueA = Convert.ToDouble(a);
                     double valueB = Convert.ToDouble(b);
                     double valueC = Convert.ToDouble(c);
-                    LotAdo.updateLotRappel(_currentLot.LOFROM, Convert.ToDecimal(tbxAnnee.Text), moisNum.Numero, Math.Round(valueA, 5), Math.Round(valueB, 5), Math.Round(valueC, 5), Convert.ToDouble(Math.Round(montant, 2)));
+                    LotAdo.updateLotRappel(_currentLot.LOFROM, Convert.ToDecimal(tbxAnnee.Text), moisNum.Numero, Math.Round(valueA, 5), Math.Round(valueB, 5), Math.Round(valueC, 5), Convert.ToDouble(montant));
                     this._currentLot.LOPU1 = Math.Round(a, 5);
                     this._currentLot.LOPU2 = Math.Round(b, 5);
                     this._currentLot.LOPU3 = Math.Round(c, 5);

@@ -289,7 +289,7 @@ namespace GestcomWF.Views
                     try
                     {
 
-
+                        int lineendparagraphe = 32;
                         string annee = (DateTime.Now.Year / 100).ToString();
                         // Traitement pour chaque entré
                         foreach (LotFrom lotFrom in lotFroms)
@@ -323,116 +323,102 @@ namespace GestcomWF.Views
                                 objSheet.Columns[5].Columnwidth = 7.57;
                                 objSheet.Columns[6].Columnwidth = 5.71;
 
-
                                 // Configuration du style de la feuille (police, ...)
                                 objSheet.Cells.Font.Name = "Arial";
-                                //objSheet.Cells[24, "E"].Style.Font.Bold = true;
 
                                 // Initialisez la ligne actuelle
+                                int currentRow = 30;
 
-                                //int currentRow = 30;
                                 if (lotFrom.LOC11 != 0)
                                 {
-                               
-                                    objSheet.Cells[30, "B"].Value = "- Catégorie A";
-                                    objSheet.Cells[30, "B"].Font.Bold = true;
+                                    objSheet.Cells[currentRow, "B"].Value = "- Catégorie A";
+                                    objSheet.Cells[currentRow, "B"].Font.Bold = true;
 
-                                    objSheet.Cells[30, "C"].Value = "………..";
-                                    objSheet.Cells[30, "C"].Font.Bold = true;
-                                    objSheet.Cells[30, "C"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
+                                    objSheet.Cells[currentRow, "C"].Value = "………..";
+                                    objSheet.Cells[currentRow, "C"].Font.Bold = true;
+                                    objSheet.Cells[currentRow, "C"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
 
-                                    objSheet.Cells[30, "F"].Value = "pains";
-                                    objSheet.Cells[30, "F"].Font.Bold = true;
+                                    objSheet.Cells[currentRow, "F"].Value = "pains";
+                                    objSheet.Cells[currentRow, "F"].Font.Bold = true;
 
-                                    objSheet.Cells[30, "E"] = lotFrom.LOC11;
-                                    objSheet.Cells[30, "E"].Font.Bold = true;
-                                    objSheet.Cells[30, "E"].HorizontalAlignment = XlHAlign.xlHAlignRight;
+                                    objSheet.Cells[currentRow, "E"] = lotFrom.LOC11;
+                                    objSheet.Cells[currentRow, "E"].Font.Bold = true;
+                                    objSheet.Cells[currentRow, "E"].HorizontalAlignment = XlHAlign.xlHAlignRight;
 
+                                    objSheet.Cells[currentRow, "G"] = (Math.Round((lotFrom.LOC11 / lotFrom.LOCEM1) * 100, 2)).ToString("F2") + "%";
+                                    objSheet.Cells[currentRow, "G"].Font.Bold = true;
+                                    objSheet.Cells[currentRow, "G"].HorizontalAlignment = XlHAlign.xlHAlignRight;
 
-                                    objSheet.Cells[30, "G"] = Math.Round((lotFrom.LOC11 / lotFrom.LOCEM1) * 100) + "%";
-                                    objSheet.Cells[30, "G"].Font.Bold = true;
-                                    objSheet.Cells[30, "G"].HorizontalAlignment = XlHAlign.xlHAlignRight;
-
+                                    currentRow++;
                                 }
-
-
 
                                 if (lotFrom.LOC12 != 0)
                                 {
-                                    objSheet.Cells[31, "B"].Value = "- Catégorie B";
-                                    objSheet.Cells[31, "B"].Font.Bold = true;
+                                    objSheet.Cells[currentRow, "B"].Value = "- Catégorie B";
+                                    objSheet.Cells[currentRow, "B"].Font.Bold = true;
 
-                                    objSheet.Cells[31, "C"].Value = "………..";
-                                    objSheet.Cells[31, "C"].Font.Bold = true;
-                                    objSheet.Cells[31, "C"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
+                                    objSheet.Cells[currentRow, "C"].Value = "………..";
+                                    objSheet.Cells[currentRow, "C"].Font.Bold = true;
+                                    objSheet.Cells[currentRow, "C"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
 
-                                    objSheet.Cells[31, "F"].Value = "pains";
-                                    objSheet.Cells[31, "F"].Font.Bold = true;
+                                    objSheet.Cells[currentRow, "F"].Value = "pains";
+                                    objSheet.Cells[currentRow, "F"].Font.Bold = true;
 
-                                    objSheet.Cells[31, "E"] = lotFrom.LOC12;
-                                    objSheet.Cells[31, "E"].Font.Bold = true;
-                                    objSheet.Cells[31, "E"].HorizontalAlignment = XlHAlign.xlHAlignRight;
+                                    objSheet.Cells[currentRow, "E"] = lotFrom.LOC12;
+                                    objSheet.Cells[currentRow, "E"].Font.Bold = true;
+                                    objSheet.Cells[currentRow, "E"].HorizontalAlignment = XlHAlign.xlHAlignRight;
 
+                                    objSheet.Cells[currentRow, "G"] = Math.Round((lotFrom.LOC12 / lotFrom.LOCEM1) * 100, 2).ToString("F2") + "%";
+                                    objSheet.Cells[currentRow, "G"].Font.Bold = true;
+                                    objSheet.Cells[currentRow, "G"].HorizontalAlignment = XlHAlign.xlHAlignRight;
 
-                                    objSheet.Cells[31, "G"] = Math.Round((lotFrom.LOC12 / lotFrom.LOCEM1) * 100) + "%";
-                                    objSheet.Cells[31, "G"].Font.Bold = true;
-                                    objSheet.Cells[31, "G"].HorizontalAlignment = XlHAlign.xlHAlignRight;
-
-                                    // Placez le total à 4 cellules en dessous de la dernière ligne remplie
-
+                                    currentRow++;
                                 }
+
                                 if (lotFrom.LOC13 != 0)
                                 {
-                                    objSheet.Cells[32, "B"].Value = "- Catégorie C";
-                                    objSheet.Cells[32, "B"].Font.Bold = true;
+                                    objSheet.Cells[currentRow, "B"].Value = "- Catégorie C";
+                                    objSheet.Cells[currentRow, "B"].Font.Bold = true;
 
-                                    objSheet.Cells[32, "C"].Value = "………..";
-                                    objSheet.Cells[32, "C"].Font.Bold = true;
-                                    objSheet.Cells[32, "C"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
+                                    objSheet.Cells[currentRow, "C"].Value = "………..";
+                                    objSheet.Cells[currentRow, "C"].Font.Bold = true;
+                                    objSheet.Cells[currentRow, "C"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
 
-                                    objSheet.Cells[32, "F"].Value = "pains";
-                                    objSheet.Cells[32, "F"].Font.Bold = true;
+                                    objSheet.Cells[currentRow, "F"].Value = "pains";
+                                    objSheet.Cells[currentRow, "F"].Font.Bold = true;
 
-                                    objSheet.Cells[32, "E"] = lotFrom.LOC13;
-                                    objSheet.Cells[32, "E"].Font.Bold = true;
-                                    objSheet.Cells[32, "E"].HorizontalAlignment = XlHAlign.xlHAlignRight;
+                                    objSheet.Cells[currentRow, "E"] = lotFrom.LOC13;
+                                    objSheet.Cells[currentRow, "E"].Font.Bold = true;
+                                    objSheet.Cells[currentRow, "E"].HorizontalAlignment = XlHAlign.xlHAlignRight;
 
+                                    objSheet.Cells[currentRow, "G"] = Math.Round((lotFrom.LOC13 / lotFrom.LOCEM1) * 100, 2).ToString("F2") + "%";
+                                    objSheet.Cells[currentRow, "G"].Font.Bold = true;
+                                    objSheet.Cells[currentRow, "G"].HorizontalAlignment = XlHAlign.xlHAlignRight;
 
-                                    objSheet.Cells[32, "G"] = Math.Round((lotFrom.LOC13 / lotFrom.LOCEM1) * 100) + "%";
-                                    objSheet.Cells[32, "G"].Font.Bold = true;
-                                    objSheet.Cells[32, "G"].HorizontalAlignment = XlHAlign.xlHAlignRight;
+                                    currentRow++;
                                 }
 
+                                // Ajout des bordures et formules de totalisation si nécessaire
+                                if ((lotFrom.LOC12 != 0 || lotFrom.LOC13 != 0) && currentRow > 30)
+                                {
+                                    objSheet.Cells[currentRow, "E"].Borders[XlBordersIndex.xlEdgeTop].LineStyle = XlLineStyle.xlContinuous;
+                                    objSheet.Cells[currentRow, "E"].Borders[XlBordersIndex.xlEdgeTop].Weight = XlBorderWeight.xlThin;
+                                    objSheet.Cells[currentRow, "E"].Borders[XlBordersIndex.xlEdgeTop].ColorIndex = 0;
 
-                                /*foreach (var dateEntry in lotFroms.Where(item => item.FRNUM == lotFrom.FRNUM))
-                                 {
-                                     // Remplissez les données pour chaque entrée de fromagerie
-                                     workSheet[$"E{currentRow}"].Value = dateEntry.LOC11;
-                                     this.workSheet[$"E{currentRow}"].Style.Font.Bold = true;
-                                     this.workSheet[$"E{currentRow}"].Style.HorizontalAlignment = IronXL.Styles.HorizontalAlignment.Right;
+                                    objSheet.Cells[currentRow, "E"].Formula = $"=SUM(E30:E{currentRow - 1})";
+                                    objSheet.Cells[currentRow, "F"].Value = "pains";
 
-                                     currentRow++;
-                                 }*/
+                                    currentRow++;
+                                }
 
-                                // Placez le total à 4 cellules en dessous de la dernière ligne remplie
-
-
-                                // int totalRow = currentRow + 4;
-
-                                objSheet.Cells[34, "B"].Value = "          Nous vous prions d'agréer, Monsieur le Président, nos";
-                                objSheet.Cells[35, "B"].Value = "salutations distinguées";
-                                objSheet.Cells[38, "E"].Value = "Service Technique";
-                                objSheet.Cells[38, "E"].Font.Bold = true;
-
+                                // Positionnement du paragraphe de fin
+                                objSheet.Cells[currentRow + 2, "B"].Value = "          Nous vous prions d'agréer, Monsieur le Président, nos";
+                                objSheet.Cells[currentRow + 3, "B"].Value = "salutations distinguées";
+                                objSheet.Cells[currentRow + 6, "E"].Value = "Service Technique";
+                                objSheet.Cells[currentRow + 6, "E"].Font.Bold = true;
 
                                 valeurPrecedente = lotFrom.FRNUM;
-
                             }
-
-
-
-
-
                         }
                         // Propose à l'utilisateur d'enregistrer le fichier Excel
                         SaveFileDialog saveFileDialog = new SaveFileDialog();
