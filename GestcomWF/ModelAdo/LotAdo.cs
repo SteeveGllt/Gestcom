@@ -713,6 +713,7 @@ INSERT INTO TB_Lots(
                         (String)reader["FRVILL"],
                         (Decimal)reader["FRNUM"]);*/
                     decimal defaultDecimal = 0m;
+                    int defaultInt = 0;
                     string defaultString = "";
                     LotFrom lot = new LotFrom(
                         reader.IsDBNull(reader.GetOrdinal("LOFROM")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOFROM")),
@@ -734,7 +735,7 @@ INSERT INTO TB_Lots(
                        reader.IsDBNull(reader.GetOrdinal("LOMOIS")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOMOIS")),
                         reader.IsDBNull(reader.GetOrdinal("FRVILL")) ? defaultString : reader.GetString(reader.GetOrdinal("FRVILL")),
                         reader.IsDBNull(reader.GetOrdinal("FRNUM")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("FRNUM")),
-                        reader.IsDBNull(reader.GetOrdinal("FRRAP")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("FRRAP")),
+                        reader.IsDBNull(reader.GetOrdinal("FRRAP")) ? defaultInt : reader.GetInt16(reader.GetOrdinal("FRRAP")),
                         reader.IsDBNull(reader.GetOrdinal("FRDOMI")) ? defaultString : reader.GetString(reader.GetOrdinal("FRDOMI")),
                         reader.IsDBNull(reader.GetOrdinal("FRBANQ")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("FRBANQ")),
                         reader.IsDBNull(reader.GetOrdinal("FRGUIC")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("FRGUIC")),
