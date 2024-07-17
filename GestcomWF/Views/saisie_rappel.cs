@@ -347,7 +347,7 @@ namespace GestcomWF.Views
                             }
 
                             poidsMoyen = lotFrom.LOCEN1 / lotFrom.LOCEM1;
-                            acompte = lotFrom.LOPUAC * lotFrom.LOCEN1;
+                            acompte = lotFrom.LOPUAC * (lotFrom.LOCEN1 / 1000);
                             string nomFeuille = lotFrom.FRNOM.Replace("/", "-");
 
                             // Si l'entrée a une nouvelle valeur FRNUM
@@ -416,7 +416,7 @@ namespace GestcomWF.Views
                                     objSheet.Cells[25, "E"].Value = Math.Round((poidsMoyen * lotFrom.LOC11) / 1000, 3);
                                     objSheet.Cells[25, "E"].Font.Bold = true;
                                     objSheet.Cells[25, "E"].HorizontalAlignment = XlHAlign.xlHAlignRight;
-                                    objSheet.Cells[25, "E"].NumberFormat = @"#\ ##0,000€";
+                                    objSheet.Cells[25, "E"].NumberFormat = @"#\ ##0,000";
 
                                     objSheet.Cells[25, "F"].Value = "T";
                                     objSheet.Cells[25, "F"].Font.Bold = true;
@@ -438,7 +438,7 @@ namespace GestcomWF.Views
                               
                                     objSheet.Cells[25, "K"].FormulaLocal = "=ARRONDI(+E25*H25 ; 2)";
                                     objSheet.Cells[25, "K"].HorizontalAlignment = XlHAlign.xlHAlignRight;
-                                    objSheet.Cells[25, "K"].NumberFormat = @"#\ ##0,00€";
+                                    objSheet.Cells[25, "K"].NumberFormat = @"#\ ##0,00 €";
 
                                 }
 
@@ -481,7 +481,7 @@ namespace GestcomWF.Views
 
                                     objSheet.Cells[26, "K"].FormulaLocal = "=ARRONDI(+E26*H26 ; 2)";
                                     objSheet.Cells[26, "K"].HorizontalAlignment = XlHAlign.xlHAlignRight;
-                                    objSheet.Cells[26, "K"].NumberFormat = @"#\ ##0,00€";
+                                    objSheet.Cells[26, "K"].NumberFormat = @"#\ ##0,00 €";
 
 
                                 }
@@ -521,7 +521,7 @@ namespace GestcomWF.Views
 
                                     objSheet.Cells[27, "K"].FormulaLocal = "=ARRONDI(+E27*H27 ; 2)";
                                     objSheet.Cells[27, "K"].HorizontalAlignment = XlHAlign.xlHAlignRight;
-                                    objSheet.Cells[27, "K"].NumberFormat = @"#\ ##0,00€";
+                                    objSheet.Cells[27, "K"].NumberFormat = @"#\ ##0,00 €";
 
                                 }
 
@@ -545,7 +545,7 @@ namespace GestcomWF.Views
                                         var valeurH27 = Math.Round((lotFrom.LOPU1 * 1000) * (lotFrom.FRPRIME / 100), 2);
                                         objSheet.Cells[27, "K"].Value = Math.Round(valeurE27 * valeurH27, 2);
                                         objSheet.Cells[27, "K"].HorizontalAlignment = XlHAlign.xlHAlignRight;
-                                        objSheet.Cells[27, "K"].NumberFormat = @"#\ ##0,00€";
+                                        objSheet.Cells[27, "K"].NumberFormat = @"#\ ##0,00 €";
 
                                         objSheet.Cells[27, "K"].Borders[XlBordersIndex.xlEdgeBottom].LineStyle = XlLineStyle.xlContinuous;
                                         objSheet.Cells[27, "K"].Borders[XlBordersIndex.xlEdgeBottom].Weight = XlBorderWeight.xlThin;
@@ -557,47 +557,51 @@ namespace GestcomWF.Views
                                         objSheet.Cells[31, "K"].Formula = "=SUM(K25:K27)";
                                         objSheet.Cells[31, "K"].HorizontalAlignment = XlHAlign.xlHAlignRight;
                                         var total = objSheet.Cells[31, "K"].Value;
-                                        objSheet.Cells[35, "K"].Value = Math.Round(total - acompte, 2);
+                                       // objSheet.Cells[35, "K"].Value = Math.Round(total - acompte, 2);
+                                        objSheet.Cells[35, "K"].FormulaLocal = "=SOMME(K25;K33)";
                                         objSheet.Cells[35, "K"].HorizontalAlignment = XlHAlign.xlHAlignRight;
-                                        objSheet.Cells[35, "K"].NumberFormat = @"#\ ##0,00€";
+                                        objSheet.Cells[35, "K"].NumberFormat = @"#\ ##0,00 €";
 
-                                        objSheet.Cells[36, "K"].Value = objSheet.Cells[35, "K"].Value * 5.5m / 100;
+                                        //objSheet.Cells[36, "K"].Value = objSheet.Cells[35, "K"].Value * 5.5m / 100;
+                                        objSheet.Cells[36, "K"].Formula = "=+K35*I36/100";
                                         objSheet.Cells[36, "K"].HorizontalAlignment = XlHAlign.xlHAlignRight;
-                                        objSheet.Cells[36, "K"].NumberFormat = @"#\ ##0,00€";
+                                        objSheet.Cells[36, "K"].NumberFormat = @"#\ ##0,00 €";
 
                                         //var sumQuandPrime = objSheet.Range["K35", "K36"].Value;
-                                        objSheet.Cells[38, "K"].FormulaLocal = "=ARRONDI(SOMME(K35:K36); 2)";
+                                        objSheet.Cells[38, "K"].FormulaLocal = "=SOMME(K35:K36)";
                                         objSheet.Cells[38, "K"].HorizontalAlignment = XlHAlign.xlHAlignRight;
                                         //objSheet.Cells[38, "K"].Value = Math.Round(sumQuandPrime, 2);
                                         objSheet.Cells[38, "K"].Font.Bold = true;
-                                        objSheet.Cells[38, "K"].NumberFormat = @"#\ ##0,00€";
+                                        objSheet.Cells[38, "K"].NumberFormat = @"#\ ##0,00 €";
                                     }
                                     else
                                     {
                                         var resultatSumPrixTotal = objSheet.Cells[25, "K"].Value;
                                         var resultatSumPoidsTotal = objSheet.Cells[25, "E"].Value;
 
-                                        var test = resultatSumPrixTotal / resultatSumPoidsTotal;
+                                       // var test = resultatSumPrixTotal / resultatSumPoidsTotal;
                                         decimal temp = Math.Round((poidsMoyen * lotFrom.LOC11) * lotFrom.LOPU1, 2);
 
-                                        objSheet.Cells[31, "E"].Value = Math.Round(test, 2);
+                                        objSheet.Cells[31, "E"].FormulaLocal = "=ARRONDI(+K25/E25;2)";
                                         objSheet.Cells[31, "E"].HorizontalAlignment = XlHAlign.xlHAlignRight;
 
-                                        objSheet.Cells[35, "K"].Value = Math.Round(temp - acompte, 2);
+                                        //objSheet.Cells[35, "K"].Value = Math.Round(temp - acompte, 2);
+                                        objSheet.Cells[35, "K"].FormulaLocal = "=SOMME(K25;K33)";
                                         objSheet.Cells[35, "K"].HorizontalAlignment = XlHAlign.xlHAlignRight;
-                                        objSheet.Cells[35, "K"].NumberFormat = @"#\ ##0,00€";
+                                        objSheet.Cells[35, "K"].NumberFormat = @"#\ ##0,00 €";
 
 
-                                        objSheet.Cells[36, "K"].Value = Math.Round((temp - acompte) * 5.5m) / 100;
+                                        // objSheet.Cells[36, "K"].Value = Math.Round((temp - acompte) * 5.5m) / 100;
+                                        objSheet.Cells[36, "K"].FormulaLocal = "=+K35*I36/100";
                                         objSheet.Cells[36, "K"].HorizontalAlignment = XlHAlign.xlHAlignRight;
-                                        objSheet.Cells[36, "K"].NumberFormat = @"#\ ##0,00€";
+                                        objSheet.Cells[36, "K"].NumberFormat = @"#\ ##0,00 €";
 
-                                        objSheet.Cells[38, "K"].FormulaLocal = "=ARRONDI(SOMME(K35:K36); 2)";
+                                        objSheet.Cells[38, "K"].FormulaLocal = "=SOMME(K35:K36)";
                                         objSheet.Cells[38, "K"].HorizontalAlignment = XlHAlign.xlHAlignRight;
                                         //var sum = objSheet.Range["K35", "K36"].Value;
                                         // objSheet.Cells[38, "K"].Value = Math.Round(sum.Sum(), 2);
                                         objSheet.Cells[38, "K"].Font.Bold = true;
-                                        objSheet.Cells[38, "K"].NumberFormat = @"#\ ##0,00€";
+                                        objSheet.Cells[38, "K"].NumberFormat = @"#\ ##0,00 €";
                                     }
 
                                 }
@@ -638,7 +642,7 @@ namespace GestcomWF.Views
                                     // var sumRangePrix = objSheet.Range["K25", "K26"].Value;
                                     //objSheet.Cells[27, "K"].Value = sumRangePrix.Sum();
                                     objSheet.Cells[27, "K"].Formula = "=SUM(K25:K26)";
-                                    objSheet.Cells[27, "K"].NumberFormat = @"#\ ##0,00€";
+                                    objSheet.Cells[27, "K"].NumberFormat = @"#\ ##0,00 €";
                                     objSheet.Cells[27, "K"].HorizontalAlignment = XlHAlign.xlHAlignRight;
 
                                     objSheet.Cells[27, "K"].Font.Bold = true;
@@ -646,27 +650,29 @@ namespace GestcomWF.Views
                                     var resultatSumPrixTotal = objSheet.Cells[27, "K"];
                                     var resultatSumPoidsTotal = objSheet.Cells[27, "E"];
 
-                                    var test = Convert.ToDecimal(resultatSumPrixTotal.Value) / Convert.ToDecimal(resultatSumPoidsTotal.Value);
+                                   // var test = Convert.ToDecimal(resultatSumPrixTotal.Value) / Convert.ToDecimal(resultatSumPoidsTotal.Value);
 
-                                    objSheet.Cells[31, "E"].Value = Math.Round(test, 2);
+                                  
+                                    objSheet.Cells[31, "E"].FormulaLocal = "=ARRONDI(K27/E27;2)";
                                     objSheet.Cells[31, "E"].HorizontalAlignment = XlHAlign.xlHAlignRight;
 
                                     decimal resultatSumPrixAcompte = Math.Round(objSheet.Cells[27, "K"].Value - acompte, 2);
 
-                                    objSheet.Cells[35, "K"].Value = resultatSumPrixAcompte;
+                                    objSheet.Cells[35, "K"].FormulaLocal = "=SOMME(K27;K33)";
                                     objSheet.Cells[35, "K"].HorizontalAlignment = XlHAlign.xlHAlignRight;
-                                    objSheet.Cells[35, "K"].NumberFormat = @"#\ ##0,00€";
+                                    objSheet.Cells[35, "K"].NumberFormat = @"#\ ##0,00 €";
 
-                                    objSheet.Cells[36, "K"].Value = Math.Round(resultatSumPrixAcompte * 5.5m) / 100;
+                                    //objSheet.Cells[36, "K"].Value = Math.Round(resultatSumPrixAcompte * 5.5m) / 100;
+                                    objSheet.Cells[36, "K"].FormulaLocal = "=+K35*I36/100";
                                     objSheet.Cells[36, "K"].HorizontalAlignment = XlHAlign.xlHAlignRight;
-                                    objSheet.Cells[36, "K"].NumberFormat = @"#\ ##0,00€";
+                                    objSheet.Cells[36, "K"].NumberFormat = @"#\ ##0,00 €";
 
                                     // var sum = objSheet.Range["K35", "K36"].Value;
-                                    objSheet.Cells[38, "K"].FormulaLocal = "=ARRONDI(SOMME(K35:K36); 2)";
+                                    objSheet.Cells[38, "K"].FormulaLocal = "=SOMME(K35:K36)";
                                     objSheet.Cells[38, "K"].HorizontalAlignment = XlHAlign.xlHAlignRight;
                                     //objSheet.Cells[38, "K"].Value = Math.Round(sum.Sum(), 2);
                                     objSheet.Cells[38, "K"].Font.Bold = true;
-                                    objSheet.Cells[38, "K"].NumberFormat = @"#\ ##0,00€";
+                                    objSheet.Cells[38, "K"].NumberFormat = @"#\ ##0,00 €";
 
                                     if (lotFrom.FRPRIME > 0)
                                     {
@@ -706,18 +712,18 @@ namespace GestcomWF.Views
                                         var total = objSheet.Cells[31, "K"].Value;
                                         objSheet.Cells[35, "K"].Value = Math.Round(total - acompte, 2);
                                         objSheet.Cells[35, "K"].HorizontalAlignment = XlHAlign.xlHAlignRight;
-                                        objSheet.Cells[35, "K"].NumberFormat = @"#\ ##0,00€";
+                                        objSheet.Cells[35, "K"].NumberFormat = @"#\ ##0,00 €";
 
-                                        objSheet.Cells[36, "K"].Value = objSheet.Cells[35, "K"].Value * 5.5m / 100;
+                                        objSheet.Cells[36, "K"].Formula = "=+K35*I36/100";
                                         objSheet.Cells[36, "K"].HorizontalAlignment = XlHAlign.xlHAlignRight;
-                                        objSheet.Cells[36, "K"].NumberFormat = @"#\ ##0,00€";
+                                        objSheet.Cells[36, "K"].NumberFormat = @"#\ ##0,00 €";
 
                                         // var sumQuandPrime = objSheet.Range["K35", "K36"].Value;
-                                        objSheet.Cells[38, "K"].FormulaLocal = "=ARRONDI(SOMME(K35:K36); 2)";
+                                        objSheet.Cells[38, "K"].FormulaLocal = "=SOMME(K35:K36)";
                                         objSheet.Cells[38, "K"].HorizontalAlignment = XlHAlign.xlHAlignRight;
                                         //objSheet.Cells[38, "K"].Value = Math.Round(sumQuandPrime.Sum(), 2);
                                         objSheet.Cells[38, "K"].Font.Bold = true;
-                                        objSheet.Cells[38, "K"].NumberFormat = @"#\ ##0,00€";
+                                        objSheet.Cells[38, "K"].NumberFormat = @"#\ ##0,00 €";
                                     }
 
 
@@ -765,24 +771,27 @@ namespace GestcomWF.Views
                                     var resultatSumPrixTotal = objSheet.Cells[28, "K"];
                                     var resultatSumPoidsTotal = objSheet.Cells[28, "E"];
 
-                                    var test = resultatSumPrixTotal.Value / resultatSumPoidsTotal.Value;
+                                   // var test = resultatSumPrixTotal.Value / resultatSumPoidsTotal.Value;
 
                                     decimal resultatSumPrixAcompte = Math.Round(objSheet.Cells[28, "K"].Value - acompte, 2);
-                                    objSheet.Cells[31, "E"].Value = Math.Round(test, 2);
+                                   
+                                    objSheet.Cells[31, "E"].FormulaLocal = "=ARRONDI(K28/E28;2)";
                                     objSheet.Cells[31, "E"].HorizontalAlignment = XlHAlign.xlHAlignRight;
-                                    objSheet.Cells[35, "K"].Value = resultatSumPrixAcompte;
+                                   // objSheet.Cells[35, "K"].Value = resultatSumPrixAcompte;
+                                    objSheet.Cells[35, "K"].FormulaLocal = "=SOMME(K28;K33)";
                                     objSheet.Cells[35, "K"].HorizontalAlignment = XlHAlign.xlHAlignRight;
-                                    objSheet.Cells[36, "K"] = Math.Round(resultatSumPrixAcompte * 5.5m / 100, 2);
+                                    //  objSheet.Cells[36, "K"] = Math.Round(resultatSumPrixAcompte * 5.5m / 100, 2);
+                                    objSheet.Cells[36, "K"].FormulaLocal = "=+K35*I36/100";
                                     objSheet.Cells[36, "K"].HorizontalAlignment = XlHAlign.xlHAlignRight;
-                                    objSheet.Cells[35, "K"].NumberFormat = @"#\ ##0,00€";
-                                    objSheet.Cells[36, "K"].NumberFormat = @"#\ ##0,00€";
+                                    objSheet.Cells[35, "K"].NumberFormat = @"#\ ##0,00 €";
+                                    objSheet.Cells[36, "K"].NumberFormat = @"#\ ##0,00 €";
 
                                     // var sum = objSheet.Range["K35", "K36"].Value;
-                                    objSheet.Cells[38, "K"].FormulaLocal = "=ARRONDI(SOMME(K35:K36); 2)";
+                                    objSheet.Cells[38, "K"].FormulaLocal = "=SOMME(K35:K36)";
                                     objSheet.Cells[38, "K"].HorizontalAlignment = XlHAlign.xlHAlignRight;
                                     // objSheet.Cells[38, "K"].Value = Math.Round(sum.Sum(), 2);
                                     objSheet.Cells[38, "K"].Font.Bold = true;
-                                    objSheet.Cells[38, "K"].NumberFormat = @"#\ ##0,00€";
+                                    objSheet.Cells[38, "K"].NumberFormat = @"#\ ##0,00 €";
 
                                     if (lotFrom.FRPRIME > 0)
                                     {
@@ -818,20 +827,22 @@ namespace GestcomWF.Views
                                         objSheet.Cells[31, "K"].NumberFormat = @"#\ ##0,00€";
 
                                         var total = objSheet.Cells[31, "K"].Value;
-                                        objSheet.Cells[35, "K"].Value = Math.Round(total - acompte, 2);
+                                        //objSheet.Cells[35, "K"].Value = Math.Round(total - acompte, 2);
+                                        objSheet.Cells[35, "K"].Formula = "=SOMME(K28:K33)";
                                         objSheet.Cells[35, "K"].HorizontalAlignment = XlHAlign.xlHAlignRight;
-                                        objSheet.Cells[35, "K"].NumberFormat = @"#\ ##0,00€";
+                                        objSheet.Cells[35, "K"].NumberFormat = @"#\ ##0,00 €";
 
-                                        objSheet.Cells[36, "K"].Value = objSheet.Cells[35, "K"].Value * 5.5m / 100;
+                                        //objSheet.Cells[36, "K"].Value = objSheet.Cells[35, "K"].Value * 5.5m / 100;
+                                        objSheet.Cells[36, "K"].Formula = "=+K35*I36/100";
                                         objSheet.Cells[36, "K"].HorizontalAlignment = XlHAlign.xlHAlignRight;
-                                        objSheet.Cells[36, "K"].NumberFormat = @"#\ ##0,00€";
+                                        objSheet.Cells[36, "K"].NumberFormat = @"#\ ##0,00 €";
 
                                         // var sumQuandPrime = objSheet.Range["K35", "K36"].Value;
                                         objSheet.Cells[38, "K"].FormulaLocal = "=ARRONDI(SOMME(K35:K36); 2)";
                                         objSheet.Cells[38, "K"].HorizontalAlignment = XlHAlign.xlHAlignRight;
                                         //objSheet.Cells[38, "K"].Value = Math.Round(sumQuandPrime.Sum(), 2);
                                         objSheet.Cells[38, "K"].Font.Bold = true;
-                                        objSheet.Cells[38, "K"].NumberFormat = @"#\ ##0,00€";
+                                        objSheet.Cells[38, "K"].NumberFormat = @"#\ ##0,00 €";
                                     }
                                 }
 
@@ -855,9 +866,9 @@ namespace GestcomWF.Views
                                 objSheet.Cells[33, "K"].Borders[XlBordersIndex.xlEdgeBottom].Weight = XlBorderWeight.xlThin;
                                 objSheet.Cells[33, "K"].Borders[XlBordersIndex.xlEdgeBottom].ColorIndex = 0;
 
-                                objSheet.Cells[33, "K"].Value = Math.Round(acompte, 2);
+                                objSheet.Cells[33, "K"].Value = Math.Round(-acompte, 2);
                                 objSheet.Cells[33, "K"].HorizontalAlignment = XlHAlign.xlHAlignRight;
-                                objSheet.Cells[33, "K"].NumberFormat = @"-#\ ##0,00€";
+                                objSheet.Cells[33, "K"].NumberFormat = @"#\ ##0,00 €";
 
                                 objSheet.Cells[36, "K"].Borders[XlBordersIndex.xlEdgeBottom].LineStyle = XlLineStyle.xlContinuous;
                                 objSheet.Cells[36, "K"].Borders[XlBordersIndex.xlEdgeBottom].Weight = XlBorderWeight.xlThin;
@@ -879,12 +890,13 @@ namespace GestcomWF.Views
                                 objSheet.Cells[43, "B"].Value = "salutations distinguées";
                                 objSheet.Cells[45, "H"].Value = "Service Comptabilité";
                                 objSheet.Cells[45, "H"].Font.Bold = true;
-                                var sumPs = objSheet.Cells[38, "K"].Value;
+                                //var sumPs = objSheet.Cells[38, "K"].Value;
 
                                 objSheet.Cells[50, "B"].Value = "PS : Nous virons ce jour, sur votre compte N° " + lotFrom.FRBANQ + " " + lotFrom.FRGUIC + " " + lotFrom.FRCOM1 + " " + lotFrom.FRCOM2;
                                 objSheet.Cells[51, "B"].Value = lotFrom.FRDOMI + ", la somme de";
-                                objSheet.Cells[51, "H"].Value = sumPs;
-                                objSheet.Cells[51, "H"].NumberFormat = @"#\ ##0,00€";
+                                objSheet.Cells[51, "H"].FormulaLocal = "=+K38";
+                                objSheet.Cells[51, "H"].HorizontalAlignment = XlHAlign.xlHAlignRight;
+                                objSheet.Cells[51, "H"].NumberFormat = @"#\ ##0,00 €";
 
                                 valeurPrecedente = lotFrom.FRNUM;
 
