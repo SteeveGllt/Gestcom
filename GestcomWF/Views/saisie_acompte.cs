@@ -296,11 +296,12 @@ namespace GestcomWF.Views
                                 objSheet.Cells[28, "I"].Value = " =";
                                 objSheet.Cells[28, "I"].HorizontalAlignment = XlHAlign.xlHAlignLeft;
 
-                                objSheet.Cells[28, "J"].Value = prix;
+                               
+                                objSheet.Cells[28, "J"].FormulaLocal = "=ARRONDI(+E28*H28; 2)";
                                 objSheet.Cells[28, "J"].HorizontalAlignment = XlHAlign.xlHAlignRight;
                                 objSheet.Cells[28, "J"].NumberFormat = @"#\ ##0,00 €";
 
-                                objSheet.Cells[30, "J"].Value = prix;
+                                objSheet.Cells[30, "J"].FormulaLocal = "=+J28";
                                 objSheet.Cells[30, "J"].HorizontalAlignment = XlHAlign.xlHAlignRight;
                                 objSheet.Cells[30, "J"].NumberFormat = @"#\ ##0,00 €";
 
@@ -338,7 +339,7 @@ namespace GestcomWF.Views
                                 objSheet.Cells[31, "H"].Value = "5,5";
                                 objSheet.Cells[31, "H"].HorizontalAlignment = XlHAlign.xlHAlignRight;
                                 objSheet.Cells[31, "I"].Value = "%";
-                                objSheet.Cells[31, "J"].Value = prix * 5.5m / 100;
+                                objSheet.Cells[31, "J"].FormulaLocal = "=ARRONDI(+J30*H31/100; 2)";
                                 objSheet.Cells[31, "J"].NumberFormat = @"#\ ##0,00 €";
 
                                 objSheet.Cells[33, "F"].Value = "Total Réglé";
@@ -360,7 +361,7 @@ namespace GestcomWF.Views
 
                                 objSheet.Cells[46, "B"].Value = "PS : Nous virons ce jour, sur votre compte N° " + lotFrom.FRBANQ + " " + lotFrom.FRGUIC + " " + lotFrom.FRCOM1 + " " + lotFrom.FRCOM2;
                                 objSheet.Cells[47, "B"].Value = lotFrom.FRDOMI + ", la somme de";
-                                objSheet.Cells[47, "J"].Value = sum;
+                                objSheet.Cells[47, "J"].FormulaLocal = "=+J33";
                                 objSheet.Cells[47, "J"].NumberFormat = @"#\ ##0,00 €";
 
 
