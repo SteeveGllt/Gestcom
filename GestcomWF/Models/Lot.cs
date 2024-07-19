@@ -74,6 +74,7 @@ namespace Gestcom.Models
         public Decimal LOPSTK { get; set; }
         public String VIDE { get; set; }
         public Decimal MONTANT { get; set; }
+        public Decimal FRPRIME { get; set; }
 
         public Lot () { }
         public Lot(decimal lofrom, decimal locem1, decimal loc11, decimal loc12, decimal loc13) {
@@ -91,7 +92,7 @@ namespace Gestcom.Models
             LOPUAC = lopuac;
         }
 
-        public Lot(decimal lofrom, decimal locem1, decimal locen1, decimal loc11, decimal loc12, decimal loc13, decimal lopu1, decimal lopu2, decimal lopu3, decimal montant)
+        public Lot(decimal lofrom, decimal locem1, decimal locen1, decimal loc11, decimal loc12, decimal loc13, decimal lopu1, decimal lopu2, decimal lopu3, decimal montant, decimal fRPRIME)
         {
             LOFROM = lofrom;
             LOCEM1 = locem1;
@@ -103,7 +104,7 @@ namespace Gestcom.Models
             LOPU2 = lopu2;
             LOPU3 = lopu3;
             MONTANT = montant;
-
+            FRPRIME = fRPRIME;
         }
 
 

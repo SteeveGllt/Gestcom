@@ -595,7 +595,7 @@ INSERT INTO TB_Lots(
                 open();
                 OleDbCommand oleDbCommand = new OleDbCommand();
                 oleDbCommand.Connection = connection;
-                oleDbCommand.CommandText = "SELECT LOFROM, LOCEM1, LOCEN1, LOC11, LOC12, LOC13, LOPU1, LOPU2, LOPU3, MONTANT FROM TB_Lots INNER JOIN TB_Fromageries ON TB_Lots.LOFROM = TB_Fromageries.FRNUM WHERE ((TB_Fromageries.FRAFFINE)=False) AND ((TB_Fromageries.FRACTIF)=True) AND LOANNE = @LOANNE AND LOMOIS = @LOMOIS";
+                oleDbCommand.CommandText = "SELECT LOFROM, LOCEM1, LOCEN1, LOC11, LOC12, LOC13, LOPU1, LOPU2, LOPU3, MONTANT, FRPRIME  FROM TB_Lots INNER JOIN TB_Fromageries ON TB_Lots.LOFROM = TB_Fromageries.FRNUM WHERE ((TB_Fromageries.FRAFFINE)=False) AND ((TB_Fromageries.FRACTIF)=True) AND LOANNE = @LOANNE AND LOMOIS = @LOMOIS";
                 oleDbCommand.Prepare();
                 oleDbCommand.Parameters.AddWithValue("@LOANNE", loanne);
                 oleDbCommand.Parameters.AddWithValue("@LOMOIS", lomois);
@@ -619,7 +619,8 @@ INSERT INTO TB_Lots(
                         reader.IsDBNull(reader.GetOrdinal("LOPU1")) ? defaultDecimal : Math.Round(reader.GetDecimal(reader.GetOrdinal("LOPU1")), 5),
                         reader.IsDBNull(reader.GetOrdinal("LOPU2")) ? defaultDecimal : Math.Round(reader.GetDecimal(reader.GetOrdinal("LOPU2")), 5),
                         reader.IsDBNull(reader.GetOrdinal("LOPU3")) ? defaultDecimal : Math.Round(reader.GetDecimal(reader.GetOrdinal("LOPU3")), 5),
-                        reader.IsDBNull(reader.GetOrdinal("MONTANT")) ? defaultDecimal : Math.Round(reader.GetDecimal(reader.GetOrdinal("MONTANT")), 2)
+                        reader.IsDBNull(reader.GetOrdinal("MONTANT")) ? defaultDecimal : Math.Round(reader.GetDecimal(reader.GetOrdinal("MONTANT")), 2),
+                        reader.IsDBNull(reader.GetOrdinal("FRPRIME")) ? defaultDecimal : Math.Round(reader.GetDecimal(reader.GetOrdinal("FRPRIME")), 2)
                     // Ajoutez tous les champs nécessaires pour le constructeur de Lot ici.
                     );
 
