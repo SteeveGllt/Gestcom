@@ -303,7 +303,7 @@ namespace GestcomWF.Views
                                 objSheet = objBook.Sheets.Add(Missing.Value, objBook.Worksheets[objBook.Worksheets.Count], Missing.Value, Missing.Value);
                                 objSheet.Name = nomFeuille;
 
-                                objSheet.Cells[10, "D"] = lotFrom.FRNOM;
+                                objSheet.Cells[10, "D"] = lotFrom.FRCOOP;
                                 objSheet.Cells[11, "D"] = lotFrom.FRNDIR;
                                 objSheet.Cells[12, "D"] = lotFrom.FRADR;
                                 objSheet.Cells[13, "D"] = lotFrom.FRCPOS + " " + lotFrom.FRVILL;

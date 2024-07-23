@@ -115,7 +115,7 @@ namespace GestcomWF.Views
 
                     if(_currentLot.FRPRIME > 0)
                     {
-                        var prime = (Convert.ToDecimal(tbx_a.Text) + Convert.ToDecimal(tbx_b.Text) + Convert.ToDecimal(tbx_c.Text)) * _currentLot.FRPRIME / 100;
+                        var prime = Math.Round((Convert.ToDecimal(tbx_a.Text) + Convert.ToDecimal(tbx_b.Text) + Convert.ToDecimal(tbx_c.Text)) * _currentLot.FRPRIME / 100, 2);
                         var tonnageTotal = tonnageA + tonnageB + tonnageC;
                         var totalPrime = prime * tonnageTotal;
                         montant = montant + totalPrime;
@@ -366,8 +366,8 @@ namespace GestcomWF.Views
 
 
 
-                                objSheet.Cells[8, "F"].Value = lotFrom.FRNDIR;
-                                objSheet.Cells[9, "F"].Value = lotFrom.FRNOM;
+                                objSheet.Cells[8, "F"].Value = lotFrom.FRCOOP;
+                                objSheet.Cells[9, "F"].Value = lotFrom.FRNDIR;
                                 objSheet.Cells[10, "F"].Value = lotFrom.FRADR;
                                 objSheet.Cells[11, "F"].Value = lotFrom.FRCPOS + " " + lotFrom.FRVILL;
 

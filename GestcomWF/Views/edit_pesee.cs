@@ -105,8 +105,9 @@ namespace GestcomWF.Views
                             objSheet = objBook.Sheets.Add(Missing.Value, objBook.Worksheets[objBook.Worksheets.Count], Missing.Value, Missing.Value);
                             objSheet.Name = nomFeuille;
 
-                            objSheet.Cells[7, "D"].Value = entreeLotFrom.FRNDIR;
-                            objSheet.Cells[8, "D"].Value = "Président " + entreeLotFrom.FRNOM;
+                            objSheet.Cells[7, "D"].Value = entreeLotFrom.FRCOOP;
+                            objSheet.Cells[8, "D"].Value = entreeLotFrom.FRNDIR;
+                            //objSheet.Cells[8, "D"].Value = "Président " + entreeLotFrom.FRNOM;
                             objSheet.Cells[9, "D"].Value = entreeLotFrom.FRADR;
                             objSheet.Cells[10, "D"].Value = entreeLotFrom.FRCPOS + " " + entreeLotFrom.FRVILL;
 

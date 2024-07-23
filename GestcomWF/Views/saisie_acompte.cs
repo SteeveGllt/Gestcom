@@ -228,8 +228,8 @@ namespace GestcomWF.Views
                                 objSheet = objBook.Sheets.Add(Missing.Value, objBook.Worksheets[objBook.Worksheets.Count], Missing.Value, Missing.Value);
                                 objSheet.Name = nomFeuille;
 
-                                objSheet.Cells[10, "F"].Value = lotFrom.FRNDIR;
-                                objSheet.Cells[11, "F"].Value = lotFrom.FRNOM;
+                                objSheet.Cells[10, "F"].Value = lotFrom.FRCOOP;
+                                objSheet.Cells[11, "F"].Value = lotFrom.FRNDIR;
                                 objSheet.Cells[12, "F"].Value = lotFrom.FRADR;
                                 objSheet.Cells[13, "F"].Value = lotFrom.FRCPOS + " " + lotFrom.FRVILL;
                                 objSheet.Cells[28, "G"].Value = "Le" + " " + formattedDate;

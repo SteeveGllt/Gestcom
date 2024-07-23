@@ -11,7 +11,7 @@ namespace GestcomWF.DataAccess
         {
             //string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source=E:\Dossier Dev\Informatique\Bases\TB_Gestcom_Bis_1.accdb;Persist Security Info=False;";
             //string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\steev\Desktop\Informatique\Bases\TB_Gestcom_Bis_Serveur.accdb;Persist Security Info=False;";
-            string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source=E:\Dossier Dev\Informatique\Bases\TB_Gestcom_Bis_Serveur.accdb;Persist Security Info=False;";
+            string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source=E:\Dossier Dev\Informatique\Bases\TB_Gestcom_Bis (2).accdb;Persist Security Info=False;";
             //string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source=F:\Projets\Informatique\Bases\TB_GestCom_Bis.accdb;Persist Security Info=False;";
             //string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source=\\SRVBRUN-files\Bases\TB_GestCom_Bis.accdb;Persist Security Info=False;";
             try

@@ -333,7 +333,7 @@ INSERT INTO TB_Lots(
                 //OleDbCommand oleDbCommand = new OleDbCommand("SELECT * FROM TB_Entrée_Lots WHERE LOMOIS = @LOMOIS AND LOANNE = @LOANNE");
                 OleDbCommand oleDbCommand = new OleDbCommand("SELECT TB_Entrée_Lots.LOFROM, TB_Entrée_Lots.LOANNE, TB_Entrée_Lots.LOMOIS, TB_Entrée_Lots.Date_Entrée, " +
                     "TB_Entrée_Lots.LOCENM, TB_Entrée_Lots.LOCENB, TB_Entrée_Lots.LOCENN, TB_Entrée_Lots.LOTAUX, TB_Fromageries.FRNUM, TB_Fromageries.FRNOM, " +
-                    "TB_Fromageries.FRADR, TB_Fromageries.FRCPOS, TB_Fromageries.FRVILL, TB_Fromageries.FRNDIR FROM TB_Entrée_Lots INNER JOIN TB_Fromageries ON " +
+                    "TB_Fromageries.FRADR, TB_Fromageries.FRCPOS, TB_Fromageries.FRVILL, TB_Fromageries.FRNDIR, TB_Fromageries.FRCOOP FROM TB_Entrée_Lots INNER JOIN TB_Fromageries ON " +
                     "TB_Entrée_Lots.LOFROM = TB_Fromageries.FRNUM WHERE LOMOIS = @LOMOIS AND LOANNE = @LOANNE ORDER BY TB_Entrée_Lots.LOFROM,TB_Entrée_Lots.Date_Entrée;");
                 oleDbCommand.Connection = connection;
                 oleDbCommand.Prepare();
@@ -346,7 +346,7 @@ INSERT INTO TB_Lots(
                         (Decimal)reader["LOMOIS"], (DateTime)reader["Date_Entrée"],
                         (Decimal)reader["LOCENM"], (Decimal)reader["LOCENB"], (Decimal)reader["LOCENN"], (Decimal)reader["LOTAUX"], (Decimal)reader["FRNUM"],
                         (String)reader["FRNOM"], (String)reader["FRADR"], (Decimal)reader["FRCPOS"],
-                        (String)reader["FRVILL"], (String)reader["FRNDIR"]);
+                        (String)reader["FRVILL"], (String)reader["FRNDIR"], (String)reader["FRCOOP"]);
                     entreeLotFroms.Add(entreeLotFrom);
                 }
                 Console.WriteLine(reader);
@@ -691,7 +691,7 @@ INSERT INTO TB_Lots(
                 DateTime date5 = date.AddMonths(5);
                 MessageBox.Show(date5.ToString("MM/dd/yyyy"));
                 //OleDbCommand oleDbCommand = new OleDbCommand("SELECT * FROM TB_Entrée_Lots WHERE LOMOIS = @LOMOIS AND LOANNE = @LOANNE");
-                OleDbCommand oleDbCommand = new OleDbCommand("SELECT TB_Lots.LOFROM, TB_Fromageries.FRNOM, TB_Fromageries.FRNDIR, TB_Fromageries.FRADR, TB_Fromageries.FRCPOS, TB_Fromageries.FRPRIME, TB_Lots.LOCEN1, TB_Lots.LOCEM1, TB_Lots.LOC11, TB_Lots.LOC12, TB_Lots.LOC13, " +
+                OleDbCommand oleDbCommand = new OleDbCommand("SELECT TB_Lots.LOFROM, TB_Fromageries.FRCOOP,  TB_Fromageries.FRNOM, TB_Fromageries.FRNDIR, TB_Fromageries.FRADR, TB_Fromageries.FRCPOS, TB_Fromageries.FRPRIME, TB_Lots.LOCEN1, TB_Lots.LOCEM1, TB_Lots.LOC11, TB_Lots.LOC12, TB_Lots.LOC13, " +
                     " TB_Lots.LOPUAC, TB_Lots.LOPU1, TB_Lots.LOPU2, TB_Lots.LOPU3, TB_Lots.LOANNE, TB_Lots.LOMOIS, TB_Fromageries.FRVILL, TB_Fromageries.FRNUM, TB_Fromageries.FRRAP, TB_Fromageries.FRDOMI, TB_Fromageries.FRBANQ, TB_Fromageries.FRGUIC, TB_Fromageries.FRCOM1, TB_Fromageries.FRCOM2 FROM TB_Fromageries INNER JOIN TB_Lots ON TB_Fromageries.FRNUM = TB_Lots.LOFROM" +
                     " WHERE ((TB_Fromageries.FRAFFINE)=False) AND ((TB_Fromageries.FRACTIF)=True) AND ((TB_Lots.LOANNE)=Year(DateAdd(\"m\",[TB_Fromageries].[FRRAP], #" + date5.ToString("yyyy-MM-dd") + "#))-2000) AND ((TB_Lots.LOMOIS)=Month(DateAdd(\"m\",[TB_Fromageries].[FRRAP], #" + date5.ToString("yyyy-MM-dd") + "#))) AND TB_Lots.LODEP = 0 ORDER BY TB_Lots.LOFROM; ");
 
@@ -718,6 +718,7 @@ INSERT INTO TB_Lots(
                     string defaultString = "";
                     LotFrom lot = new LotFrom(
                         reader.IsDBNull(reader.GetOrdinal("LOFROM")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOFROM")),
+                        reader.IsDBNull(reader.GetOrdinal("FRCOOP")) ? defaultString : reader.GetString(reader.GetOrdinal("FRCOOP")),
                         reader.IsDBNull(reader.GetOrdinal("FRNOM")) ? defaultString : reader.GetString(reader.GetOrdinal("FRNOM")),
                         reader.IsDBNull(reader.GetOrdinal("FRNDIR")) ? defaultString : reader.GetString(reader.GetOrdinal("FRNDIR")),
                         reader.IsDBNull(reader.GetOrdinal("FRADR")) ? defaultString : reader.GetString(reader.GetOrdinal("FRADR")),

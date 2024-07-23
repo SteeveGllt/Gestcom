@@ -23,10 +23,11 @@ namespace Gestcom.Classes
         public Decimal FRCPOS { get; set; }
         public String FRVILL { get; set; }
         public String FRNDIR { get; set; }
+        public String FRCOOP { get; set; }
 
         public EntreeLotFrom() { }
 
-        public EntreeLotFrom(decimal lOFROM, decimal lOANNE, decimal lOMOIS, DateTime date_Entrée, decimal lOCENM, decimal lOCENB, decimal lOCENN, decimal lOTAUX, decimal fRNUM, string fRNOM, string fRADR, decimal fRCPOS, string fRVILL, string fRNDIR)
+        public EntreeLotFrom(decimal lOFROM, decimal lOANNE, decimal lOMOIS, DateTime date_Entrée, decimal lOCENM, decimal lOCENB, decimal lOCENN, decimal lOTAUX, decimal fRNUM, string fRNOM, string fRADR, decimal fRCPOS, string fRVILL, string fRNDIR, string fRCOOP)
         {
             LOFROM = lOFROM;
             LOANNE = lOANNE;
@@ -42,6 +43,7 @@ namespace Gestcom.Classes
             FRCPOS = fRCPOS;
             FRVILL = fRVILL;
             FRNDIR = fRNDIR;
+            FRCOOP = fRCOOP;
         }
     }
 }
