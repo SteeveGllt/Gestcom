@@ -183,7 +183,7 @@ namespace GestcomWF.Views
                     Excel.Range range;
 
                     objApp = new Excel.Application();
-                    objApp.Visible = true;
+                    objApp.Visible = false;
                     objBooks = objApp.Workbooks;
                     objBook = objBooks.Add(Missing.Value);
                     objSheets = objBook.Worksheets;
@@ -296,7 +296,7 @@ namespace GestcomWF.Views
                                 objSheet.Cells[28, "I"].Value = " =";
                                 objSheet.Cells[28, "I"].HorizontalAlignment = XlHAlign.xlHAlignLeft;
 
-                               
+
                                 objSheet.Cells[28, "J"].FormulaLocal = "=ARRONDI(+E28*H28; 2)";
                                 objSheet.Cells[28, "J"].HorizontalAlignment = XlHAlign.xlHAlignRight;
                                 objSheet.Cells[28, "J"].NumberFormat = @"#\ ##0,00 €";
@@ -342,28 +342,73 @@ namespace GestcomWF.Views
                                 objSheet.Cells[31, "J"].FormulaLocal = "=ARRONDI(+J30*H31/100; 2)";
                                 objSheet.Cells[31, "J"].NumberFormat = @"#\ ##0,00 €";
 
-                                objSheet.Cells[33, "F"].Value = "Total Réglé";
-                                objSheet.Cells[33, "F"].Font.Bold = true;
+                                decimal cmcomn = lotFrom.FRNUM + 8000;
 
-                                //var sumPrixTVA = workSheet["J30:J31"];
+                                FactLig numFactLig = LotAdo.ExisteCMCOMN(cmcomn, anneeValue, moisNumValue + 1);
+                                if (numFactLig != null)
+                                {
+                                    FactLig factLig = LotAdo.GetFactLigData(cmcomn, anneeValue, moisNumValue + 1);
 
-                                objSheet.Cells[33, "J"].Formula = "=SUM(J30:J31)";
-                                objSheet.Cells[33, "J"].Font.Bold = true;
-                                objSheet.Cells[33, "J"].NumberFormat = @"#\ ##0,00 €";
-                                var sum = objSheet.Cells[33, "J"].Value;
+                                    objSheet.Cells[33, "J"].Formula = "=SUM(J30:J31)";
+                                    objSheet.Cells[33, "J"].NumberFormat = @"#\ ##0,00 €";
+
+                                    string decadeDate = GetDecadeDate(factLig.CMDATE);
+
+                                    objSheet.Cells[34, "B"].Value = "A déduire N/Facture n° " + factLig.NUMFAC + " du " + decadeDate;
+
+                                    objSheet.Cells[34, "J"].Value = -factLig.CA;
+                                    objSheet.Cells[34, "J"].NumberFormat = @"#\ ##0,00 €";
+
+                                    objSheet.Cells[36, "F"].Value = "Total Réglé";
+                                    objSheet.Cells[36, "F"].Font.Bold = true;
 
 
-                                objSheet.Cells[35, "B"].Value = "          Vous en souhaitant bonne réception";
-                                objSheet.Cells[37, "B"].Value = "          Nous vous prions d'agréer, Monsieur le Président, nos";
-                                objSheet.Cells[38, "B"].Value = "salutations distinguées";
-                                objSheet.Cells[40, "H"].Value = "Service Comptabilité";
-                                objSheet.Cells[40, "H"].Font.Bold = true;
+                                    objSheet.Cells[36, "J"].Borders[XlBordersIndex.xlEdgeTop].LineStyle = XlLineStyle.xlContinuous;
+                                    objSheet.Cells[36, "J"].Borders[XlBordersIndex.xlEdgeTop].Weight = XlBorderWeight.xlThin;
+                                    objSheet.Cells[36, "J"].Borders[XlBordersIndex.xlEdgeTop].ColorIndex = 0;
 
-                                objSheet.Cells[46, "B"].Value = "PS : Nous virons ce jour, sur votre compte N° " + lotFrom.FRBANQ + " " + lotFrom.FRGUIC + " " + lotFrom.FRCOM1 + " " + lotFrom.FRCOM2;
-                                objSheet.Cells[47, "B"].Value = lotFrom.FRDOMI + ", la somme de";
-                                objSheet.Cells[47, "J"].FormulaLocal = "=+J33";
-                                objSheet.Cells[47, "J"].NumberFormat = @"#\ ##0,00 €";
+                                    objSheet.Cells[36, "J"].Formula = "=SUM(J33:J35)";
+                                    objSheet.Cells[36, "J"].Font.Bold = true;
 
+
+                                    objSheet.Cells[38, "B"].Value = "          Vous en souhaitant bonne réception";
+                                    objSheet.Cells[40, "B"].Value = "          Nous vous prions d'agréer, Monsieur le Président, nos";
+                                    objSheet.Cells[41, "B"].Value = "salutations distinguées";
+                                    objSheet.Cells[43, "H"].Value = "Service Comptabilité";
+                                    objSheet.Cells[43, "H"].Font.Bold = true;
+
+                                    objSheet.Cells[49, "B"].Value = "PS : Nous virons ce jour, sur votre compte N° " + lotFrom.FRBANQ + " " + lotFrom.FRGUIC + " " + lotFrom.FRCOM1 + " " + lotFrom.FRCOM2;
+                                    objSheet.Cells[50, "B"].Value = lotFrom.FRDOMI + ", la somme de";
+                                    objSheet.Cells[50, "J"].FormulaLocal = "=+J36";
+                                    objSheet.Cells[50, "J"].NumberFormat = @"#\ ##0,00 €";
+
+                                }
+                                else
+                                {
+                                    objSheet.Cells[33, "F"].Value = "Total Réglé";
+                                    objSheet.Cells[33, "F"].Font.Bold = true;
+
+                                    //var sumPrixTVA = workSheet["J30:J31"];
+
+                                    objSheet.Cells[33, "J"].Formula = "=SUM(J30:J31)";
+                                    objSheet.Cells[33, "J"].Font.Bold = true;
+                                    objSheet.Cells[33, "J"].NumberFormat = @"#\ ##0,00 €";
+                                    var sum = objSheet.Cells[33, "J"].Value;
+
+
+
+                                    objSheet.Cells[35, "B"].Value = "          Vous en souhaitant bonne réception";
+                                    objSheet.Cells[37, "B"].Value = "          Nous vous prions d'agréer, Monsieur le Président, nos";
+                                    objSheet.Cells[38, "B"].Value = "salutations distinguées";
+                                    objSheet.Cells[40, "H"].Value = "Service Comptabilité";
+                                    objSheet.Cells[40, "H"].Font.Bold = true;
+
+                                    objSheet.Cells[46, "B"].Value = "PS : Nous virons ce jour, sur votre compte N° " + lotFrom.FRBANQ + " " + lotFrom.FRGUIC + " " + lotFrom.FRCOM1 + " " + lotFrom.FRCOM2;
+                                    objSheet.Cells[47, "B"].Value = lotFrom.FRDOMI + ", la somme de";
+                                    objSheet.Cells[47, "J"].FormulaLocal = "=+J33";
+                                    objSheet.Cells[47, "J"].NumberFormat = @"#\ ##0,00 €";
+
+                                }
 
                                 valeurPrecedente = lotFrom.FRNUM;
                             }
@@ -526,6 +571,47 @@ namespace GestcomWF.Views
                     GenererValeurs();
                 }
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            decimal cmcomn = 8710;
+            decimal annee = 24;
+            decimal mois = 5;
+
+            FactLig test = LotAdo.GetFactLigData(cmcomn, annee, mois);
+            if (test != null)
+            {
+               
+                    MessageBox.Show("Existe.");
+               
+            }
+            else
+            {
+                MessageBox.Show("CMCOMN n'existe pas.");
+            }
+        }
+
+        private string GetDecadeDate(DateTime date)
+        {
+            int day = date.Day;
+            int month = date.Month;
+            int year = date.Year % 100; // to get last two digits of the year
+
+            if (day >= 1 && day <= 10)
+            {
+                day = 10;
+            }
+            else if (day >= 11 && day <= 20)
+            {
+                day = 20;
+            }
+            else
+            {
+                day = DateTime.DaysInMonth(date.Year, date.Month); // last day of the month
+            }
+
+            return $"{day:00}/{month:00}/{year:00}";
         }
     }
 }

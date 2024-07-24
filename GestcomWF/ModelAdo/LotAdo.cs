@@ -542,6 +542,134 @@ INSERT INTO TB_Lots(
                 close();
             }
         }
+        public static bool CheckCMCOMNExists(string cmcomn, int annee, int mois)
+        {
+            try
+            {
+                open();
+                OleDbCommand oleDbCommand = new OleDbCommand();
+                oleDbCommand.Connection = connection;
+                oleDbCommand.CommandText = "SELECT COUNT(*) FROM TB_Fact_Lig WHERE CMCOMN = @CMCOMN AND CMAA = @ANNEE AND CMMM = @MOIS";
+                oleDbCommand.Parameters.AddWithValue("@CMCOMN", cmcomn);
+                oleDbCommand.Parameters.AddWithValue("@ANNEE", annee);
+                oleDbCommand.Parameters.AddWithValue("@MOIS", mois);
+
+                int count = (int)oleDbCommand.ExecuteScalar();
+                return count > 0;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                MessageBox.Show("Erreur de communication avec la base de données!" + ex);
+                return false;
+            }
+            finally
+            {
+                close();
+            }
+        }
+
+        public static FactLig ExisteCMCOMN(decimal cmcomn, decimal loanne, decimal lomois)
+        {
+            try
+            {
+                // Initialisation de l'objet Lot
+                FactLig factLig = new FactLig();
+                OleDbDataReader reader;
+
+                // Ouverture de la connexion
+                open();
+                OleDbCommand oleDbCommand = new OleDbCommand();
+                oleDbCommand.Connection = connection;
+
+                // Requête SQL pour vérifier l'existence d'un lot
+                oleDbCommand.CommandText = "SELECT TB_Fact_Lig.CMCOMN FROM TB_Fact_Lig WHERE CMCOMN = @CMCOMN AND CMAA = @ANNEE AND CMMM = @MOIS";
+
+                // Préparation et exécution de la requête
+                oleDbCommand.Prepare();
+                oleDbCommand.Parameters.AddWithValue("@CMCOMN", cmcomn);
+                oleDbCommand.Parameters.AddWithValue("@ANNEE", loanne);
+                oleDbCommand.Parameters.AddWithValue("@MOIS", lomois);
+                oleDbCommand.ExecuteNonQuery();
+                reader = oleDbCommand.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    // Si la requête a retourné des résultats, créez un objet Lot
+                    factLig = new FactLig
+                    {
+                        // Assurez-vous de récupérer les valeurs appropriées depuis le reader
+                        CMCOMN = reader.GetDecimal(0)
+                    };
+                    return factLig;
+                }
+                else
+                {
+                    return null;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                MessageBox.Show("Erreur de communication avec la base de données!");
+                return null;
+            }
+            finally
+            {
+                close();
+            }
+        }
+
+        public static FactLig GetFactLigData(decimal cmcomn, decimal annee, decimal mois)
+        {
+            try
+            {
+                FactLig factLig = new FactLig();
+                OleDbDataReader reader;
+                open();
+                OleDbCommand oleDbCommand = new OleDbCommand();
+                oleDbCommand.Connection = connection;
+                oleDbCommand.CommandText = @"
+            SELECT TB_Fact_Lig.CMCOMN, TB_Fact_Lig.CMDATE, TB_Fact_Lig.NUMFAC, 
+                   Round([CMPDSU]*[CMPRIU]*IIf([CMCDFA]='F' Or [CMCDFA]='G',1,-1)*IIf([CMCODE]='P',1-[CMREMI]/100,1)*1.055,2) AS CA
+            FROM TB_Fact_Lig
+            WHERE TB_Fact_Lig.CMCOMN = @CMCOMN AND TB_Fact_Lig.CMAA = @ANNEE AND TB_Fact_Lig.CMMM = @MOIS
+            GROUP BY TB_Fact_Lig.CMCOMN, TB_Fact_Lig.CMDATE, TB_Fact_Lig.NUMFAC, 
+                     Round([CMPDSU]*[CMPRIU]*IIf([CMCDFA]='F' Or [CMCDFA]='G',1,-1)*IIf([CMCODE]='P',1-[CMREMI]/100,1)*1.055,2), 
+                     TB_Fact_Lig.CMAA, TB_Fact_Lig.CMMM";
+                oleDbCommand.Parameters.AddWithValue("@CMCOMN", cmcomn);
+                oleDbCommand.Parameters.AddWithValue("@ANNEE", annee);
+                oleDbCommand.Parameters.AddWithValue("@MOIS", mois);
+
+                reader = oleDbCommand.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    factLig = new FactLig
+                    {
+                        CMCOMN = reader.GetDecimal(0),
+                        CMDATE = Convert.ToDateTime(reader["CMDATE"]),
+                        NUMFAC = reader.GetDecimal(2),
+                        CA = Convert.ToDecimal(reader["CA"])
+                    };
+                    return factLig;
+                }
+
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                MessageBox.Show("Erreur de communication avec la base de données!" + ex);
+                return null;
+            }
+            finally
+            {
+                close();
+            }
+        }
+
 
 
         public static void updateLotPrix(decimal lofrom, decimal loanne, decimal lomois, double newPrix)

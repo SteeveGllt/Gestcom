@@ -46,6 +46,7 @@ namespace GestcomWF.Views
             dtpAcompte = new DateTimePicker();
             label2 = new Label();
             btnImprimer = new Button();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
             SuspendLayout();
             // 
@@ -205,11 +206,22 @@ namespace GestcomWF.Views
             btnImprimer.UseVisualStyleBackColor = true;
             btnImprimer.Click += btnImprimer_Click;
             // 
+            // button1
+            // 
+            button1.Location = new System.Drawing.Point(593, 53);
+            button1.Name = "button1";
+            button1.Size = new System.Drawing.Size(75, 23);
+            button1.TabIndex = 17;
+            button1.Text = "Test";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // saisie_acompte
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(700, 338);
+            Controls.Add(button1);
             Controls.Add(btnImprimer);
             Controls.Add(label2);
             Controls.Add(dtpAcompte);
@@ -277,5 +289,6 @@ namespace GestcomWF.Views
         private DateTimePicker dtpAcompte;
         private Label label2;
         private Button btnImprimer;
+        private Button button1;
     }
 }
