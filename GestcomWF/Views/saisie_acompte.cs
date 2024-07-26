@@ -239,7 +239,7 @@ namespace GestcomWF.Views
                                 objSheet.Cells[26, "B"].Value = "du premier acompte sur votre lot de fabrication " + moisNum.Mois.ToUpper() + " " + annee + anneeValue;
 
 
-                                objSheet.Columns[1].Columnwidth = 19.11;
+                                objSheet.Columns[1].Columnwidth = 11;
                                 objSheet.Columns[2].Columnwidth = 3.56;
                                 objSheet.Columns[3].Columnwidth = 5.89;
                                 objSheet.Columns[4].Columnwidth = 6.78;

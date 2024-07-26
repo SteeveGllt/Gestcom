@@ -382,7 +382,7 @@ namespace GestcomWF.Views
 
                                 /* this.workSheet["F27"].StringValue = moisNum.Mois.ToUpper() + " " + (annee + tbxAnnee.Text);
                                  this.workSheet["F27"].Style.Font.Bold = true;*/
-                                objSheet.Columns[1].Columnwidth = 19.14;
+                                objSheet.Columns[1].Columnwidth = 11;
                                 objSheet.Columns[2].Columnwidth = 3.57;
                                 objSheet.Columns[3].Columnwidth = 6;
                                 objSheet.Columns[4].Columnwidth = 6.86;
