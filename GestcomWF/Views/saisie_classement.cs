@@ -8,6 +8,7 @@ using Excel = Microsoft.Office.Interop.Excel;
 using System.Drawing.Printing;
 using System.Reflection;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace GestcomWF.Views
 {
@@ -441,6 +442,20 @@ namespace GestcomWF.Views
                             _lastPathSaved = path;
                             objBook.SaveAs(path);
                             objBook.Close();
+                            objApp.Quit();
+
+                            // Nettoyer les interfaces COM
+                            System.Runtime.InteropServices.Marshal.ReleaseComObject(objSheets);
+                            System.Runtime.InteropServices.Marshal.ReleaseComObject(objBook);
+                            System.Runtime.InteropServices.Marshal.ReleaseComObject(objBooks);
+                            System.Runtime.InteropServices.Marshal.ReleaseComObject(objApp);
+
+                            ProcessStartInfo psi = new ProcessStartInfo
+                            {
+                                FileName = path,
+                                UseShellExecute = true
+                            };
+                            System.Diagnostics.Process.Start(psi);
                         }
                     }
                     catch (Exception ex)

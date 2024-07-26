@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Reflection.Metadata;
 using IronXL;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace GestcomWF.Views
 {
@@ -342,6 +343,14 @@ namespace GestcomWF.Views
                             System.Runtime.InteropServices.Marshal.ReleaseComObject(objBook);
                             System.Runtime.InteropServices.Marshal.ReleaseComObject(objBooks);
                             System.Runtime.InteropServices.Marshal.ReleaseComObject(objApp);
+
+
+                            ProcessStartInfo psi = new ProcessStartInfo
+                            {
+                                FileName = path,
+                                UseShellExecute = true
+                            };
+                            System.Diagnostics.Process.Start(psi);
                         }
                     }
                     catch (Exception ex)

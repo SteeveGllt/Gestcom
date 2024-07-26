@@ -8,6 +8,7 @@ using Excel = Microsoft.Office.Interop.Excel;
 using Microsoft.VisualBasic;
 using System.Reflection;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace GestcomWF.Views
 {
@@ -432,11 +433,25 @@ namespace GestcomWF.Views
                         saveFileDialog.FileName = "Acomptes_" + tbx_annee.Text + moisExcel + ".xlsx";
                         if (saveFileDialog.ShowDialog() == DialogResult.OK)
                         {
+
                             string path = saveFileDialog.FileName;
 
                             objBook.SaveAs(path);
                             objBook.Close();
                             objApp.Quit();
+
+                            // Nettoyer les interfaces COM
+                            System.Runtime.InteropServices.Marshal.ReleaseComObject(objSheets);
+                            System.Runtime.InteropServices.Marshal.ReleaseComObject(objBook);
+                            System.Runtime.InteropServices.Marshal.ReleaseComObject(objBooks);
+                            System.Runtime.InteropServices.Marshal.ReleaseComObject(objApp);
+
+                            ProcessStartInfo psi = new ProcessStartInfo
+                            {
+                                FileName = path,
+                                UseShellExecute = true
+                            };
+                            System.Diagnostics.Process.Start(psi);
 
                         }
                     }

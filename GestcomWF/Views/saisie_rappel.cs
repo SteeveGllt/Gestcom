@@ -9,6 +9,7 @@ using Microsoft.Office.Interop.Excel;
 using Excel = Microsoft.Office.Interop.Excel;
 using IronXL;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace GestcomWF.Views
 {
@@ -958,7 +959,20 @@ namespace GestcomWF.Views
 
                             objBook.SaveAs(path);
                             objBook.Close();
+                            objApp.Quit();
 
+                            // Nettoyer les interfaces COM
+                            System.Runtime.InteropServices.Marshal.ReleaseComObject(objSheets);
+                            System.Runtime.InteropServices.Marshal.ReleaseComObject(objBook);
+                            System.Runtime.InteropServices.Marshal.ReleaseComObject(objBooks);
+                            System.Runtime.InteropServices.Marshal.ReleaseComObject(objApp);
+
+                            ProcessStartInfo psi = new ProcessStartInfo
+                            {
+                                FileName = path,
+                                UseShellExecute = true
+                            };
+                            System.Diagnostics.Process.Start(psi);
                         }
                     }
                 }
