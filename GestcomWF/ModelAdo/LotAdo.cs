@@ -251,7 +251,7 @@ INSERT INTO TB_Lots(
                 oleDbCommand.Parameters.AddWithValue("@LOCEB1", ((double)lot.LOCEB1));
                 oleDbCommand.Parameters.AddWithValue("@LOCEN1", lot.LOCEN1);
                 oleDbCommand.Parameters.AddWithValue("@LOPUAC", Convert.ToDouble(lot.LOPUAC));
-                oleDbCommand.Parameters.AddWithValue("@MONTANT", Convert.ToDouble(lot.LOPUAC) * Convert.ToDouble(lot.LOCEN1));
+                oleDbCommand.Parameters.AddWithValue("@MONTANT", Math.Round(Convert.ToDouble(lot.LOPUAC) / 1000 * Convert.ToDouble(lot.LOCEN1), 2));
                 oleDbCommand.ExecuteNonQuery();
                 Console.WriteLine("Lot créé");
             }
