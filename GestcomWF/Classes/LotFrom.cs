@@ -36,9 +36,10 @@ namespace GestcomWF.Classes
         public Decimal FRPRIME { get; set; }
         public String FRCOOP { get; set; }
 
-        public LotFrom(decimal lOFROM, string fRNOM, string fRNDIR, string fRADR, decimal fRCPOS, decimal lOCEM1, decimal lOC11, decimal lOC12, decimal lOC13, decimal lOANNE, decimal lOMOIS, string fRVILL, decimal fRNUM)
+        public LotFrom(decimal lOFROM,string fRCOOP, string fRNOM, string fRNDIR, string fRADR, decimal fRCPOS, decimal lOCEM1, decimal lOC11, decimal lOC12, decimal lOC13, decimal lOANNE, decimal lOMOIS, string fRVILL, decimal fRNUM)
         {
             LOFROM = lOFROM;
+            FRCOOP = fRCOOP;
             FRNOM = fRNOM;
             FRNDIR = fRNDIR;
             FRADR = fRADR;
@@ -83,9 +84,10 @@ namespace GestcomWF.Classes
             FRCOM2 = fRCOM2;
         }
 
-        public LotFrom(decimal lOFROM, string fRNOM, string fRNDIR, string fRADR, decimal fRCPOS, decimal lOCEN1, decimal lOCEM1, decimal lOPUAC, decimal lOANNE, decimal lOMOIS, string fRVILL, decimal fRNUM, string fRDOMI, decimal fRBANQ, decimal fRGUIC, string fRCOM1, string fRCOM2)
+        public LotFrom(decimal lOFROM, string fRCOOP, string fRNOM, string fRNDIR, string fRADR, decimal fRCPOS, decimal lOCEN1, decimal lOCEM1, decimal lOPUAC, decimal lOANNE, decimal lOMOIS, string fRVILL, decimal fRNUM, string fRDOMI, decimal fRBANQ, decimal fRGUIC, string fRCOM1, string fRCOM2)
         {
             LOFROM = lOFROM;
+            FRCOOP = fRCOOP;
             FRNOM = fRNOM;
             FRNDIR = fRNDIR;
             FRADR = fRADR;

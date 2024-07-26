@@ -117,7 +117,7 @@ namespace GestcomWF.Views
                     {
                         var prime = Math.Round((Convert.ToDecimal(tbx_a.Text) + Convert.ToDecimal(tbx_b.Text) + Convert.ToDecimal(tbx_c.Text)) * _currentLot.FRPRIME / 100, 2);
                         var tonnageTotal = tonnageA + tonnageB + tonnageC;
-                        var totalPrime = prime * tonnageTotal;
+                        var totalPrime = Math.Round(prime * tonnageTotal, 2);
                         montant = montant + totalPrime;
                     }
 
