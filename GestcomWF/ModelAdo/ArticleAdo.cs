@@ -94,15 +94,27 @@ namespace Gestcom.ModelAdo
             }
         }
 
+        // Méthode pour créer un article dans la base de données
         public static void createArticle(Article article)
         {
             try
             {
+                // Ouverture de la connexion à la base de données
                 open();
+
+                // Création d'une commande OleDb
                 OleDbCommand oleDbCommand = new OleDbCommand();
+
+                // Attribution de la connexion à la commande
                 oleDbCommand.Connection = connection;
+
+                // Définition de la requête SQL pour insérer un nouvel article
                 oleDbCommand.CommandText = "INSERT INTO TB_Articles(ARNUM, ARDESI, ARFAMI, ARUNIT, ARPRIX, ARTVA, ARPOID, ARCEC, ARCPT1, ARCPT2, ARDLUO, AREAN13) VALUES(@ARNUM, @ARDESI, @ARFAMI, @ARUNIT, @ARPRIX, @ARTVA, @ARPOID, @ARCEC, @ARCPT1, @ARCPT2, @ARDLUO, @AREAN13)";
+
+                // Préparation de la commande
                 oleDbCommand.Prepare();
+
+                // Ajout des paramètres à la commande avec les valeurs de l'article
                 oleDbCommand.Parameters.AddWithValue("@ARNUM", article.ARNUM);
                 oleDbCommand.Parameters.AddWithValue("@ARDESI", article.ARDESI);
                 oleDbCommand.Parameters.AddWithValue("@ARFAMI", article.ARFAMI);
@@ -115,28 +127,48 @@ namespace Gestcom.ModelAdo
                 oleDbCommand.Parameters.AddWithValue("@ARCPT2", article.ARCPT2);
                 oleDbCommand.Parameters.AddWithValue("@ARDLUO", article.ARDLUO);
                 oleDbCommand.Parameters.AddWithValue("@AREAN13", article.AREAN13);
+
+                // Exécution de la commande
                 oleDbCommand.ExecuteNonQuery();
+
+                // Affichage d'un message de confirmation dans la console et une boîte de dialogue
                 Console.WriteLine("Article créé");
                 MessageBox.Show("Article créé");
             }
             catch (Exception ex)
             {
+                // Affichage du message d'erreur en cas d'exception
                 Console.WriteLine(ex.Message);
                 MessageBox.Show("Erreur de communication avec la base de données!");
             }
-            finally { close(); }
+            finally
+            {
+                // Fermeture de la connexion à la base de données
+                close();
+            }
         }
 
+        // Méthode pour mettre à jour un article dans la base de données
         public static void updateArticle(decimal arnum, string ardesi, string arfami, string arunit, double arprix, decimal artva, decimal arpoid, string arcec, string arcpt1, string arcpt2, int ardluo, decimal arean13)
         {
             try
             {
+                // Ouverture de la connexion à la base de données
                 open();
+
+                // Création d'une commande OleDb
                 OleDbCommand oleDbCommand = new OleDbCommand();
+
+                // Attribution de la connexion à la commande
                 oleDbCommand.Connection = connection;
+
+                // Définition de la requête SQL pour mettre à jour un article
                 oleDbCommand.CommandText = "UPDATE TB_Articles SET ARDESI = @ARDESI, ARFAMI = @ARFAMI, ARUNIT = @ARUNIT, ARPRIX = @ARPRIX, ARTVA = @ARTVA, ARPOID = @ARPOID, ARCEC = @ARCEC, ARCPT1 = @ARCPT1, ARCPT2 = @ARCPT2, ARDLUO = @ARDLUO, AREAN13 = @AREAN13 WHERE ARNUM = @ARNUM;";
+
+                // Préparation de la commande
                 oleDbCommand.Prepare();
-               
+
+                // Ajout des paramètres à la commande avec les nouvelles valeurs
                 oleDbCommand.Parameters.AddWithValue("@ARDESI", ardesi);
                 oleDbCommand.Parameters.AddWithValue("@ARFAMI", arfami);
                 oleDbCommand.Parameters.AddWithValue("@ARUNIT", arunit);
@@ -149,41 +181,65 @@ namespace Gestcom.ModelAdo
                 oleDbCommand.Parameters.AddWithValue("@ARDLUO", ardluo);
                 oleDbCommand.Parameters.AddWithValue("@AREAN13", arean13);
                 oleDbCommand.Parameters.AddWithValue("@ARNUM", arnum);
+
+                // Exécution de la commande
                 oleDbCommand.ExecuteNonQuery();
+
+                // Affichage d'un message de confirmation dans une boîte de dialogue
                 MessageBox.Show("Article Modifié");
             }
             catch (Exception ex)
             {
+                // Affichage du message d'erreur en cas d'exception
                 Console.WriteLine(ex.Message);
                 MessageBox.Show("Erreur de communication avec la base de données!");
             }
-            finally { close(); }
+            finally
+            {
+                // Fermeture de la connexion à la base de données
+                close();
+            }
         }
 
+        // Méthode pour supprimer un article de la base de données
         public static void deleteArticle(decimal arnum)
         {
             try
             {
+                // Ouverture de la connexion à la base de données
                 open();
+
+                // Création d'une commande OleDb
                 OleDbCommand oleDbCommand = new OleDbCommand();
+
+                // Attribution de la connexion à la commande
                 oleDbCommand.Connection = connection;
+
+                // Définition de la requête SQL pour supprimer un article
                 oleDbCommand.CommandText = "DELETE FROM TB_Articles WHERE ARNUM = @ARNUM";
+
+                // Préparation de la commande
                 oleDbCommand.Prepare();
+
+                // Ajout du paramètre à la commande avec la valeur de l'ARNUM
                 oleDbCommand.Parameters.AddWithValue("@ARNUM", arnum);
+
+                // Exécution de la commande
                 oleDbCommand.ExecuteNonQuery();
+
+                // Affichage d'un message de confirmation dans la console et une boîte de dialogue
                 Console.WriteLine("Article supprimé");
                 MessageBox.Show("Article supprimé");
-                close();
 
+                // Fermeture de la connexion à la base de données
+                close();
             }
             catch (Exception ex)
             {
-                // Affiche des erreurs
+                // Affichage du message d'erreur en cas d'exception
                 Console.WriteLine(ex.Message);
                 MessageBox.Show("Erreur !");
-
             }
-
         }
 
         public static Article GetArticletDetails(string numeroArticle)
