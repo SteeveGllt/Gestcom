@@ -104,6 +104,7 @@ namespace GestcomWF.Views
                         objSheet = objBook.Sheets.Add(Missing.Value, objBook.Worksheets[objBook.Worksheets.Count], Missing.Value, Missing.Value);
                         
                         objSheet.Cells.Font.Name = "Arial";
+                        objSheet.Cells.Font.Size = 10;
 
                         objSheet.Cells[2, "D"].Value = "CLASSEMENT/REGLEMENT DE FABRICATION :";
                         objSheet.Cells[2, "D"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
@@ -131,8 +132,9 @@ namespace GestcomWF.Views
                         objSheet.Cells[2, "I"].Value = "     J A N V I E R     2 0 2 4";
                         objSheet.Cells[2, "I"].Font.Color = colorText;
                         objSheet.Cells[2, "I"].Font.Bold = true;
+                        objSheet.Cells[2, "I"].HorizontalAlignment = XlHAlign.xlHAlignLeft;
+                        objSheet.Cells[2, "I"].VerticalAlignment = XlVAlign.xlVAlignCenter;
 
-                      
 
                         objSheet.Columns[1].Columnwidth = 0;
                         objSheet.Columns[2].Columnwidth = 26.56;
