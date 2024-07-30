@@ -622,30 +622,31 @@ INSERT INTO TB_Lots(
             }
         }
 
-        public static FactLig GetFactLigData(decimal cmcomn, decimal annee, decimal mois)
+        public static List<FactLig> GetFactLigData(decimal cmcomn, decimal annee, decimal mois)
         {
             try
             {
+                List<FactLig> factLigs = new List<FactLig>();
                 FactLig factLig = new FactLig();
                 OleDbDataReader reader;
                 open();
                 OleDbCommand oleDbCommand = new OleDbCommand();
                 oleDbCommand.Connection = connection;
                 oleDbCommand.CommandText = @"
-            SELECT TB_Fact_Lig.CMCOMN, TB_Fact_Lig.CMDATE, TB_Fact_Lig.NUMFAC, 
-                   Round([CMPDSU]*[CMPRIU]*IIf([CMCDFA]='F' Or [CMCDFA]='G',1,-1)*IIf([CMCODE]='P',1-[CMREMI]/100,1)*1.055,2) AS CA
-            FROM TB_Fact_Lig
-            WHERE TB_Fact_Lig.CMCOMN = @CMCOMN AND TB_Fact_Lig.CMAA = @ANNEE AND TB_Fact_Lig.CMMM = @MOIS
-            GROUP BY TB_Fact_Lig.CMCOMN, TB_Fact_Lig.CMDATE, TB_Fact_Lig.NUMFAC, 
-                     Round([CMPDSU]*[CMPRIU]*IIf([CMCDFA]='F' Or [CMCDFA]='G',1,-1)*IIf([CMCODE]='P',1-[CMREMI]/100,1)*1.055,2), 
-                     TB_Fact_Lig.CMAA, TB_Fact_Lig.CMMM";
+    SELECT TB_Fact_Lig.CMCOMN, TB_Fact_Lig.CMDATE, TB_Fact_Lig.NUMFAC, 
+           Round([CMPDSU]*[CMPRIU]*IIf([CMCDFA]='F' Or [CMCDFA]='G',1,-1)*IIf([CMCODE]='P',1-[CMREMI]/100,1)*1.055,2) AS CA
+    FROM TB_Fact_Lig
+    GROUP BY TB_Fact_Lig.CMCOMN, TB_Fact_Lig.CMDATE, TB_Fact_Lig.NUMFAC, 
+             Round([CMPDSU]*[CMPRIU]*IIf([CMCDFA]='F' Or [CMCDFA]='G',1,-1)*IIf([CMCODE]='P',1-[CMREMI]/100,1)*1.055,2), 
+             TB_Fact_Lig.CMAA, TB_Fact_Lig.CMMM
+    HAVING TB_Fact_Lig.CMCOMN = @CMCOMN AND TB_Fact_Lig.CMAA = @ANNEE AND TB_Fact_Lig.CMMM = @MOIS";
                 oleDbCommand.Parameters.AddWithValue("@CMCOMN", cmcomn);
                 oleDbCommand.Parameters.AddWithValue("@ANNEE", annee);
                 oleDbCommand.Parameters.AddWithValue("@MOIS", mois);
 
                 reader = oleDbCommand.ExecuteReader();
 
-                if (reader.Read())
+                while (reader.Read())
                 {
                     factLig = new FactLig
                     {
@@ -654,10 +655,9 @@ INSERT INTO TB_Lots(
                         NUMFAC = reader.GetDecimal(2),
                         CA = Convert.ToDecimal(reader["CA"])
                     };
-                    return factLig;
+                    factLigs.Add(factLig);
                 }
-
-                return null;
+                return factLigs;
             }
             catch (Exception ex)
             {

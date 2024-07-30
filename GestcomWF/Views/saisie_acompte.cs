@@ -233,7 +233,7 @@ namespace GestcomWF.Views
                                 objSheet.Cells[11, "F"].Value = lotFrom.FRNDIR;
                                 objSheet.Cells[12, "F"].Value = lotFrom.FRADR;
                                 objSheet.Cells[13, "F"].Value = lotFrom.FRCPOS + " " + lotFrom.FRVILL;
-                                objSheet.Cells[28, "G"].Value = "Le" + " " + formattedDate;
+                                objSheet.Cells[18, "G"].Value = "Le" + " " + formattedDate;
                                 objSheet.Cells[18, "A"].Value = "      TB/PB";
                                 objSheet.Cells[23, "B"].Value = "Monsieur le Président";
                                 objSheet.Cells[25, "B"].Value = "          Nous vous prions de bien vouloir trouver ci-dessous, le détail";
@@ -348,41 +348,52 @@ namespace GestcomWF.Views
                                 FactLig numFactLig = LotAdo.ExisteCMCOMN(cmcomn, anneeValue, moisNumValue + 1);
                                 if (numFactLig != null)
                                 {
-                                    FactLig factLig = LotAdo.GetFactLigData(cmcomn, anneeValue, moisNumValue + 1);
+                                    List<FactLig> factLigs = LotAdo.GetFactLigData(cmcomn, anneeValue, moisNumValue + 1);
+                                    int currentRow = 34;
+                                    foreach (FactLig fact in factLigs)
+                                    {
+                                        string decadeDate = GetDecadeDate(fact.CMDATE);
+                                        objSheet.Cells[currentRow, "B"].Value = "A déduire N/Facture n° " + fact.NUMFAC + " du " + decadeDate;
+                                        objSheet.Cells[currentRow, "J"].Value = -fact.CA;
+                                        objSheet.Cells[currentRow, "J"].NumberFormat = @"#\ ##0,00 €";
+                                        currentRow++;
+                                    }
 
                                     objSheet.Cells[33, "J"].Formula = "=SUM(J30:J31)";
                                     objSheet.Cells[33, "J"].NumberFormat = @"#\ ##0,00 €";
 
-                                    string decadeDate = GetDecadeDate(factLig.CMDATE);
+                                    // Always insert an empty row before "Total Réglé"
+                                    currentRow++;
 
-                                    objSheet.Cells[34, "B"].Value = "A déduire N/Facture n° " + factLig.NUMFAC + " du " + decadeDate;
+                                    objSheet.Cells[currentRow, "F"].Value = "Total Réglé";
+                                    objSheet.Cells[currentRow, "F"].Font.Bold = true;
 
-                                    objSheet.Cells[34, "J"].Value = -factLig.CA;
-                                    objSheet.Cells[34, "J"].NumberFormat = @"#\ ##0,00 €";
+                                    objSheet.Cells[currentRow, "J"].Borders[XlBordersIndex.xlEdgeTop].LineStyle = XlLineStyle.xlContinuous;
+                                    objSheet.Cells[currentRow, "J"].Borders[XlBordersIndex.xlEdgeTop].Weight = XlBorderWeight.xlThin;
+                                    objSheet.Cells[currentRow, "J"].Borders[XlBordersIndex.xlEdgeTop].ColorIndex = 0;
 
-                                    objSheet.Cells[36, "F"].Value = "Total Réglé";
-                                    objSheet.Cells[36, "F"].Font.Bold = true;
+                                    objSheet.Cells[currentRow, "J"].Formula = $"=SUM(J33:J{currentRow - 2})";
+                                    var totalRegle = "J" + currentRow;
+                                    objSheet.Cells[currentRow, "J"].Font.Bold = true;
 
+                                    currentRow += 2;
 
-                                    objSheet.Cells[36, "J"].Borders[XlBordersIndex.xlEdgeTop].LineStyle = XlLineStyle.xlContinuous;
-                                    objSheet.Cells[36, "J"].Borders[XlBordersIndex.xlEdgeTop].Weight = XlBorderWeight.xlThin;
-                                    objSheet.Cells[36, "J"].Borders[XlBordersIndex.xlEdgeTop].ColorIndex = 0;
+                                    objSheet.Cells[currentRow, "B"].Value = "          Vous en souhaitant bonne réception";
+                                    currentRow += 2;
+                                    objSheet.Cells[currentRow, "B"].Value = "          Nous vous prions d'agréer, Monsieur le Président, nos";
+                                    currentRow++;
+                                    objSheet.Cells[currentRow, "B"].Value = "salutations distinguées";
+                                    currentRow += 2;
+                                    objSheet.Cells[currentRow, "H"].Value = "Service Comptabilité";
+                                    objSheet.Cells[currentRow, "H"].Font.Bold = true;
 
-                                    objSheet.Cells[36, "J"].Formula = "=SUM(J33:J35)";
-                                    objSheet.Cells[36, "J"].Font.Bold = true;
+                                    currentRow += 6;
 
-
-                                    objSheet.Cells[38, "B"].Value = "          Vous en souhaitant bonne réception";
-                                    objSheet.Cells[40, "B"].Value = "          Nous vous prions d'agréer, Monsieur le Président, nos";
-                                    objSheet.Cells[41, "B"].Value = "salutations distinguées";
-                                    objSheet.Cells[43, "H"].Value = "Service Comptabilité";
-                                    objSheet.Cells[43, "H"].Font.Bold = true;
-
-                                    objSheet.Cells[49, "B"].Value = "PS : Nous virons ce jour, sur votre compte N° " + lotFrom.FRBANQ + " " + lotFrom.FRGUIC + " " + lotFrom.FRCOM1 + " " + lotFrom.FRCOM2;
-                                    objSheet.Cells[50, "B"].Value = lotFrom.FRDOMI + ", la somme de";
-                                    objSheet.Cells[50, "J"].FormulaLocal = "=+J36";
-                                    objSheet.Cells[50, "J"].NumberFormat = @"#\ ##0,00 €";
-
+                                    objSheet.Cells[currentRow, "B"].Value = "PS : Nous virons ce jour, sur votre compte N° " + lotFrom.FRBANQ + " " + lotFrom.FRGUIC + " " + lotFrom.FRCOM1 + " " + lotFrom.FRCOM2;
+                                    currentRow++;
+                                    objSheet.Cells[currentRow, "B"].Value = lotFrom.FRDOMI + ", la somme de";
+                                    objSheet.Cells[currentRow, "J"].FormulaLocal = $"=+" + totalRegle;
+                                    objSheet.Cells[currentRow, "J"].NumberFormat = @"#\ ##0,00 €";
                                 }
                                 else
                                 {
@@ -585,25 +596,6 @@ namespace GestcomWF.Views
                 {
                     GenererValeurs();
                 }
-            }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            decimal cmcomn = 8710;
-            decimal annee = 24;
-            decimal mois = 5;
-
-            FactLig test = LotAdo.GetFactLigData(cmcomn, annee, mois);
-            if (test != null)
-            {
-               
-                    MessageBox.Show("Existe.");
-               
-            }
-            else
-            {
-                MessageBox.Show("CMCOMN n'existe pas.");
             }
         }
 
