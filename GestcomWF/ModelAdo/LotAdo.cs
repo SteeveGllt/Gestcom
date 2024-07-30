@@ -1010,5 +1010,54 @@ INSERT INTO TB_Lots(
             }
         }
 
+
+        public static List<EtatRecap> EtatRecap(decimal mois, decimal annee)
+        {
+            try
+            {
+
+                List<EtatRecap> etatRecaps = new List<EtatRecap>();
+                OleDbDataReader reader;
+                open();
+                //OleDbCommand oleDbCommand = new OleDbCommand("SELECT * FROM TB_Entrée_Lots WHERE LOMOIS = @LOMOIS AND LOANNE = @LOANNE");
+                OleDbCommand oleDbCommand = new OleDbCommand("SELECT TB_Fromageries.FRNOM, TB_Lots.LOCEM1, TB_Lots.LOCEN1, TB_Lots.LOC11, TB_Lots.LOC12, TB_Lots.LOC13, TB_Lots.MONTANT " +
+                    "FROM TB_Lots INNER JOIN TB_Fromageries ON " +
+                    "TB_Lots.LOFROM = TB_Fromageries.FRNUM WHERE LOMOIS = @LOMOIS AND LOANNE = @LOANNE ORDER BY TB_Lots.LOFROM");
+                oleDbCommand.Connection = connection;
+                oleDbCommand.Prepare();
+                oleDbCommand.Parameters.AddWithValue("@LOMOIS", mois);
+                oleDbCommand.Parameters.AddWithValue("@LOANNE", annee);
+                reader = oleDbCommand.ExecuteReader();
+                while (reader.Read())
+                {
+                    decimal defaultDecimal = 0m;
+                    string defaultString = "";
+
+                    EtatRecap etatRecap = new EtatRecap(
+                        reader.IsDBNull(reader.GetOrdinal("FRNOM")) ? defaultString : reader.GetString(reader.GetOrdinal("FRNOM")),
+                        reader.IsDBNull(reader.GetOrdinal("LOCEM1")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOCEM1")),
+                        reader.IsDBNull(reader.GetOrdinal("LOCEN1")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOCEN1")),
+                        reader.IsDBNull(reader.GetOrdinal("LOC11")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOC11")),
+                        reader.IsDBNull(reader.GetOrdinal("LOC12")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOC12")),
+                        reader.IsDBNull(reader.GetOrdinal("LOC13")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("LOC13")),
+                        reader.IsDBNull(reader.GetOrdinal("MONTANT")) ? defaultDecimal : reader.GetDecimal(reader.GetOrdinal("MONTANT"))
+                        
+                       );
+                    etatRecaps.Add(etatRecap);
+                }
+                return etatRecaps;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                MessageBox.Show("Erreur de communication avec la base de données!");
+                return null;
+            }
+            finally
+            {
+                close();
+            }
+        }
+
     }
 }

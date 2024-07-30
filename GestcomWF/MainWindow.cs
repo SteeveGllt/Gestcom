@@ -99,5 +99,12 @@ namespace GestcomWF
             article.MdiParent = this;
             article.Show();
         }
+
+        private void etatRécapitulatifToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            etat_recapitulatif etat_Recapitulatif = new etat_recapitulatif();
+            etat_Recapitulatif.MdiParent = this;
+            etat_Recapitulatif.Show();
+        }
     }
 }

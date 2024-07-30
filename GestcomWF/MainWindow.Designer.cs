@@ -49,6 +49,7 @@ namespace GestcomWF
             outilsToolStripMenuItem = new ToolStripMenuItem();
             calculatriceToolStripMenuItem = new ToolStripMenuItem();
             testVBNetToolStripMenuItem = new ToolStripMenuItem();
+            etatRécapitulatifToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -74,41 +75,41 @@ namespace GestcomWF
             // clientsToolStripMenuItem
             // 
             clientsToolStripMenuItem.Name = "clientsToolStripMenuItem";
-            clientsToolStripMenuItem.Size = new Size(209, 26);
+            clientsToolStripMenuItem.Size = new Size(224, 26);
             clientsToolStripMenuItem.Text = "Clients";
             clientsToolStripMenuItem.Click += clientsToolStripMenuItem_Click;
             // 
             // articlesToolStripMenuItem
             // 
             articlesToolStripMenuItem.Name = "articlesToolStripMenuItem";
-            articlesToolStripMenuItem.Size = new Size(209, 26);
+            articlesToolStripMenuItem.Size = new Size(224, 26);
             articlesToolStripMenuItem.Text = "Articles";
             articlesToolStripMenuItem.Click += articlesToolStripMenuItem_Click;
             // 
             // tarifsToolStripMenuItem
             // 
             tarifsToolStripMenuItem.Name = "tarifsToolStripMenuItem";
-            tarifsToolStripMenuItem.Size = new Size(209, 26);
+            tarifsToolStripMenuItem.Size = new Size(224, 26);
             tarifsToolStripMenuItem.Text = "Tarifs";
             // 
             // lieuxDeLivraisonToolStripMenuItem
             // 
             lieuxDeLivraisonToolStripMenuItem.Name = "lieuxDeLivraisonToolStripMenuItem";
-            lieuxDeLivraisonToolStripMenuItem.Size = new Size(209, 26);
+            lieuxDeLivraisonToolStripMenuItem.Size = new Size(224, 26);
             lieuxDeLivraisonToolStripMenuItem.Text = "Lieux de Livraison";
             // 
             // fromageriesToolStripMenuItem
             // 
             fromageriesToolStripMenuItem.Name = "fromageriesToolStripMenuItem";
-            fromageriesToolStripMenuItem.Size = new Size(209, 26);
+            fromageriesToolStripMenuItem.Size = new Size(224, 26);
             fromageriesToolStripMenuItem.Text = "Fromageries";
             fromageriesToolStripMenuItem.Click += fromageriesToolStripMenuItem_Click;
             // 
             // lotsToolStripMenuItem
             // 
-            lotsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { entréeToolStripMenuItem, editionDesPeséesToolStripMenuItem, classementToolStripMenuItem, saisieÉditionDesAcomptesToolStripMenuItem, saisieÉditionDesRappelsToolStripMenuItem });
+            lotsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { entréeToolStripMenuItem, editionDesPeséesToolStripMenuItem, classementToolStripMenuItem, saisieÉditionDesAcomptesToolStripMenuItem, saisieÉditionDesRappelsToolStripMenuItem, etatRécapitulatifToolStripMenuItem });
             lotsToolStripMenuItem.Name = "lotsToolStripMenuItem";
-            lotsToolStripMenuItem.Size = new Size(209, 26);
+            lotsToolStripMenuItem.Size = new Size(224, 26);
             lotsToolStripMenuItem.Text = "Lots";
             // 
             // entréeToolStripMenuItem
@@ -149,7 +150,7 @@ namespace GestcomWF
             // imprimantesToolStripMenuItem
             // 
             imprimantesToolStripMenuItem.Name = "imprimantesToolStripMenuItem";
-            imprimantesToolStripMenuItem.Size = new Size(209, 26);
+            imprimantesToolStripMenuItem.Size = new Size(224, 26);
             imprimantesToolStripMenuItem.Text = "Imprimantes";
             imprimantesToolStripMenuItem.Click += imprimantesToolStripMenuItem_Click;
             // 
@@ -177,6 +178,13 @@ namespace GestcomWF
             // 
             testVBNetToolStripMenuItem.Name = "testVBNetToolStripMenuItem";
             testVBNetToolStripMenuItem.Size = new Size(14, 24);
+            // 
+            // etatRécapitulatifToolStripMenuItem
+            // 
+            etatRécapitulatifToolStripMenuItem.Name = "etatRécapitulatifToolStripMenuItem";
+            etatRécapitulatifToolStripMenuItem.Size = new Size(291, 26);
+            etatRécapitulatifToolStripMenuItem.Text = "État récapitulatif";
+            etatRécapitulatifToolStripMenuItem.Click += etatRécapitulatifToolStripMenuItem_Click;
             // 
             // MainWindow
             // 
@@ -215,5 +223,6 @@ namespace GestcomWF
         private ToolStripMenuItem editionDesPeséesToolStripMenuItem;
         private ToolStripMenuItem saisieÉditionDesAcomptesToolStripMenuItem;
         private ToolStripMenuItem saisieÉditionDesRappelsToolStripMenuItem;
+        private ToolStripMenuItem etatRécapitulatifToolStripMenuItem;
     }
 }
