@@ -304,7 +304,15 @@ namespace GestcomWF.Views
                                 objSheet = objBook.Sheets.Add(Missing.Value, objBook.Worksheets[objBook.Worksheets.Count], Missing.Value, Missing.Value);
                                 objSheet.Name = nomFeuille;
 
-                                objSheet.Cells[10, "D"] = lotFrom.FRCOOP;
+                                if (lotFrom.FRNUM == 710)
+                                {
+                                    objSheet.Cells[10, "D"].Value = "LONGEVELLE LES RUSSEY";
+                                }
+                                else
+                                {
+                                    objSheet.Cells[10, "D"].Value = lotFrom.FRCOOP;
+                                }
+
                                 objSheet.Cells[11, "D"] = lotFrom.FRNDIR;
                                 objSheet.Cells[12, "D"] = lotFrom.FRADR;
                                 objSheet.Cells[13, "D"] = lotFrom.FRCPOS + " " + lotFrom.FRVILL;
@@ -450,6 +458,17 @@ namespace GestcomWF.Views
                             System.Runtime.InteropServices.Marshal.ReleaseComObject(objBooks);
                             System.Runtime.InteropServices.Marshal.ReleaseComObject(objApp);
 
+
+                            objSheets = null;
+                            objBook = null;
+                            objBooks = null;
+                            objApp = null;
+
+                            // Forcer la collecte des objets non référencés
+                            GC.Collect();
+                            GC.WaitForPendingFinalizers();
+
+
                             ProcessStartInfo psi = new ProcessStartInfo
                             {
                                 FileName = path,
@@ -570,6 +589,13 @@ namespace GestcomWF.Views
                 // Libère les ressources pour éviter les fuites de mémoire.
                 System.Runtime.InteropServices.Marshal.ReleaseComObject(workbook);
                 System.Runtime.InteropServices.Marshal.ReleaseComObject(excelApp);
+
+                excelApp = null;
+                workbook = null;
+
+                // Forcer la collecte des objets non référencés
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
             }
         }
 

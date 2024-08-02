@@ -225,19 +225,61 @@ namespace GestcomWF.Views
                             // Si l'entrée a une nouvelle valeur FRNUM
                             if (lotFrom.FRNUM != valeurPrecedente)
                             {
+                                string mois = selectedDate.ToString("MMMM yyyy");
+
+                                // Mettre la première lettre du mois en majuscule
+                                mois = char.ToUpper(mois[0]) + mois.Substring(1);
+
+                                // Appliquer la logique de date en fonction de FRNUM
+                                string dateAcompte;
+                                if (lotFrom.FRNUM == 710 || lotFrom.FRNUM == 820)
+                                {
+                                    // Si FRNUM est 710 ou 820, la date est le 08 du mois
+                                    dateAcompte = "08 " + mois;
+                                }
+                                else
+                                {
+                                    // Sinon, la date est le 20 du mois
+                                    dateAcompte = "20 " + mois;
+                                }
                                 // Initialisation de la feuille Excel avec le nom adapté
                                 objSheet = objBook.Sheets.Add(Missing.Value, objBook.Worksheets[objBook.Worksheets.Count], Missing.Value, Missing.Value);
                                 objSheet.Name = nomFeuille;
 
-                                objSheet.Cells[10, "F"].Value = lotFrom.FRCOOP;
+
+                                if (lotFrom.FRNUM == 710)
+                                {
+                                    objSheet.Cells[10, "F"].Value = "LONGEVELLE LES RUSSEY";
+                                }
+                                else
+                                {
+                                    objSheet.Cells[10, "F"].Value = lotFrom.FRCOOP;
+                                }
+
                                 objSheet.Cells[11, "F"].Value = lotFrom.FRNDIR;
                                 objSheet.Cells[12, "F"].Value = lotFrom.FRADR;
                                 objSheet.Cells[13, "F"].Value = lotFrom.FRCPOS + " " + lotFrom.FRVILL;
-                                objSheet.Cells[18, "G"].Value = "Le" + " " + formattedDate;
+                                objSheet.Cells[18, "G"].Value = "Le" + " " + dateAcompte;
                                 objSheet.Cells[18, "A"].Value = "      TB/PB";
                                 objSheet.Cells[23, "B"].Value = "Monsieur le Président";
                                 objSheet.Cells[25, "B"].Value = "          Nous vous prions de bien vouloir trouver ci-dessous, le détail";
-                                objSheet.Cells[26, "B"].Value = "du premier acompte sur votre lot de fabrication " + moisNum.Mois.ToUpper() + " " + annee + anneeValue;
+
+                                // Écrire le texte dans la cellule
+                                string moisAnnee = moisNum.Mois.ToUpper() + " " + annee + anneeValue;
+                                string texte = "du premier acompte sur votre lot de fabrication " + moisAnnee;
+                                objSheet.Cells[26, "B"].Value = texte;
+
+                                // Sélectionner la cellule et formater une partie du texte en gras
+                                Excel.Range rangeT = objSheet.Cells[26, "B"];
+
+                                // Trouver la position du mois et de l'année dans le texte
+                                int startPos = texte.IndexOf(moisAnnee);
+                                int length = moisAnnee.Length;
+
+                                // Appliquer le format en gras uniquement sur le mois et l'année
+                                rangeT.Characters[startPos + 1, length].Font.Bold = true;
+
+                               // objSheet.Cells[26, "B"].Value = "du premier acompte sur votre lot de fabrication " + moisNum.Mois.ToUpper() + " " + annee + anneeValue;
 
 
                                 objSheet.Columns[1].Columnwidth = 11;
@@ -448,7 +490,7 @@ namespace GestcomWF.Views
                             string path = saveFileDialog.FileName;
 
                             objBook.SaveAs(path);
-                            objBook.Close();
+                            objBook.Close(false);
                             objApp.Quit();
 
                             // Nettoyer les interfaces COM
@@ -456,6 +498,15 @@ namespace GestcomWF.Views
                             System.Runtime.InteropServices.Marshal.ReleaseComObject(objBook);
                             System.Runtime.InteropServices.Marshal.ReleaseComObject(objBooks);
                             System.Runtime.InteropServices.Marshal.ReleaseComObject(objApp);
+
+                            objSheets = null;
+                            objBook = null;
+                            objBooks = null;
+                            objApp = null;
+
+                            // Forcer la collecte des objets non référencés
+                            GC.Collect();
+                            GC.WaitForPendingFinalizers();
 
                             ProcessStartInfo psi = new ProcessStartInfo
                             {
@@ -570,6 +621,13 @@ namespace GestcomWF.Views
                 // Libère les ressources pour éviter les fuites de mémoire.
                 System.Runtime.InteropServices.Marshal.ReleaseComObject(workbook);
                 System.Runtime.InteropServices.Marshal.ReleaseComObject(excelApp);
+
+                excelApp = null;
+                workbook = null;
+
+                // Forcer la collecte des objets non référencés
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
             }
         }
 

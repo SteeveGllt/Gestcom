@@ -114,7 +114,7 @@ namespace GestcomWF.Views
 
                     var montant = montantA + montantB + montantC;
 
-                    if(_currentLot.FRPRIME > 0)
+                    if (_currentLot.FRPRIME > 0)
                     {
                         var prime = Math.Round((Convert.ToDecimal(tbx_a.Text) + Convert.ToDecimal(tbx_b.Text) + Convert.ToDecimal(tbx_c.Text)) * _currentLot.FRPRIME / 100, 2);
                         var tonnageTotal = tonnageA + tonnageB + tonnageC;
@@ -357,32 +357,87 @@ namespace GestcomWF.Views
                             poidsMoyen = lotFrom.LOCEN1 / lotFrom.LOCEM1;
                             acompte = lotFrom.LOPUAC * (lotFrom.LOCEN1 / 1000);
                             string nomFeuille = lotFrom.FRNOM.Replace("/", "-");
+                            int row = 0;
 
                             // Si l'entrée a une nouvelle valeur FRNUM
                             if (lotFrom.FRNUM != valeurPrecedente)
                             {
+
+
                                 // Initialisation de la feuille Excel avec le nom adapté
                                 objSheet = objBook.Sheets.Add(Missing.Value, objBook.Worksheets[objBook.Worksheets.Count], Missing.Value, Missing.Value);
                                 objSheet.Name = nomFeuille;
 
+                                string moisS = selectedDate.ToString("MMMM yyyy");
 
+                                // Mettre la première lettre du mois en majuscule
+                                moisS = char.ToUpper(moisS[0]) + moisS.Substring(1);
 
-                                objSheet.Cells[8, "F"].Value = lotFrom.FRCOOP;
+                                // Appliquer la logique de date en fonction de FRNUM
+                                string dateRappel;
+                                if (lotFrom.FRNUM == 710 || lotFrom.FRNUM == 820)
+                                {
+                                    // Si FRNUM est 710 ou 820, la date est le 08 du mois
+                                    dateRappel = "08 " + moisS;
+                                }
+                                else
+                                {
+                                    // Sinon, la date est le 20 du mois
+                                    dateRappel = "20 " + moisS;
+                                }
+
+                                if(lotFrom.FRNUM == 710)
+                                {
+                                    objSheet.Cells[8, "F"].Value = "LONGEVELLE LES RUSSEY";
+                                }
+                                else
+                                {
+                                    objSheet.Cells[8, "F"].Value = lotFrom.FRCOOP;
+                                }
+                                
                                 objSheet.Cells[9, "F"].Value = lotFrom.FRNDIR;
                                 objSheet.Cells[10, "F"].Value = lotFrom.FRADR;
                                 objSheet.Cells[11, "F"].Value = lotFrom.FRCPOS + " " + lotFrom.FRVILL;
 
                                 objSheet.Cells[16, "A"].Value = "      TB/PB";
-                                objSheet.Cells[16, "G"].Value = "Le" + " " + formattedDate;
+                                objSheet.Cells[16, "G"].Value = "Le" + " " + dateRappel;
                                 objSheet.Cells[20, "B"].Value = "Monsieur le Président";
 
                                 objSheet.Cells[22, "B"].Value = "          Conformément à nos conditions d'achat, le décompte de votre";
 
-                                objSheet.Cells[23, "B"].Value = "lot de fabrication " + nomMoisDecale.ToUpper() + " " + annee + anneeValue + " s'établit comme suit :";
+                                // Écrire le texte dans la cellule
+                                string moisAnnee = nomMoisDecale.ToUpper() + " " + annee + anneeValue;
+                                string texte = "lot de fabrication " + moisAnnee + " s'établit comme suit :";
+                                objSheet.Cells[23, "B"].Value = texte;
+
+                                // Sélectionner la cellule et formater une partie du texte en gras
+                                Excel.Range rangeT = objSheet.Cells[23, "B"];
+
+                                // Trouver la position du mois et de l'année dans le texte
+                                int startPos = texte.IndexOf(moisAnnee);
+                                int length = moisAnnee.Length;
+
+                                // Appliquer le format en gras uniquement sur le mois et l'année
+                                rangeT.Characters[startPos + 1, length].Font.Bold = true;
+
+
+                                // objSheet.Cells[23, "B"].Value = "lot de fabrication " + nomMoisDecale.ToUpper() + " " + annee + anneeValue + " s'établit comme suit :";
 
 
                                 /* this.workSheet["F27"].StringValue = moisNum.Mois.ToUpper() + " " + (annee + tbxAnnee.Text);
                                  this.workSheet["F27"].Style.Font.Bold = true;*/
+
+                                if (lotFrom.LOC11 != 0 && lotFrom.LOC12 == 0 && lotFrom.LOC13 == 0 && lotFrom.FRPRIME == 0)
+                                {
+
+                                }
+                                else
+                                {
+
+                                    objSheet.Rows[30].Rowheight = 3.75;
+                                    objSheet.Rows[34].Rowheight = 3.75;
+                                    objSheet.Rows[37].Rowheight = 3.75;
+                                }
                                 objSheet.Columns[1].Columnwidth = 11;
                                 objSheet.Columns[2].Columnwidth = 3.57;
                                 objSheet.Columns[3].Columnwidth = 6;
@@ -397,9 +452,6 @@ namespace GestcomWF.Views
 
 
 
-                                objSheet.Rows[30].Rowheight = 3.75;
-                                objSheet.Rows[34].Rowheight = 3.75;
-                                objSheet.Rows[37].Rowheight = 3.75;
 
                                 Excel.Range allCells = objSheet.Cells;
                                 allCells.HorizontalAlignment = Excel.XlHAlign.xlHAlignLeft;
@@ -447,6 +499,7 @@ namespace GestcomWF.Views
                                     objSheet.Cells[25, "K"].FormulaLocal = "=ARRONDI(+E25*H25 ; 2)";
                                     objSheet.Cells[25, "K"].HorizontalAlignment = XlHAlign.xlHAlignRight;
                                     objSheet.Cells[25, "K"].NumberFormat = @"#\ ##0,00 €";
+
 
                                 }
 
@@ -535,6 +588,8 @@ namespace GestcomWF.Views
 
                                 if (lotFrom.LOC11 != 0 && lotFrom.LOC12 == 0 && lotFrom.LOC13 == 0)
                                 {
+                                    row = 27;
+
                                     if (lotFrom.FRPRIME > 0)
                                     {
                                         objSheet.Cells[27, "B"].Value = "Prime qualité:";
@@ -568,6 +623,7 @@ namespace GestcomWF.Views
                                         objSheet.Cells[31, "K"].Formula = "=SUM(K25:K27)";
                                         objSheet.Cells[31, "K"].HorizontalAlignment = XlHAlign.xlHAlignRight;
                                         var total = objSheet.Cells[31, "K"].Value;
+
                                         // objSheet.Cells[35, "K"].Value = Math.Round(total - acompte, 2);
                                         objSheet.Cells[35, "K"].FormulaLocal = "=SOMME(K31;K33)";
                                         objSheet.Cells[35, "K"].HorizontalAlignment = XlHAlign.xlHAlignRight;
@@ -596,32 +652,33 @@ namespace GestcomWF.Views
                                         // var test = resultatSumPrixTotal / resultatSumPoidsTotal;
                                         decimal temp = Math.Round((poidsMoyen * lotFrom.LOC11) * lotFrom.LOPU1, 2);
 
-                                        objSheet.Cells[31, "E"].FormulaLocal = "=ARRONDI(+K25/E25;2)";
-                                        objSheet.Cells[31, "E"].HorizontalAlignment = XlHAlign.xlHAlignRight;
+                                        objSheet.Cells[28, "E"].FormulaLocal = "=ARRONDI(+K25/E25;2)";
+                                        objSheet.Cells[28, "E"].HorizontalAlignment = XlHAlign.xlHAlignRight;
 
                                         //objSheet.Cells[35, "K"].Value = Math.Round(temp - acompte, 2);
-                                        objSheet.Cells[35, "K"].FormulaLocal = "=SOMME(K25;K33)";
-                                        objSheet.Cells[35, "K"].HorizontalAlignment = XlHAlign.xlHAlignRight;
-                                        objSheet.Cells[35, "K"].NumberFormat = @"#\ ##0,00 €";
+                                        objSheet.Cells[31, "K"].FormulaLocal = "=SOMME(K25;K30)";
+                                        objSheet.Cells[31, "K"].HorizontalAlignment = XlHAlign.xlHAlignRight;
+                                        objSheet.Cells[31, "K"].NumberFormat = @"#\ ##0,00 €";
 
 
                                         // objSheet.Cells[36, "K"].Value = Math.Round((temp - acompte) * 5.5m) / 100;
-                                        objSheet.Cells[36, "K"].FormulaLocal = "=+K35*I36/100";
-                                        objSheet.Cells[36, "K"].HorizontalAlignment = XlHAlign.xlHAlignRight;
-                                        objSheet.Cells[36, "K"].NumberFormat = @"#\ ##0,00 €";
+                                        objSheet.Cells[32, "K"].FormulaLocal = "=+K31*I32/100";
+                                        objSheet.Cells[32, "K"].HorizontalAlignment = XlHAlign.xlHAlignRight;
+                                        objSheet.Cells[32, "K"].NumberFormat = @"#\ ##0,00 €";
 
-                                        objSheet.Cells[38, "K"].FormulaLocal = "=SOMME(K35:K36)";
-                                        objSheet.Cells[38, "K"].HorizontalAlignment = XlHAlign.xlHAlignRight;
+                                        objSheet.Cells[33, "K"].FormulaLocal = "=SOMME(K31:K32)";
+                                        objSheet.Cells[33, "K"].HorizontalAlignment = XlHAlign.xlHAlignRight;
                                         //var sum = objSheet.Range["K35", "K36"].Value;
                                         // objSheet.Cells[38, "K"].Value = Math.Round(sum.Sum(), 2);
-                                        objSheet.Cells[38, "K"].Font.Bold = true;
-                                        objSheet.Cells[38, "K"].NumberFormat = @"#\ ##0,00 €";
+                                        objSheet.Cells[33, "K"].Font.Bold = true;
+                                        objSheet.Cells[33, "K"].NumberFormat = @"#\ ##0,00 €";
                                     }
 
                                 }
 
                                 if (lotFrom.LOC12 != 0 && lotFrom.LOC13 == 0)
                                 {
+                                    row = 28;
                                     objSheet.Cells[26, "C"].Borders[XlBordersIndex.xlEdgeBottom].LineStyle = XlLineStyle.xlContinuous;
                                     objSheet.Cells[26, "C"].Borders[XlBordersIndex.xlEdgeBottom].Weight = XlBorderWeight.xlThin;
                                     objSheet.Cells[26, "C"].Borders[XlBordersIndex.xlEdgeBottom].ColorIndex = 0;
@@ -696,11 +753,11 @@ namespace GestcomWF.Views
                                         objSheet.Cells[29, "F"].Value = "T";
                                         objSheet.Cells[29, "G"].Value = "x";
 
-                                       /* var sumLopu12 = Math.Round((lotFrom.LOPU1 * 1000) + (lotFrom.LOPU2 * 1000), 2);
+                                        /* var sumLopu12 = Math.Round((lotFrom.LOPU1 * 1000) + (lotFrom.LOPU2 * 1000), 2);
 
-                                        objSheet.Cells[29, "H"].Value = Math.Round(sumLopu12 * (lotFrom.FRPRIME / 100), 2);
+                                         objSheet.Cells[29, "H"].Value = Math.Round(sumLopu12 * (lotFrom.FRPRIME / 100), 2);
 
-                                        objSheet.Cells[29, "H"].HorizontalAlignment = XlHAlign.xlHAlignRight;*/
+                                         objSheet.Cells[29, "H"].HorizontalAlignment = XlHAlign.xlHAlignRight;*/
 
                                         objSheet.Cells[29, "H"].FormulaLocal = "=ARRONDI((H25+H26)*" + lotFrom.FRPRIME + "%; 2)";
                                         objSheet.Cells[29, "H"].HorizontalAlignment = XlHAlign.xlHAlignRight;
@@ -747,7 +804,7 @@ namespace GestcomWF.Views
 
                                         // ---------------------
 
-                                       
+
                                     }
 
 
@@ -897,41 +954,91 @@ namespace GestcomWF.Views
 
                                 // int totalRow = currentRow + 4;
 
-                                objSheet.Cells[33, "K"].Borders[XlBordersIndex.xlEdgeBottom].LineStyle = XlLineStyle.xlContinuous;
-                                objSheet.Cells[33, "K"].Borders[XlBordersIndex.xlEdgeBottom].Weight = XlBorderWeight.xlThin;
-                                objSheet.Cells[33, "K"].Borders[XlBordersIndex.xlEdgeBottom].ColorIndex = 0;
-
-                                objSheet.Cells[33, "K"].Value = Math.Round(-acompte, 2);
-                                objSheet.Cells[33, "K"].HorizontalAlignment = XlHAlign.xlHAlignRight;
-                                objSheet.Cells[33, "K"].NumberFormat = @"#\ ##0,00 €";
-
-                                objSheet.Cells[36, "K"].Borders[XlBordersIndex.xlEdgeBottom].LineStyle = XlLineStyle.xlContinuous;
-                                objSheet.Cells[36, "K"].Borders[XlBordersIndex.xlEdgeBottom].Weight = XlBorderWeight.xlThin;
-                                objSheet.Cells[36, "K"].Borders[XlBordersIndex.xlEdgeBottom].ColorIndex = 0;
-
-                                objSheet.Cells[31, "B"].Value = "Soit au kg blanc : ";
-                                objSheet.Cells[31, "F"].Value = "€/T";
-                                objSheet.Cells[33, "D"].Value = "A déduire N/Acompte du ";
-                                objSheet.Cells[35, "G"].Value = "Total Hors Taxes";
-                                objSheet.Cells[36, "G"].Value = "T.V.A";
-                                objSheet.Cells[36, "I"].Value = "5,5";
-                                objSheet.Cells[36, "J"].Value = "%";
-                                objSheet.Cells[38, "G"].Value = "Total Réglé";
-                                objSheet.Cells[38, "G"].Font.Bold = true;
 
 
-                                objSheet.Cells[40, "B"].Value = "          Vous en souhaitant bonne réception";
-                                objSheet.Cells[42, "B"].Value = "          Nous vous prions d'agréer, Monsieur le Président, nos";
-                                objSheet.Cells[43, "B"].Value = "salutations distinguées";
-                                objSheet.Cells[45, "H"].Value = "Service Comptabilité";
-                                objSheet.Cells[45, "H"].Font.Bold = true;
-                                //var sumPs = objSheet.Cells[38, "K"].Value;
 
-                                objSheet.Cells[50, "B"].Value = "PS : Nous virons ce jour, sur votre compte N° " + lotFrom.FRBANQ + " " + lotFrom.FRGUIC + " " + lotFrom.FRCOM1 + " " + lotFrom.FRCOM2;
-                                objSheet.Cells[51, "B"].Value = lotFrom.FRDOMI + ", la somme de";
-                                objSheet.Cells[51, "H"].FormulaLocal = "=+K38";
-                                objSheet.Cells[51, "H"].HorizontalAlignment = XlHAlign.xlHAlignRight;
-                                objSheet.Cells[51, "H"].NumberFormat = @"#\ ##0,00 €";
+                                if (lotFrom.LOC11 != 0 && lotFrom.LOC12 == 0 && lotFrom.LOC13 == 0 && lotFrom.FRPRIME == 0)
+                                {
+
+                                    objSheet.Cells[30, "K"].Borders[XlBordersIndex.xlEdgeBottom].LineStyle = XlLineStyle.xlContinuous;
+                                    objSheet.Cells[30, "K"].Borders[XlBordersIndex.xlEdgeBottom].Weight = XlBorderWeight.xlThin;
+                                    objSheet.Cells[30, "K"].Borders[XlBordersIndex.xlEdgeBottom].ColorIndex = 0;
+
+                                    objSheet.Cells[30, "K"].Value = Math.Round(-acompte, 2);
+                                    objSheet.Cells[30, "K"].HorizontalAlignment = XlHAlign.xlHAlignRight;
+                                    objSheet.Cells[30, "K"].NumberFormat = @"#\ ##0,00 €";
+
+                                    objSheet.Cells[32, "K"].Borders[XlBordersIndex.xlEdgeBottom].LineStyle = XlLineStyle.xlContinuous;
+                                    objSheet.Cells[32, "K"].Borders[XlBordersIndex.xlEdgeBottom].Weight = XlBorderWeight.xlThin;
+                                    objSheet.Cells[32, "K"].Borders[XlBordersIndex.xlEdgeBottom].ColorIndex = 0;
+
+                                    objSheet.Cells[28, "B"].Value = "Soit au kg blanc : ";
+                                    objSheet.Cells[28, "F"].Value = "€/T";
+                                    objSheet.Cells[30, "D"].Value = "A déduire N/Acompte du ";
+                                    objSheet.Cells[31, "G"].Value = "Total Hors Taxes";
+                                    objSheet.Cells[32, "G"].Value = "T.V.A";
+                                    objSheet.Cells[32, "I"].Value = "5,5";
+                                    objSheet.Cells[32, "J"].Value = "%";
+                                    objSheet.Cells[33, "G"].Value = "Total Réglé";
+                                    objSheet.Cells[33, "G"].Font.Bold = true;
+
+
+                                    objSheet.Cells[35, "B"].Value = "          Vous en souhaitant bonne réception";
+                                    objSheet.Cells[37, "B"].Value = "          Nous vous prions d'agréer, Monsieur le Président, nos";
+                                    objSheet.Cells[38, "B"].Value = "salutations distinguées";
+                                    objSheet.Cells[40, "H"].Value = "Service Comptabilité";
+                                    objSheet.Cells[40, "H"].Font.Bold = true;
+                                    //var sumPs = objSheet.Cells[38, "K"].Value;
+
+                                    objSheet.Cells[45, "B"].Value = "PS : Nous virons ce jour, sur votre compte N° " + lotFrom.FRBANQ + " " + lotFrom.FRGUIC + " " + lotFrom.FRCOM1 + " " + lotFrom.FRCOM2;
+                                    objSheet.Cells[46, "B"].Value = lotFrom.FRDOMI + ", la somme de";
+                                    objSheet.Cells[46, "H"].FormulaLocal = "=+K33";
+                                    objSheet.Cells[46, "H"].HorizontalAlignment = XlHAlign.xlHAlignRight;
+                                    objSheet.Cells[46, "H"].NumberFormat = @"#\ ##0,00 €";
+                                }
+                                else
+                                {
+
+
+                                    objSheet.Cells[33, "K"].Borders[XlBordersIndex.xlEdgeBottom].LineStyle = XlLineStyle.xlContinuous;
+                                    objSheet.Cells[33, "K"].Borders[XlBordersIndex.xlEdgeBottom].Weight = XlBorderWeight.xlThin;
+                                    objSheet.Cells[33, "K"].Borders[XlBordersIndex.xlEdgeBottom].ColorIndex = 0;
+
+                                    objSheet.Cells[33, "K"].Value = Math.Round(-acompte, 2);
+                                    objSheet.Cells[33, "K"].HorizontalAlignment = XlHAlign.xlHAlignRight;
+                                    objSheet.Cells[33, "K"].NumberFormat = @"#\ ##0,00 €";
+
+                                    objSheet.Cells[36, "K"].Borders[XlBordersIndex.xlEdgeBottom].LineStyle = XlLineStyle.xlContinuous;
+                                    objSheet.Cells[36, "K"].Borders[XlBordersIndex.xlEdgeBottom].Weight = XlBorderWeight.xlThin;
+                                    objSheet.Cells[36, "K"].Borders[XlBordersIndex.xlEdgeBottom].ColorIndex = 0;
+
+                                    objSheet.Cells[31, "B"].Value = "Soit au kg blanc : ";
+                                    objSheet.Cells[31, "F"].Value = "€/T";
+                                    objSheet.Cells[33, "D"].Value = "A déduire N/Acompte du ";
+                                    objSheet.Cells[35, "G"].Value = "Total Hors Taxes";
+                                    objSheet.Cells[36, "G"].Value = "T.V.A";
+                                    objSheet.Cells[36, "I"].Value = "5,5";
+                                    objSheet.Cells[36, "J"].Value = "%";
+                                    objSheet.Cells[38, "G"].Value = "Total Réglé";
+                                    objSheet.Cells[38, "G"].Font.Bold = true;
+
+
+                                    objSheet.Cells[40, "B"].Value = "          Vous en souhaitant bonne réception";
+                                    objSheet.Cells[42, "B"].Value = "          Nous vous prions d'agréer, Monsieur le Président, nos";
+                                    objSheet.Cells[43, "B"].Value = "salutations distinguées";
+                                    objSheet.Cells[45, "H"].Value = "Service Comptabilité";
+                                    objSheet.Cells[45, "H"].Font.Bold = true;
+                                    //var sumPs = objSheet.Cells[38, "K"].Value;
+
+                                    objSheet.Cells[50, "B"].Value = "PS : Nous virons ce jour, sur votre compte N° " + lotFrom.FRBANQ + " " + lotFrom.FRGUIC + " " + lotFrom.FRCOM1 + " " + lotFrom.FRCOM2;
+                                    objSheet.Cells[51, "B"].Value = lotFrom.FRDOMI + ", la somme de";
+                                    objSheet.Cells[51, "H"].FormulaLocal = "=+K38";
+                                    objSheet.Cells[51, "H"].HorizontalAlignment = XlHAlign.xlHAlignRight;
+                                    objSheet.Cells[51, "H"].NumberFormat = @"#\ ##0,00 €";
+                                }
+
+
+
 
                                 valeurPrecedente = lotFrom.FRNUM;
 
@@ -956,16 +1063,30 @@ namespace GestcomWF.Views
                         if (saveFileDialog.ShowDialog() == DialogResult.OK)
                         {
                             string path = saveFileDialog.FileName;
+                            try
+                            {
+                                objBook.SaveAs(path);
+                            }
+                            finally
+                            {
+                                objBook.Close(false);
+                                objApp.Quit();
 
-                            objBook.SaveAs(path);
-                            objBook.Close();
-                            objApp.Quit();
+                                // Nettoyer les interfaces COM
+                                System.Runtime.InteropServices.Marshal.ReleaseComObject(objSheets);
+                                System.Runtime.InteropServices.Marshal.ReleaseComObject(objBook);
+                                System.Runtime.InteropServices.Marshal.ReleaseComObject(objBooks);
+                                System.Runtime.InteropServices.Marshal.ReleaseComObject(objApp);
 
-                            // Nettoyer les interfaces COM
-                            System.Runtime.InteropServices.Marshal.ReleaseComObject(objSheets);
-                            System.Runtime.InteropServices.Marshal.ReleaseComObject(objBook);
-                            System.Runtime.InteropServices.Marshal.ReleaseComObject(objBooks);
-                            System.Runtime.InteropServices.Marshal.ReleaseComObject(objApp);
+                                objSheets = null;
+                                objBook = null;
+                                objBooks = null;
+                                objApp = null;
+
+                                // Forcer la collecte des objets non référencés
+                                GC.Collect();
+                                GC.WaitForPendingFinalizers();
+                            }
 
                             ProcessStartInfo psi = new ProcessStartInfo
                             {

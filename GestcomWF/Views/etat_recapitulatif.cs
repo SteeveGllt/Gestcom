@@ -93,257 +93,385 @@ namespace GestcomWF.Views
                 }
                 else
                 {
+
+                    // Initialisation de la feuille Excel avec le nom adapté
+                    objSheet = objBook.Sheets.Add(Missing.Value, objBook.Worksheets[objBook.Worksheets.Count], Missing.Value, Missing.Value);
+
+                    string moisFeuille;
+
+                    if (moisNum.Numero < 10)
+                    {
+                        moisFeuille = "0" + moisNum.Numero;
+                    }
+                    else
+                    {
+                        moisFeuille = moisNum.Numero.ToString();
+                    }
+
+                    objSheet.Name = moisFeuille + " " + tbxAnnee.Text;
+
+                    objSheet.Columns[1].Columnwidth = 0;
+                    objSheet.Columns[2].Columnwidth = 26.56;
+                    objSheet.Columns[3].Columnwidth = 7.71;
+                    objSheet.Columns[4].Columnwidth = 11.43;
+                    objSheet.Columns[5].Columnwidth = 7.57;
+                    objSheet.Columns[6].Columnwidth = 9.57;
+                    objSheet.Columns[7].Columnwidth = 9.57;
+                    objSheet.Columns[8].Columnwidth = 9.57;
+                    objSheet.Columns[9].Columnwidth = 9.29;
+                    objSheet.Columns[10].Columnwidth = 9.57;
+                    objSheet.Columns[11].Columnwidth = 9.86;
+                    objSheet.Columns[12].Columnwidth = 14.71;
+                    objSheet.Columns[13].Columnwidth = 11.14;
+                    objSheet.Columns[14].Columnwidth = 1.14;
+                    objSheet.Columns[15].Columnwidth = 0.75;
+
+                    objSheet.Rows[1].Rowheight = 12.60;
+                    objSheet.Rows[2].Rowheight = 18.30;
+                    objSheet.Rows[3].Rowheight = 30.60;
+                    objSheet.Rows[4].Rowheight = 18;
+
+                    objSheet.Cells.Font.Name = "Arial";
+                    objSheet.Cells.Font.Size = 10;
+
+                    objSheet.Cells[2, "D"].Value = "CLASSEMENT/REGLEMENT DE FABRICATION :";
+                    objSheet.Cells[2, "D"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
+                    objSheet.Cells[2, "D"].VerticalAlignment = XlVAlign.xlVAlignCenter;
+                    objSheet.Cells[2, "D"].Font.Bold = true;
+
+
+                    objSheet.Range["I2", "K2"].Borders[XlBordersIndex.xlEdgeTop].LineStyle = XlLineStyle.xlContinuous;
+                    objSheet.Range["I2", "K2"].Borders[XlBordersIndex.xlEdgeTop].Weight = XlBorderWeight.xlMedium;
+                    objSheet.Range["I2", "K2"].Borders[XlBordersIndex.xlEdgeTop].ColorIndex = 0;
+
+                    objSheet.Cells[2, "I"].Borders[XlBordersIndex.xlEdgeLeft].LineStyle = XlLineStyle.xlContinuous;
+                    objSheet.Cells[2, "I"].Borders[XlBordersIndex.xlEdgeLeft].Weight = XlBorderWeight.xlMedium;
+                    objSheet.Cells[2, "I"].Borders[XlBordersIndex.xlEdgeLeft].ColorIndex = 0;
+
+                    objSheet.Cells[2, "K"].Borders[XlBordersIndex.xlEdgeRight].LineStyle = XlLineStyle.xlContinuous;
+                    objSheet.Cells[2, "K"].Borders[XlBordersIndex.xlEdgeRight].Weight = XlBorderWeight.xlMedium;
+                    objSheet.Cells[2, "K"].Borders[XlBordersIndex.xlEdgeRight].ColorIndex = 0;
+
+                    int color = HexToColor("#FFCC99");
+                    objSheet.Range["I2", "K2"].Interior.Color = color;
+
+                    int year = DateTime.Now.Year;
+                    string firstTwoDigits = year.ToString().Substring(0, 2);
+
+                    int colorText = HexToColor("#FF0000");
+                    objSheet.Cells[2, "I"].Value = "     " + moisNum.Mois.ToUpper() + "     " + firstTwoDigits[0] + " " + firstTwoDigits[1] + " " + tbxAnnee.Text[0] + " " + tbxAnnee.Text[1];
+                    objSheet.Cells[2, "I"].Font.Color = colorText;
+                    objSheet.Cells[2, "I"].Font.Bold = true;
+                    objSheet.Cells[2, "I"].HorizontalAlignment = XlHAlign.xlHAlignLeft;
+                    objSheet.Cells[2, "I"].VerticalAlignment = XlVAlign.xlVAlignCenter;
+
+                    objSheet.Range["B4", "M4"].Borders[XlBordersIndex.xlEdgeTop].LineStyle = XlLineStyle.xlContinuous;
+                    objSheet.Range["B4", "M4"].Borders[XlBordersIndex.xlEdgeTop].Weight = XlBorderWeight.xlMedium;
+                    objSheet.Range["B4", "M4"].Borders[XlBordersIndex.xlEdgeTop].ColorIndex = 0;
+
+                    objSheet.Range["M4", "M5"].Borders[XlBordersIndex.xlEdgeRight].LineStyle = XlLineStyle.xlContinuous;
+                    objSheet.Range["M4", "M5"].Borders[XlBordersIndex.xlEdgeRight].Weight = XlBorderWeight.xlMedium;
+                    objSheet.Range["M4", "M5"].Borders[XlBordersIndex.xlEdgeRight].ColorIndex = 0;
+
+
+                    objSheet.Range["B4", "B5"].Borders[XlBordersIndex.xlEdgeLeft].LineStyle = XlLineStyle.xlContinuous;
+                    objSheet.Range["B4", "B5"].Borders[XlBordersIndex.xlEdgeLeft].Weight = XlBorderWeight.xlMedium;
+                    objSheet.Range["B4", "B5"].Borders[XlBordersIndex.xlEdgeLeft].ColorIndex = 0;
+
+                    objSheet.Cells[4, "B"].Value = "SOCIETES";
+                    objSheet.Cells[4, "B"].Font.Bold = true;
+                    objSheet.Cells[4, "B"].HorizontalAlignment = XlHAlign.xlHAlignLeft;
+                    objSheet.Cells[4, "B"].VerticalAlignment = XlVAlign.xlVAlignCenter;
+
+                    objSheet.Cells[4, "C"].Value = "    COLLECTE";
+                    objSheet.Cells[4, "C"].Font.Bold = true;
+                    objSheet.Cells[4, "C"].VerticalAlignment = XlVAlign.xlVAlignCenter;
+
+                    objSheet.Cells[5, "C"].Value = "  PAINS";
+                    objSheet.Cells[5, "C"].HorizontalAlignment = XlHAlign.xlHAlignLeft;
+                    objSheet.Cells[5, "C"].VerticalAlignment = XlVAlign.xlVAlignCenter;
+
+                    objSheet.Cells[5, "D"].Value = "   POIDS";
+                    objSheet.Cells[5, "D"].HorizontalAlignment = XlHAlign.xlHAlignLeft;
+                    objSheet.Cells[5, "D"].VerticalAlignment = XlVAlign.xlVAlignCenter;
+
+                    objSheet.Cells[4, "E"].Value = "    QUALITE A";
+                    objSheet.Cells[4, "E"].Font.Bold = true;
+                    objSheet.Cells[4, "E"].HorizontalAlignment = XlHAlign.xlHAlignLeft;
+                    objSheet.Cells[4, "E"].VerticalAlignment = XlVAlign.xlVAlignCenter;
+
+                    objSheet.Cells[5, "E"].Value = "  PAINS";
+                    objSheet.Cells[5, "E"].HorizontalAlignment = XlHAlign.xlHAlignLeft;
+                    objSheet.Cells[5, "E"].VerticalAlignment = XlVAlign.xlVAlignCenter;
+
+                    objSheet.Cells[5, "F"].Value = "   POIDS";
+                    objSheet.Cells[5, "F"].HorizontalAlignment = XlHAlign.xlHAlignLeft;
+                    objSheet.Cells[5, "F"].VerticalAlignment = XlVAlign.xlVAlignCenter;
+
+                    objSheet.Cells[4, "G"].Value = "  %";
+                    objSheet.Cells[4, "G"].Font.Bold = true;
+                    objSheet.Cells[4, "G"].HorizontalAlignment = XlHAlign.xlHAlignLeft;
+                    objSheet.Cells[4, "G"].VerticalAlignment = XlVAlign.xlVAlignCenter;
+
+                    objSheet.Cells[5, "G"].Value = "QUAL.A";
+                    objSheet.Cells[5, "G"].HorizontalAlignment = XlHAlign.xlHAlignLeft;
+                    objSheet.Cells[5, "G"].VerticalAlignment = XlVAlign.xlVAlignCenter;
+
+                    objSheet.Cells[4, "H"].Value = "    QUALITE B";
+                    objSheet.Cells[4, "H"].Font.Bold = true;
+                    objSheet.Cells[4, "H"].HorizontalAlignment = XlHAlign.xlHAlignLeft;
+                    objSheet.Cells[4, "H"].VerticalAlignment = XlVAlign.xlVAlignCenter;
+
+                    objSheet.Cells[5, "H"].Value = "  PAINS";
+                    objSheet.Cells[5, "H"].HorizontalAlignment = XlHAlign.xlHAlignLeft;
+                    objSheet.Cells[5, "H"].VerticalAlignment = XlVAlign.xlVAlignCenter;
+
+                    objSheet.Cells[5, "I"].Value = "   POIDS";
+                    objSheet.Cells[5, "I"].HorizontalAlignment = XlHAlign.xlHAlignLeft;
+                    objSheet.Cells[5, "I"].VerticalAlignment = XlVAlign.xlVAlignCenter;
+
+                    objSheet.Cells[4, "J"].Value = "    QUALITE C";
+                    objSheet.Cells[4, "J"].Font.Bold = true;
+                    objSheet.Cells[4, "J"].HorizontalAlignment = XlHAlign.xlHAlignLeft;
+                    objSheet.Cells[4, "J"].VerticalAlignment = XlVAlign.xlVAlignCenter;
+
+                    objSheet.Cells[5, "J"].Value = "  PAINS";
+                    objSheet.Cells[5, "J"].HorizontalAlignment = XlHAlign.xlHAlignLeft;
+                    objSheet.Cells[5, "J"].VerticalAlignment = XlVAlign.xlVAlignCenter;
+
+                    objSheet.Cells[5, "K"].Value = "   POIDS";
+                    objSheet.Cells[5, "K"].HorizontalAlignment = XlHAlign.xlHAlignLeft;
+                    objSheet.Cells[5, "K"].VerticalAlignment = XlVAlign.xlVAlignCenter;
+
+                    objSheet.Cells[4, "L"].Value = "   REGLEMENT";
+                    objSheet.Cells[4, "L"].Font.Bold = true;
+                    objSheet.Cells[4, "L"].HorizontalAlignment = XlHAlign.xlHAlignLeft;
+                    objSheet.Cells[4, "L"].VerticalAlignment = XlVAlign.xlVAlignCenter;
+
+                    objSheet.Cells[5, "L"].Value = "TOTAL";
+                    objSheet.Cells[5, "L"].HorizontalAlignment = XlHAlign.xlHAlignLeft;
+                    objSheet.Cells[5, "L"].VerticalAlignment = XlVAlign.xlVAlignCenter;
+
+                    objSheet.Cells[4, "M"].Value = " PRIX";
+                    objSheet.Cells[4, "M"].Font.Bold = true;
+                    objSheet.Cells[4, "M"].HorizontalAlignment = XlHAlign.xlHAlignLeft;
+                    objSheet.Cells[4, "M"].VerticalAlignment = XlVAlign.xlVAlignCenter;
+
+                    objSheet.Cells[5, "M"].Value = "AU KG";
+                    objSheet.Cells[5, "M"].Font.Bold = true;
+                    objSheet.Cells[5, "M"].HorizontalAlignment = XlHAlign.xlHAlignLeft;
+                    objSheet.Cells[5, "M"].VerticalAlignment = XlVAlign.xlVAlignCenter;
+
+
+                    objSheet.Range["B5", "M5"].Borders[XlBordersIndex.xlEdgeBottom].LineStyle = XlLineStyle.xlContinuous;
+                    objSheet.Range["B5", "M5"].Borders[XlBordersIndex.xlEdgeBottom].Weight = XlBorderWeight.xlMedium;
+                    objSheet.Range["B5", "M5"].Borders[XlBordersIndex.xlEdgeBottom].ColorIndex = 0;
+
+                    objSheet.Cells[7, "C"].Value = "MPN";
+                    objSheet.Cells[7, "C"].HorizontalAlignment = XlHAlign.xlHAlignLeft;
+                    objSheet.Cells[7, "C"].VerticalAlignment = XlVAlign.xlVAlignBottom;
+
+                    objSheet.Cells[7, "D"].VerticalAlignment = XlVAlign.xlVAlignBottom;
+
+                    objSheet.Cells[7, "F"].Value = "Coef Valeur :";
+                    objSheet.Cells[7, "F"].HorizontalAlignment = XlHAlign.xlHAlignLeft;
+                    objSheet.Cells[7, "F"].VerticalAlignment = XlVAlign.xlVAlignBottom;
+
+                    objSheet.Cells[7, "H"].FormulaLocal = "=+M25/D7";
+                    objSheet.Cells[7, "H"].VerticalAlignment = XlVAlign.xlVAlignBottom;
+                    objSheet.Cells[7, "H"].NumberFormat = "###,##%";
+
+                    objSheet.Cells[7, "J"].Value = "Marge";
+                    objSheet.Cells[7, "J"].HorizontalAlignment = XlHAlign.xlHAlignLeft;
+                    objSheet.Cells[7, "J"].VerticalAlignment = XlVAlign.xlVAlignBottom;
+
+                    objSheet.Cells[7, "K"].FormulaLocal = "=+(D7-M25)/D7";
+                    objSheet.Cells[7, "K"].VerticalAlignment = XlVAlign.xlVAlignBottom;
+                    objSheet.Cells[7, "K"].NumberFormat = "###,##%";
+
+                    objSheet.Cells[7, "L"].Value = "%";
+                    objSheet.Cells[7, "L"].HorizontalAlignment = XlHAlign.xlHAlignLeft;
+                    objSheet.Cells[7, "L"].VerticalAlignment = XlVAlign.xlVAlignBottom;
+
+                    int cellNomFromFirst = 11;
+                    int cellNomFrom = 11;
+
+                    int colorTextTab = HexToColor("#0000FF");
+
+                    int fondColorTab = HexToColor("#969696");
+
                     //string annee = (DateTime.Now.Year / 100).ToString();
                     // Traitement pour chaque entré
                     foreach (EtatRecap etatRecap in etatRecaps)
                     {
-                       
+                        objSheet.Range["D" + (cellNomFrom - 1), "E" + (cellNomFrom + 1)].Interior.Color = fondColorTab;
+                        objSheet.Range["H" + (cellNomFrom - 1), "H" + (cellNomFrom + 1)].Interior.Color = fondColorTab;
+                        objSheet.Range["J" + (cellNomFrom - 1), "J" + (cellNomFrom + 1)].Interior.Color = fondColorTab;
 
 
-                        // Initialisation de la feuille Excel avec le nom adapté
-                        objSheet = objBook.Sheets.Add(Missing.Value, objBook.Worksheets[objBook.Worksheets.Count], Missing.Value, Missing.Value);
-                        
-                        objSheet.Cells.Font.Name = "Arial";
-                        objSheet.Cells.Font.Size = 10;
+                        objSheet.Cells[cellNomFrom, "B"].Value = etatRecap.FRNOM;
+                        objSheet.Cells[cellNomFrom, "B"].Font.Bold = true;
+                        objSheet.Cells[cellNomFrom, "B"].VerticalAlignment = XlVAlign.xlVAlignBottom;
 
-                        objSheet.Cells[2, "D"].Value = "CLASSEMENT/REGLEMENT DE FABRICATION :";
-                        objSheet.Cells[2, "D"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
-                        objSheet.Cells[2, "D"].VerticalAlignment = XlVAlign.xlVAlignCenter;
-                        objSheet.Cells[2, "D"].Font.Bold = true;
+                        objSheet.Cells[cellNomFrom, "C"].Value = etatRecap.LOCEM1;
+                        objSheet.Cells[cellNomFrom, "C"].VerticalAlignment = XlVAlign.xlVAlignBottom;
+                        objSheet.Cells[cellNomFrom, "C"].Font.Color = colorTextTab;
 
+                        objSheet.Cells[cellNomFrom, "D"].Value = etatRecap.LOCEN1;
+                        objSheet.Cells[cellNomFrom, "D"].VerticalAlignment = XlVAlign.xlVAlignBottom;
 
-                        objSheet.Range["I2", "K2"].Borders[XlBordersIndex.xlEdgeTop].LineStyle = XlLineStyle.xlContinuous;
-                        objSheet.Range["I2", "K2"].Borders[XlBordersIndex.xlEdgeTop].Weight = XlBorderWeight.xlThin;
-                        objSheet.Range["I2", "K2"].Borders[XlBordersIndex.xlEdgeTop].ColorIndex = 0;
+                        objSheet.Cells[cellNomFrom, "E"].Value = etatRecap.LOC11;
+                        objSheet.Cells[cellNomFrom, "E"].VerticalAlignment = XlVAlign.xlVAlignBottom;
 
-                        objSheet.Cells[2, "I"].Borders[XlBordersIndex.xlEdgeLeft].LineStyle = XlLineStyle.xlContinuous;
-                        objSheet.Cells[2, "I"].Borders[XlBordersIndex.xlEdgeLeft].Weight = XlBorderWeight.xlThin;
-                        objSheet.Cells[2, "I"].Borders[XlBordersIndex.xlEdgeLeft].ColorIndex = 0;
+                        objSheet.Cells[cellNomFrom, "F"].FormulaLocal = "=D" + cellNomFrom + "-I" + cellNomFrom + "-K" + cellNomFrom;
+                        objSheet.Cells[cellNomFrom, "F"].VerticalAlignment = XlVAlign.xlVAlignBottom;
+                        objSheet.Cells[cellNomFrom, "F"].Font.Color = colorTextTab;
 
-                        objSheet.Cells[2, "K"].Borders[XlBordersIndex.xlEdgeRight].LineStyle = XlLineStyle.xlContinuous;
-                        objSheet.Cells[2, "K"].Borders[XlBordersIndex.xlEdgeRight].Weight = XlBorderWeight.xlThin;
-                        objSheet.Cells[2, "K"].Borders[XlBordersIndex.xlEdgeRight].ColorIndex = 0;
+                        objSheet.Cells[cellNomFrom, "G"].FormulaLocal = "=ARRONDI(E" + cellNomFrom + "/C" + cellNomFrom + "*100;2)";
+                        objSheet.Cells[cellNomFrom, "G"].VerticalAlignment = XlVAlign.xlVAlignBottom;
+                        objSheet.Cells[cellNomFrom, "G"].Font.Color = colorTextTab;
+                        objSheet.Cells[cellNomFrom, "G"].NumberFormat = "0,00";
 
-                        int color = HexToColor("#FFCC99");
-                        objSheet.Range["I2", "K2"].Interior.Color = color;
 
+                        objSheet.Cells[cellNomFrom, "H"].Value = etatRecap.LOC12;
+                        objSheet.Cells[cellNomFrom, "H"].VerticalAlignment = XlVAlign.xlVAlignBottom;
 
-                        int colorText = HexToColor("#FF0000");
-                        objSheet.Cells[2, "I"].Value = "     J A N V I E R     2 0 2 4";
-                        objSheet.Cells[2, "I"].Font.Color = colorText;
-                        objSheet.Cells[2, "I"].Font.Bold = true;
-                        objSheet.Cells[2, "I"].HorizontalAlignment = XlHAlign.xlHAlignLeft;
-                        objSheet.Cells[2, "I"].VerticalAlignment = XlVAlign.xlVAlignCenter;
+                        objSheet.Cells[cellNomFrom, "I"].FormulaLocal = "=ARRONDI(+H" + cellNomFrom + "/$C" + cellNomFrom + "*$D" + cellNomFrom + ";0)";
+                        objSheet.Cells[cellNomFrom, "I"].VerticalAlignment = XlVAlign.xlVAlignBottom;
+                        objSheet.Cells[cellNomFrom, "I"].Font.Color = colorTextTab;
 
+                        objSheet.Cells[cellNomFrom, "J"].Value = etatRecap.LOC13;
+                        objSheet.Cells[cellNomFrom, "J"].VerticalAlignment = XlVAlign.xlVAlignBottom;
 
-                        objSheet.Columns[1].Columnwidth = 0;
-                        objSheet.Columns[2].Columnwidth = 26.56;
+                        objSheet.Cells[cellNomFrom, "K"].FormulaLocal = "=ARRONDI(+J" + cellNomFrom + "/$C" + cellNomFrom + "*$D" + cellNomFrom + ";0)";
+                        objSheet.Cells[cellNomFrom, "K"].VerticalAlignment = XlVAlign.xlVAlignBottom;
+                        objSheet.Cells[cellNomFrom, "K"].Font.Color = colorTextTab;
 
-                        objSheet.Rows[1].Rowheight = 12.60;
-                        objSheet.Rows[2].Rowheight = 18.30;
-                        objSheet.Rows[3].Rowheight = 30.60;
+                        objSheet.Cells[cellNomFrom, "L"].Value = etatRecap.MONTANT;
+                        objSheet.Cells[cellNomFrom, "L"].VerticalAlignment = XlVAlign.xlVAlignBottom;
+                        objSheet.Cells[cellNomFrom, "L"].NumberFormat = @"#\ ##0,00 €";
 
+                        objSheet.Cells[cellNomFrom, "M"].FormulaLocal = "=ARRONDI(L" + cellNomFrom + "/D" + cellNomFrom + ";2)";
+                        objSheet.Cells[cellNomFrom, "M"].VerticalAlignment = XlVAlign.xlVAlignBottom;
+                        objSheet.Cells[cellNomFrom, "M"].NumberFormat = @"#\ ##0,00 €";
 
-                        /* objSheet.Cells[9, "D"].Value = entreeLotFrom.FRADR;
-                         objSheet.Cells[10, "D"].Value = entreeLotFrom.FRCPOS + " " + entreeLotFrom.FRVILL;
 
-                         objSheet.Cells[15, "A"].Value = "      TB/PB";
-                         objSheet.Cells[16, "D"].Value = "Le" + " " + formattedDate;
-
-                         objSheet.Cells[21, "B"].Value = "Monsieur le Président";
-                         objSheet.Cells[23, "B"].Value = "Nous vous prions de bien vouloir trouver ci-dessous, le détail des";
-                         objSheet.Cells[24, "B"].Value = "pesées concernant vos fabrications de ";
-
-                         objSheet.Cells[24, "E"].Value = moisNum.Mois.ToUpper() + " " + (annee + tbxAnnee.Text);
-                         objSheet.Cells[24, "E"].Font.Bold = true;
-                         //objSheet.Cells[24, "E"].Style.Font.Bold = true;
-
-
-
-                         objSheet.Range["B27", "F27"].Borders[XlBordersIndex.xlEdgeTop].LineStyle = XlLineStyle.xlContinuous;
-                         objSheet.Range["B27", "F27"].Borders[XlBordersIndex.xlEdgeTop].Weight = XlBorderWeight.xlThin;
-                         objSheet.Range["B27", "F27"].Borders[XlBordersIndex.xlEdgeTop].ColorIndex = 0;
-
-
-
-
-
-
-                         objSheet.Cells[27, "B"] = "Date";
-                         objSheet.Cells[27, "B"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
-
-
-                         //this.workSheet["B27:B35"].Style.RightBorder.SetColor("#000000");
-                         //this.workSheet["B27:B35"].Style.RightBorder.Type = IronXL.Styles.BorderType.Medium;
-
-                         objSheet.Cells[28, "B"] = "Entrée";
-                         objSheet.Cells[28, "B"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
-
-                         objSheet.Cells[27, "C"] = "Nombres";
-                         objSheet.Cells[27, "C"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
-
-
-
-                         objSheet.Cells[28, "C"] = "Meules";
-                         objSheet.Cells[28, "C"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
-
-                         objSheet.Cells[27, "D"] = "Poids";
-                         objSheet.Cells[27, "D"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
-
-
-
-                         objSheet.Cells[28, "D"] = "brut";
-                         objSheet.Cells[28, "D"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
-
-                         objSheet.Cells[27, "E"] = "%";
-                         objSheet.Cells[27, "E"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
-
-
-
-                         objSheet.Cells[28, "E"] = "Réfaction";
-                         objSheet.Cells[28, "E"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
-
-                         objSheet.Cells[27, "F"] = "Poids";
-                         objSheet.Cells[27, "F"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
-
-                         objSheet.Cells[28, "F"] = "Net";
-                         objSheet.Cells[28, "F"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
-
-
-                         objSheet.Range["B28", "F28"].Borders[XlBordersIndex.xlEdgeBottom].LineStyle = XlLineStyle.xlContinuous;
-                         objSheet.Range["B28", "F28"].Borders[XlBordersIndex.xlEdgeBottom].Weight = XlBorderWeight.xlThin;
-                         objSheet.Range["B28", "F28"].Borders[XlBordersIndex.xlEdgeBottom].ColorIndex = 0;
-
-
-
-                         // Initialisez la ligne actuelle
-                         int currentRow = 30;
-
-
-                         foreach (var dateEntry in entreeLotFroms.Where(item => item.FRNUM == entreeLotFrom.FRNUM))
-                         {
-                             // Remplissez les données pour chaque entrée de fromagerie
-
-                             objSheet.Cells[currentRow, "B"] = dateEntry.Date_Entrée;
-                             objSheet.Cells[currentRow, "B"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
-
-
-                             objSheet.Cells[currentRow, "C"].Value = dateEntry.LOCENM;
-                             objSheet.Cells[currentRow, "C"].HorizontalAlignment = XlHAlign.xlHAlignRight;
-                             objSheet.Cells[currentRow, "C"].NumberFormat = @"#\ ##0\    ";
-
-                             objSheet.Cells[currentRow, "D"] = dateEntry.LOCENB;
-                             objSheet.Cells[currentRow, "D"].HorizontalAlignment = XlHAlign.xlHAlignRight;
-                             objSheet.Cells[currentRow, "D"].NumberFormat = @"#\ ##0\    ";
-
-
-                             objSheet.Cells[currentRow, "E"] = dateEntry.LOTAUX.ToString("F2") + "%";
-                             objSheet.Cells[currentRow, "E"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
-
-                             objSheet.Cells[currentRow, "F"] = dateEntry.LOCENN;
-                             objSheet.Cells[currentRow, "F"].HorizontalAlignment = XlHAlign.xlHAlignRight;
-                             objSheet.Cells[currentRow, "F"].NumberFormat = @"#\ ##0\    ";
-
-
-
-                             currentRow++;
-                         }
-
-                         int totalRow = currentRow + 2;
-
-                         objSheet.Range[objSheet.Cells[totalRow, "B"], objSheet.Cells[totalRow - 1, "B"]].Merge();
-
-                         objSheet.Cells[totalRow - 1, "B"] = "Totaux";
-
-                         // Appliquer l'alignement horizontal et vertical au contenu
-                         objSheet.Cells[totalRow - 1, "B"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
-                         objSheet.Cells[totalRow - 1, "B"].VerticalAlignment = XlHAlign.xlHAlignCenter;
-
-                         // Ligne en bas du tableau
-
-                         objSheet.Range[$"B{totalRow}", $"F{totalRow}"].Borders[XlBordersIndex.xlEdgeBottom].LineStyle = XlLineStyle.xlContinuous;
-                         objSheet.Range[$"B{totalRow}", $"F{totalRow}"].Borders[XlBordersIndex.xlEdgeBottom].Weight = XlBorderWeight.xlThin;
-                         objSheet.Range[$"B{totalRow}", $"F{totalRow}"].Borders[XlBordersIndex.xlEdgeBottom].ColorIndex = 0;
-
-                         objSheet.Range[objSheet.Cells[totalRow, "C"], objSheet.Cells[totalRow - 1, "C"]].Merge();
-                         objSheet.Range[objSheet.Cells[totalRow, "F"], objSheet.Cells[totalRow - 1, "F"]].Merge();
-
-
-                         //var sumRange = objSheet.Cells[30, "C"][$"C{currentRow - 1}"];
-                         objSheet.Cells[totalRow - 1, "C"].Formula = "=SUM(C29:" + $"C{currentRow - 1})";
-
-                         objSheet.Cells[totalRow - 1, "C"].Font.Bold = true;
-
-                         // Appliquer l'alignement horizontal et vertical au contenu
-                         objSheet.Cells[totalRow - 1, "C"].HorizontalAlignment = XlHAlign.xlHAlignRight;
-                         objSheet.Cells[totalRow - 1, "C"].NumberFormat = @"#\ ##0\    ";
-                         objSheet.Cells[totalRow - 1, "C"].VerticalAlignment = XlHAlign.xlHAlignCenter;
-
-
-
-                         objSheet.Range[$"C{totalRow - 1}", $"C{currentRow + 2}"].Borders[XlBordersIndex.xlEdgeTop].LineStyle = XlLineStyle.xlContinuous;
-                         objSheet.Range[$"C{totalRow - 1}", $"C{currentRow + 2}"].Borders[XlBordersIndex.xlEdgeTop].Weight = XlBorderWeight.xlThin;
-                         objSheet.Range[$"C{totalRow - 1}", $"C{currentRow + 2}"].Borders[XlBordersIndex.xlEdgeTop].ColorIndex = 0;
-
-                         //var sumRangePoidsNet = workSheet[$"F30:F{currentRow - 1}"];
-                         objSheet.Cells[totalRow - 1, "F"].Formula = "=SUM(F29:" + $"F{currentRow - 1})";
-                         objSheet.Cells[totalRow - 1, "F"].Font.Bold = true;
-
-                         // Appliquer l'alignement horizontal et vertical au contenu
-                         objSheet.Cells[totalRow - 1, "F"].HorizontalAlignment = XlHAlign.xlHAlignRight;
-                         objSheet.Cells[totalRow - 1, "F"].NumberFormat = @"#\ ##0\    ";
-                         objSheet.Cells[totalRow - 1, "F"].VerticalAlignment = XlHAlign.xlHAlignCenter;
-
-                         objSheet.Range[$"F{totalRow - 1}", $"F{currentRow + 2}"].Borders[XlBordersIndex.xlEdgeTop].LineStyle = XlLineStyle.xlContinuous;
-                         objSheet.Range[$"F{totalRow - 1}", $"F{currentRow + 2}"].Borders[XlBordersIndex.xlEdgeTop].Weight = XlBorderWeight.xlThin;
-                         objSheet.Range[$"F{totalRow - 1}", $"F{currentRow + 2}"].Borders[XlBordersIndex.xlEdgeTop].ColorIndex = 0;
-
-
-
-
-
-                         //this.workSheet[$"B27:B{totalRow}"].Style.RightBorder.SetColor("#000000");
-                         //this.workSheet[$"B27:B{totalRow}"].Style.RightBorder.Type = IronXL.Styles.BorderType.Medium;
-                         // Bordure à droite de la colonne C
-                         objSheet.Range["C27", $"C{currentRow + 2}"].Borders[XlBordersIndex.xlEdgeRight].LineStyle = XlLineStyle.xlContinuous;
-                         objSheet.Range["C27", $"C{currentRow + 2}"].Borders[XlBordersIndex.xlEdgeRight].Weight = XlBorderWeight.xlThin;
-                         objSheet.Range["C27", $"C{currentRow + 2}"].Borders[XlBordersIndex.xlEdgeRight].ColorIndex = 0;
-
-                         // Ligne à droite de la cellule D
-                         objSheet.Range["D27", $"D{currentRow + 2}"].Borders[XlBordersIndex.xlEdgeRight].LineStyle = XlLineStyle.xlContinuous;
-                         objSheet.Range["D27", $"D{currentRow + 2}"].Borders[XlBordersIndex.xlEdgeRight].Weight = XlBorderWeight.xlThin;
-                         objSheet.Range["D27", $"D{currentRow + 2}"].Borders[XlBordersIndex.xlEdgeRight].ColorIndex = 0;
-
-                         // Ligne à droite de la colonne E
-                         objSheet.Range["E27", $"E{currentRow + 2}"].Borders[XlBordersIndex.xlEdgeRight].LineStyle = XlLineStyle.xlContinuous;
-                         objSheet.Range["E27", $"E{currentRow + 2}"].Borders[XlBordersIndex.xlEdgeRight].Weight = XlBorderWeight.xlThin;
-                         objSheet.Range["E27", $"E{currentRow + 2}"].Borders[XlBordersIndex.xlEdgeRight].ColorIndex = 0;
-
-                         // Ligne à droite du tableau
-                         objSheet.Range["F27", $"F{totalRow}"].Borders[XlBordersIndex.xlEdgeRight].LineStyle = XlLineStyle.xlContinuous;
-                         objSheet.Range["F27", $"F{totalRow}"].Borders[XlBordersIndex.xlEdgeRight].Weight = XlBorderWeight.xlThin;
-                         objSheet.Range["F27", $"F{totalRow}"].Borders[XlBordersIndex.xlEdgeRight].ColorIndex = 0;
-
-                         // Bordure à gauche du tableau
-                         objSheet.Range["B27", $"B{totalRow}"].Borders[XlBordersIndex.xlEdgeLeft].LineStyle = XlLineStyle.xlContinuous;
-                         objSheet.Range["B27", $"B{totalRow}"].Borders[XlBordersIndex.xlEdgeLeft].Weight = XlBorderWeight.xlThin;
-                         objSheet.Range["B27", $"B{totalRow}"].Borders[XlBordersIndex.xlEdgeLeft].ColorIndex = 0;
-
-                         // Bordure à droite de la colonne B
-                         objSheet.Range["B27", $"B{currentRow + 2}"].Borders[XlBordersIndex.xlEdgeRight].LineStyle = XlLineStyle.xlContinuous;
-                         objSheet.Range["B27", $"B{currentRow + 2}"].Borders[XlBordersIndex.xlEdgeRight].Weight = XlBorderWeight.xlThin;
-                         objSheet.Range["B27", $"B{currentRow + 2}"].Borders[XlBordersIndex.xlEdgeRight].ColorIndex = 0;
-
-
-                         objSheet.Cells[39, "B"] = "          Vous en souhaitant bonne réception";
-                         objSheet.Cells[41, "B"] = "          Nous vous prions d'agréer, Monsieur le Président, nos";
-                         objSheet.Cells[42, "B"] = "salutations distinguées";
-                         objSheet.Cells[45, "E"] = "Service Technique";
-                         objSheet.Cells[45, "E"].Font.Bold = true;*/
-
-
+                        cellNomFrom = cellNomFrom + 2;
 
                     }
+
+                    int finalCell = cellNomFrom + 1;
+
+                    objSheet.Range["B" + finalCell, "M" + finalCell].Borders[XlBordersIndex.xlEdgeTop].LineStyle = XlLineStyle.xlContinuous;
+                    objSheet.Range["B" + finalCell, "M" + finalCell].Borders[XlBordersIndex.xlEdgeTop].Weight = XlBorderWeight.xlThin;
+                    objSheet.Range["B" + finalCell, "M" + finalCell].Borders[XlBordersIndex.xlEdgeTop].ColorIndex = 0;
+
+
+                    objSheet.Cells[finalCell, "B"].Value = "TOTAL";
+                    objSheet.Cells[finalCell, "B"].Font.Bold = true;
+
+                    objSheet.Cells[finalCell, "B"].Borders[XlBordersIndex.xlEdgeRight].LineStyle = XlLineStyle.xlContinuous;
+                    objSheet.Cells[finalCell, "B"].Borders[XlBordersIndex.xlEdgeRight].Weight = XlBorderWeight.xlThin;
+                    objSheet.Cells[finalCell, "B"].Borders[XlBordersIndex.xlEdgeRight].ColorIndex = 0;
+
+                    objSheet.Cells[finalCell, "B"].Borders[XlBordersIndex.xlEdgeLeft].LineStyle = XlLineStyle.xlContinuous;
+                    objSheet.Cells[finalCell, "B"].Borders[XlBordersIndex.xlEdgeLeft].Weight = XlBorderWeight.xlThin;
+                    objSheet.Cells[finalCell, "B"].Borders[XlBordersIndex.xlEdgeLeft].ColorIndex = 0;
+
+                    objSheet.Cells[finalCell, "C"].FormulaLocal = "=SOMME(C" + cellNomFromFirst + ":C" + cellNomFrom + ")";
+                    objSheet.Cells[finalCell, "C"].Font.Bold = true;
+
+                    objSheet.Cells[finalCell, "C"].Borders[XlBordersIndex.xlEdgeRight].LineStyle = XlLineStyle.xlContinuous;
+                    objSheet.Cells[finalCell, "C"].Borders[XlBordersIndex.xlEdgeRight].Weight = XlBorderWeight.xlThin;
+                    objSheet.Cells[finalCell, "C"].Borders[XlBordersIndex.xlEdgeRight].ColorIndex = 0;
+
+                    objSheet.Cells[finalCell, "D"].FormulaLocal = "=SOMME(D" + cellNomFromFirst + ":D" + cellNomFrom + ")";
+                    objSheet.Cells[finalCell, "D"].Font.Bold = true;
+
+                    objSheet.Cells[finalCell, "D"].Borders[XlBordersIndex.xlEdgeRight].LineStyle = XlLineStyle.xlContinuous;
+                    objSheet.Cells[finalCell, "D"].Borders[XlBordersIndex.xlEdgeRight].Weight = XlBorderWeight.xlThin;
+                    objSheet.Cells[finalCell, "D"].Borders[XlBordersIndex.xlEdgeRight].ColorIndex = 0;
+
+                    objSheet.Cells[finalCell, "E"].FormulaLocal = "=SOMME(E" + cellNomFromFirst + ":E" + cellNomFrom + ")";
+                    objSheet.Cells[finalCell, "E"].Font.Bold = true;
+
+                    objSheet.Cells[finalCell, "E"].Borders[XlBordersIndex.xlEdgeRight].LineStyle = XlLineStyle.xlContinuous;
+                    objSheet.Cells[finalCell, "E"].Borders[XlBordersIndex.xlEdgeRight].Weight = XlBorderWeight.xlThin;
+                    objSheet.Cells[finalCell, "E"].Borders[XlBordersIndex.xlEdgeRight].ColorIndex = 0;
+
+                    objSheet.Cells[finalCell, "F"].FormulaLocal = "=SOMME(F" + cellNomFromFirst + ":F" + cellNomFrom + ")";
+                    objSheet.Cells[finalCell, "F"].Font.Bold = true;
+
+                    objSheet.Cells[finalCell, "F"].Borders[XlBordersIndex.xlEdgeRight].LineStyle = XlLineStyle.xlContinuous;
+                    objSheet.Cells[finalCell, "F"].Borders[XlBordersIndex.xlEdgeRight].Weight = XlBorderWeight.xlThin;
+                    objSheet.Cells[finalCell, "F"].Borders[XlBordersIndex.xlEdgeRight].ColorIndex = 0;
+
+                    objSheet.Cells[finalCell, "G"].FormulaLocal = "=ARRONDI(E" + finalCell + "/C" + finalCell + "*100;0)";
+                    objSheet.Cells[finalCell, "G"].Font.Bold = true;
+
+
+                    objSheet.Cells[finalCell, "G"].Borders[XlBordersIndex.xlEdgeRight].LineStyle = XlLineStyle.xlContinuous;
+                    objSheet.Cells[finalCell, "G"].Borders[XlBordersIndex.xlEdgeRight].Weight = XlBorderWeight.xlThin;
+                    objSheet.Cells[finalCell, "G"].Borders[XlBordersIndex.xlEdgeRight].ColorIndex = 0;
+
+                    objSheet.Cells[finalCell, "H"].FormulaLocal = "=SOMME(H" + cellNomFromFirst + ":H" + cellNomFrom + ")";
+                    objSheet.Cells[finalCell, "H"].Font.Bold = true;
+
+                    objSheet.Cells[finalCell, "H"].Borders[XlBordersIndex.xlEdgeRight].LineStyle = XlLineStyle.xlContinuous;
+                    objSheet.Cells[finalCell, "H"].Borders[XlBordersIndex.xlEdgeRight].Weight = XlBorderWeight.xlThin;
+                    objSheet.Cells[finalCell, "H"].Borders[XlBordersIndex.xlEdgeRight].ColorIndex = 0;
+
+                    objSheet.Cells[finalCell, "I"].FormulaLocal = "=SOMME(I" + cellNomFromFirst + ":I" + cellNomFrom + ")";
+                    objSheet.Cells[finalCell, "I"].Font.Bold = true;
+
+                    objSheet.Cells[finalCell, "I"].Borders[XlBordersIndex.xlEdgeRight].LineStyle = XlLineStyle.xlContinuous;
+                    objSheet.Cells[finalCell, "I"].Borders[XlBordersIndex.xlEdgeRight].Weight = XlBorderWeight.xlThin;
+                    objSheet.Cells[finalCell, "I"].Borders[XlBordersIndex.xlEdgeRight].ColorIndex = 0;
+
+                    objSheet.Cells[finalCell, "J"].FormulaLocal = "=SOMME(J" + cellNomFromFirst + ":J" + cellNomFrom + ")";
+                    objSheet.Cells[finalCell, "J"].Font.Bold = true;
+
+                    objSheet.Cells[finalCell, "J"].Borders[XlBordersIndex.xlEdgeRight].LineStyle = XlLineStyle.xlContinuous;
+                    objSheet.Cells[finalCell, "J"].Borders[XlBordersIndex.xlEdgeRight].Weight = XlBorderWeight.xlThin;
+                    objSheet.Cells[finalCell, "J"].Borders[XlBordersIndex.xlEdgeRight].ColorIndex = 0;
+
+                    objSheet.Cells[finalCell, "K"].FormulaLocal = "=SOMME(K" + cellNomFromFirst + ":K" + cellNomFrom + ")";
+                    objSheet.Cells[finalCell, "K"].Font.Bold = true;
+                    double somme = objSheet.Cells[finalCell, "K"].Value;
+                    if (somme == 0)
+                    {
+                        objSheet.Cells[finalCell, "K"].Value = "-";
+                        objSheet.Cells[finalCell, "K"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
+                        objSheet.Cells[finalCell, "K"].Font.Bold = true;
+                    }
+                    objSheet.Cells[finalCell, "K"].Borders[XlBordersIndex.xlEdgeRight].LineStyle = XlLineStyle.xlContinuous;
+                    objSheet.Cells[finalCell, "K"].Borders[XlBordersIndex.xlEdgeRight].Weight = XlBorderWeight.xlThin;
+                    objSheet.Cells[finalCell, "K"].Borders[XlBordersIndex.xlEdgeRight].ColorIndex = 0;
+
+                    objSheet.Cells[finalCell, "L"].FormulaLocal = "=SOMME(L" + cellNomFromFirst + ":L" + cellNomFrom + ")";
+                    objSheet.Cells[finalCell, "L"].NumberFormat = @"#\ ##0,00 €";
+                    objSheet.Cells[finalCell, "L"].Font.Bold = true;
+
+                    objSheet.Cells[finalCell, "L"].Borders[XlBordersIndex.xlEdgeRight].LineStyle = XlLineStyle.xlContinuous;
+                    objSheet.Cells[finalCell, "L"].Borders[XlBordersIndex.xlEdgeRight].Weight = XlBorderWeight.xlThin;
+                    objSheet.Cells[finalCell, "L"].Borders[XlBordersIndex.xlEdgeRight].ColorIndex = 0;
+
+                    objSheet.Cells[finalCell, "M"].FormulaLocal = "=ARRONDI(L" + finalCell + "/D" + finalCell + "*1000;2)";
+                    objSheet.Cells[finalCell, "M"].NumberFormat = @"#\ ##0,00 €";
+                    objSheet.Cells[finalCell, "M"].Font.Bold = true;
+
+                    objSheet.Cells[finalCell, "M"].Borders[XlBordersIndex.xlEdgeRight].LineStyle = XlLineStyle.xlContinuous;
+                    objSheet.Cells[finalCell, "M"].Borders[XlBordersIndex.xlEdgeRight].Weight = XlBorderWeight.xlThin;
+                    objSheet.Cells[finalCell, "M"].Borders[XlBordersIndex.xlEdgeRight].ColorIndex = 0;
+
+                    objSheet.Range["B" + finalCell, "M" + finalCell].Borders[XlBordersIndex.xlEdgeBottom].LineStyle = XlLineStyle.xlContinuous;
+                    objSheet.Range["B" + finalCell, "M" + finalCell].Borders[XlBordersIndex.xlEdgeBottom].Weight = XlBorderWeight.xlThin;
+                    objSheet.Range["B" + finalCell, "M" + finalCell].Borders[XlBordersIndex.xlEdgeBottom].ColorIndex = 0;
+
+                    int colorTotal = HexToColor("#FFFF99");
+                    objSheet.Range["B" + finalCell, "M" + finalCell].Interior.Color = colorTotal;
+
+
                     try
                     {
                         // Propose à l'utilisateur d'enregistrer le fichier Excel
@@ -374,6 +502,14 @@ namespace GestcomWF.Views
                             System.Runtime.InteropServices.Marshal.ReleaseComObject(objBooks);
                             System.Runtime.InteropServices.Marshal.ReleaseComObject(objApp);
 
+                            objSheets = null;
+                            objBook = null;
+                            objBooks = null;
+                            objApp = null;
+
+                            // Forcer la collecte des objets non référencés
+                            GC.Collect();
+                            GC.WaitForPendingFinalizers();
 
                             ProcessStartInfo psi = new ProcessStartInfo
                             {
@@ -413,6 +549,126 @@ namespace GestcomWF.Views
             int red = (argb & 0xFF0000) >> 16;
 
             return blue | green | red;
+        }
+
+        private void PrintAllSheets(string filePath)
+        {
+            // Initialise les objets pour l'application Excel et le classeur.
+            Microsoft.Office.Interop.Excel.Application excelApp = new Microsoft.Office.Interop.Excel.Application();
+            Microsoft.Office.Interop.Excel.Workbook workbook = excelApp.Workbooks.Open(filePath);
+
+            try
+            {
+                // Parcourir chaque feuille pour configurer l'orientation en paysage
+                foreach (Microsoft.Office.Interop.Excel.Worksheet sheet in workbook.Sheets)
+                {
+                    sheet.PageSetup.Orientation = Microsoft.Office.Interop.Excel.XlPageOrientation.xlLandscape;
+
+                    // Réduction des marges (exemple de 0.5 pouce pour chaque marge)
+                    sheet.PageSetup.TopMargin = excelApp.CentimetersToPoints(2.5);
+                    sheet.PageSetup.BottomMargin = excelApp.CentimetersToPoints(2.5);
+                    sheet.PageSetup.LeftMargin = excelApp.CentimetersToPoints(0.5);
+                    sheet.PageSetup.RightMargin = excelApp.CentimetersToPoints(0.5);
+                    sheet.PageSetup.FooterMargin = excelApp.CentimetersToPoints(1.3);
+                    sheet.PageSetup.HeaderMargin = excelApp.CentimetersToPoints(1.3);
+
+                    // Ajuster la feuille pour tenir sur une seule page
+                    sheet.PageSetup.FitToPagesWide = 1;
+                    sheet.PageSetup.FitToPagesTall = 1;
+
+                    // Désactiver le zoom (au cas où)
+                    sheet.PageSetup.Zoom = false;
+
+                    // Configurer la taille de la page
+                    sheet.PageSetup.PaperSize = Microsoft.Office.Interop.Excel.XlPaperSize.xlPaperA4;
+
+                }
+
+                // Configure les paramètres d'impression pour Microsoft Print to PDF
+                excelApp.PrintCommunication = false;
+                excelApp.ActiveWorkbook.PrintOutEx(
+                    From: 1,
+                    To: workbook.Sheets.Count,
+                    Copies: 1,
+                    Preview: false,
+                    PrintToFile: true,
+                    Collate: true
+                    
+                    
+                );
+                excelApp.PrintCommunication = true;
+            }
+            catch (Exception ex)
+            {
+                // Affiche un message d'erreur en cas de problème lors de l'impression.
+                MessageBox.Show($"Une erreur est survenue lors de la tentative d'impression: {ex.Message}");
+            }
+            finally
+            {
+                workbook.Close(false);
+                excelApp.Quit();
+
+                // Nettoyer les interfaces COM
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(workbook);
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(excelApp);
+
+                excelApp = null;
+                workbook = null;
+
+                // Forcer la collecte des objets non référencés
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+            }
+        }
+
+        private void OuvrirImprimerFermerXLS()
+        {
+            // Vérifie si un fichier a été sélectionné.
+            if (string.IsNullOrEmpty(selectedFilePath))
+            {
+                // Affiche un message si aucun fichier n'a été sélectionné.
+                MessageBox.Show("Veuillez d'abord sélectionner un fichier.");
+                return;
+            }
+
+            // Appelle la méthode pour imprimer toutes les feuilles du fichier Excel.
+            PrintAllSheets(selectedFilePath);
+
+        }
+
+
+
+        // Permet à l'utilisateur de rechercher et de sélectionner un fichier Excel.
+        private void RechercherXLS()
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                // Filtre les fichiers pour n'afficher que les fichiers Excel
+                openFileDialog.Filter = "Excel files (*.xls; *.xlsx)|*.xls;*.xlsx";
+                string initialDir = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, dataPath.PathReglement));
+                openFileDialog.InitialDirectory = initialDir;
+                // Affiche la boîte de dialogue de sélection de fichier.
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    // Stocke le chemin du fichier sélectionné.
+                    selectedFilePath = openFileDialog.FileName;
+
+                    // Affiche le chemin du fichier dans le TextBox.
+                    tbxRecherche.Text = selectedFilePath.ToString();
+                }
+            }
+        }
+
+        private void btnRechercher_Click(object sender, EventArgs e)
+        {
+            // Appelle la méthode pour permettre à l'utilisateur de rechercher un fichier Excel.
+            RechercherXLS();
+        }
+
+        private void printExcel_Click(object sender, EventArgs e)
+        {
+            // Appelle la méthode pour ouvrir, imprimer et fermer le fichier Excel.
+            OuvrirImprimerFermerXLS();
         }
     }
 }

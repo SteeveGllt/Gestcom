@@ -9,6 +9,7 @@ using System.Reflection.Metadata;
 using IronXL;
 using System.Windows.Forms;
 using System.Diagnostics;
+using GestcomWF.Classes;
 
 namespace GestcomWF.Views
 {
@@ -106,7 +107,15 @@ namespace GestcomWF.Views
                             objSheet = objBook.Sheets.Add(Missing.Value, objBook.Worksheets[objBook.Worksheets.Count], Missing.Value, Missing.Value);
                             objSheet.Name = nomFeuille;
 
-                            objSheet.Cells[7, "D"].Value = entreeLotFrom.FRCOOP;
+                            if (entreeLotFrom.FRNUM == 710)
+                            {
+                                objSheet.Cells[7, "D"].Value = "LONGEVELLE LES RUSSEY";
+                            }
+                            else
+                            {
+                                objSheet.Cells[7, "D"].Value = entreeLotFrom.FRCOOP;
+                            }
+
                             objSheet.Cells[8, "D"].Value = entreeLotFrom.FRNDIR;
                             //objSheet.Cells[8, "D"].Value = "Président " + entreeLotFrom.FRNOM;
                             objSheet.Cells[9, "D"].Value = entreeLotFrom.FRADR;
@@ -344,6 +353,15 @@ namespace GestcomWF.Views
                             System.Runtime.InteropServices.Marshal.ReleaseComObject(objBooks);
                             System.Runtime.InteropServices.Marshal.ReleaseComObject(objApp);
 
+                            objSheets = null;
+                            objBook = null;
+                            objBooks = null;
+                            objApp = null;
+
+                            // Forcer la collecte des objets non référencés
+                            GC.Collect();
+                            GC.WaitForPendingFinalizers();
+
 
                             ProcessStartInfo psi = new ProcessStartInfo
                             {
@@ -450,13 +468,19 @@ namespace GestcomWF.Views
             }
             finally
             {
-                // Ferme le classeur et l'application Excel.
                 workbook.Close(false);
                 excelApp.Quit();
 
-                // Libère les ressources pour éviter les fuites de mémoire.
+                // Nettoyer les interfaces COM
                 System.Runtime.InteropServices.Marshal.ReleaseComObject(workbook);
                 System.Runtime.InteropServices.Marshal.ReleaseComObject(excelApp);
+
+                excelApp = null;
+                workbook = null;
+
+                // Forcer la collecte des objets non référencés
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
             }
         }
 

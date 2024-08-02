@@ -8,13 +8,13 @@ namespace GestcomWF.Classes
 {
     public class EtatRecap
     {
-        private String FRNOM;
-        private Decimal LOCEM1;
-        private Decimal LOCEN1;
-        private Decimal LOC11;
-        private Decimal LOC12;
-        private Decimal LOC13;
-        private Decimal MONTANT;
+        public String FRNOM { get; set; }
+        public Decimal LOCEM1 { get; set; }
+        public Decimal LOCEN1 { get; set; }
+        public Decimal LOC11 { get; set; }
+        public Decimal LOC12 { get; set; }
+        public Decimal LOC13 { get; set; }
+        public Decimal MONTANT { get; set; }
 
         public EtatRecap(string fRNOM, decimal lOCEM1, decimal lOCEN1, decimal lOC11, decimal lOC12, decimal lOC13, decimal mONTANT)
         {
