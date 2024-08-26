@@ -109,7 +109,7 @@ namespace GestcomWF.Views
 
                             if (entreeLotFrom.FRNUM == 710)
                             {
-                                objSheet.Cells[7, "D"].Value = "LONGEVELLE LES RUSSEY";
+                                objSheet.Cells[7, "D"].Value = "SCAF DE LONGEVELLE LES RUSSEY";
                             }
                             else
                             {

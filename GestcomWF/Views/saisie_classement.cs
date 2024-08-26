@@ -306,16 +306,16 @@ namespace GestcomWF.Views
 
                                 if (lotFrom.FRNUM == 710)
                                 {
-                                    objSheet.Cells[10, "D"].Value = "LONGEVELLE LES RUSSEY";
+                                    objSheet.Cells[7, "D"].Value = "SCAF DE LONGEVELLE LES RUSSEY";
                                 }
                                 else
                                 {
-                                    objSheet.Cells[10, "D"].Value = lotFrom.FRCOOP;
+                                    objSheet.Cells[7, "D"].Value = lotFrom.FRCOOP;
                                 }
 
-                                objSheet.Cells[11, "D"] = lotFrom.FRNDIR;
-                                objSheet.Cells[12, "D"] = lotFrom.FRADR;
-                                objSheet.Cells[13, "D"] = lotFrom.FRCPOS + " " + lotFrom.FRVILL;
+                                objSheet.Cells[8, "D"] = lotFrom.FRNDIR;
+                                objSheet.Cells[9, "D"] = lotFrom.FRADR;
+                                objSheet.Cells[10, "D"] = lotFrom.FRCPOS + " " + lotFrom.FRVILL;
                                 objSheet.Cells[18, "A"] = "      TB/PB";
                                 objSheet.Cells[19, "D"] = "Le" + " " + formattedDate;
                                 objSheet.Cells[24, "B"] = "Monsieur le Président";

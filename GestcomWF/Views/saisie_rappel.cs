@@ -388,16 +388,16 @@ namespace GestcomWF.Views
 
                                 if(lotFrom.FRNUM == 710)
                                 {
-                                    objSheet.Cells[8, "F"].Value = "LONGEVELLE LES RUSSEY";
+                                    objSheet.Cells[7, "F"].Value = "SCAF DE LONGEVELLE LES RUSSEY";
                                 }
                                 else
                                 {
-                                    objSheet.Cells[8, "F"].Value = lotFrom.FRCOOP;
+                                    objSheet.Cells[7, "F"].Value = lotFrom.FRCOOP;
                                 }
                                 
-                                objSheet.Cells[9, "F"].Value = lotFrom.FRNDIR;
-                                objSheet.Cells[10, "F"].Value = lotFrom.FRADR;
-                                objSheet.Cells[11, "F"].Value = lotFrom.FRCPOS + " " + lotFrom.FRVILL;
+                                objSheet.Cells[8, "F"].Value = lotFrom.FRNDIR;
+                                objSheet.Cells[9, "F"].Value = lotFrom.FRADR;
+                                objSheet.Cells[10, "F"].Value = lotFrom.FRCPOS + " " + lotFrom.FRVILL;
 
                                 objSheet.Cells[16, "A"].Value = "      TB/PB";
                                 objSheet.Cells[16, "G"].Value = "Le" + " " + dateRappel;
